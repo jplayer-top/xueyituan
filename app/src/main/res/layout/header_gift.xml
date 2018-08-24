@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:paddingStart="@dimen/dimen_15dp"
+    android:paddingEnd="@dimen/dimen_15dp"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvPoints"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="60sp"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvPointsText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="可用积分"
+        app:layout_constraintTop_toBottomOf="@+id/tvPoints"/>
+
+    <LinearLayout
+        android:id="@+id/llText"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_40dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvPointsText">
+
+        <TextView
+            android:id="@+id/tvPointsDetail"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="积分详情"/>
+
+        <View
+            android:layout_width="@dimen/dimen_1dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_divider"/>
+
+        <TextView
+            android:id="@+id/tvPointsRecode"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="兑换记录"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@drawable/shape_divider"
+        app:layout_constraintTop_toBottomOf="@+id/llText"/>
+
+    <cn.bingoogolapple.bgabanner.BGABanner
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:bga="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/bgaBanner"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dimen_150dp"
+        android:layout_marginTop="@dimen/dimen_1dp"
+        bga:banner_indicatorGravity="bottom"
+        bga:banner_pointAutoPlayAble="true"
+        bga:banner_pointContainerBackground="@color/trans"
+        bga:banner_pointDrawable="@drawable/selector_banner_point_bar"
+        bga:layout_constraintEnd_toEndOf="parent"
+        bga:layout_constraintStart_toStartOf="parent"
+        bga:layout_constraintTop_toBottomOf="@+id/llText"/>
+
+</android.support.constraint.ConstraintLayout>

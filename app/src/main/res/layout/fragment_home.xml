@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraint"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/ivWeather"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="@dimen/dp_10"
+            android:src="@drawable/ic_info_outline_white_48dp"
+            android:tint="@color/color666"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvWeather"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="25℃"
+            android:textColor="@color/color666"
+            android:textSize="@dimen/dimen_10sp"
+            app:layout_constraintEnd_toEndOf="@+id/ivWeather"
+            app:layout_constraintStart_toStartOf="@+id/ivWeather"
+            app:layout_constraintTop_toBottomOf="@+id/ivWeather"/>
+
+        <TextView
+            android:id="@+id/tvLocal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_10dp"
+            android:drawableEnd="@drawable/bottom_arrow"
+            android:drawablePadding="@dimen/dimen_2dp"
+            android:text="聊城市"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvWeather"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_30dp"
+            android:layout_margin="@dimen/dimen_10dp"
+            android:background="@drawable/shape_stroke_grey"
+            android:drawableStart="@drawable/bar_search"
+            android:gravity="center_vertical"
+            android:paddingEnd="@dimen/dimen_5dp"
+            android:paddingStart="@dimen/dimen_5dp"
+            android:text="请输入商户名或课程名"
+            android:textColor="@color/color999"
+            android:textSize="@dimen/dimen_12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvLocal"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <include layout="@layout/layout_refresh_white_nofoot"/>
+</LinearLayout>

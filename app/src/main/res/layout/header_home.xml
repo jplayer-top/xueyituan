@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <cn.bingoogolapple.bgabanner.BGABanner
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:bga="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/bgaBanner"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        bga:banner_indicatorGravity="bottom"
+        bga:banner_pointAutoPlayAble="true"
+        bga:banner_pointContainerBackground="@color/trans"
+        bga:banner_pointDrawable="@drawable/selector_banner_point_bar"/>
+
+    <LinearLayout
+        android:id="@+id/ll0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/ll1"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bgaBanner">
+
+        <ImageView
+            android:id="@+id/ivSrc0"
+            android:layout_width="@dimen/dimen_40dp"
+            android:layout_height="@dimen/dimen_40dp"
+            android:src="@mipmap/ic_launcher"/>
+
+        <TextView
+            android:id="@+id/tvT0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:text="@string/app_name"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll1"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/ll2"
+        app:layout_constraintStart_toEndOf="@+id/ll0"
+        app:layout_constraintTop_toBottomOf="@+id/bgaBanner">
+
+        <ImageView
+            android:id="@+id/ivSrc1"
+            android:layout_width="@dimen/dimen_40dp"
+            android:layout_height="@dimen/dimen_40dp"
+            android:src="@mipmap/ic_launcher"/>
+
+        <TextView
+            android:id="@+id/tvT1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:text="@string/app_name"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll2"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/ll3"
+        app:layout_constraintStart_toEndOf="@+id/ll1"
+        app:layout_constraintTop_toBottomOf="@+id/bgaBanner">
+
+        <ImageView
+            android:id="@+id/ivSrc2"
+            android:layout_width="@dimen/dimen_40dp"
+            android:layout_height="@dimen/dimen_40dp"
+            android:src="@mipmap/ic_launcher"/>
+
+        <TextView
+            android:id="@+id/tvT2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:text="@string/app_name"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll3"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/ll4"
+        app:layout_constraintStart_toEndOf="@+id/ll2"
+        app:layout_constraintTop_toBottomOf="@+id/bgaBanner">
+
+        <ImageView
+            android:id="@+id/ivSrc3"
+            android:layout_width="@dimen/dimen_40dp"
+            android:layout_height="@dimen/dimen_40dp"
+            android:src="@mipmap/ic_launcher"/>
+
+        <TextView
+            android:id="@+id/tvT3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:text="@string/app_name"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ll3"
+        app:layout_constraintTop_toBottomOf="@+id/bgaBanner">
+
+        <ImageView
+            android:id="@+id/ivSrc4"
+            android:layout_width="@dimen/dimen_40dp"
+            android:layout_height="@dimen/dimen_40dp"
+            android:src="@mipmap/ic_launcher"/>
+
+        <TextView
+            android:id="@+id/tvT4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:text="@string/app_name"/>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ivLogoNews"
+        android:layout_width="@dimen/dimen_60dp"
+        android:layout_height="@dimen/dimen_60dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/logo_news"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll0"/>
+
+    <ViewFlipper
+        android:id="@+id/viewFlipper"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:autoStart="true"
+        android:flipInterval="3000"
+        android:inAnimation="@anim/slide_in_bottom"
+        android:outAnimation="@anim/slide_out_top"
+        app:layout_constraintBottom_toBottomOf="@+id/ivLogoNews"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivLogoNews"
+        app:layout_constraintTop_toBottomOf="@+id/ll0"
+        app:layout_constraintTop_toTopOf="@+id/ivLogoNews"/>
+
+    <LinearLayout
+        android:id="@+id/llWeek"
+        android:layout_width="@dimen/dimen_100dp"
+        android:layout_height="@dimen/dimen_150dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:background="@color/whitesmoke"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toStartOf="@+id/llShop0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivLogoNews">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:gravity="center_horizontal"
+            android:text="周末亲子游"/>
+
+        <TextView
+            android:id="@+id/tvWeekTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:ellipsize="end"
+            android:gravity="center_horizontal"
+            android:lines="1"
+            android:text="周末亲子游玩"
+            android:textColor="@color/coral"
+            android:textSize="@dimen/dimen_12sp"/>
+
+        <com.kingja.magicmirror.MagicMirrorView
+            android:id="@+id/mirrorView"
+            android:layout_width="@dimen/dimen_70dp"
+            android:layout_height="@dimen/dimen_70dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:src="@mipmap/ic_launcher"
+            app:mirrorShape="circle"/>
+    </LinearLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/llShop0"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dimen_70dp"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_marginStart="@dimen/dimen_10dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:background="@color/whitesmoke"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toEndOf="@+id/llWeek"
+        app:layout_constraintTop_toBottomOf="@+id/ivLogoNews">
+
+        <TextView
+            android:id="@+id/tvShopT0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:paddingEnd="@dimen/dimen_40dp"
+            android:paddingStart="@dimen/dimen_10dp"
+            android:text=""
+            app:layout_constraintBottom_toTopOf="@+id/tvShopT1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvShopT1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:paddingEnd="@dimen/dimen_40dp"
+            android:paddingStart="@dimen/dimen_10dp"
+            android:text=""
+            android:textColor="@color/coral"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvShopT0"/>
+
+        <ImageView
+            android:id="@+id/ivShop0"
+            android:layout_width="@dimen/dimen_50dp"
+            android:layout_height="@dimen/dimen_50dp"
+            android:layout_marginEnd="@dimen/dimen_3dp"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/llShop1"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dimen_70dp"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_marginStart="@dimen/dimen_10dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:background="@color/whitesmoke"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toEndOf="@+id/llWeek"
+        app:layout_constraintTop_toBottomOf="@+id/llShop0">
+
+        <TextView
+            android:id="@+id/tvShop1T0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:paddingEnd="@dimen/dimen_40dp"
+            android:paddingStart="@dimen/dimen_10dp"
+            android:text=""
+            app:layout_constraintBottom_toTopOf="@+id/tvShop1T1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvShop1T1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:lines="1"
+            android:paddingEnd="@dimen/dimen_40dp"
+            android:paddingStart="@dimen/dimen_10dp"
+            android:text=""
+            android:textColor="@color/coral"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvShop1T0"/>
+
+        <ImageView
+            android:id="@+id/ivShop1"
+            android:layout_width="@dimen/dimen_50dp"
+            android:layout_height="@dimen/dimen_50dp"
+            android:layout_marginEnd="@dimen/dimen_3dp"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tvNearByShop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_15dp"
+        android:gravity="center_vertical"
+        android:text="附近商家"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/llShop1"/>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_40dp"
+        android:layout_marginTop="@dimen/dimen_5dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvNearByShop"
+        app:tabMaxWidth="@dimen/dimen_60dp"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="@color/colorBlackGrey"
+        app:tabTextColor="@color/color999">
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="综合"/>
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="距离"/>
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="优选"/>
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="销量"/>
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="评分"/>
+
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="筛选"/>
+    </android.support.design.widget.TabLayout>
+
+</android.support.constraint.ConstraintLayout>
