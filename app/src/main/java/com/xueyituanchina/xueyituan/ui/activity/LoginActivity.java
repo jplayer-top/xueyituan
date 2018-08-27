@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.github.florent37.viewanimator.ViewAnimator;
 import com.xueyituanchina.xueyituan.R;
+import com.xueyituanchina.xueyituan.mpbe.bean.LoginBean;
 import com.xueyituanchina.xueyituan.mpbe.presenter.LoginPresenter;
 
 import java.util.Calendar;
@@ -530,7 +531,7 @@ public class LoginActivity extends SuperBaseActivity implements TextWatcher, ICo
         goNext();
     }
 
-    public void login() {
+    public void login(LoginBean loginBean) {
         finish();
     }
 }
