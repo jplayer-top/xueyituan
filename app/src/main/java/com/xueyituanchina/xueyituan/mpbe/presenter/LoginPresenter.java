@@ -13,6 +13,8 @@ import java.util.Map;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
+import top.jplayer.baseprolibrary.net.tip.GetImplTip;
+import top.jplayer.baseprolibrary.net.tip.LoaddingImplTip;
 import top.jplayer.baseprolibrary.net.tip.PostImplTip;
 
 /**
@@ -81,7 +83,8 @@ public class LoginPresenter extends BasePresenter<LoginActivity> {
     }
 
     public void login(String phone, String password) {
-        mModel.requestLogin(phone, password).subscribe(new NetCallBackObserver<LoginBean>(new PostImplTip(mIView)) {
+        mModel.requestLogin(phone, password).subscribe(new NetCallBackObserver<LoginBean>(new GetImplTip(mIView) {
+        }) {
             @Override
             public void responseSuccess(LoginBean loginBean) {
                 mIView.login(loginBean);
@@ -96,7 +99,7 @@ public class LoginPresenter extends BasePresenter<LoginActivity> {
     }
 
     public void register(Map<String, String> map) {
-        mModel.requestRegister(map).subscribe(new NetCallBackObserver<BaseBean>(new PostImplTip(mIView)) {
+        mModel.requestRegister(map).subscribe(new NetCallBackObserver<BaseBean>(new LoaddingImplTip(mIView)) {
             @Override
             public void responseSuccess(BaseBean baseBean) {
                 login(map.get("phone"), map.get("password"));
