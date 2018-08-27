@@ -6,6 +6,7 @@ import android.view.View;
 import com.xueyituanchina.xueyituan.R;
 import com.xueyituanchina.xueyituan.ui.fragment.GiftFragment;
 import com.xueyituanchina.xueyituan.ui.fragment.HomeFragment;
+import com.xueyituanchina.xueyituan.ui.fragment.MeFragment;
 import com.xueyituanchina.xueyituan.ui.fragment.NearbyFragment;
 import com.xueyituanchina.xueyituan.ui.fragment.ShareFragment;
 
@@ -14,7 +15,6 @@ import java.util.List;
 
 import devlight.io.library.ntb.NavigationTabBar;
 import top.jplayer.baseprolibrary.ui.activity.SuperBaseActivity;
-import top.jplayer.baseprolibrary.ui.fragment.TestFragment;
 import top.jplayer.baseprolibrary.utils.QuickNavigationBar;
 
 public class MainActivity extends SuperBaseActivity {
@@ -46,7 +46,7 @@ public class MainActivity extends SuperBaseActivity {
         list.add(new QuickNavigationBar.NavihationInfo("活动", R.drawable.main_act, new NearbyFragment()));
         list.add(new QuickNavigationBar.NavihationInfo("商城", R.drawable.main_shop, new GiftFragment()));
         list.add(new QuickNavigationBar.NavihationInfo("发布", R.drawable.main_send, new ShareFragment()));
-        list.add(new QuickNavigationBar.NavihationInfo("我的", R.drawable.main_me, new TestFragment()));
+        list.add(new QuickNavigationBar.NavihationInfo("我的", R.drawable.main_me, new MeFragment()));
         return list;
     }
 }
