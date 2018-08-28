@@ -1,5 +1,6 @@
 package com.xueyituanchina.xueyituan.ui.fragment;
 
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -28,6 +29,7 @@ import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.ui.fragment.SuperBaseFragment;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.StringUtils;
+import top.jplayer.baseprolibrary.utils.ToastUtils;
 
 /**
  * Created by Obl on 2018/8/27.
@@ -80,6 +82,7 @@ public class MeFragment extends SuperBaseFragment {
     private Unbinder mUnbinder;
     private MePresenter mPresenter;
     private MeOrderAdapter mAdapter;
+    private MyInfoBean bean;
 
     @Override
     public int initLayout() {
@@ -106,7 +109,15 @@ public class MeFragment extends SuperBaseFragment {
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setEmptyView(View.inflate(this.getContext(), R.layout.layout_empty_view, null));
         mIvToolRightLeft.setOnClickListener(v -> {
-            ActivityUtils.init().start(this.getActivity(), SettingActivity.class, "设置");
+            if (bean == null) {
+                ToastUtils.init().showInfoToast(this.getContext(), "请先登录");
+                return;
+            }
+            Bundle bundle = new Bundle();
+            bundle.putString("nick", bean.nick);
+            bundle.putString("points", bean.points + "");
+            bundle.putString("avatar", bean.avator);
+            ActivityUtils.init().start(this.getActivity(), SettingActivity.class, "设置", bundle);
         });
     }
 
@@ -117,10 +128,12 @@ public class MeFragment extends SuperBaseFragment {
 
 
     public void responseMyInfo(MyInfoBean bean) {
+        this.bean = bean;
         mTvToLogin.setVisibility(View.INVISIBLE);
         mTvNick.setText(String.format(Locale.CHINA, "会员昵称：%s", StringUtils.init().fixNullStr(bean.nick)));
         mTvPoints.setText(String.format(Locale.CHINA, "会员积分：%d", bean.points));
         mIvIsVip.setSelected(bean.vip != 0);
+        initRecomend(bean.avator, mIvAvatar);
         initRecomend(bean.rmdList.get(0).img, mIvRecommend01);
         initRecomend(bean.rmdList.get(1).img, mIvRecommend02);
         if (bean.orderList != null && bean.orderList.size() > 0) {

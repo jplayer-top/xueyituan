@@ -27,6 +27,7 @@ public class MyInfoBean extends BaseBean{
     public int vip;
     public int points;
     public String recharge;
+    public String avator;
     public List<OrderListBean> orderList;
     public List<RmdListBean> rmdList;
 

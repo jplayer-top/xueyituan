@@ -14,7 +14,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/dimen_10dp"
         android:divider="@drawable/shape_divider"
         android:dividerPadding="15dp"
         android:orientation="vertical"
@@ -37,11 +36,43 @@
                 android:text="头像"
                 tools:ignore="RtlHardcoded"/>
 
-            <ImageView
+            <top.jplayer.baseprolibrary.widgets.polygon.PolygonImageView
                 android:id="@+id/ivMeAvatar"
                 android:layout_width="@dimen/dimen_50dp"
                 android:layout_height="@dimen/dimen_50dp"
-                android:src="@mipmap/ic_launcher"/>
+                android:src="@mipmap/ic_launcher"
+                app:poly_border="true"
+                app:poly_border_color="@color/grey"
+                app:poly_border_width="@dimen/dimen_1dp"
+                app:poly_vertices="0"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@drawable/selector_white_muti_press"
+                android:drawablePadding="@dimen/dp_10"
+                android:gravity="center_vertical"
+                android:text="手机号"
+                tools:ignore="RtlHardcoded"/>
+
+            <TextView
+                android:id="@+id/tvPhone"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_weight="1"
+                android:background="@drawable/selector_white_muti_press"
+                android:drawablePadding="@dimen/dp_10"
+                android:drawableRight="@drawable/right_arrow"
+                android:gravity="center|right"
+                android:text=""
+                tools:ignore="RtlHardcoded"/>
+
         </LinearLayout>
 
         <LinearLayout
@@ -78,27 +109,28 @@
             android:gravity="center_vertical">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@drawable/selector_white_muti_press"
-                android:drawablePadding="@dimen/dp_10"
-                android:gravity="center_vertical"
-                android:text="手机号"
-                tools:ignore="RtlHardcoded"/>
-
-            <TextView
-                android:id="@+id/tvPhone"
                 android:layout_width="0dp"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_weight="1"
                 android:background="@drawable/selector_white_muti_press"
                 android:drawablePadding="@dimen/dp_10"
+                android:gravity="center_vertical"
+                android:text="红包"
+                tools:ignore="RtlHardcoded"/>
+
+            <TextView
+                android:id="@+id/tvPoint"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@drawable/selector_white_muti_press"
+                android:drawablePadding="@dimen/dp_10"
                 android:drawableRight="@drawable/right_arrow"
                 android:gravity="center|right"
-                android:text="183****8542"
+                android:text="0"
                 tools:ignore="RtlHardcoded"/>
 
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -115,7 +147,7 @@
                 tools:ignore="RtlHardcoded"/>
 
             <TextView
-                android:id="@+id/tvEmail"
+                android:id="@+id/tvPassword"
                 android:layout_width="0dp"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_weight="1"
@@ -123,39 +155,11 @@
                 android:drawablePadding="@dimen/dp_10"
                 android:drawableRight="@drawable/right_arrow"
                 android:gravity="center|right"
-                android:text=""
+                android:hint="已设置"
                 tools:ignore="RtlHardcoded"/>
 
         </LinearLayout>
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="?attr/actionBarSize"
-                android:layout_weight="1"
-                android:background="@drawable/selector_white_muti_press"
-                android:drawablePadding="@dimen/dp_10"
-                android:gravity="center_vertical"
-                android:text="用户积分"
-                tools:ignore="RtlHardcoded"/>
-
-            <TextView
-                android:id="@+id/tvPoint"
-                android:layout_width="wrap_content"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@drawable/selector_white_muti_press"
-                android:drawablePadding="@dimen/dp_10"
-                android:drawableRight="@drawable/right_arrow"
-                android:gravity="center|right"
-                android:text="0"
-                tools:ignore="RtlHardcoded"/>
-
-        </LinearLayout>
 
         <FrameLayout
             android:layout_width="match_parent"

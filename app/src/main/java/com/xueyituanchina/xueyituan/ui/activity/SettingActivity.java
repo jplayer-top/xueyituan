@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.jaiky.imagespickers.ImageSelectorActivity;
 import com.xueyituanchina.xueyituan.R;
+import com.xueyituanchina.xueyituan.mpbe.presenter.SettingPresenter;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.Permission;
 
@@ -21,6 +22,7 @@ import butterknife.Unbinder;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
 import top.jplayer.baseprolibrary.utils.CameraUtil;
+import top.jplayer.baseprolibrary.utils.SharePreUtil;
 
 /**
  * Created by Obl on 2018/8/28.
@@ -37,8 +39,8 @@ public class SettingActivity extends CommonToolBarActivity {
     TextView mTvName;
     @BindView(R.id.tvPhone)
     TextView mTvPhone;
-    @BindView(R.id.tvEmail)
-    TextView mTvEmail;
+    @BindView(R.id.tvPassword)
+    TextView mTvPasswrod;
     @BindView(R.id.tvPoint)
     TextView mTvPoint;
     @BindView(R.id.btnLogout)
@@ -55,6 +57,9 @@ public class SettingActivity extends CommonToolBarActivity {
     public void initAddView(FrameLayout rootView) {
         super.initAddView(rootView);
         mUnbinder = ButterKnife.bind(this, rootView);
+        String nick = mBundle.getString("nick");
+        String points = mBundle.getString("points");
+        String avatar = mBundle.getString("avatar");
         mIvMeAvatar.setOnClickListener(v -> {
             AndPermission.with(this)
                     .permission(Permission.CAMERA, Permission.WRITE_EXTERNAL_STORAGE, Permission.READ_EXTERNAL_STORAGE)
@@ -62,6 +67,11 @@ public class SettingActivity extends CommonToolBarActivity {
                     .onDenied(permissions -> AndPermission.hasAlwaysDeniedPermission(mActivity, permissions))
                     .start();
         });
+        Glide.with(this).load(avatar).apply(GlideUtils.init().options(R.mipmap.ic_launcher)).into(mIvMeAvatar);
+        mTvName.setText(nick);
+        mTvPoint.setText(points);
+        String phone = (String) SharePreUtil.getData(this, "login_phone", "");
+        mTvPhone.setText(phone);
     }
 
     @Override
@@ -72,6 +82,7 @@ public class SettingActivity extends CommonToolBarActivity {
             for (String path : pathList) {
                 mFile = new File(path);
             }
+            new SettingPresenter(this).updateAvatar(mFile);
         }
     }
 
