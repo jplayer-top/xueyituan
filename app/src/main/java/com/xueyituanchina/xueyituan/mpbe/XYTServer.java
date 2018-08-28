@@ -28,14 +28,12 @@ import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
  */
 
 public interface XYTServer {
+    //主页
     @GET("home/top")
     Observable<HomeTopBean> home_top();
 
     @GET("home/list")
     Observable<HomeListBean> home_list();
-
-    @GET("points/index")
-    Observable<GiftDetailBean> gift_detail();
 
     @GET("home/list")
     Observable<HomeListBean> home_list(@Query("pid") String pid);
@@ -43,10 +41,28 @@ public interface XYTServer {
     @GET("home/goodslist")
     Observable<HomeGoodsList> home_goods_list(@QueryMap() Map<String, String> map);
 
+    //积分
+    @GET("points/index")
+    Observable<GiftDetailBean> gift_detail();
+
+    @GET("points/orders?")
+    Observable<BaseBean> billsOrders();
+
+    @POST("points/create?")
+    Observable<BaseBean> createBills(@QueryMap Map<String, String> map);
+
+    @GET("points/bills?")
+    Observable<BaseBean> billsList();
+
+    //活动
     @GET("activity/nearList")
     Observable<NearbyActiveBean> active_nearby_list();
 
+    //我的
+    @GET("my/index?")
+    Observable<MyInfoBean> myInfo();
 
+    //个人信息
     @POST("user/register?")
     Observable<BaseBean> register(@QueryMap() Map<String, String> map);
 
@@ -64,9 +80,6 @@ public interface XYTServer {
 
     @POST("user/updatenick?")
     Observable<BaseBean> updateNick(@Query("nick") String nick);
-
-    @GET("my/index?")
-    Observable<MyInfoBean> myInfo();
 
     @Multipart
     @POST("user/updateavatar?")
