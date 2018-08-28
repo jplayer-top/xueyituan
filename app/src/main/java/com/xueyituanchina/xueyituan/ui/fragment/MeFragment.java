@@ -111,16 +111,26 @@ public class MeFragment extends SuperBaseFragment {
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setEmptyView(View.inflate(this.getContext(), R.layout.layout_empty_view, null));
         mIvToolRightLeft.setOnClickListener(v -> {
-            if (bean == null) {
-                ToastUtils.init().showInfoToast(this.getContext(), "请先登录");
-                return;
-            }
-            Bundle bundle = new Bundle();
-            bundle.putString("nick", bean.nick);
-            bundle.putString("points", bean.points + "");
-            bundle.putString("avatar", bean.avator);
-            ActivityUtils.init().start(this.getActivity(), SettingActivity.class, "设置", bundle);
+            toSettingActivity();
         });
+        mLlShowMsgUser.setOnClickListener(v -> {
+            toSettingActivity();
+        });
+        mIvAvatar.setOnClickListener(v -> {
+            toSettingActivity();
+        });
+    }
+
+    private void toSettingActivity() {
+        if (bean == null) {
+            ToastUtils.init().showInfoToast(this.getContext(), "请先登录");
+            return;
+        }
+        Bundle bundle = new Bundle();
+        bundle.putString("nick", bean.nick);
+        bundle.putString("points", bean.points + "");
+        bundle.putString("avatar", bean.avator);
+        ActivityUtils.init().start(this.getActivity(), SettingActivity.class, "设置", bundle);
     }
 
     @Subscribe
