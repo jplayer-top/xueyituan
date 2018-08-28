@@ -27,6 +27,46 @@ public class SettingPresenter extends BasePresenter<SettingActivity> {
         mModel = new MeModel(XYTServer.class);
     }
 
+    public void updateNick(String nick) {
+        mModel.updateNick(nick).subscribe(new NetCallBackObserver<BaseBean>(new PostImplTip(mIView)) {
+            @Override
+            public void responseSuccess(BaseBean baseBean) {
+                mIView.responseNick(nick);
+            }
+
+            @Override
+            public void responseFail(BaseBean baseBean) {
+
+            }
+        });
+    }
+
+    public void verifyPw(String pw) {
+        mModel.verifyPw(pw).subscribe(new NetCallBackObserver<BaseBean>(new PostImplTip(mIView)) {
+            @Override
+            public void responseSuccess(BaseBean baseBean) {
+                mIView.verifyPw(pw);
+            }
+
+            @Override
+            public void responseFail(BaseBean baseBean) {
+
+            }
+        });
+    } public void updatePw(String opw,String npw) {
+        mModel.updatePw(opw, npw).subscribe(new NetCallBackObserver<BaseBean>(new PostImplTip(mIView)) {
+            @Override
+            public void responseSuccess(BaseBean baseBean) {
+                mIView.updatePw();
+            }
+
+            @Override
+            public void responseFail(BaseBean baseBean) {
+
+            }
+        });
+    }
+
     public void updateAvatar(File file) {
         mModel.updateAvatar(file).subscribe(new NetCallBackObserver<BaseBean>(new PostImplTip(mIView)) {
             @Override

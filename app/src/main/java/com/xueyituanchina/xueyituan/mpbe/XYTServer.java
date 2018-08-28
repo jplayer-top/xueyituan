@@ -62,6 +62,9 @@ public interface XYTServer {
     @POST("user/login?")
     Observable<LoginBean> getLoginBean(@Query("username") String phone, @Query("password") String password);
 
+    @POST("user/updatenick?")
+    Observable<BaseBean> updateNick(@Query("nick") String nick);
+
     @GET("my/index?")
     Observable<MyInfoBean> myInfo();
 
@@ -69,4 +72,9 @@ public interface XYTServer {
     @POST("user/updateavatar?")
     Observable<MyInfoBean> updateAvatar(@Part MultipartBody.Part file);
 
+    @POST("user/updatepw?")
+    Observable<BaseBean> updatePw(@Query("opw") String opw, @Query("npw") String npw);
+
+    @POST("user/verifypw?")
+    Observable<BaseBean> verifyPw(@Query("pw") String pw);
 }

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingEnd="@dimen/dimen_15dp"
+    android:paddingStart="@dimen/dimen_15dp"
+    android:background="@color/white">
+
+    <EditText
+
+        android:id="@+id/editText01"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:background="@null"
+        android:hint="请输入要修改的密码"
+
+        android:textColorHint="@color/color666"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/shape_divider"
+        app:layout_constraintTop_toBottomOf="@+id/editText01"/>
+
+    <EditText
+        android:id="@+id/editText02"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:background="@null"
+        android:hint="请确认要修改的密码"
+
+        android:textColorHint="@color/color666"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText01"/>
+
+    <View
+
+        android:id="@+id/viewLine2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/shape_divider"
+        app:layout_constraintTop_toBottomOf="@+id/editText02"/>
+</android.support.constraint.ConstraintLayout>

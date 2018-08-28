@@ -10,6 +10,7 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import top.jplayer.baseprolibrary.mvp.model.BaseModel;
+import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.net.retrofit.IoMainSchedule;
 
 /**
@@ -27,6 +28,18 @@ public class MeModel extends BaseModel<XYTServer> {
 
     public Observable<MyInfoBean> requestMyInfo() {
         return mServer.myInfo().compose(new IoMainSchedule<>());
+    }
+
+    public Observable<BaseBean> updateNick(String nick) {
+        return mServer.updateNick(nick).compose(new IoMainSchedule<>());
+    }
+
+    public Observable<BaseBean> verifyPw(String pw) {
+        return mServer.verifyPw(pw).compose(new IoMainSchedule<>());
+    }
+
+    public Observable<BaseBean> updatePw(String opw, String npw) {
+        return mServer.updatePw(opw, npw).compose(new IoMainSchedule<>());
     }
 
     public Observable<MyInfoBean> updateAvatar(File file) {

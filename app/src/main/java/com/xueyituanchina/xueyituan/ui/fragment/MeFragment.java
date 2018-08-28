@@ -12,6 +12,8 @@ import com.bumptech.glide.Glide;
 import com.xueyituanchina.xueyituan.R;
 import com.xueyituanchina.xueyituan.mpbe.bean.MyInfoBean;
 import com.xueyituanchina.xueyituan.mpbe.event.LoginSuccessEvent;
+import com.xueyituanchina.xueyituan.mpbe.event.MessageEvent;
+import com.xueyituanchina.xueyituan.mpbe.event.MessageOkEvent;
 import com.xueyituanchina.xueyituan.mpbe.presenter.MePresenter;
 import com.xueyituanchina.xueyituan.ui.activity.LoginActivity;
 import com.xueyituanchina.xueyituan.ui.activity.SettingActivity;
@@ -123,6 +125,11 @@ public class MeFragment extends SuperBaseFragment {
 
     @Subscribe
     public void onEvent(LoginSuccessEvent event) {
+        mPresenter.requestMyInfo();
+    }
+
+    @Subscribe
+    public void onEvent(MessageOkEvent event) {
         mPresenter.requestMyInfo();
     }
 
