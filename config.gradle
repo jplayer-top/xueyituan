@@ -86,6 +86,8 @@ ext {
     pickerview = 'com.contrarywind:Android-PickerView:3.2.7'
     //权限申请
     permission = 'com.yanzhenjie:permission:2.0.0-rc4'
+    //图片选择器
+    imagespickers = 'com.jaikydota.imagespickers:imagespickers:1.0.6'
     //二维码
     qcode = 'cn.yipianfengye.android:zxing-library:2.2'
     //多边形图+图片滤镜
@@ -126,7 +128,8 @@ ext {
                  qcode,
                  polygon,
                  swipebacklayout,
-                 ticker]
+                 ticker,
+                 imagespickers]
     annotationProcessorLibs = [glideCompiler]
 
 }

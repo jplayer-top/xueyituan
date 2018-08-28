@@ -3,7 +3,12 @@ package com.xueyituanchina.xueyituan.mpbe.model;
 import com.xueyituanchina.xueyituan.mpbe.XYTServer;
 import com.xueyituanchina.xueyituan.mpbe.bean.MyInfoBean;
 
+import java.io.File;
+
 import io.reactivex.Observable;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import top.jplayer.baseprolibrary.mvp.model.BaseModel;
 import top.jplayer.baseprolibrary.net.retrofit.IoMainSchedule;
 
@@ -22,5 +27,14 @@ public class MeModel extends BaseModel<XYTServer> {
 
     public Observable<MyInfoBean> requestMyInfo() {
         return mServer.myInfo().compose(new IoMainSchedule<>());
+    }
+
+    public Observable<MyInfoBean> updateAvatar(File file) {
+        RequestBody requestFile =
+                RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData("img", file.getName(), requestFile);
+        return mServer.updateAvatar(body)
+                .compose(new IoMainSchedule<>());
     }
 }

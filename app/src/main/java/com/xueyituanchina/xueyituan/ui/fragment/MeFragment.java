@@ -13,6 +13,7 @@ import com.xueyituanchina.xueyituan.mpbe.bean.MyInfoBean;
 import com.xueyituanchina.xueyituan.mpbe.event.LoginSuccessEvent;
 import com.xueyituanchina.xueyituan.mpbe.presenter.MePresenter;
 import com.xueyituanchina.xueyituan.ui.activity.LoginActivity;
+import com.xueyituanchina.xueyituan.ui.activity.SettingActivity;
 import com.xueyituanchina.xueyituan.ui.adapter.MeOrderAdapter;
 
 import org.greenrobot.eventbus.EventBus;
@@ -104,7 +105,9 @@ public class MeFragment extends SuperBaseFragment {
         mAdapter = new MeOrderAdapter(null);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setEmptyView(View.inflate(this.getContext(), R.layout.layout_empty_view, null));
-
+        mIvToolRightLeft.setOnClickListener(v -> {
+            ActivityUtils.init().start(this.getActivity(), SettingActivity.class, "设置");
+        });
     }
 
     @Subscribe
