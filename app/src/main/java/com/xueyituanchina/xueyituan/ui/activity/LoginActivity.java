@@ -319,7 +319,7 @@ public class LoginActivity extends SuperBaseActivity implements TextWatcher, ICo
                     if (!"验证账号".equals(mTvSetType.getText().toString()) || "完成绑定".equals(mBtRegister1.getText().toString())) {
                         mMap.put("check", "1");
                     } else {
-                        mMap.put("check", "2");
+                        mMap.put("check", "0");
                     }
                     showLoading();
                     mPresenter.sendSms(mMap, mRtnCode);

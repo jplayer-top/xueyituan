@@ -3,10 +3,14 @@ package com.xueyituanchina.xueyituan.mpbe.presenter;
 import android.text.TextUtils;
 import android.widget.Button;
 
+import com.xueyituanchina.xueyituan.XYTApplication;
 import com.xueyituanchina.xueyituan.mpbe.XYTServer;
 import com.xueyituanchina.xueyituan.mpbe.bean.LoginBean;
+import com.xueyituanchina.xueyituan.mpbe.event.LoginSuccessEvent;
 import com.xueyituanchina.xueyituan.mpbe.model.LoginModel;
 import com.xueyituanchina.xueyituan.ui.activity.LoginActivity;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.Map;
 
@@ -16,6 +20,7 @@ import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
 import top.jplayer.baseprolibrary.net.tip.GetImplTip;
 import top.jplayer.baseprolibrary.net.tip.LoaddingImplTip;
 import top.jplayer.baseprolibrary.net.tip.PostImplTip;
+import top.jplayer.baseprolibrary.utils.SharePreUtil;
 
 /**
  * Created by Obl on 2018/8/13.
@@ -88,6 +93,19 @@ public class LoginPresenter extends BasePresenter<LoginActivity> {
             @Override
             public void responseSuccess(LoginBean loginBean) {
                 mIView.login(loginBean);
+
+                String imtoken = loginBean.imtoken;
+                String uid = loginBean.uid + "";
+
+                SharePreUtil.saveData(mIView, "login_phone", phone);
+                SharePreUtil.saveData(mIView, "login_password", password);
+                SharePreUtil.saveData(mIView, "login_uid", uid);
+                SharePreUtil.saveData(mIView, "login_token", imtoken);
+
+                XYTApplication.uid = uid;
+                XYTApplication.token = imtoken;
+
+                EventBus.getDefault().post(new LoginSuccessEvent(uid));
             }
 
             @Override

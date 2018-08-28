@@ -12,6 +12,9 @@ import top.jplayer.baseprolibrary.BaseInitApplication;
  */
 
 public class XYTApplication extends MultiDexApplication {
+    public static String uid = "";
+    public static String token = "";
+
     @Override
     public void onCreate() {
         super.onCreate();

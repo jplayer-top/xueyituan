@@ -5,6 +5,7 @@ import com.xueyituanchina.xueyituan.mpbe.bean.HomeGoodsList;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeListBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeTopBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.LoginBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.MyInfoBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.NearbyActiveBean;
 
 import java.util.Map;
@@ -58,5 +59,6 @@ public interface XYTServer {
     @POST("user/login?")
     Observable<LoginBean> getLoginBean(@Query("username") String phone, @Query("password") String password);
 
-
+    @GET("my/index?")
+    Observable<MyInfoBean> myInfo();
 }
