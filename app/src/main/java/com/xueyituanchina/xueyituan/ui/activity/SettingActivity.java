@@ -21,6 +21,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
+import top.jplayer.baseprolibrary.ui.dialog.DialogLogout;
 import top.jplayer.baseprolibrary.utils.CameraUtil;
 import top.jplayer.baseprolibrary.utils.SharePreUtil;
 
@@ -47,6 +48,7 @@ public class SettingActivity extends CommonToolBarActivity {
     Button mBtnLogout;
     private Unbinder mUnbinder;
     private File mFile;
+    private SettingPresenter mPresenter;
 
     @Override
     public int initAddLayout() {
@@ -57,6 +59,7 @@ public class SettingActivity extends CommonToolBarActivity {
     public void initAddView(FrameLayout rootView) {
         super.initAddView(rootView);
         mUnbinder = ButterKnife.bind(this, rootView);
+        mPresenter = new SettingPresenter(this);
         String nick = mBundle.getString("nick");
         String points = mBundle.getString("points");
         String avatar = mBundle.getString("avatar");
@@ -72,6 +75,11 @@ public class SettingActivity extends CommonToolBarActivity {
         mTvPoint.setText(points);
         String phone = (String) SharePreUtil.getData(this, "login_phone", "");
         mTvPhone.setText(phone);
+        mBtnLogout.setOnClickListener(v -> {
+            new DialogLogout(this).setSubTitle("退出后将无法享受优质服务\n确认退出吗?").show(R.id.btnSure, view -> {
+//                mPresenter.logout();
+            });
+        });
     }
 
     @Override
@@ -82,7 +90,7 @@ public class SettingActivity extends CommonToolBarActivity {
             for (String path : pathList) {
                 mFile = new File(path);
             }
-            new SettingPresenter(this).updateAvatar(mFile);
+            mPresenter.updateAvatar(mFile);
         }
     }
 

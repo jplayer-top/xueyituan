@@ -12,7 +12,6 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="30dp"
         android:background="@color/white">
 
 
@@ -21,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:text="确认退出吗"
+            android:text="退出"
             android:textSize="@dimen/sp_16"
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -31,7 +30,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
-            android:text="退出将无法接收到新消息"
+            android:lineSpacingExtra="@dimen/dimen_3dp"
+            android:text=""
             android:textSize="13sp"
             app:layout_constraintTop_toTopOf="@id/tvTitle"/>
 
@@ -61,9 +61,4 @@
 
     </android.support.constraint.ConstraintLayout>
 
-    <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/ic_launcher_round"/>
 </android.support.v7.widget.CardView>
