@@ -10,11 +10,13 @@ import com.xueyituanchina.xueyituan.R;
 import com.xueyituanchina.xueyituan.mpbe.bean.GiftDetailBean;
 import com.xueyituanchina.xueyituan.mpbe.presenter.GiftDetailPresenter;
 import com.xueyituanchina.xueyituan.ui.adapter.GiftDetailAdapter;
+import com.xueyituanchina.xueyituan.ui.dialog.DialogPointsBuy;
 
 import java.util.Locale;
 
 import cn.bingoogolapple.bgabanner.BGABanner;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
+import top.jplayer.baseprolibrary.ui.dialog.DialogShare;
 import top.jplayer.baseprolibrary.ui.fragment.SuperBaseFragment;
 
 /**
@@ -53,6 +55,11 @@ public class GiftFragment extends SuperBaseFragment {
         mTvPoints = mHeader.findViewById(R.id.tvPoints);
         mBgaBanner = mHeader.findViewById(R.id.bgaBanner);
         mAdapter.addHeaderView(mHeader);
+        mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            GiftDetailBean.GoodsListBean listBean = mAdapter.getData().get(position);
+            new DialogPointsBuy(this.getContext()).show();
+            return false;
+        });
     }
 
 
