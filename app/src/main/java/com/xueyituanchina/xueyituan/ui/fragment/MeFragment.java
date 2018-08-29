@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide;
 import com.xueyituanchina.xueyituan.R;
 import com.xueyituanchina.xueyituan.mpbe.bean.MyInfoBean;
 import com.xueyituanchina.xueyituan.mpbe.event.LoginSuccessEvent;
+import com.xueyituanchina.xueyituan.mpbe.event.LogoutEvent;
 import com.xueyituanchina.xueyituan.mpbe.event.MessageEvent;
 import com.xueyituanchina.xueyituan.mpbe.event.MessageOkEvent;
 import com.xueyituanchina.xueyituan.mpbe.presenter.MePresenter;
@@ -30,6 +31,7 @@ import butterknife.Unbinder;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.ui.fragment.SuperBaseFragment;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
+import top.jplayer.baseprolibrary.utils.SharePreUtil;
 import top.jplayer.baseprolibrary.utils.StringUtils;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
 
@@ -136,6 +138,15 @@ public class MeFragment extends SuperBaseFragment {
     @Subscribe
     public void onEvent(LoginSuccessEvent event) {
         mPresenter.requestMyInfo();
+    }
+
+    @Subscribe
+    public void onEvent(LogoutEvent event) {
+        SharePreUtil.saveData(mActivity, "login_phone", "");
+        SharePreUtil.saveData(mActivity, "login_password", "");
+        SharePreUtil.saveData(mActivity, "login_uid", "");
+        SharePreUtil.saveData(mActivity, "login_token", "");
+        mActivity.finish();
     }
 
     @Subscribe

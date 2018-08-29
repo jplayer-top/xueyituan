@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://C:\Users\Administrator\Desktop\xueyituan\XueYiTuan.iml" filepath="C:\Users\Administrator\Desktop\xueyituan\XueYiTuan.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\Administrator\Desktop\xueyituan\app\app.iml" filepath="C:\Users\Administrator\Desktop\xueyituan\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/baseprolibrary/baseprolibrary.iml" filepath="$PROJECT_DIR$/baseprolibrary/baseprolibrary.iml" />
-      <module fileurl="file://C:\Users\Administrator\Desktop\xueyituan\baseprolibrary\baseprolibrary.iml" filepath="C:\Users\Administrator\Desktop\xueyituan\baseprolibrary\baseprolibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/xueyituan.iml" filepath="$PROJECT_DIR$/xueyituan.iml" />
     </modules>
   </component>

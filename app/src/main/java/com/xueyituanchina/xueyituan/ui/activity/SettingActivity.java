@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.jaiky.imagespickers.ImageSelectorActivity;
 import com.xueyituanchina.xueyituan.R;
+import com.xueyituanchina.xueyituan.mpbe.event.LogoutEvent;
 import com.xueyituanchina.xueyituan.mpbe.event.MessageEvent;
 import com.xueyituanchina.xueyituan.mpbe.event.MessageOkEvent;
 import com.xueyituanchina.xueyituan.mpbe.presenter.SettingPresenter;
@@ -92,7 +93,7 @@ public class SettingActivity extends CommonToolBarActivity {
         mTvPhone.setText(phone);
         mBtnLogout.setOnClickListener(v -> {
             new DialogLogout(this).setSubTitle("退出后将无法享受优质服务\n确认退出吗?").show(R.id.btnSure, view -> {
-//                mPresenter.logout();
+                mPresenter.logout();
             });
         });
         mTvName.setOnClickListener(view -> {
@@ -129,7 +130,7 @@ public class SettingActivity extends CommonToolBarActivity {
         if ("昵称".equals(event.key)) {
             mPresenter.updateNick(event.preText);
         } else {
-            mPresenter.updatePw(opw, event.preText);
+            mPresenter.updatePw( event.preText, event.preText);
         }
     }
 
@@ -159,5 +160,10 @@ public class SettingActivity extends CommonToolBarActivity {
 
     public void updatePw() {
 
+    }
+
+    public void logout() {
+        EventBus.getDefault().post(new LogoutEvent());
+        finish();
     }
 }

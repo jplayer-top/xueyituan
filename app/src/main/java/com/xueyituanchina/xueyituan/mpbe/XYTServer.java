@@ -69,6 +69,9 @@ public interface XYTServer {
     @POST("user/resetpw?")
     Observable<BaseBean> forget(@QueryMap() Map<String, String> map);
 
+    @GET("user/logout?")
+    Observable<BaseBean> logout();
+
     @POST("user/verfiysmcode?")
     Observable<LoginBean> verfiyCode(@Query("phone") String phone, @Query("smCode") String password);
 

@@ -50,4 +50,8 @@ public class MeModel extends BaseModel<XYTServer> {
         return mServer.updateAvatar(body)
                 .compose(new IoMainSchedule<>());
     }
+
+    public Observable<BaseBean> logout() {
+        return mServer.logout().compose(new IoMainSchedule<>());
+    }
 }
