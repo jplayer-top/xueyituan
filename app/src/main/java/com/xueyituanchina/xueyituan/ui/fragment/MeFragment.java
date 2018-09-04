@@ -12,9 +12,9 @@ import com.bumptech.glide.Glide;
 import com.xueyituanchina.xueyituan.R;
 import com.xueyituanchina.xueyituan.mpbe.bean.MyInfoBean;
 import com.xueyituanchina.xueyituan.mpbe.event.LoginSuccessEvent;
-import com.xueyituanchina.xueyituan.mpbe.event.MessageEvent;
 import com.xueyituanchina.xueyituan.mpbe.event.MessageOkEvent;
 import com.xueyituanchina.xueyituan.mpbe.presenter.MePresenter;
+import com.xueyituanchina.xueyituan.ui.activity.CollectionActivity;
 import com.xueyituanchina.xueyituan.ui.activity.LoginActivity;
 import com.xueyituanchina.xueyituan.ui.activity.SettingActivity;
 import com.xueyituanchina.xueyituan.ui.adapter.MeOrderAdapter;
@@ -118,6 +118,9 @@ public class MeFragment extends SuperBaseFragment {
         });
         mIvAvatar.setOnClickListener(v -> {
             toSettingActivity();
+        });
+        mLlCollection.setOnClickListener(v -> {
+            ActivityUtils.init().start(mActivity, CollectionActivity.class, "收藏");
         });
     }
 

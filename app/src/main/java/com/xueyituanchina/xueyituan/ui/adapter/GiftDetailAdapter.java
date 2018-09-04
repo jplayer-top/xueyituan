@@ -41,6 +41,7 @@ public class GiftDetailAdapter extends BaseQuickAdapter<GiftDetailBean.GoodsList
         ImageView ivSrc = helper.itemView.findViewById(R.id.ivSrc);
         Glide.with(ivSrc).load(item.thumb_img).into(ivSrc);
         helper.setText(R.id.tvTip, item.title)
+                .addOnClickListener(R.id.tvSubTitle)
                 .setText(R.id.tvPrice, String.format(Locale.CHINA, "%d", item.points));
     }
 }

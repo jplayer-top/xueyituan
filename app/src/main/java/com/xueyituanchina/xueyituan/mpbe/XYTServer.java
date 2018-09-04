@@ -7,6 +7,8 @@ import com.xueyituanchina.xueyituan.mpbe.bean.HomeTopBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.LoginBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.MyInfoBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.NearbyActiveBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.PointDetailBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.PointRecodeBean;
 
 import java.util.Map;
 
@@ -46,13 +48,13 @@ public interface XYTServer {
     Observable<GiftDetailBean> gift_detail();
 
     @GET("points/orders?")
-    Observable<BaseBean> billsOrders();
+    Observable<PointRecodeBean> billsOrders();
 
     @POST("points/create?")
     Observable<BaseBean> createBills(@QueryMap Map<String, String> map);
 
     @GET("points/bills?")
-    Observable<BaseBean> billsList();
+    Observable<PointDetailBean> billsList();
 
     //活动
     @GET("activity/nearList")
