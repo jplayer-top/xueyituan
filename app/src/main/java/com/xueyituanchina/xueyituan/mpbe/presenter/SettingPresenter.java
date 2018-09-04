@@ -9,6 +9,7 @@ import java.io.File;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
+import top.jplayer.baseprolibrary.net.tip.GetImplTip;
 import top.jplayer.baseprolibrary.net.tip.PostImplTip;
 
 /**
@@ -76,6 +77,20 @@ public class SettingPresenter extends BasePresenter<SettingActivity> {
 
             @Override
             public void responseFail(BaseBean bean) {
+
+            }
+        });
+    }
+
+    public void logout() {
+        mModel.logout().subscribe(new NetCallBackObserver<BaseBean>(new GetImplTip(mIView)) {
+            @Override
+            public void responseSuccess(BaseBean baseBean) {
+                mIView.logout();
+            }
+
+            @Override
+            public void responseFail(BaseBean baseBean) {
 
             }
         });

@@ -4,6 +4,7 @@ import android.view.View;
 
 import com.github.florent37.viewanimator.ViewAnimator;
 import com.xueyituanchina.xueyituan.R;
+import com.xueyituanchina.xueyituan.XYTApplication;
 import com.xueyituanchina.xueyituan.mpbe.XYTServer;
 import com.xueyituanchina.xueyituan.mpbe.bean.LoginBean;
 import com.xueyituanchina.xueyituan.mpbe.model.LoginModel;
@@ -50,6 +51,16 @@ public class SplashActivity extends SuperBaseActivity {
                     model.requestLogin(phone, password).subscribe(new NetCallBackObserver<LoginBean>() {
                         @Override
                         public void responseSuccess(LoginBean loginBean) {
+                            String imtoken = loginBean.imtoken;
+                            String uid = loginBean.uid + "";
+
+                            SharePreUtil.saveData(mActivity, "login_phone", phone);
+                            SharePreUtil.saveData(mActivity, "login_password", password);
+                            SharePreUtil.saveData(mActivity, "login_uid", uid);
+                            SharePreUtil.saveData(mActivity, "login_token", imtoken);
+
+                            XYTApplication.uid = uid;
+                            XYTApplication.token = imtoken;
                         }
 
                         @Override

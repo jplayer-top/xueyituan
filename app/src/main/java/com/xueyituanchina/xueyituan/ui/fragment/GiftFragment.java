@@ -19,10 +19,12 @@ import com.xueyituanchina.xueyituan.ui.dialog.LocalDialog;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+
 import java.util.Locale;
 
 import cn.bingoogolapple.bgabanner.BGABanner;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
+import top.jplayer.baseprolibrary.ui.dialog.DialogShare;
 import top.jplayer.baseprolibrary.ui.fragment.SuperBaseFragment;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.LogUtil;
@@ -73,6 +75,7 @@ public class GiftFragment extends SuperBaseFragment {
         });
         mAdapter.addHeaderView(mHeader);
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+
             mListBean = mAdapter.getData().get(position);
             new LocalDialog(mActivity)
                     .setTvTitle(mListBean.title)
@@ -80,6 +83,7 @@ public class GiftFragment extends SuperBaseFragment {
                     .setIvShopPic(mListBean.thumb_img)
                     .setGoodsId(mListBean.points_goods_id)
                     .show(R.id.btnSure);
+
             return false;
         });
     }
