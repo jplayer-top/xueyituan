@@ -12,11 +12,7 @@ import com.bumptech.glide.Glide;
 import com.xueyituanchina.xueyituan.R;
 import com.xueyituanchina.xueyituan.mpbe.bean.MyInfoBean;
 import com.xueyituanchina.xueyituan.mpbe.event.LoginSuccessEvent;
-<<<<<<< HEAD
-=======
 import com.xueyituanchina.xueyituan.mpbe.event.LogoutEvent;
-import com.xueyituanchina.xueyituan.mpbe.event.MessageEvent;
->>>>>>> 16aeafc8a0fac41c1e843455e43e4112385ee97a
 import com.xueyituanchina.xueyituan.mpbe.event.MessageOkEvent;
 import com.xueyituanchina.xueyituan.mpbe.presenter.MePresenter;
 import com.xueyituanchina.xueyituan.ui.activity.CollectionActivity;
@@ -51,8 +47,6 @@ public class MeFragment extends SuperBaseFragment {
     ImageView mIvToolRightLeft;
     @BindView(R.id.ivToolRight)
     ImageView mIvToolRight;
-
-
     @BindView(R.id.llCollection)
     LinearLayout mLlCollection;
     @BindView(R.id.llIssue)
