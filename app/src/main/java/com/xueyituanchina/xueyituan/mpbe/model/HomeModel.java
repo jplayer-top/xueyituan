@@ -4,6 +4,7 @@ import com.xueyituanchina.xueyituan.mpbe.XYTServer;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeGoodsList;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeListBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeTopBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.StoreBean;
 
 import java.util.Map;
 
@@ -37,5 +38,9 @@ public class HomeModel extends BaseModel<XYTServer> {
 
     public Observable<HomeGoodsList> homeGoodsList(Map<String, String> map) {
         return mServer.home_goods_list(map).compose(new IoMainSchedule<>());
+    }
+
+    public Observable<StoreBean> storeInfo(String id) {
+        return mServer.storeInfo(id).compose(new IoMainSchedule<>());
     }
 }

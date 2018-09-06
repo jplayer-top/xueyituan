@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tvTeachTip"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dimen_50dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:text="名师风采"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewTeach"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tvTeachTip"/>
+
+    <TextView
+        android:id="@+id/tvBrandTip"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:gravity="center_vertical"
+        android:text="品牌介绍"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewTeach"/>
+
+    <TextView
+        android:id="@+id/tvSol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:drawableEnd="@drawable/right_arrow"
+        android:gravity="center"
+        android:text="@string/app_name"
+        app:layout_constraintBottom_toBottomOf="@+id/tvBrandTip"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvBrandTip"/>
+
+    <View
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@drawable/shape_divider"/>
+
+    <View
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@drawable/shape_divider"
+        app:layout_constraintBottom_toTopOf="@+id/tvChatTip"/>
+
+    <View
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@drawable/shape_divider"
+        app:layout_constraintBottom_toTopOf="@+id/tvBrandTip"/>
+
+    <TextView
+        android:id="@+id/tvChatTip"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_50dp"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:drawableEnd="@drawable/right_arrow"
+        android:gravity="center_vertical"
+        android:text="用户评论（0）"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/tvBrandTip"/>
+</android.support.constraint.ConstraintLayout>

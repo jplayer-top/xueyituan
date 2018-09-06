@@ -1,5 +1,6 @@
 package com.xueyituanchina.xueyituan.ui.fragment;
 
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,6 +14,7 @@ import com.xueyituanchina.xueyituan.mpbe.bean.HomeGoodsList;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeListBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeTopBean;
 import com.xueyituanchina.xueyituan.mpbe.presenter.HomePresenter;
+import com.xueyituanchina.xueyituan.ui.activity.StoreActivity;
 import com.xueyituanchina.xueyituan.ui.adapter.HomeAdapter;
 
 import java.util.ArrayList;
@@ -23,6 +25,7 @@ import cn.bingoogolapple.bgabanner.BGABanner;
 import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.ui.fragment.SuperBaseFragment;
+import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.LogUtil;
 
 /**
@@ -62,6 +65,8 @@ public class HomeFragment extends SuperBaseFragment {
     private ImageView mIvShop1;
     public int isLoadding = 0;
     private HashMap<String, String> mMap;
+    private View mLlShow0;
+    private View mLlShop1;
 
     @Override
     public int initLayout() {
@@ -102,6 +107,8 @@ public class HomeFragment extends SuperBaseFragment {
         mTvShop1T1 = mHeader.findViewById(R.id.tvShop1T1);
         mIvShop0 = mHeader.findViewById(R.id.ivShop0);
         mIvShop1 = mHeader.findViewById(R.id.ivShop1);
+        mLlShow0 = mHeader.findViewById(R.id.llShop0);
+        mLlShop1 = mHeader.findViewById(R.id.llShop1);
 
 
         mTvT0 = mHeader.findViewById(R.id.tvT0);
@@ -150,6 +157,12 @@ public class HomeFragment extends SuperBaseFragment {
         });
     }
 
+    private void clickToStore(String name, String id) {
+        Bundle bundle = new Bundle();
+        bundle.putString("id", id);
+        ActivityUtils.init().start(this.mActivity, StoreActivity.class, name, bundle);
+    }
+
 
     @Override
     protected void initImmersionBar() {
@@ -186,6 +199,7 @@ public class HomeFragment extends SuperBaseFragment {
         mTvShopT1.setText(homeTopBean.shop.get(0).sp_name);
         mTvShop1T0.setText(homeTopBean.shop.get(1).recommend_title);
         mTvShop1T1.setText(homeTopBean.shop.get(1).sp_name);
+
         Glide.with(mActivity)
                 .load(homeTopBean.acfamily.avator)
                 .apply(GlideUtils.init().options(R.mipmap.ic_launcher))
@@ -198,6 +212,12 @@ public class HomeFragment extends SuperBaseFragment {
                 .load(homeTopBean.shop.get(1).sp_img)
                 .apply(GlideUtils.init().options(R.mipmap.ic_launcher))
                 .into(mIvShop1);
+        mLlShow0.setOnClickListener(v -> {
+            clickToStore(homeTopBean.shop.get(0).sp_name, homeTopBean.shop.get(0).user_id + "");
+        });
+        mLlShop1.setOnClickListener(v -> {
+            clickToStore(homeTopBean.shop.get(1).sp_name, homeTopBean.shop.get(1).user_id + "");
+        });
     }
 
     private void initViewFlipper(HomeTopBean homeTopBean) {

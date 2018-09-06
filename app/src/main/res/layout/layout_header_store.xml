@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <cn.bingoogolapple.bgabanner.BGABanner
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:bga="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/bgaBanner"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        bga:banner_indicatorGravity="bottom"
+        bga:banner_pointAutoPlayAble="true"
+        bga:banner_pointContainerBackground="@color/trans"
+        bga:banner_pointDrawable="@drawable/selector_banner_point_bar"/>
+
+    <TextView
+        android:id="@+id/tvShopName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_15dp"
+        android:text="@string/app_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bgaBanner"/>
+
+    <android.support.v7.widget.AppCompatRatingBar
+        android:id="@+id/ratingBar"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_5dp"
+        android:isIndicator="true"
+        android:numStars="5"
+        android:rating="5"
+        android:theme="@style/RatingBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvShopName"/>
+
+    <TextView
+        android:id="@+id/tvShopPoint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_5dp"
+        android:text="4.5分"
+        android:textColor="@color/money_color"
+        app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
+        app:layout_constraintStart_toEndOf="@+id/ratingBar"
+        app:layout_constraintTop_toTopOf="@+id/ratingBar"/>
+
+    <TextView
+        android:id="@+id/tvCollection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:drawablePadding="@dimen/dimen_3dp"
+        android:drawableTop="@drawable/collection"
+        android:text="收藏"
+        android:textSize="@dimen/dimen_12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvShopName"/>
+
+    <View
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:id="@+id/viewLine"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:background="@drawable/shape_divider"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar"/>
+
+    <TextView
+        android:id="@+id/tvShopLocal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_15dp"
+        android:drawablePadding="@dimen/dimen_5dp"
+        android:drawableStart="@drawable/pic_local"
+        android:text="聊城市东二区"
+        android:textColor="@color/color666"
+        android:textSize="@dimen/dimen_12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewLine"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_5dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:drawablePadding="@dimen/dimen_5dp"
+        android:drawableStart="@drawable/shop_tip"
+        android:text="团购"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvShopLocal"/>
+
+</android.support.constraint.ConstraintLayout>

@@ -9,6 +9,7 @@ import com.xueyituanchina.xueyituan.mpbe.bean.MyInfoBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.NearbyActiveBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.PointDetailBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.PointRecodeBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.StoreBean;
 
 import java.util.Map;
 
@@ -42,6 +43,9 @@ public interface XYTServer {
 
     @GET("home/goodslist")
     Observable<HomeGoodsList> home_goods_list(@QueryMap() Map<String, String> map);
+
+    @GET("home/shopInfo")
+    Observable<StoreBean> storeInfo(@Query("id") String id);
 
     //积分
     @GET("points/index")
