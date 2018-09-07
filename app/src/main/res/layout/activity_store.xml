@@ -42,6 +42,7 @@
             android:textSize="@dimen/dimen_13sp"/>
 
         <Button
+            android:id="@+id/btnPay"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_50dp"
             android:layout_marginEnd="@dimen/dimen_15dp"

@@ -15,6 +15,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
+    <TextView
+        android:id="@+id/tvTeachNum"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dimen_50dp"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:text="0位教师"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerViewTeach"
@@ -47,25 +54,25 @@
         app:layout_constraintTop_toTopOf="@+id/tvBrandTip"/>
 
     <View
-        android:layout_marginStart="@dimen/dimen_15dp"
-        android:layout_marginEnd="@dimen/dimen_15dp"
         android:layout_width="match_parent"
         android:layout_height="1px"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
         android:background="@drawable/shape_divider"/>
 
     <View
-        android:layout_marginStart="@dimen/dimen_15dp"
-        android:layout_marginEnd="@dimen/dimen_15dp"
         android:layout_width="match_parent"
         android:layout_height="1px"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
         android:background="@drawable/shape_divider"
         app:layout_constraintBottom_toTopOf="@+id/tvChatTip"/>
 
     <View
-        android:layout_marginStart="@dimen/dimen_15dp"
-        android:layout_marginEnd="@dimen/dimen_15dp"
         android:layout_width="match_parent"
         android:layout_height="1px"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
         android:background="@drawable/shape_divider"
         app:layout_constraintBottom_toTopOf="@+id/tvBrandTip"/>
 

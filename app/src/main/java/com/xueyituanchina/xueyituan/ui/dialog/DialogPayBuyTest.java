@@ -14,8 +14,8 @@ import top.jplayer.baseprolibrary.widgets.dialog.BaseCustomDialog;
  * github : https://github.com/oblivion0001
  */
 
-public class DialogPointsBuy extends BaseCustomDialog {
-    public DialogPointsBuy(Context context) {
+public class DialogPayBuyTest extends BaseCustomDialog {
+    public DialogPayBuyTest(Context context) {
         super(context);
     }
 
@@ -40,6 +40,6 @@ public class DialogPointsBuy extends BaseCustomDialog {
 
     @Override
     public int initLayout() {
-        return R.layout.dialog_points_buy;
+        return R.layout.dialog_pay_buy_test;
     }
 }

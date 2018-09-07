@@ -3,6 +3,7 @@ package com.xueyituanchina.xueyituan.ui.activity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -14,6 +15,7 @@ import com.xueyituanchina.xueyituan.mpbe.bean.StoreBean;
 import com.xueyituanchina.xueyituan.mpbe.presenter.StorePresenter;
 import com.xueyituanchina.xueyituan.ui.adapter.FooterAdapter;
 import com.xueyituanchina.xueyituan.ui.adapter.StoreAdapter;
+import com.xueyituanchina.xueyituan.ui.dialog.DialogPayBuyTest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +46,10 @@ public class StoreActivity extends CommonToolBarActivity {
     private TextView mTvSol;
     private TextView mTvChatTip;
     private RecyclerView mRecyclerViewTeach;
+    private Button mBtnPay;
+    private TextView mRvTeachNum;
+    private String mId;
+    private FooterAdapter mFooterAdapter;
 
     @Override
     public int initAddLayout() {
@@ -56,10 +62,12 @@ public class StoreActivity extends CommonToolBarActivity {
         mAdapter = new StoreAdapter(null);
         mPresenter = new StorePresenter(this);
         mRecyclerView.setAdapter(mAdapter);
-        mPresenter.storeInfo(mBundle.getString("id"));
+        mId = mBundle.getString("id");
+        mPresenter.storeInfo(mId);
         showLoading();
         initHeaderView();
         initFooterView();
+        mBtnPay = rootView.findViewById(R.id.btnPay);
     }
 
     private void initFooterView() {
@@ -67,6 +75,7 @@ public class StoreActivity extends CommonToolBarActivity {
         mTvSol = mFooter.findViewById(R.id.tvSol);
         mTvChatTip = mFooter.findViewById(R.id.tvChatTip);
         mRecyclerViewTeach = mFooter.findViewById(R.id.recyclerViewTeach);
+        mRvTeachNum = mFooter.findViewById(R.id.tvTeachNum);
         mAdapter.addFooterView(mFooter);
     }
 
@@ -88,13 +97,27 @@ public class StoreActivity extends CommonToolBarActivity {
         initBanner(strings);
         initHeader(bean.shop);
         initFooter(bean);
+        mBtnPay.setOnClickListener(v -> {
+            new DialogPayBuyTest(this).show();
+        });
+    }
+
+    @Override
+    public void refreshStart() {
+        super.refreshStart();
+        mPresenter.storeInfo(mId);
     }
 
     private void initFooter(StoreBean bean) {
         mTvSol.setText(bean.slogan);
-        mTvSol.setText(String.format(Locale.CHINA, "用户评论（%d）", bean.shop.sales));
+        mTvChatTip.setText(String.format(Locale.CHINA, "用户评论（%d）", bean.shop.sales));
         mRecyclerViewTeach.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        mRecyclerViewTeach.setAdapter(new FooterAdapter(bean.teacherList));
+        mFooterAdapter = new FooterAdapter(bean.teacherList);
+        mRecyclerViewTeach.setAdapter(mFooterAdapter);
+        mRvTeachNum.setText(String.format(Locale.CHINA, "%d位老师", bean.teacherList.size()));
+        mFooterAdapter.setOnItemClickListener((adapter, view, position) -> {
+
+        });
     }
 
     private void initHeader(StoreBean.ShopBean bean) {
