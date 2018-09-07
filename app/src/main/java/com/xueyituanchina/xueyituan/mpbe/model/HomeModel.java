@@ -1,6 +1,7 @@
 package com.xueyituanchina.xueyituan.mpbe.model;
 
 import com.xueyituanchina.xueyituan.mpbe.XYTServer;
+import com.xueyituanchina.xueyituan.mpbe.bean.BrandBBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeGoodsList;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeListBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeTopBean;
@@ -42,5 +43,9 @@ public class HomeModel extends BaseModel<XYTServer> {
 
     public Observable<StoreBean> storeInfo(String id) {
         return mServer.storeInfo(id).compose(new IoMainSchedule<>());
+    }
+
+    public Observable<BrandBBean> brandInfo(String id) {
+        return mServer.brandInfo(id).compose(new IoMainSchedule<>());
     }
 }

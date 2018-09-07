@@ -1,5 +1,6 @@
 package com.xueyituanchina.xueyituan.mpbe;
 
+import com.xueyituanchina.xueyituan.mpbe.bean.BrandBBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.GiftDetailBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeGoodsList;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeListBean;
@@ -46,6 +47,9 @@ public interface XYTServer {
 
     @GET("home/shopInfo")
     Observable<StoreBean> storeInfo(@Query("id") String id);
+
+    @GET("home/brand")
+    Observable<BrandBBean> brandInfo(@Query("id") String id);
 
     //积分
     @GET("points/index")

@@ -54,7 +54,7 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".ui.activity.TeachDetailActivity"
+            android:name=".ui.activity.BrandInfoActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
     </application>
