@@ -6,8 +6,10 @@ import com.xueyituanchina.xueyituan.mpbe.model.HomeModel;
 import com.xueyituanchina.xueyituan.ui.activity.StoreActivity;
 
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
+import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
 import top.jplayer.baseprolibrary.net.tip.GetImplTip;
+import top.jplayer.baseprolibrary.net.tip.PostImplTip;
 
 /**
  * Created by Obl on 2018/8/20.
@@ -37,6 +39,37 @@ public class StorePresenter extends BasePresenter<StoreActivity> {
             public void responseFail(StoreBean bean) {
                 mIView.showError();
             }
+        });
+    }
+
+    public void collType(String favType, String favId) {
+        mModel.collectionType(favType, favId).subscribe(new NetCallBackObserver<BaseBean>(new PostImplTip(mIView
+                .mActivity)) {
+            @Override
+            public void responseSuccess(BaseBean bean) {
+                mIView.collection();
+            }
+
+            @Override
+            public void responseFail(BaseBean bean) {
+
+            }
+
+        });
+    }
+
+    public void cancelCollType(String favType, String favId) {
+        mModel.cancelCollectionType(favType, favId).subscribe(new NetCallBackObserver<BaseBean>(new PostImplTip(mIView
+                .mActivity)) {
+            @Override
+            public void responseSuccess(BaseBean bean) {
+            }
+
+            @Override
+            public void responseFail(BaseBean bean) {
+
+            }
+
         });
     }
 }

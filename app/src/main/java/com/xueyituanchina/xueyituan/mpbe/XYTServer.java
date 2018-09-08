@@ -51,6 +51,13 @@ public interface XYTServer {
     @GET("home/brand")
     Observable<BrandBBean> brandInfo(@Query("id") String id);
 
+    //类型 1商家 2商品 3内容
+    @GET("my/fav?")
+    Observable<BaseBean> collectionType(@Query("favType") String favType, @Query("favId") String favId);
+
+    @GET("my/cancelfav")
+    Observable<BaseBean> cancelCollectionType(@Query("favType") String favType, @Query("favId") String favId);
+
     //积分
     @GET("points/index")
     Observable<GiftDetailBean> gift_detail();

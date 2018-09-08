@@ -1,5 +1,6 @@
 package com.xueyituanchina.xueyituan.ui.activity;
 
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -24,6 +25,7 @@ import java.util.Locale;
 import cn.bingoogolapple.bgabanner.BGABanner;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
+import top.jplayer.baseprolibrary.utils.ActivityUtils;
 
 /**
  * Created by Obl on 2018/9/5.
@@ -50,6 +52,8 @@ public class StoreActivity extends CommonToolBarActivity {
     private TextView mRvTeachNum;
     private String mId;
     private FooterAdapter mFooterAdapter;
+    private TextView mTvBrandTip;
+    private TextView mTvCollection;
 
     @Override
     public int initAddLayout() {
@@ -76,6 +80,12 @@ public class StoreActivity extends CommonToolBarActivity {
         mTvChatTip = mFooter.findViewById(R.id.tvChatTip);
         mRecyclerViewTeach = mFooter.findViewById(R.id.recyclerViewTeach);
         mRvTeachNum = mFooter.findViewById(R.id.tvTeachNum);
+        mTvBrandTip = mFooter.findViewById(R.id.tvBrandTip);
+        mTvBrandTip.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("id", mId);
+            ActivityUtils.init().start(this, BrandInfoActivity.class, "品牌介绍", bundle);
+        });
         mAdapter.addFooterView(mFooter);
     }
 
@@ -87,6 +97,14 @@ public class StoreActivity extends CommonToolBarActivity {
         mTvShopPoint = mHeader.findViewById(R.id.tvShopPoint);
         mTvShopLocal = mHeader.findViewById(R.id.tvShopLocal);
         mTvShopName = mHeader.findViewById(R.id.tvShopName);
+        mTvCollection = mHeader.findViewById(R.id.tvCollection);
+        mTvCollection.setOnClickListener(v -> {
+            if ("取消收藏".equals(mTvCollection.getText().toString())) {
+                mPresenter.cancelCollType("1", mId);
+            } else {
+                mPresenter.collType("1", mId);
+            }
+        });
     }
 
     public void storeInfo(StoreBean bean) {
@@ -137,4 +155,8 @@ public class StoreActivity extends CommonToolBarActivity {
         mBgaBanner.setData(bean, null);
     }
 
+    public void collection() {
+        mTvCollection.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.collection_cancel), null, null, null);
+        mTvCollection.setText("取消收藏");
+    }
 }

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/ivAvatarSrc"
+        android:layout_width="@dimen/dimen_80dp"
+        android:layout_height="@dimen/dimen_80dp"
+        android:layout_margin="@dimen/dimen_15dp"
+        android:src="@mipmap/ic_launcher"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_10dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:text="@string/app_name"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/ivAvatarSrc"
+        app:layout_constraintTop_toTopOf="@+id/ivAvatarSrc"/>
+
+    <TextView
+        android:id="@+id/tvSol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_10dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:text="找学校,找老师,学特长"
+        android:textColor="@color/color666"
+        android:textSize="@dimen/dimen_13sp"
+        app:layout_constraintStart_toEndOf="@+id/ivAvatarSrc"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"/>
+
+    <TextView
+        android:id="@+id/tvBrandTip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_30dp"
+        android:text="品牌故事"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivAvatarSrc"/>
+
+    <TextView
+        android:id="@+id/tvBrandText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:gravity="center_vertical"
+        android:lineSpacingExtra="@dimen/dimen_3dp"
+        android:text="文字是一个汉语词汇，拼音为wén zì，基本意思是记录思想、交流思想或承载语言的图像或符号。出自《史记·秦始皇本纪》：“一法度衡石丈尺，车同轨，书同文字。”"
+        android:textColor="@color/color666"
+        android:textSize="@dimen/dimen_12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvBrandTip"/>
+
+    <TextView
+        android:id="@+id/tvBrandBestTip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_15dp"
+        android:text="办学特色"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvBrandText"/>
+
+    <TextView
+        android:id="@+id/tvBrandBestText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:gravity="center_vertical"
+        android:lineSpacingExtra="@dimen/dimen_3dp"
+        android:text="一对一教学"
+        android:textColor="@color/color666"
+        android:textSize="@dimen/dimen_12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvBrandBestTip"/>
+
+    <TextView
+        android:id="@+id/tvBrandPicTip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_10dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_15dp"
+        android:text="环境"
+        android:textStyle="bold"
+        android:paddingBottom="@dimen/dimen_10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvBrandBestText"/>
+</android.support.constraint.ConstraintLayout>

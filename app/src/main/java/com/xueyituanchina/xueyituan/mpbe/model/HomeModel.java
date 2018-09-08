@@ -11,6 +11,7 @@ import java.util.Map;
 
 import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.mvp.model.BaseModel;
+import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.net.retrofit.IoMainSchedule;
 
 /**
@@ -47,5 +48,13 @@ public class HomeModel extends BaseModel<XYTServer> {
 
     public Observable<BrandBBean> brandInfo(String id) {
         return mServer.brandInfo(id).compose(new IoMainSchedule<>());
+    }
+
+    public Observable<BaseBean> collectionType(String favType, String favId) {
+        return mServer.collectionType(favType, favId).compose(new IoMainSchedule<>());
+    }
+
+    public Observable<BaseBean> cancelCollectionType(String favType, String favId) {
+        return mServer.cancelCollectionType(favType, favId).compose(new IoMainSchedule<>());
     }
 }

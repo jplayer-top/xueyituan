@@ -58,6 +58,8 @@
         android:layout_marginEnd="@dimen/dimen_15dp"
         android:drawablePadding="@dimen/dimen_3dp"
         android:drawableTop="@drawable/collection"
+        android:paddingEnd="@dimen/dimen_5dp"
+        android:paddingStart="@dimen/dimen_15dp"
         android:text="收藏"
         android:textSize="@dimen/dimen_12sp"
         app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
@@ -65,11 +67,11 @@
         app:layout_constraintTop_toTopOf="@+id/tvShopName"/>
 
     <View
-        android:layout_marginStart="@dimen/dimen_15dp"
-        android:layout_marginEnd="@dimen/dimen_15dp"
         android:id="@+id/viewLine"
         android:layout_width="match_parent"
         android:layout_height="1px"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
         android:layout_marginTop="@dimen/dimen_10dp"
         android:background="@drawable/shape_divider"
         app:layout_constraintTop_toBottomOf="@+id/ratingBar"/>
