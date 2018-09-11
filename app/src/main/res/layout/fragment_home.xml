@@ -93,7 +93,8 @@
             android:id="@+id/recyclerViewLocal"
             android:layout_width="@dimen/dimen_80dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dimen_30dp"/>
+            android:layout_marginStart="@dimen/dimen_30dp"
+            android:visibility="gone"/>
 
     </FrameLayout>
 </android.support.constraint.ConstraintLayout>
