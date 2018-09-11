@@ -74,6 +74,8 @@ public class HomeFragment extends SuperBaseFragment {
     private View mLlShop1;
     private RecyclerView mRecyclerViewLocal;
     private boolean mIsGone;
+    private LocalSetAdapter mLocalSetAdapter;
+    private TextView mTvLocal;
 
     @Override
     public int initLayout() {
@@ -108,8 +110,10 @@ public class HomeFragment extends SuperBaseFragment {
         strings.add("东阿县");
         strings.add("冠县");
         strings.add("高唐县");
-        mRecyclerViewLocal.setAdapter(new LocalSetAdapter(strings));
-        rootView.findViewById(R.id.tvLocal).setOnClickListener(v -> {
+        mLocalSetAdapter = new LocalSetAdapter(strings);
+        mRecyclerViewLocal.setAdapter(mLocalSetAdapter);
+        mTvLocal = rootView.findViewById(R.id.tvLocal);
+        mTvLocal.setOnClickListener(v -> {
             mIsGone = mRecyclerViewLocal.getVisibility() == View.GONE;
             if (mIsGone) {
                 fadeInLocal();
@@ -125,6 +129,11 @@ public class HomeFragment extends SuperBaseFragment {
             } else {
                 return false;
             }
+        });
+        mLocalSetAdapter.setOnItemClickListener((adapter, view, position) -> {
+            String data = mLocalSetAdapter.getData().get(position);
+            mTvLocal.setText(data);
+            fadeOutLocal();
         });
         mHeader = View.inflate(getContext(), R.layout.header_home, null);
 
