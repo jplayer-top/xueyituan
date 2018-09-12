@@ -16,6 +16,7 @@ import com.xueyituanchina.xueyituan.mpbe.event.LogoutEvent;
 import com.xueyituanchina.xueyituan.mpbe.event.MessageOkEvent;
 import com.xueyituanchina.xueyituan.mpbe.presenter.MePresenter;
 import com.xueyituanchina.xueyituan.ui.activity.CollectionActivity;
+import com.xueyituanchina.xueyituan.ui.activity.IssueActivity;
 import com.xueyituanchina.xueyituan.ui.activity.LoginActivity;
 import com.xueyituanchina.xueyituan.ui.activity.SettingActivity;
 import com.xueyituanchina.xueyituan.ui.adapter.MeOrderAdapter;
@@ -121,6 +122,9 @@ public class MeFragment extends SuperBaseFragment {
         });
         mLlCollection.setOnClickListener(v -> {
             ActivityUtils.init().start(mActivity, CollectionActivity.class, "收藏");
+        });
+        mLlIssue.setOnClickListener(v -> {
+            ActivityUtils.init().start(mActivity, IssueActivity.class, "我的评价");
         });
     }
 
