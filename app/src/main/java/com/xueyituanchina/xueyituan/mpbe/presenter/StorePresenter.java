@@ -1,5 +1,6 @@
 package com.xueyituanchina.xueyituan.mpbe.presenter;
 
+import com.xueyituanchina.xueyituan.R;
 import com.xueyituanchina.xueyituan.mpbe.XYTServer;
 import com.xueyituanchina.xueyituan.mpbe.bean.StoreBean;
 import com.xueyituanchina.xueyituan.mpbe.model.HomeModel;
@@ -47,7 +48,7 @@ public class StorePresenter extends BasePresenter<StoreActivity> {
                 .mActivity)) {
             @Override
             public void responseSuccess(BaseBean bean) {
-                mIView.collection();
+                mIView.collection(R.drawable.collection_cancel, "取消收藏");
             }
 
             @Override
@@ -63,6 +64,7 @@ public class StorePresenter extends BasePresenter<StoreActivity> {
                 .mActivity)) {
             @Override
             public void responseSuccess(BaseBean bean) {
+                mIView.collection(R.drawable.collection, "收藏");
             }
 
             @Override

@@ -33,7 +33,7 @@ public class BrandInfoActivity extends CommonToolBarActivity {
 
     @Override
     public int initAddLayout() {
-        return R.layout.activity_teach_detail;
+        return R.layout.activity_brand_detail;
     }
 
     @Override

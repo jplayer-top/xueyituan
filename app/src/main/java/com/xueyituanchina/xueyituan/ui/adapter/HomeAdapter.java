@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Locale;
 
 import top.jplayer.baseprolibrary.glide.GlideUtils;
+import top.jplayer.baseprolibrary.utils.ToastUtils;
 
 /**
  * Created by Obl on 2018/8/16.
@@ -46,6 +47,9 @@ public class HomeAdapter extends BaseQuickAdapter<HomeGoodsList.ListBean, BaseVi
         int other = item.other;
         isShowFooter(adapter, other, item.goodslist);
         recyclerItem.setAdapter(adapter);
+        adapter.setOnItemClickListener((adapter1, view, position) -> {
+            ToastUtils.init().showQuickToast(position + "---");
+        });
     }
 
     private void isShowFooter(AdapterItemClass adapter, int other, List<HomeGoodsList.ListBean.GoodslistBean> goodslist) {

@@ -1,6 +1,7 @@
 package com.xueyituanchina.xueyituan.ui.activity;
 
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -132,15 +133,24 @@ public class StoreActivity extends CommonToolBarActivity {
         mRecyclerViewTeach.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mFooterAdapter = new FooterAdapter(bean.teacherList);
         mRecyclerViewTeach.setAdapter(mFooterAdapter);
-        mRvTeachNum.setText(String.format(Locale.CHINA, "%d位老师", bean.teacherList.size()));
+        mRvTeachNum.setText(String.format(Locale.CHINA, "全部 %d位老师", bean.teacherList.size()));
         mFooterAdapter.setOnItemClickListener((adapter, view, position) -> {
+            StoreBean.TeacherListBean listBean = mFooterAdapter.getData().get(position);
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("bean", listBean);
+            ActivityUtils.init().start(mActivity, TeacherInfoActivity.class, listBean.teacher_name, bundle);
 
         });
+        if (bean.keep) {
+            collection(R.drawable.collection_cancel, "取消收藏");
+        } else {
+            collection(R.drawable.collection, "收藏");
+        }
     }
 
     private void initHeader(StoreBean.ShopBean bean) {
         mRatingBar.setRating((float) bean.score);
-        mTvShopPoint.setText(String.format(Locale.CHINA, "%2.2f分", bean.score));
+        mTvShopPoint.setText(String.format(Locale.CHINA, "%2.1f分", bean.score));
         mTvShopLocal.setText(bean.addr);
         mTvShopName.setText(bean.sp_name);
     }
@@ -155,8 +165,8 @@ public class StoreActivity extends CommonToolBarActivity {
         mBgaBanner.setData(bean, null);
     }
 
-    public void collection() {
-        mTvCollection.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.drawable.collection_cancel), null, null, null);
-        mTvCollection.setText("取消收藏");
+    public void collection(@DrawableRes int des, String text) {
+        mTvCollection.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(des), null, null, null);
+        mTvCollection.setText(text);
     }
 }

@@ -245,6 +245,10 @@ public class HomeFragment extends SuperBaseFragment {
 
     public void homeGoodsList(HomeGoodsList homeGoodsList) {
         mAdapter.setNewData(homeGoodsList.list);
+        mAdapter.setOnItemClickListener((adapter, view, position) -> {
+            HomeGoodsList.ListBean bean = mAdapter.getData().get(position);
+            clickToStore(bean.sp_name, bean.user_id + "");
+        });
     }
 
     public void homeTop(HomeTopBean homeTopBean) {
