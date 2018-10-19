@@ -18,6 +18,7 @@ import com.xueyituanchina.xueyituan.mpbe.bean.HomeGoodsList;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeListBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeTopBean;
 import com.xueyituanchina.xueyituan.mpbe.presenter.HomePresenter;
+import com.xueyituanchina.xueyituan.ui.activity.SearchActivity;
 import com.xueyituanchina.xueyituan.ui.activity.StoreActivity;
 import com.xueyituanchina.xueyituan.ui.adapter.HomeAdapter;
 import com.xueyituanchina.xueyituan.ui.adapter.LocalSetAdapter;
@@ -95,6 +96,9 @@ public class HomeFragment extends SuperBaseFragment {
         mMap = new HashMap<>();
         mMap.put("orderType", "0");
         mPresenter.homeGoodsList(mMap);
+        rootView.findViewById(R.id.tvSearch).setOnClickListener(v -> {
+            clickToSearch(0);
+        });
         showLoading();
     }
 
@@ -114,12 +118,7 @@ public class HomeFragment extends SuperBaseFragment {
         mRecyclerViewLocal.setAdapter(mLocalSetAdapter);
         mTvLocal = rootView.findViewById(R.id.tvLocal);
         mTvLocal.setOnClickListener(v -> {
-            mIsGone = mRecyclerViewLocal.getVisibility() == View.GONE;
-            if (mIsGone) {
-                fadeInLocal();
-            } else {
-                fadeOutLocal();
-            }
+            dissmisDilaog();
         });
         rootView.findViewById(R.id.flTouchView).setOnTouchListener((v, event) -> {
             v.performClick();
@@ -200,6 +199,15 @@ public class HomeFragment extends SuperBaseFragment {
                 LogUtil.method();
             }
         });
+    }
+
+    private void dissmisDilaog() {
+        mIsGone = mRecyclerViewLocal.getVisibility() == View.GONE;
+        if (mIsGone) {
+            fadeInLocal();
+        } else {
+            fadeOutLocal();
+        }
     }
 
     private void fadeInLocal() {
@@ -306,8 +314,19 @@ public class HomeFragment extends SuperBaseFragment {
                     .load(listBean.icon)
                     .apply(GlideUtils.init().options(R.mipmap.ic_launcher))
                     .into(mListSrc.get(index));
-
+            mListText.get(index).setOnClickListener(v -> {
+                clickToSearch(index + 1);
+            });
+            mListSrc.get(index).setOnClickListener(v -> {
+                clickToSearch(index + 1);
+            });
         });
+    }
+
+    private void clickToSearch(int index) {
+        Bundle bundle = new Bundle();
+        bundle.putString("pid", index + "");
+        ActivityUtils.init().start(getActivity(), SearchActivity.class, "", bundle);
     }
 
     private void initBanner(HomeTopBean homeTopBean) {

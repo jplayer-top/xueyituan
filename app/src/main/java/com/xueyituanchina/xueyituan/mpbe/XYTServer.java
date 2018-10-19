@@ -39,6 +39,7 @@ public interface XYTServer {
     @GET("home/list")
     Observable<HomeListBean> home_list();
 
+
     @GET("home/list")
     Observable<HomeListBean> home_list(@Query("pid") String pid);
 
