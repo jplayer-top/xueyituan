@@ -11,15 +11,18 @@ import java.util.List;
 
 public class HomeListBean {
 
+
     /**
      * code : 000
      * msg : 操作成功
      * list : [{"id":1,"pid":0,"name":"特长","icon":"https://xueyituan.oss-cn-beijing.aliyuncs.com/icon/tv_inde_call.png","ct":"2018-08-14 09:48:56"},{"id":2,"pid":0,"name":"文化课","icon":"https://xueyituan.oss-cn-beijing.aliyuncs.com/icon/tv_index_album.png","ct":"2018-08-15 16:52:19"},{"id":3,"pid":0,"name":"早教","icon":"https://xueyituan.oss-cn-beijing.aliyuncs.com/icon/tv_index_child.png","ct":"2018-08-15 16:52:20"},{"id":4,"pid":0,"name":"成人教育","icon":"https://xueyituan.oss-cn-beijing.aliyuncs.com/icon/tv_index_health.png","ct":"2018-08-15 16:52:22"},{"id":5,"pid":0,"name":"母婴馆","icon":"https://xueyituan.oss-cn-beijing.aliyuncs.com/icon/tv_index_setup.png","ct":"2018-08-15 16:52:23"}]
+     * sendList : [{"id":6,"pid":1,"name":"美术","ct":"2018-08-15 16:52:25"},{"id":7,"pid":1,"name":"音乐","ct":"2018-08-15 16:52:26"},{"id":8,"pid":1,"name":"舞蹈","ct":"2018-08-15 16:52:27"}]
      */
 
     public String code;
     public String msg;
     public List<ListBean> list;
+    public List<SendListBean> sendList;
 
     public static class ListBean {
         /**
@@ -34,6 +37,20 @@ public class HomeListBean {
         public int pid;
         public String name;
         public String icon;
+        public String ct;
+    }
+
+    public static class SendListBean {
+        /**
+         * id : 6
+         * pid : 1
+         * name : 美术
+         * ct : 2018-08-15 16:52:25
+         */
+
+        public int id;
+        public int pid;
+        public String name;
         public String ct;
     }
 }

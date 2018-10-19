@@ -1,6 +1,7 @@
 package com.xueyituanchina.xueyituan.mpbe.model;
 
 import com.xueyituanchina.xueyituan.mpbe.XYTServer;
+import com.xueyituanchina.xueyituan.mpbe.bean.AreaBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.BrandBBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeGoodsList;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeListBean;
@@ -32,6 +33,10 @@ public class HomeModel extends BaseModel<XYTServer> {
 
     public Observable<HomeListBean> homeList() {
         return mServer.home_list().compose(new IoMainSchedule<>());
+    }
+
+    public Observable<AreaBean> area_list() {
+        return mServer.area_list("http://123.206.45.111:8080/xytuan/area").compose(new IoMainSchedule<>());
     }
 
 

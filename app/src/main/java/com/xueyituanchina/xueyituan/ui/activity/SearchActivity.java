@@ -5,12 +5,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.github.florent37.viewanimator.ViewAnimator;
 import com.xueyituanchina.xueyituan.R;
+import com.xueyituanchina.xueyituan.mpbe.bean.AreaBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeGoodsList;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeListBean;
 import com.xueyituanchina.xueyituan.mpbe.presenter.SearchPresenter;
@@ -26,6 +29,7 @@ import butterknife.Unbinder;
 import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.ui.activity.SuperBaseActivity;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
+import top.jplayer.baseprolibrary.utils.KeyboardUtils;
 
 /**
  * Created by Obl on 2018/10/19.
@@ -46,6 +50,8 @@ public class SearchActivity extends SuperBaseActivity {
     TextView mTvLocal;
     @BindView(R.id.ivGoBack)
     ImageView ivGoBack;
+    @BindView(R.id.editSearch)
+    EditText editSearch;
     @BindView(R.id.recyclerViewSelect)
     RecyclerView mRecyclerViewSelect;
     @BindView(R.id.flTouchView)
@@ -55,8 +61,6 @@ public class SearchActivity extends SuperBaseActivity {
     SelectAdapter mSelectAdapter;
     private ArrayList<String> mStrings;
     private int clickSelect = -1;
-    private int orderType = 0;
-    private int typeType = 0;
     private String mPid;
 
     @Override
@@ -83,9 +87,20 @@ public class SearchActivity extends SuperBaseActivity {
         mMap.put("orderType", "0");
         mPresenter.homeGoodsList(mMap);
         mPresenter.homeList(mPid);
+        mPresenter.areaList();
         initSelect(rootView);
         ivGoBack.setOnClickListener(v -> finish());
         showLoading();
+        editSearch.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                KeyboardUtils.init().hideKeyboard(this, editSearch);
+                editSearch.clearFocus();
+                String string = editSearch.getText().toString();
+                mMap.put("name", string);
+                mPresenter.homeGoodsList(mMap, true);
+            }
+            return false;
+        });
     }
 
     //0综合排序 1距离 2优选 3销量 4评分
@@ -97,9 +112,11 @@ public class SearchActivity extends SuperBaseActivity {
         mRecyclerViewSelect.setAdapter(mSelectAdapter);
         initLocalData();
         mTvLocal.setOnClickListener(v -> {
-            initLocalData();
-            clickSelect = 2;
-            closeDialog();
+            if (mAreaBean != null) {
+                areaList(mAreaBean);
+                clickSelect = 2;
+                closeDialog();
+            }
         });
         mTvType.setOnClickListener(v -> {
             if (listBean != null) {
@@ -125,14 +142,24 @@ public class SearchActivity extends SuperBaseActivity {
         mSelectAdapter.setOnItemClickListener((adapter, view, position) -> {
             String data = mSelectAdapter.getData().get(position);
             if (clickSelect == 0) {
-                orderType = position;
-                mMap.put("orderType", orderType + "");
+                mMap.put("orderType", position + "");
                 mTvOrder.setText(data);
             } else if (clickSelect == 1) {
                 mTvType.setText(data);
-                typeType = position + 1;
+                for (HomeListBean.ListBean bean : listBean.list) {
+                    if (data.equals(bean.name)) {
+                        mMap.put("catId", bean.id + "");
+                        break;
+                    }
+                }
             } else if (clickSelect == 2) {
                 mTvLocal.setText(data);
+                for (AreaBean.AreasBean.SubsBean bean : mAreaBean.areas.subs) {
+                    if (data.equals(bean.area_name)) {
+                        mMap.put("areaCode", bean.area_code);
+                        break;
+                    }
+                }
             }
             fadeOutLocal();
             mPresenter.homeGoodsList(mMap, true);
@@ -210,6 +237,11 @@ public class SearchActivity extends SuperBaseActivity {
     @Override
     public void refreshStart() {
         super.refreshStart();
+        mMap.clear();
+        mTvOrder.setText("智能排序");
+        mTvType.setText("全部分类");
+        mTvLocal.setText("全城");
+        editSearch.setText("");
         mPresenter.homeGoodsList(mMap);
     }
 
@@ -254,6 +286,18 @@ public class SearchActivity extends SuperBaseActivity {
         Observable.fromIterable(listBean.list).subscribe(listBean1 -> {
             mStrings.add(listBean1.name);
         });
+        mSelectAdapter.setNewData(mStrings);
+    }
+
+    private AreaBean mAreaBean;
+
+    public void areaList(AreaBean listBean) {
+        if (mStrings == null) {
+            mStrings = new ArrayList<>();
+        }
+        mStrings.clear();
+        mAreaBean = listBean;
+        Observable.fromIterable(listBean.areas.subs).subscribe(bean -> mStrings.add(bean.area_name));
         mSelectAdapter.setNewData(mStrings);
     }
 }

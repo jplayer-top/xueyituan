@@ -18,12 +18,12 @@
         bga:banner_pointDrawable="@drawable/selector_banner_point_bar"/>
 
     <LinearLayout
-        android:gravity="center"
         android:id="@+id/ll0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_15dp"
         android:layout_marginTop="@dimen/dimen_10dp"
+        android:gravity="center"
         android:orientation="vertical"
         app:layout_constraintEnd_toStartOf="@+id/ll1"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
@@ -370,5 +370,13 @@
             android:layout_height="wrap_content"
             android:text="筛选"/>
     </android.support.design.widget.TabLayout>
+
+    <View
+        android:id="@+id/viAr"
+        android:layout_width="80dp"
+        android:layout_height="1px"
+        android:layout_marginEnd="@dimen/dimen_10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout"/>
 
 </android.support.constraint.ConstraintLayout>

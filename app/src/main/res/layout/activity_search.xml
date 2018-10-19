@@ -28,6 +28,7 @@
             android:src="@drawable/black_left_arrow"/>
 
         <EditText
+            android:id="@+id/editSearch"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_30dp"
             android:layout_marginBottom="@dimen/dimen_10dp"
@@ -37,6 +38,7 @@
             android:drawableStart="@drawable/bar_search"
             android:gravity="center_vertical"
             android:hint="请输入商户名或课程名"
+            android:imeOptions="actionSearch"
             android:inputType="text"
             android:paddingEnd="@dimen/dimen_5dp"
             android:paddingStart="@dimen/dimen_5dp"
@@ -82,7 +84,7 @@
                 android:layout_gravity="center"
                 android:drawableEnd="@drawable/bottom_arrow"
                 android:drawablePadding="@dimen/dimen_5dp"
-                android:text="特长种类"
+                android:text="全部分类"
                 android:textColor="@color/color666"/>
         </FrameLayout>
 
@@ -128,9 +130,9 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerViewSelect"
             android:layout_width="match_parent"
-            android:visibility="gone"
             android:layout_height="wrap_content"
-            android:background="@color/white"/>
+            android:background="@color/white"
+            android:visibility="gone"/>
 
     </FrameLayout>
 </android.support.constraint.ConstraintLayout>

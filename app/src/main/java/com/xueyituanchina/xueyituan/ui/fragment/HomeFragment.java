@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
@@ -22,6 +23,7 @@ import com.xueyituanchina.xueyituan.ui.activity.SearchActivity;
 import com.xueyituanchina.xueyituan.ui.activity.StoreActivity;
 import com.xueyituanchina.xueyituan.ui.adapter.HomeAdapter;
 import com.xueyituanchina.xueyituan.ui.adapter.LocalSetAdapter;
+import com.xueyituanchina.xueyituan.ui.adapter.SelectCatAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,6 +35,8 @@ import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.ui.fragment.SuperBaseFragment;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.LogUtil;
+import top.jplayer.baseprolibrary.utils.ScreenUtils;
+import top.jplayer.baseprolibrary.widgets.popup.CommonPopupWindow;
 
 /**
  * Created by Obl on 2018/8/16.
@@ -77,6 +81,11 @@ public class HomeFragment extends SuperBaseFragment {
     private boolean mIsGone;
     private LocalSetAdapter mLocalSetAdapter;
     private TextView mTvLocal;
+    // popup window
+    private CommonPopupWindow window;
+    private CommonPopupWindow.LayoutGravity layoutGravity;
+    private View mView;
+    private RecyclerView mRecyclerViewSelect;
 
     @Override
     public int initLayout() {
@@ -100,42 +109,27 @@ public class HomeFragment extends SuperBaseFragment {
             clickToSearch(0);
         });
         showLoading();
+        window = new CommonPopupWindow(getActivity(),
+                R.layout.layout_popup_view, ScreenUtils.dp2px(80),
+                ViewGroup.LayoutParams.WRAP_CONTENT) {
+            @Override
+            protected void initView() {
+                View view = getContentView();
+                mRecyclerViewSelect = view.findViewById(R.id.recyclerViewSelect);
+                initRecyclerSelect();
+            }
+
+            @Override
+            protected void initEvent() {
+            }
+        };
+        layoutGravity = new CommonPopupWindow.LayoutGravity(CommonPopupWindow.LayoutGravity.ALIGN_LEFT | CommonPopupWindow.LayoutGravity.TO_BOTTOM);
     }
 
     private void initHeader() {
-        mRecyclerViewLocal = rootView.findViewById(R.id.recyclerViewLocal);
-        mRecyclerViewLocal.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        ArrayList<String> strings = new ArrayList<>();
-        strings.add("东昌府区");
-        strings.add("临清市");
-        strings.add("阳谷县");
-        strings.add("莘县");
-        strings.add("荏平县");
-        strings.add("东阿县");
-        strings.add("冠县");
-        strings.add("高唐县");
-        mLocalSetAdapter = new LocalSetAdapter(strings);
-        mRecyclerViewLocal.setAdapter(mLocalSetAdapter);
-        mTvLocal = rootView.findViewById(R.id.tvLocal);
-        mTvLocal.setOnClickListener(v -> {
-            dissmisDilaog();
-        });
-        rootView.findViewById(R.id.flTouchView).setOnTouchListener((v, event) -> {
-            v.performClick();
-            if (event.getAction() == MotionEvent.ACTION_DOWN && mRecyclerViewLocal.getVisibility() == View.VISIBLE) {
-                fadeOutLocal();
-                return true;
-            } else {
-                return false;
-            }
-        });
-        mLocalSetAdapter.setOnItemClickListener((adapter, view, position) -> {
-            String data = mLocalSetAdapter.getData().get(position);
-            mTvLocal.setText(data);
-            fadeOutLocal();
-        });
+        initRecyclerLocal();
         mHeader = View.inflate(getContext(), R.layout.header_home, null);
-
+        mView = mHeader.findViewById(R.id.viAr);
         mViewFlipper = mHeader.findViewById(R.id.viewFlipper);
 
         mTabLayout = mHeader.findViewById(R.id.tabLayout);
@@ -185,8 +179,16 @@ public class HomeFragment extends SuperBaseFragment {
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                mMap.put("orderType", tab.getPosition() + "");
-                mPresenter.homeGoodsList(mMap);
+                int position = tab.getPosition();
+                if (position != 5) {
+                    mMap.put("orderType", position + "");
+                    mPresenter.homeGoodsList(mMap);
+                } else {
+                    if (sendList != null) {
+                        mSelectCatAdapter.setNewData(sendList);
+                        window.showBashOfAnchor(mView, layoutGravity, 0, 0);
+                    }
+                }
             }
 
             @Override
@@ -197,38 +199,96 @@ public class HomeFragment extends SuperBaseFragment {
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
                 LogUtil.method();
+                int position = tab.getPosition();
+                if (position == 5) {
+                    if (sendList != null) {
+                        window.showBashOfAnchor(mView, layoutGravity, 0, 0);
+                    }
+                }
             }
+        });
+    }
+
+    SelectCatAdapter mSelectCatAdapter;
+
+    private void initRecyclerSelect() {
+        mRecyclerViewSelect.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        mSelectCatAdapter = new SelectCatAdapter(null);
+        mRecyclerViewSelect.setAdapter(mSelectCatAdapter);
+        mSelectCatAdapter.setOnItemClickListener((adapter, view, position) -> {
+            HomeListBean.SendListBean sendListBean = mSelectCatAdapter.getData().get(position);
+            String data = sendListBean.name;
+            TabLayout.Tab tab = mTabLayout.getTabAt(5);
+            if (tab != null) {
+                tab.setText(data);
+            }
+            mMap.put("catId", sendListBean.pid + "");
+            mPresenter.homeGoodsList(mMap);
+        });
+    }
+
+    private void initRecyclerLocal() {
+        mRecyclerViewLocal = rootView.findViewById(R.id.recyclerViewLocal);
+        mRecyclerViewLocal.setLayoutManager(new LinearLayoutManager(this.getContext()));
+        ArrayList<String> strings = new ArrayList<>();
+        strings.add("东昌府区");
+        strings.add("临清市");
+        strings.add("阳谷县");
+        strings.add("莘县");
+        strings.add("荏平县");
+        strings.add("东阿县");
+        strings.add("冠县");
+        strings.add("高唐县");
+        mLocalSetAdapter = new LocalSetAdapter(strings);
+        mRecyclerViewLocal.setAdapter(mLocalSetAdapter);
+        mTvLocal = rootView.findViewById(R.id.tvLocal);
+        mTvLocal.setOnClickListener(v -> {
+            dissmisDilaog();
+        });
+        rootView.findViewById(R.id.flTouchView).setOnTouchListener((v, event) -> {
+            v.performClick();
+            if (event.getAction() == MotionEvent.ACTION_DOWN && mRecyclerViewLocal.getVisibility() == View.VISIBLE) {
+                fadeOutLocal(mRecyclerViewLocal);
+                return true;
+            } else {
+                return false;
+            }
+        });
+        mLocalSetAdapter.setOnItemClickListener((adapter, view, position) -> {
+            String data = mLocalSetAdapter.getData().get(position);
+            mTvLocal.setText(data);
+            fadeOutLocal(mRecyclerViewLocal);
         });
     }
 
     private void dissmisDilaog() {
         mIsGone = mRecyclerViewLocal.getVisibility() == View.GONE;
         if (mIsGone) {
-            fadeInLocal();
+            fadeInLocal(mRecyclerViewLocal);
         } else {
-            fadeOutLocal();
+            fadeOutLocal(mRecyclerViewLocal);
         }
     }
 
-    private void fadeInLocal() {
-        ViewAnimator.animate(mRecyclerViewLocal)
+    private void fadeInLocal(View view) {
+        ViewAnimator.animate()
                 .fadeIn()
                 .duration(300)
                 .onStart(() -> {
-                    if (mRecyclerViewLocal.getVisibility() == View.GONE) {
-                        mRecyclerViewLocal.setVisibility(View.VISIBLE);
+                    if (view.getVisibility() == View.GONE) {
+                        view.setVisibility(View.VISIBLE);
                     }
                 })
                 .start();
     }
 
-    private void fadeOutLocal() {
-        ViewAnimator.animate(mRecyclerViewLocal)
+    private void fadeOutLocal(View view) {
+        ViewAnimator.animate(view)
                 .fadeOut()
                 .duration(300)
                 .onStop(() -> {
-                    if (mRecyclerViewLocal.getVisibility() == View.VISIBLE) {
-                        mRecyclerViewLocal.setVisibility(View.GONE);
+                    if (view.getVisibility() == View.VISIBLE) {
+                        view.setVisibility(View.GONE);
                     }
                 })
                 .start();
@@ -247,7 +307,10 @@ public class HomeFragment extends SuperBaseFragment {
         mImmersionBar.titleBar(R.id.constraint).init();
     }
 
+    List<HomeListBean.SendListBean> sendList;
+
     public void homeList(HomeListBean homeListBean) {
+        sendList = homeListBean.sendList;
         initClassify(homeListBean.list);
     }
 

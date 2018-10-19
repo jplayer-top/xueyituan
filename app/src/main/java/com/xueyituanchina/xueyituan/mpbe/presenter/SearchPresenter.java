@@ -48,13 +48,25 @@ public class SearchPresenter extends BasePresenter<SearchActivity> {
         });
     }
 
+    public void areaList() {
+        mModel.area_list().subscribe(areaListBean -> {
+            if (areaListBean != null) {
+                mIView.responseSuccess();
+                mIView.areaList(areaListBean);
+            }
+        }, throwable -> {
+        });
+    }
+
     public void homeGoodsList(Map<String, String> map, boolean isLoadding) {
         mModel.homeGoodsList(map).subscribe(new NetCallBackObserver<HomeGoodsList>(new LoaddingImplTip(mIView)) {
             @Override
             public void responseSuccess(HomeGoodsList homeGoodsList) {
-                if (homeGoodsList != null) {
+                if (homeGoodsList.list != null && homeGoodsList.list.size() > 0) {
                     mIView.responseSuccess();
                     mIView.homeGoodsList(homeGoodsList);
+                } else {
+                    mIView.showEmpty();
                 }
             }
 

@@ -1,5 +1,6 @@
 package com.xueyituanchina.xueyituan.mpbe;
 
+import com.xueyituanchina.xueyituan.mpbe.bean.AreaBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.BrandBBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.GiftDetailBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeGoodsList;
@@ -22,6 +23,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
+import retrofit2.http.Url;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 
 /**
@@ -39,6 +41,8 @@ public interface XYTServer {
     @GET("home/list")
     Observable<HomeListBean> home_list();
 
+    @GET()
+    Observable<AreaBean> area_list(@Url String url);
 
     @GET("home/list")
     Observable<HomeListBean> home_list(@Query("pid") String pid);
