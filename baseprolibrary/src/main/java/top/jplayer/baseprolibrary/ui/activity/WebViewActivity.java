@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import top.jplayer.baseprolibrary.R;
 import top.jplayer.baseprolibrary.utils.LogUtil;
+import top.jplayer.baseprolibrary.utils.ToastUtils;
 
 public class WebViewActivity extends CommonToolBarActivity {
 
@@ -40,7 +41,7 @@ public class WebViewActivity extends CommonToolBarActivity {
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         pbWebBase = rootView.findViewById(R.id.pb_web_base);
         webBase = rootView.findViewById(R.id.web_base);
-        tooColor(true, R.color.trans);
+        webPath = mBundle.getString("url");
         initData();// 初始化控件的数据及监听事件
     }
 
@@ -59,7 +60,8 @@ public class WebViewActivity extends CommonToolBarActivity {
 //        webPath = getIntent().getStringExtra("URL");
 //        webPath = RxConstants.URL_BAIDU_SEARCH;//加载的URL
         if (webPath.equals("")) {
-            webPath = "https://www.jb51.net/article/52851.htm";
+            ToastUtils.init().showQuickToast("链接已失效");
+            finish();
         }
         WebSettings webSettings = webBase.getSettings();
         if (Build.VERSION.SDK_INT >= 19) {
