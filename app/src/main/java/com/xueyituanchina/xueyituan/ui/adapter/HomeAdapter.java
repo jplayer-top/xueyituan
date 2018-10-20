@@ -1,5 +1,7 @@
 package com.xueyituanchina.xueyituan.ui.adapter;
 
+import android.app.Activity;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -11,12 +13,13 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.xueyituanchina.xueyituan.R;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeGoodsList;
+import com.xueyituanchina.xueyituan.ui.activity.ShopItemActivity;
 
 import java.util.List;
 import java.util.Locale;
 
 import top.jplayer.baseprolibrary.glide.GlideUtils;
-import top.jplayer.baseprolibrary.utils.ToastUtils;
+import top.jplayer.baseprolibrary.utils.ActivityUtils;
 
 /**
  * Created by Obl on 2018/8/16.
@@ -48,7 +51,10 @@ public class HomeAdapter extends BaseQuickAdapter<HomeGoodsList.ListBean, BaseVi
         isShowFooter(adapter, other, item.goodslist);
         recyclerItem.setAdapter(adapter);
         adapter.setOnItemClickListener((adapter1, view, position) -> {
-            ToastUtils.init().showQuickToast(position + "---");
+            HomeGoodsList.ListBean.GoodslistBean goodslistBean = adapter.getData().get(position);
+            Bundle bundle =new Bundle();
+            bundle.putString("id",goodslistBean.goods_id+"");
+            ActivityUtils.init().start((Activity) mContext, ShopItemActivity.class, goodslistBean.goods_title,bundle);
         });
     }
 

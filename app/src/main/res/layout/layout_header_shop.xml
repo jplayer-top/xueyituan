@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <cn.bingoogolapple.bgabanner.BGABanner
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:bga="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/bgaBanner"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        bga:banner_indicatorGravity="bottom"
+        bga:banner_pointAutoPlayAble="true"
+        bga:banner_pointContainerBackground="@color/trans"
+        bga:banner_pointDrawable="@drawable/selector_banner_point_bar"/>
+
+    <TextView
+        android:id="@+id/tvShopName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_15dp"
+        android:text="@string/app_name"
+        android:textSize="@dimen/dimen_18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bgaBanner"/>
+
+    <TextView
+        android:id="@+id/tvShopSubTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_15dp"
+        android:text="@string/app_name"
+        android:textSize="@dimen/dimen_13sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvShopName"/>
+
+    <LinearLayout
+        android:id="@+id/llPrice"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_60dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvShopSubTitle">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="￥ "
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tvNewPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.0"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/dimen_25sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tvOldPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_20dp"
+            android:text="门市价：9.9"
+            android:textColor="@color/color999"
+            android:textSize="@dimen/dimen_14sp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:paddingEnd="@dimen/dimen_15dp"
+            android:text="4.5分"
+            android:textColor="@color/money_color"
+            android:textSize="@dimen/dimen_28sp"
+            android:textStyle="italic"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvVipTip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:drawablePadding="@dimen/dimen_5dp"
+        android:drawableStart="@drawable/vip"
+        android:text="会员：可免费试课，领取礼品。"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llPrice"/>
+
+    <TextView
+        android:id="@+id/tvGiftTip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:drawablePadding="@dimen/dimen_5dp"
+        android:drawableStart="@drawable/gift"
+        android:text="试课结束后可领取70元伊利金典牛奶一箱"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvVipTip"/>
+
+
+    <TextView
+        android:id="@+id/tvWasPay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_5dp"
+        android:drawablePadding="@dimen/dimen_5dp"
+        android:drawableStart="@drawable/shop_me"
+        android:text="已售 0"
+        android:textColor="@color/color999"
+        android:textSize="@dimen/dimen_14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llPrice"/>
+
+    <TextView
+        android:id="@+id/tvTipStore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_30dp"
+        android:text="商家信息"
+        android:textColor="@color/color666"
+        android:textSize="@dimen/dimen_18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvGiftTip"/>
+
+    <TextView
+        android:id="@+id/tvStoreName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_20dp"
+        android:text="@string/app_name"
+        android:textSize="@dimen/dimen_16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTipStore"/>
+
+    <TextView
+        android:id="@+id/tvStoreLocal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_5dp"
+        android:text="@string/app_name"
+        android:textColor="@color/color666"
+        android:textSize="@dimen/dimen_14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvStoreName"/>
+
+    <TextView
+        android:id="@+id/tvStoreLocalLen"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_5dp"
+        android:drawablePadding="@dimen/dimen_5dp"
+        android:drawableStart="@drawable/pic_local"
+        android:text="500米"
+        android:textColor="@color/color666"
+        android:textSize="@dimen/dimen_14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvStoreLocal"/>
+
+    <TextView
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/dimen_50dp"
+        android:background="@color/pickerview_wheelview_textcolor_divider"
+        app:layout_constraintBottom_toTopOf="@+id/tvStoreLocalLen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvStoreName"/>
+
+    <ImageView
+        android:id="@+id/ivToCall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimen_10dp"
+        android:src="@drawable/shop_call"
+        android:tint="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/tvStoreLocalLen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvStoreName"/>
+
+    <TextView
+        android:id="@+id/tvTipShopInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_30dp"
+        android:text="课程信息"
+        android:textColor="@color/color666"
+        android:textSize="@dimen/dimen_18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvStoreLocalLen"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_10"
+        app:layout_constraintTop_toBottomOf="@+id/tvTipShopInfo"/>
+</android.support.constraint.ConstraintLayout>

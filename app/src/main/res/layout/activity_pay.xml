@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:animateLayoutChanges="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:drawablePadding="@dimen/dp_20"
+            android:drawableTop="@drawable/shop_pay_logo"
+            android:gravity="center"
+            android:paddingBottom="@dimen/dp_20"
+            android:paddingTop="@dimen/dp_20"
+            android:text="学艺团支付中心"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_20sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="@dimen/dimen_2dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/dimen_15dp">
+
+            <TextView
+                android:id="@+id/tvOrderId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dimen_10dp"
+                android:text="订单编号：20123123123123"
+                android:textSize="@dimen/dimen_15sp"/>
+
+            <TextView
+                android:id="@+id/tvPayMoney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="付款总额：￥0.00"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_5dp"
+            android:layout_marginBottom="@dimen/dimen_10dp"
+            android:background="@color/whitesmoke"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_50dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dimen_15dp"
+            android:paddingRight="@dimen/dimen_15dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="@dimen/dimen_21dp"
+                android:drawableStart="@drawable/wxpay"
+                android:gravity="start"
+                android:text="微信支付"
+                android:textSize="@dimen/dimen_15sp"/>
+
+            <CheckBox
+                android:id="@+id/checkbox1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="@dimen/dimen_15dp"
+            android:layout_marginRight="@dimen/dimen_15dp"
+            android:background="@drawable/shape_divider"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_50dp"
+            android:layout_marginBottom="@dimen/dimen_30dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dimen_15dp"
+            android:paddingRight="@dimen/dimen_15dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="@dimen/dimen_21dp"
+                android:drawableStart="@drawable/alipay"
+                android:gravity="start"
+                android:text="支付宝支付"
+                android:textSize="@dimen/dimen_15sp"/>
+
+            <CheckBox
+                android:id="@+id/checkbox2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv2Pay"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_46dp"
+            android:layout_margin="@dimen/dimen_15dp"
+            android:background="@color/black"
+            android:gravity="center"
+            android:text="立即支付"
+            android:textColor="@color/chocolate"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llPayOk"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_80dp"
+            android:background="@color/colorPrimary"
+            android:drawableEnd="@drawable/pay_ok"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dp_20"
+            android:paddingRight="@dimen/dp_20"
+            android:text="买家已付款"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_20sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_10"
+            android:gravity="center_vertical"
+            android:padding="@dimen/dimen_5dp"
+            android:text="注意：学艺平台及销售商不会以订单异常，系统升级为由要求您点击任何网址链接进行退款操作。"/>
+    </LinearLayout>
+</FrameLayout>

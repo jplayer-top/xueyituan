@@ -1,5 +1,6 @@
 package com.xueyituanchina.xueyituan.mpbe;
 
+import com.xueyituanchina.xueyituan.aliapi.AliPayInfoBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.AreaBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.BrandBBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.GiftDetailBean;
@@ -9,9 +10,12 @@ import com.xueyituanchina.xueyituan.mpbe.bean.HomeTopBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.LoginBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.MyInfoBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.NearbyActiveBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.OrderBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.PointDetailBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.PointRecodeBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.ShopItemBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.StoreBean;
+import com.xueyituanchina.xueyituan.wxapi.WxPayInfoBean;
 
 import java.util.Map;
 
@@ -47,6 +51,9 @@ public interface XYTServer {
     @GET("home/list")
     Observable<HomeListBean> home_list(@Query("pid") String pid);
 
+    @GET("home/goodsinfo?")
+    Observable<ShopItemBean> shopInfo(@Query("id") String id);
+
     @GET("home/goodslist")
     Observable<HomeGoodsList> home_goods_list(@QueryMap() Map<String, String> map);
 
@@ -72,6 +79,17 @@ public interface XYTServer {
 
     @POST("points/create?")
     Observable<BaseBean> createBills(@QueryMap Map<String, String> map);
+
+    @POST("home/pay")
+    Observable<AliPayInfoBean> payAliOrder(@Query("orderId") String orderId, @Query("payType") String payType);
+
+    @POST("home/pay")
+    Observable<WxPayInfoBean> payWxOrder(@Query("orderId") String orderId, @Query("payType") String payType);
+
+    @POST("home/createorder?")
+    Observable<OrderBean> createOrder(@Query("goodsId") String goodsId,
+                                      @Query("amount") String amount,
+                                      @Query("phone") String phone);
 
     @GET("points/bills?")
     Observable<PointDetailBean> billsList();
@@ -115,4 +133,5 @@ public interface XYTServer {
 
     @POST("user/verifypw?")
     Observable<BaseBean> verifyPw(@Query("pw") String pw);
+
 }

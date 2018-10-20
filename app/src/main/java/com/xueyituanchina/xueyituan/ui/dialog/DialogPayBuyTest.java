@@ -3,9 +3,11 @@ package com.xueyituanchina.xueyituan.ui.dialog;
 import android.content.Context;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.EditText;
 
 import com.xueyituanchina.xueyituan.R;
 
+import top.jplayer.baseprolibrary.utils.SharePreUtil;
 import top.jplayer.baseprolibrary.widgets.dialog.BaseCustomDialog;
 
 /**
@@ -21,6 +23,11 @@ public class DialogPayBuyTest extends BaseCustomDialog {
 
     @Override
     protected void initView(View view) {
+        EditText editPhone = view.findViewById(R.id.editPhone);
+        String login_phone = (String) SharePreUtil.getData(getContext(), "login_phone", "");
+        if (login_phone != null && !"".equals(login_phone)) {
+            editPhone.setText(login_phone);
+        }
     }
 
     @Override

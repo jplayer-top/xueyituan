@@ -76,6 +76,7 @@
         android:background="@drawable/shape_divider"/>
 
     <EditText
+        android:id="@+id/editPhone"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_50dp"
         android:layout_marginEnd="@dimen/dimen_15dp"

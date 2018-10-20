@@ -1,12 +1,16 @@
 package com.xueyituanchina.xueyituan.mpbe.model;
 
+import com.xueyituanchina.xueyituan.aliapi.AliPayInfoBean;
 import com.xueyituanchina.xueyituan.mpbe.XYTServer;
 import com.xueyituanchina.xueyituan.mpbe.bean.AreaBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.BrandBBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeGoodsList;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeListBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeTopBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.OrderBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.ShopItemBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.StoreBean;
+import com.xueyituanchina.xueyituan.wxapi.WxPayInfoBean;
 
 import java.util.Map;
 
@@ -50,6 +54,22 @@ public class HomeModel extends BaseModel<XYTServer> {
 
     public Observable<StoreBean> storeInfo(String id) {
         return mServer.storeInfo(id).compose(new IoMainSchedule<>());
+    }
+
+    public Observable<AliPayInfoBean> payAli(String id) {
+        return mServer.payAliOrder(id, "1").compose(new IoMainSchedule<>());
+    }
+
+    public Observable<WxPayInfoBean> payWx(String id) {
+        return mServer.payWxOrder(id, "2").compose(new IoMainSchedule<>());
+    }
+
+    public Observable<ShopItemBean> shopInfo(String id) {
+        return mServer.shopInfo(id).compose(new IoMainSchedule<>());
+    }
+
+    public Observable<OrderBean> createOrder(String goodsId, String amount, String phone) {
+        return mServer.createOrder(goodsId, amount, phone).compose(new IoMainSchedule<>());
     }
 
     public Observable<BrandBBean> brandInfo(String id) {
