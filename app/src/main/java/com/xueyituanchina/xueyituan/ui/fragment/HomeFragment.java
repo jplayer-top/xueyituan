@@ -32,6 +32,7 @@ import java.util.List;
 import cn.bingoogolapple.bgabanner.BGABanner;
 import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
+import top.jplayer.baseprolibrary.ui.activity.WebViewActivity;
 import top.jplayer.baseprolibrary.ui.fragment.SuperBaseFragment;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.LogUtil;
@@ -399,6 +400,16 @@ public class HomeFragment extends SuperBaseFragment {
                 Glide.with(mActivity).load(bannerBean.banner_img)
                         .apply(GlideUtils.init().options(R.drawable.placeholder))
                         .into((ImageView) itemView);
+                itemView.setOnClickListener(v -> {
+                    if ("1".equals(bannerBean.banner_type)) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("url", "https://www.xueyituanchina.cn/xytuan/article_active.html?id=" +
+                                bannerBean.banner_id);
+                        ActivityUtils.init().start(getActivity(), WebViewActivity.class, "", bundle);
+                    } else {
+                        clickToStore("", bannerBean.banner_id + "");
+                    }
+                });
             }
 
         });

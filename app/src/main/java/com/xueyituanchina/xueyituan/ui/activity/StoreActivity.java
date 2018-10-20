@@ -153,6 +153,7 @@ public class StoreActivity extends CommonToolBarActivity {
         mTvShopPoint.setText(String.format(Locale.CHINA, "%2.1f分", bean.score));
         mTvShopLocal.setText(bean.addr);
         mTvShopName.setText(bean.sp_name);
+        mTvToolTitle.setText(bean.sp_name);
     }
 
     private void initBanner(List<String> bean) {
