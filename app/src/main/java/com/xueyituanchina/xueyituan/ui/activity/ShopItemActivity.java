@@ -50,6 +50,7 @@ public class ShopItemActivity extends CommonToolBarActivity {
     private TextView mTvStoreLocalLen;
     private View mFooter;
     private TextView mTvChatTip;
+    private TextView mTvGiftTip;
 
     @Override
     public int initAddLayout() {
@@ -92,6 +93,7 @@ public class ShopItemActivity extends CommonToolBarActivity {
         mTvStoreName = mHeader.findViewById(R.id.tvStoreName);
         mTvStoreLocal = mHeader.findViewById(R.id.tvStoreLocal);
         mTvStoreLocalLen = mHeader.findViewById(R.id.tvStoreLocalLen);
+        mTvGiftTip = mHeader.findViewById(R.id.tvGiftTip);
     }
 
     public void shopInfo(ShopItemBean bean) {
@@ -107,6 +109,7 @@ public class ShopItemActivity extends CommonToolBarActivity {
         mTvShopSubName.setText(goodsBean.goods_desc);
         mTvNewPrice.setText(goodsBean.goodsBestPriceStr);
         mTvStoreLocal.setText(shopBean.addr);
+        mTvGiftTip.setText(goodsBean.goods_subtitle);
         mTvStoreName.setText(shopBean.sp_name);
         mTvStoreLocalLen.setText("暂无");
         mTvOldPrice.setText(String.format(Locale.CHINA, "门市价：%s", goodsBean.goodsOrgPriceStr));

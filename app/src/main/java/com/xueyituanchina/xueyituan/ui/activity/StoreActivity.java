@@ -36,7 +36,7 @@ import top.jplayer.baseprolibrary.utils.ActivityUtils;
  */
 
 public class StoreActivity extends CommonToolBarActivity {
-
+//27:0e:f8:5b:ea:24:36:e1:e7:a9:f0:7a:d9:e6:0b:3d
     private StoreAdapter mAdapter;
     private StorePresenter mPresenter;
     private View mHeader;
@@ -55,6 +55,7 @@ public class StoreActivity extends CommonToolBarActivity {
     private FooterAdapter mFooterAdapter;
     private TextView mTvBrandTip;
     private TextView mTvCollection;
+    private TextView mTvLocalDist;
 
     @Override
     public int initAddLayout() {
@@ -97,6 +98,7 @@ public class StoreActivity extends CommonToolBarActivity {
         mRatingBar = mHeader.findViewById(R.id.ratingBar);
         mTvShopPoint = mHeader.findViewById(R.id.tvShopPoint);
         mTvShopLocal = mHeader.findViewById(R.id.tvShopLocal);
+        mTvLocalDist = mHeader.findViewById(R.id.tvLocalDist);
         mTvShopName = mHeader.findViewById(R.id.tvShopName);
         mTvCollection = mHeader.findViewById(R.id.tvCollection);
         mTvCollection.setOnClickListener(v -> {
@@ -154,6 +156,7 @@ public class StoreActivity extends CommonToolBarActivity {
         mTvShopLocal.setText(bean.addr);
         mTvShopName.setText(bean.sp_name);
         mTvToolTitle.setText(bean.sp_name);
+        mTvLocalDist.setText(String.format(Locale.CHINA, "距离%s", bean.dist));
     }
 
     private void initBanner(List<String> bean) {

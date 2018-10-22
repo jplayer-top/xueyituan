@@ -19,11 +19,13 @@ import com.xueyituanchina.xueyituan.ui.activity.CollectionActivity;
 import com.xueyituanchina.xueyituan.ui.activity.IssueActivity;
 import com.xueyituanchina.xueyituan.ui.activity.LoginActivity;
 import com.xueyituanchina.xueyituan.ui.activity.SettingActivity;
+import com.xueyituanchina.xueyituan.ui.activity.StoreActivity;
 import com.xueyituanchina.xueyituan.ui.adapter.MeOrderAdapter;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -126,6 +128,18 @@ public class MeFragment extends SuperBaseFragment {
         mLlIssue.setOnClickListener(v -> {
             ActivityUtils.init().start(mActivity, IssueActivity.class, "我的评价");
         });
+        mIvRecommend01.setOnClickListener(v -> {
+            clickToStore("", bean.rmdList.get(0).user_id + "");
+        });
+        mIvRecommend02.setOnClickListener(v -> {
+            clickToStore("", bean.rmdList.get(1).user_id + "");
+        });
+    }
+
+    private void clickToStore(String name, String id) {
+        Bundle bundle = new Bundle();
+        bundle.putString("id", id);
+        ActivityUtils.init().start(this.mActivity, StoreActivity.class, name, bundle);
     }
 
     private void toSettingActivity() {
@@ -167,8 +181,13 @@ public class MeFragment extends SuperBaseFragment {
         mTvPoints.setText(String.format(Locale.CHINA, "会员积分：%d", bean.points));
         mIvIsVip.setSelected(bean.vip != 0);
         initRecomend(bean.avator, mIvAvatar);
-        initRecomend(bean.rmdList.get(0).img, mIvRecommend01);
-        initRecomend(bean.rmdList.get(1).img, mIvRecommend02);
+        List<MyInfoBean.RmdListBean> rmdList = bean.rmdList;
+        if (rmdList.size() > 0) {
+            initRecomend(rmdList.get(0).img, mIvRecommend01);
+            if (rmdList.size() > 1) {
+                initRecomend(rmdList.get(1).img, mIvRecommend02);
+            }
+        }
         if (bean.orderList != null && bean.orderList.size() > 0) {
             mAdapter.setNewData(bean.orderList.subList(0, 2));
         }

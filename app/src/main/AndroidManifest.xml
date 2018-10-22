@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
           package="com.xueyituanchina.xueyituan">
 
     <application
@@ -81,6 +82,11 @@
             android:name=".ui.activity.PayActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.ShopCreateActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+
         <!--微信-->
         <activity
             android:name=".wxapi.WXPayEntryActivity"
@@ -100,6 +106,7 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:screenOrientation="portrait"/>
+
         <!--支付宝-->
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
@@ -115,6 +122,28 @@
             android:screenOrientation="behind"
             android:windowSoftInputMode="adjustResize|stateHidden">
         </activity>
+        <!--7.0 -->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            tools:replace="name,authorities,exported,grantUriPermissions">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider"
+                tools:replace="name,resource"/>
+
+        </provider>
+
+        <meta-data
+            android:name="RONG_CLOUD_APP_KEY"
+            android:value="${RONG_KEY}"
+            tools:replace="android:value"/>
+        <!--高德地图-->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="1bccdbbc720a0902d77ef13dd7edb040"/>
     </application>
 
 </manifest>

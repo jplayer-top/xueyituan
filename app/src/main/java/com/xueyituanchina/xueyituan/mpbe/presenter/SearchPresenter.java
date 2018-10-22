@@ -1,5 +1,6 @@
 package com.xueyituanchina.xueyituan.mpbe.presenter;
 
+import com.xueyituanchina.xueyituan.XYTApplication;
 import com.xueyituanchina.xueyituan.mpbe.XYTServer;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeGoodsList;
 import com.xueyituanchina.xueyituan.mpbe.model.HomeModel;
@@ -11,6 +12,7 @@ import io.reactivex.disposables.Disposable;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
 import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
 import top.jplayer.baseprolibrary.net.tip.LoaddingImplTip;
+import top.jplayer.baseprolibrary.utils.SharePreUtil;
 
 /**
  * Created by Obl on 2018/8/20.
@@ -39,6 +41,14 @@ public class SearchPresenter extends BasePresenter<SearchActivity> {
     }
 
     public void homeGoodsList(Map<String, String> map) {
+        if (XYTApplication.lnglat != null) {
+            map.put("lnglat", XYTApplication.lnglat);
+        } else {
+            String lnglat = (String) SharePreUtil.getData(mIView, "lnglat", "");
+            if (!"".equals(lnglat)) {
+                map.put("lnglat", lnglat);
+            }
+        }
         mModel.homeGoodsList(map).subscribe(homeGoodsList -> {
             if (homeGoodsList != null) {
                 mIView.responseSuccess();
@@ -59,6 +69,14 @@ public class SearchPresenter extends BasePresenter<SearchActivity> {
     }
 
     public void homeGoodsList(Map<String, String> map, boolean isLoadding) {
+        if (XYTApplication.lnglat != null) {
+            map.put("lnglat", XYTApplication.lnglat);
+        } else {
+            String lnglat = (String) SharePreUtil.getData(mIView, "lnglat", "");
+            if (!"".equals(lnglat)) {
+                map.put("lnglat", lnglat);
+            }
+        }
         mModel.homeGoodsList(map).subscribe(new NetCallBackObserver<HomeGoodsList>(new LoaddingImplTip(mIView)) {
             @Override
             public void responseSuccess(HomeGoodsList homeGoodsList) {

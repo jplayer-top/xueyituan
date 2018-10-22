@@ -1,2 +1,2 @@
-Error:Execution failed for task ':app:transformClassesWithDexBuilderForDebug'.
-> java.io.IOException: Could not delete path 'C:\Users\newone\Desktop\work\XueYiTuan\app\build\intermediates\transforms\dexBuilder\debug\273\android\support\v7'.
+Error:Execution failed for task ':baseprolibrary:processDebugAndroidTestResources'.
+> java.io.IOException: Could not delete path 'C:\Users\newone\Desktop\work\XueYiTuan\baseprolibrary\build\generated\source\r\androidTest\debug\top\jplayer'.

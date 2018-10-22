@@ -11,12 +11,54 @@ android {
         versionName rootProject.ext.android.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+        ndk {
+            abiFilters "armeabi-v7a"
+        }
+    }
 
+    signingConfigs {
+        config {
+            keyAlias "xueyituan"
+            keyPassword "xyt666"
+            storeFile file("../xyt.jks")
+            storePassword "xyt666"
+        }
+
+        debug {
+            keyAlias "xueyituan"
+            keyPassword "xyt666"
+            storeFile file("../xyt.jks")
+            storePassword "xyt666"
+
+        }
+        release {
+            keyAlias "xueyituan"
+            keyPassword "xyt666"
+            storeFile file("../xyt.jks")
+            storePassword "xyt666"
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
     }
     buildTypes {
+        def url = rootProject.ext.url
+        def key_rong = rootProject.ext.key_rong
         release {
+            buildConfigField "String", "HOST", "\"${url["release"]}\""
+            minifyEnabled false // 开启混淆
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [RONG_KEY: key_rong["release"], CHANNEL_NAME: "dev"]
+            signingConfig signingConfigs.config
+        }
+        debug {
+            buildConfigField "String", "HOST", "\"${url["debug"]}\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [RONG_KEY: key_rong["debug"], CHANNEL_NAME: "dev"]
+            signingConfig signingConfigs.config
         }
     }
     compileOptions {
@@ -53,5 +95,11 @@ dependencies {
     //greenDao
     implementation rootProject.ext.greendao
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:1.1.6'
-    implementation files('libs/alipaySdk-20170922.jar')
+    implementation files('libs/alipaySdk-20180601.jar')
+    implementation project(':IMKit')
+    implementation project(':IMLib')
+    implementation files('libs/AMap_2DMap_V2.9.0_20160525.jar')
+    implementation files('libs/MiPush_SDK_Client_3_5_1.jar')
+    implementation files('libs/AMap_Channel_Location_V1.4.0_20160708.jar')
+    implementation files('libs/AMap_Search_V3.4.0_20160811.jar')
 }

@@ -52,13 +52,13 @@ public interface XYTServer {
     Observable<HomeListBean> home_list(@Query("pid") String pid);
 
     @GET("home/goodsinfo?")
-    Observable<ShopItemBean> shopInfo(@Query("id") String id);
+    Observable<ShopItemBean> shopInfo(@Query("id") String id, @Query("lnglat") String lnglat);
 
     @GET("home/goodslist")
     Observable<HomeGoodsList> home_goods_list(@QueryMap() Map<String, String> map);
 
     @GET("home/shopInfo")
-    Observable<StoreBean> storeInfo(@Query("id") String id);
+    Observable<StoreBean> storeInfo(@Query("id") String id, @Query("lnglat") String lnglat);
 
     @GET("home/brand")
     Observable<BrandBBean> brandInfo(@Query("id") String id);

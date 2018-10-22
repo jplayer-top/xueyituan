@@ -15,31 +15,7 @@ android {
         }
         ndk {
             //APP的build.gradle设置支持的SO库架构
-            abiFilters 'armeabi-v7a', 'x86'
-        }
-    }
-
-
-    signingConfigs {
-        config {
-            keyAlias "obl"
-            keyPassword "lj011200"
-            storeFile file("../obl.jks")
-            storePassword "lj011200"
-        }
-
-        debug {
-            keyAlias "obl"
-            keyPassword "lj011200"
-            storeFile file("../obl.jks")
-            storePassword "lj011200"
-
-        }
-        release {
-            keyAlias "obl"
-            keyPassword "lj011200"
-            storeFile file("../obl.jks")
-            storePassword "lj011200"
+            abiFilters 'armeabi-v7a'
         }
     }
     buildTypes {
@@ -49,18 +25,15 @@ android {
             buildConfigField "String", "HOST", "\"${url["release"]}\""
             minifyEnabled false // 开启混淆
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            manifestPlaceholders = [RONG_KEY: "\"${key_rong["release"]}\"", CHANNEL_NAME: "dev"]
-            signingConfig signingConfigs.config
+            manifestPlaceholders = [RONG_KEY: key_rong["release"], CHANNEL_NAME: "dev"]
         }
         debug {
             buildConfigField "String", "HOST", "\"${url["debug"]}\""
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            manifestPlaceholders = [RONG_KEY: "\"${key_rong["debug"]}\"", CHANNEL_NAME: "dev"]
-            signingConfig signingConfigs.config
+            manifestPlaceholders = [RONG_KEY: key_rong["debug"], CHANNEL_NAME: "dev"]
         }
     }
-
     compileOptions {
         targetCompatibility 1.8
         sourceCompatibility 1.8

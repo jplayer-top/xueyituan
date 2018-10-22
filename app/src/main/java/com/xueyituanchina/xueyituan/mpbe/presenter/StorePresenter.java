@@ -1,6 +1,7 @@
 package com.xueyituanchina.xueyituan.mpbe.presenter;
 
 import com.xueyituanchina.xueyituan.R;
+import com.xueyituanchina.xueyituan.XYTApplication;
 import com.xueyituanchina.xueyituan.mpbe.XYTServer;
 import com.xueyituanchina.xueyituan.mpbe.bean.StoreBean;
 import com.xueyituanchina.xueyituan.mpbe.model.HomeModel;
@@ -11,6 +12,7 @@ import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
 import top.jplayer.baseprolibrary.net.tip.GetImplTip;
 import top.jplayer.baseprolibrary.net.tip.PostImplTip;
+import top.jplayer.baseprolibrary.utils.SharePreUtil;
 
 /**
  * Created by Obl on 2018/8/20.
@@ -29,7 +31,16 @@ public class StorePresenter extends BasePresenter<StoreActivity> {
     }
 
     public void storeInfo(String id) {
-        mModel.storeInfo(id).subscribe(new NetCallBackObserver<StoreBean>(new GetImplTip(mIView.mActivity)) {
+        String lnglat = null;
+        if (XYTApplication.lnglat != null) {
+            lnglat = XYTApplication.lnglat;
+        } else {
+            String data = (String) SharePreUtil.getData(mIView, "lnglat", "");
+            if (!"".equals(data)) {
+                lnglat = data;
+            }
+        }
+        mModel.storeInfo(id,lnglat).subscribe(new NetCallBackObserver<StoreBean>(new GetImplTip(mIView.mActivity)) {
             @Override
             public void responseSuccess(StoreBean bean) {
                 mIView.responseSuccess();

@@ -21,8 +21,8 @@ ext {
             "release": "http://123.206.45.111:8080/xytuan/api/",
     ]
     key_rong = [
-            "debug"  : "x18ywvqfxndcc",
-            "release": "x18ywvqfxndcc"
+            "debug"  : "tdrvipkstxlp5",
+            "release": "3argexb63m5xe"
     ]
     supportDeps = [
             //--------  support  -------

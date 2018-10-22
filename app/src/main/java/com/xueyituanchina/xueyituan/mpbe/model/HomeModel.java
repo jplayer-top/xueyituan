@@ -52,8 +52,8 @@ public class HomeModel extends BaseModel<XYTServer> {
         return mServer.home_goods_list(map).compose(new IoMainSchedule<>());
     }
 
-    public Observable<StoreBean> storeInfo(String id) {
-        return mServer.storeInfo(id).compose(new IoMainSchedule<>());
+    public Observable<StoreBean> storeInfo(String id,String lnglat) {
+        return mServer.storeInfo(id,lnglat).compose(new IoMainSchedule<>());
     }
 
     public Observable<AliPayInfoBean> payAli(String id) {
@@ -64,8 +64,8 @@ public class HomeModel extends BaseModel<XYTServer> {
         return mServer.payWxOrder(id, "2").compose(new IoMainSchedule<>());
     }
 
-    public Observable<ShopItemBean> shopInfo(String id) {
-        return mServer.shopInfo(id).compose(new IoMainSchedule<>());
+    public Observable<ShopItemBean> shopInfo(String id,String lnglat) {
+        return mServer.shopInfo(id,lnglat).compose(new IoMainSchedule<>());
     }
 
     public Observable<OrderBean> createOrder(String goodsId, String amount, String phone) {
