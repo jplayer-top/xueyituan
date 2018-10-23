@@ -11,6 +11,7 @@ import com.tencent.mm.opensdk.modelpay.PayReq;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.xueyituanchina.xueyituan.R;
+import com.xueyituanchina.xueyituan.XYTApplication;
 import com.xueyituanchina.xueyituan.aliapi.AliPayInfoBean;
 import com.xueyituanchina.xueyituan.mpbe.event.PayOKStateEvent;
 import com.xueyituanchina.xueyituan.mpbe.presenter.PayPresenter;
@@ -99,7 +100,7 @@ public class PayActivity extends CommonToolBarActivity {
     private boolean checkWX() {
         boolean bErr = false;
         try {
-            if (!api.isWXAppInstalled() || !api.isWXAppSupportAPI()) {
+            if (!api.isWXAppInstalled()) {
                 bErr = true;
             }
         } catch (Exception e) {
@@ -154,9 +155,9 @@ public class PayActivity extends CommonToolBarActivity {
             ToastUtils.init().showInfoToast(this, "您手机尚未安装微信，请安装后再登录");
             return;
         }
-        api.registerApp(response.orderStr.appid);
+        api.registerApp(XYTApplication.APP_ID);
         PayReq request = new PayReq();
-        request.appId = orderStrBean.appid;
+        request.appId = XYTApplication.APP_ID;
         request.partnerId = orderStrBean.partnerid;
         request.prepayId = orderStrBean.prepayid;
         request.packageValue = orderStrBean.packageX;

@@ -45,7 +45,7 @@ public class WXShare {
     public boolean checkWX() {
         boolean bErr = false;
         try {
-            if (!api.isWXAppInstalled() || !api.isWXAppSupportAPI()) {
+            if (!api.isWXAppInstalled()) {
                 bErr = true;
             }
         } catch (Exception e) {
