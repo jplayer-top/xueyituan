@@ -3,10 +3,12 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/IMKit/IMKit.iml" filepath="$PROJECT_DIR$/IMKit/IMKit.iml" />
+      <module fileurl="file://C:\Users\Administrator\Desktop\xueyituan\IMKit\IMKit.iml" filepath="C:\Users\Administrator\Desktop\xueyituan\IMKit\IMKit.iml" />
       <module fileurl="file://$PROJECT_DIR$/IMLib/IMLib.iml" filepath="$PROJECT_DIR$/IMLib/IMLib.iml" />
-      <module fileurl="file://$PROJECT_DIR$/XueYiTuan.iml" filepath="$PROJECT_DIR$/XueYiTuan.iml" />
+      <module fileurl="file://C:\Users\Administrator\Desktop\xueyituan\IMLib\IMLib.iml" filepath="C:\Users\Administrator\Desktop\xueyituan\IMLib\IMLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/baseprolibrary/baseprolibrary.iml" filepath="$PROJECT_DIR$/baseprolibrary/baseprolibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xueyituan.iml" filepath="$PROJECT_DIR$/xueyituan.iml" />
     </modules>
   </component>
 </project>

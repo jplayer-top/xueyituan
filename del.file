@@ -1,2 +1,2 @@
-Error:Execution failed for task ':baseprolibrary:processDebugAndroidTestResources'.
-> java.io.IOException: Could not delete path 'C:\Users\newone\Desktop\work\XueYiTuan\baseprolibrary\build\generated\source\r\androidTest\debug\top\jplayer'.
+Error:Execution failed for task ':app:transformClassesWithInstantRunVerifierForDebug'.
+> java.io.IOException: Could not delete path 'C:\Users\Administrator\Desktop\xueyituan\app\build\intermediates\incremental-verifier\debug\top\jplayer\baseprolibrary\ui'.
