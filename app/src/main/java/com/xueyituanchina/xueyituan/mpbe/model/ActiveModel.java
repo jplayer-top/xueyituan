@@ -4,7 +4,9 @@ import com.xueyituanchina.xueyituan.mpbe.XYTServer;
 import com.xueyituanchina.xueyituan.mpbe.bean.NearbyActiveBean;
 
 import io.reactivex.Observable;
+import okhttp3.RequestBody;
 import top.jplayer.baseprolibrary.mvp.model.BaseModel;
+import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.net.retrofit.IoMainSchedule;
 
 /**
@@ -21,5 +23,10 @@ public class ActiveModel extends BaseModel<XYTServer> {
 
     public Observable<NearbyActiveBean> nearbyList() {
         return mServer.active_nearby_list().compose(new IoMainSchedule<>());
+    }
+
+    public Observable<BaseBean> pubActivity(RequestBody body) {
+        return mServer.pubActivity(body)
+                .compose(new IoMainSchedule<>());
     }
 }

@@ -401,9 +401,9 @@ public class HomeFragment extends SuperBaseFragment {
                         .apply(GlideUtils.init().options(R.drawable.placeholder))
                         .into((ImageView) itemView);
                 itemView.setOnClickListener(v -> {
-                    if (!"1".equals(bannerBean.banner_type)) {
+                    if ("2".equals(bannerBean.banner_type)) {
                         Bundle bundle = new Bundle();
-                        bundle.putString("url", "https://www.xueyituanchina.cn/xytuan/article_active.html?id=" +
+                        bundle.putString("url", "https://www.xueyituanchina.cn/info/article_active.html?id=" +
                                 bannerBean.banner_id);
                         ActivityUtils.init().start(getActivity(), WebViewActivity.class, "", bundle);
                     } else {

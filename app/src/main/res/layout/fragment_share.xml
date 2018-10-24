@@ -70,7 +70,7 @@
                     android:layout_gravity="center"
                     android:layout_margin="@dimen/dimen_10dp"
                     android:background="@color/color999"
-                    android:enabled="false"
+                    android:enabled="true"
                     android:padding="@dimen/dimen_3dp"
                     android:text="发布"
                     android:textColor="@color/white"/>
@@ -135,12 +135,14 @@
                         android:textStyle="bold"/>
 
                     <EditText
+                        android:id="@+id/edTitle"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dimen_40dp"
                         android:layout_marginStart="@dimen/dimen_10dp"
                         android:background="@null"
                         android:hint="活动主题"
                         android:textColor="@color/color999"
+                        android:textColorHint="@color/color999"
                         android:textSize="@dimen/dimen_13sp"/>
                 </LinearLayout>
 
@@ -165,6 +167,7 @@
                         android:textStyle="bold"/>
                     <!--开始时间至结束时间-->
                     <EditText
+                        android:id="@+id/edStartTime"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/dimen_40dp"
                         android:layout_marginStart="@dimen/dimen_10dp"
@@ -173,6 +176,7 @@
                         android:gravity="center"
                         android:hint="开始时间"
                         android:textColor="@color/color999"
+                        android:textColorHint="@color/color999"
                         android:textSize="@dimen/dimen_13sp"/>
 
                     <TextView
@@ -182,6 +186,7 @@
                         android:textColor="@color/color999"/>
 
                     <EditText
+                        android:id="@+id/edEndTime"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/dimen_40dp"
                         android:layout_marginStart="@dimen/dimen_10dp"
@@ -190,6 +195,7 @@
                         android:gravity="center"
                         android:hint="结束时间"
                         android:textColor="@color/color999"
+                        android:textColorHint="@color/color999"
                         android:textSize="@dimen/dimen_13sp"/>
                 </LinearLayout>
 
@@ -214,12 +220,14 @@
                         android:textStyle="bold"/>
 
                     <EditText
+                        android:id="@+id/edLocal"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dimen_40dp"
                         android:layout_marginStart="@dimen/dimen_10dp"
                         android:background="@null"
                         android:hint="请输入详细地址"
                         android:textColor="@color/color999"
+                        android:textColorHint="@color/color999"
                         android:textSize="@dimen/dimen_13sp"/>
                 </LinearLayout>
 
@@ -229,6 +237,7 @@
                     android:background="@drawable/shape_divider"/>
 
                 <EditText
+                    android:id="@+id/edDesc"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dimen_140dp"
                     android:background="@color/white"
@@ -238,6 +247,7 @@
                     android:paddingStart="@dimen/dimen_15dp"
                     android:paddingTop="@dimen/dimen_10dp"
                     android:textColor="@color/color999"
+                    android:textColorHint="@color/color999"
                     android:textSize="@dimen/dimen_13sp"/>
 
                 <View
@@ -251,7 +261,8 @@
                     android:background="@color/white"
                     android:gravity="center_vertical"
                     android:paddingEnd="@dimen/dimen_15dp"
-                    android:paddingStart="@dimen/dimen_15dp">
+                    android:paddingStart="@dimen/dimen_15dp"
+                    android:visibility="gone">
 
                     <TextView
 
@@ -293,12 +304,15 @@
                         android:textStyle="bold"/>
 
                     <EditText
+                        android:id="@+id/edPhone"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dimen_40dp"
                         android:layout_marginStart="@dimen/dimen_10dp"
                         android:background="@null"
                         android:hint="请输入联系电话"
+                        android:inputType="phone"
                         android:textColor="@color/color999"
+                        android:textColorHint="@color/color999"
                         android:textSize="@dimen/dimen_13sp"/>
                 </LinearLayout>
 
@@ -316,6 +330,7 @@
                     android:paddingStart="@dimen/dimen_15dp">
 
                     <TextView
+                        android:id="@+id/tvAdPlan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
@@ -368,7 +383,8 @@
                         android:textColor="@color/color666"/>
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:id="@+id/tvUserAgent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:text="《学艺团服务协议》"

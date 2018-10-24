@@ -1,6 +1,8 @@
 package com.xueyituanchina.xueyituan.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -10,11 +12,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.xueyituanchina.xueyituan.R;
 import com.xueyituanchina.xueyituan.mpbe.bean.OrderBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.ShopItemBean;
+import com.xueyituanchina.xueyituan.mpbe.event.ShareAllEvent;
+import com.xueyituanchina.xueyituan.mpbe.event.ShareOneEvent;
 import com.xueyituanchina.xueyituan.mpbe.presenter.ShopPresenter;
 import com.xueyituanchina.xueyituan.ui.adapter.ShopAdapter;
+import com.xueyituanchina.xueyituan.ui.dialog.ShareDialog;
+import com.xueyituanchina.xueyituan.wxapi.WXShare;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 import java.util.Locale;
@@ -24,6 +34,9 @@ import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.SharePreUtil;
+import top.jplayer.baseprolibrary.utils.ToastUtils;
+
+import static top.jplayer.baseprolibrary.BaseInitApplication.getContext;
 
 /**
  * Created by Obl on 2018/10/19.
@@ -51,6 +64,7 @@ public class ShopItemActivity extends CommonToolBarActivity {
     private View mFooter;
     private TextView mTvChatTip;
     private TextView mTvGiftTip;
+    private WXShare mWxShare;
 
     @Override
     public int initAddLayout() {
@@ -60,6 +74,7 @@ public class ShopItemActivity extends CommonToolBarActivity {
     @Override
     public void initAddView(FrameLayout rootView) {
         super.initAddView(rootView);
+        EventBus.getDefault().register(this);
         mAdapter = new ShopAdapter(null);
         mPresenter = new ShopPresenter(this);
         mRecyclerView.setAdapter(mAdapter);
@@ -73,6 +88,15 @@ public class ShopItemActivity extends CommonToolBarActivity {
             String login_phone = (String) SharePreUtil.getData(this, "login_phone", "");
             mPresenter.createOrder(mId, "1", login_phone);
         });
+        toolRightVisible(mIvToolRight, R.drawable.share);
+        mWxShare = new WXShare(this);
+
+    }
+
+    @Override
+    public void toolRightBtn(View v) {
+        super.toolRightBtn(v);
+        new ShareDialog(this).show();
     }
 
     private void initFooterView() {
@@ -141,6 +165,50 @@ public class ShopItemActivity extends CommonToolBarActivity {
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
+    }
+
+    @Subscribe
+    public void shareEvent(ShareOneEvent event) {
+        if (mWxShare.checkWX()) {
+            String lnglat = (String) SharePreUtil.getData(this, "lnglat", "");
+            if ("".equals(lnglat)) {
+                lnglat = "115.9853071091,36.4570202778";
+            }
+            String url = String.format(Locale.CHINA, "https://www.xueyituanchina.cn/info/shop_item" +
+                            ".html?id=%s&lnglat=%s",
+                    mId, lnglat);
+            Bitmap thumb = BitmapFactory
+                    .decodeResource(getResources(), R.mipmap.ic_launcher);
+            mWxShare.shareUrl(url, mTvToolTitle.getText().toString(), thumb,
+                    mTvShopSubName.getText().toString(), SendMessageToWX.Req.WXSceneSession);
+        } else {
+            ToastUtils.init().showInfoToast(getContext(), "请先安装微信");
+        }
+    }
+
+    @Subscribe
+    public void shareEvent(ShareAllEvent event) {
+        if (mWxShare.checkWX()) {
+            String lnglat = (String) SharePreUtil.getData(this, "lnglat", "");
+            if ("".equals(lnglat)) {
+                lnglat = "115.9853071091,36.4570202778";
+            }
+            String url = String.format(Locale.CHINA, "https://www.xueyituanchina.cn/info/shop_item" +
+                            ".html?id=%s&lnglat=%s",
+                    mId, lnglat);
+            Bitmap thumb = BitmapFactory
+                    .decodeResource(getResources(), R.mipmap.ic_launcher);
+            mWxShare.shareUrl(url, mTvToolTitle.getText().toString(), thumb,
+                    mTvShopSubName.getText().toString(), SendMessageToWX.Req.WXSceneTimeline);
+        } else {
+            ToastUtils.init().showInfoToast(getContext(), "请先安装微信");
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     public void createOrder(OrderBean orderBean) {
