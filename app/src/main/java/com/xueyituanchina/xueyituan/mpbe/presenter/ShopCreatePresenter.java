@@ -69,8 +69,8 @@ public class ShopCreatePresenter extends BasePresenter<ShopCreateActivity> {
                 .map(s -> {
                     String txt = readAssetsTxt(mIView, s);
                     return new Gson().fromJson(txt, AreaAllBean.class);
-                }).observeOn(AndroidSchedulers.mainThread()).subscribe(areaAllBean ->
-                LogUtil.str("end" + SystemClock.currentThreadTimeMillis()));
+                }).observeOn(AndroidSchedulers.mainThread()).subscribe(areaAllBean -> mIView.setLocalBean
+                (areaAllBean),throwable -> {});
 
     }
 

@@ -7,15 +7,20 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bigkoo.pickerview.OptionsPickerView;
 import com.bumptech.glide.Glide;
 import com.jaiky.imagespickers.ImageSelectorActivity;
 import com.xueyituanchina.xueyituan.R;
+import com.xueyituanchina.xueyituan.mpbe.bean.AreaAllBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.PostLocalBean;
 import com.xueyituanchina.xueyituan.mpbe.presenter.ShopCreatePresenter;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.Permission;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -82,8 +87,14 @@ public class ShopCreateActivity extends CommonToolBarActivity {
             setOnClick(1);
         });
         mPresenter = new ShopCreatePresenter(this);
-        mPresenter.areaLocal();
-        mPresenter.area();
+        initPicker();
+        mEdSpLocal.setOnClickListener(v -> {
+            if (mLocalBean != null) {
+                setLocalBean(mLocalBean);
+            } else {
+                mPresenter.areaLocal();
+            }
+        });
         mBtnCreate.setOnClickListener(v -> {
             if (fileLic == null) {
                 ToastUtils.init().showQuickToast(mActivity, "请上传营业执照");
@@ -152,6 +163,85 @@ public class ShopCreateActivity extends CommonToolBarActivity {
             }
         }
     }
+
+    private ArrayList<PostLocalBean> optionsLocalSItems = new ArrayList<>();
+    private ArrayList<ArrayList<PostLocalBean>> optionsLocalXItems = new ArrayList<>();
+    private ArrayList<ArrayList<ArrayList<PostLocalBean>>> optionsQItems = new ArrayList<>();
+    private OptionsPickerView mLocalPickerView;
+    private AreaAllBean mLocalBean;
+
+    public void setLocalBean(AreaAllBean localBean) {
+        mLocalBean = localBean;
+        if (localBean != null && localBean.areas.size() > 0) {
+            for (int i = 0; i < localBean.areas.size(); i++) {//省
+                ArrayList<ArrayList<PostLocalBean>> minLocalItems = new ArrayList<>();
+                ArrayList<PostLocalBean> subsString = new ArrayList<>();
+                for (int j = 0; j < localBean.areas.get(i).subs.size(); j++) {
+                    String area_nameS = localBean.areas.get(i).subs.get(j).area_name;
+                    String area_codeS = localBean.areas.get(i).subs.get(j).area_code;
+                    PostLocalBean postLocalBeanS = new PostLocalBean();
+                    postLocalBeanS.name = area_nameS;
+                    postLocalBeanS.code = area_codeS;
+                    subsString.add(postLocalBeanS);
+                    ArrayList<PostLocalBean> subsXString = new ArrayList<>();
+                    for (int k = 0; k < localBean.areas.get(i).subs.get(j).subs.size(); k++) {
+                        String area_nameX = localBean.areas.get(i).subs.get(j).subs.get(k).area_name;
+                        String area_codeX = localBean.areas.get(i).subs.get(j).subs.get(k).area_code;
+                        PostLocalBean postLocalBeanX = new PostLocalBean();
+                        postLocalBeanX.name = area_nameX;
+                        postLocalBeanX.code = area_codeX;
+                        subsXString.add(postLocalBeanX);
+                    }
+                    minLocalItems.add(subsXString);
+                }
+                optionsLocalXItems.add(subsString);
+                optionsQItems.add(minLocalItems);
+                String area_name = localBean.areas.get(i).area_name;
+                String area_code = localBean.areas.get(i).area_code;
+                PostLocalBean postLocalBean = new PostLocalBean();
+                postLocalBean.code = area_code;
+                postLocalBean.name = area_name;
+                optionsLocalSItems.add(postLocalBean);
+            }
+            if (optionsLocalSItems.size() != 0 & optionsLocalSItems != null) {
+                mLocalPickerView.setPicker(optionsLocalSItems, optionsLocalXItems, optionsQItems);
+            }
+        }
+        if (!mLocalPickerView.isShowing()) {
+            mLocalPickerView.show();
+        }
+    }
+
+    private void initPicker() {
+        //地区
+        mLocalPickerView = new OptionsPickerView.Builder(this, (options1, option2, options3, v) -> {
+            mProvince_name = optionsLocalSItems.get(options1).name + "";
+            mProvince_code = optionsLocalSItems.get(options1).code;
+            PostLocalBean localBean = optionsLocalXItems.get(options1).get(option2);
+            mCity_name = (localBean.name) == null ? "" : (localBean.name + "");
+            mCity_code = localBean.code;
+            PostLocalBean areaBean = optionsQItems.get(options1).get(option2).get(options3);
+            mArea_code = areaBean.code;
+            mArea_name = (areaBean.name) == null ? "" : areaBean.name + "";
+            mEdSpLocal.setText(String.format(Locale.CHINA, "%s%s%s", mProvince_name, mCity_name, mArea_name));
+        }).setSubmitText("确定")//确定按钮文字
+                .setCancelText("取消")//取消按钮文字
+                .setSubCalSize(18)//确定和取消文字大小
+                .setSubmitColor(getResources().getColor(R.color.colorBlackGold))
+                .setCancelColor(getResources().getColor(R.color.grey))
+                .setContentTextSize(18)//滚轮文字大小
+                .setCyclic(false, false, false)//循环与否
+                .setSelectOptions(0, 0, 0)  //设置默认选中项
+                .setOutSideCancelable(false)//点击外部dismiss default true
+                .build();
+    }
+
+    private String mProvince_code;
+    private String mCity_code;
+    private String mArea_code;
+    private String mProvince_name;
+    private String mCity_name;
+    private String mArea_name;
 
     @Override
     protected void onDestroy() {
