@@ -135,6 +135,9 @@ public class ShareFragment extends SuperBaseFragment {
             bundle.putString("url", "https://www.xueyituanchina.cn/info/useagreement.html");
             ActivityUtils.init().start(mActivity, WebViewActivity.class, "", bundle);
         });
+        mTvToolRightLeft.setOnClickListener(v -> {
+
+        });
     }
 
     @Subscribe
