@@ -2,6 +2,7 @@ package com.xueyituanchina.xueyituan.mpbe.model;
 
 import com.xueyituanchina.xueyituan.aliapi.AliPayInfoBean;
 import com.xueyituanchina.xueyituan.mpbe.XYTServer;
+import com.xueyituanchina.xueyituan.mpbe.bean.AreaAllBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.AreaBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.BrandBBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeGoodsList;
@@ -41,7 +42,11 @@ public class HomeModel extends BaseModel<XYTServer> {
     }
 
     public Observable<AreaBean> area_list() {
-        return mServer.area_list("http://123.206.45.111:8080/xytuan/area").compose(new IoMainSchedule<>());
+        return mServer.area_list("https://www.xueyituanchina.cn/xytuan/area").compose(new IoMainSchedule<>());
+    }
+
+    public Observable<AreaAllBean> area() {
+        return mServer.area("http://192.168.0.105:8080/area.json").compose(new IoMainSchedule<>());
     }
 
 
@@ -53,8 +58,8 @@ public class HomeModel extends BaseModel<XYTServer> {
         return mServer.home_goods_list(map).compose(new IoMainSchedule<>());
     }
 
-    public Observable<StoreBean> storeInfo(String id,String lnglat) {
-        return mServer.storeInfo(id,lnglat).compose(new IoMainSchedule<>());
+    public Observable<StoreBean> storeInfo(String id, String lnglat) {
+        return mServer.storeInfo(id, lnglat).compose(new IoMainSchedule<>());
     }
 
     public Observable<AliPayInfoBean> payAli(String id) {
@@ -65,8 +70,8 @@ public class HomeModel extends BaseModel<XYTServer> {
         return mServer.payWxOrder(id, "2").compose(new IoMainSchedule<>());
     }
 
-    public Observable<ShopItemBean> shopInfo(String id,String lnglat) {
-        return mServer.shopInfo(id,lnglat).compose(new IoMainSchedule<>());
+    public Observable<ShopItemBean> shopInfo(String id, String lnglat) {
+        return mServer.shopInfo(id, lnglat).compose(new IoMainSchedule<>());
     }
 
     public Observable<OrderBean> createOrder(String goodsId, String amount, String phone) {
@@ -80,10 +85,13 @@ public class HomeModel extends BaseModel<XYTServer> {
     public Observable<BaseBean> collectionType(String favType, String favId) {
         return mServer.collectionType(favType, favId).compose(new IoMainSchedule<>());
     }
+
     public Observable<BaseBean> createShop(RequestBody body) {
         return mServer.shopCreate(body)
                 .compose(new IoMainSchedule<>());
     }
+
+
     public Observable<BaseBean> cancelCollectionType(String favType, String favId) {
         return mServer.cancelCollectionType(favType, favId).compose(new IoMainSchedule<>());
     }

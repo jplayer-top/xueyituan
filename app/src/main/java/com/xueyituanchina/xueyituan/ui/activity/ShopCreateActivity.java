@@ -82,6 +82,8 @@ public class ShopCreateActivity extends CommonToolBarActivity {
             setOnClick(1);
         });
         mPresenter = new ShopCreatePresenter(this);
+        mPresenter.areaLocal();
+        mPresenter.area();
         mBtnCreate.setOnClickListener(v -> {
             if (fileLic == null) {
                 ToastUtils.init().showQuickToast(mActivity, "请上传营业执照");
