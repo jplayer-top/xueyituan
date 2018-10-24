@@ -19,6 +19,7 @@ import com.xueyituanchina.xueyituan.ui.activity.CollectionActivity;
 import com.xueyituanchina.xueyituan.ui.activity.IssueActivity;
 import com.xueyituanchina.xueyituan.ui.activity.LoginActivity;
 import com.xueyituanchina.xueyituan.ui.activity.SettingActivity;
+import com.xueyituanchina.xueyituan.ui.activity.ShopCreateActivity;
 import com.xueyituanchina.xueyituan.ui.activity.StoreActivity;
 import com.xueyituanchina.xueyituan.ui.adapter.MeOrderAdapter;
 
@@ -133,6 +134,9 @@ public class MeFragment extends SuperBaseFragment {
         });
         mIvRecommend02.setOnClickListener(v -> {
             clickToStore("", bean.rmdList.get(1).user_id + "");
+        });
+        mLlWork.setOnClickListener(v -> {
+            ActivityUtils.init().start(mActivity, ShopCreateActivity.class, "商家入驻");
         });
     }
 

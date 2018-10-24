@@ -138,4 +138,7 @@ public interface XYTServer {
 
     @POST("activity/pub")
     Observable<BaseBean> pubActivity(@Body RequestBody Body);
+
+    @POST("api/my/mctentry")
+    Observable<BaseBean> shopCreate(@Body RequestBody Body);
 }

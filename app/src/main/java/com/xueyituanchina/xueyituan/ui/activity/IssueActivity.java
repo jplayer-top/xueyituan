@@ -2,6 +2,8 @@ package com.xueyituanchina.xueyituan.ui.activity;
 
 import android.widget.FrameLayout;
 
+import com.xueyituanchina.xueyituan.R;
+
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
 
 /**
@@ -14,7 +16,7 @@ import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
 public class IssueActivity extends CommonToolBarActivity {
     @Override
     public int initAddLayout() {
-        return 0;
+        return R.layout.layout_test;
     }
 
     @Override

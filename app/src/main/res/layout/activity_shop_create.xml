@@ -1,25 +1,273 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
-    <ImageView
-        android:id="@+id/ivShopCreate"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
-        android:src="@drawable/shop_create"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+    <android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="店铺信息"
-        app:layout_constraintTop_toBottomOf="@+id/ivShopCreate"/>
+        <ImageView
+            android:id="@+id/ivShopCreate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/shop_create"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
-</android.support.constraint.ConstraintLayout>
+        <View
+            android:layout_width="@dimen/dimen_2dp"
+            android:layout_height="@dimen/dimen_35dp"
+            android:layout_marginStart="@dimen/dimen_15dp"
+            android:background="#4588e6"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTipE"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvTipC"/>
+
+        <TextView
+            android:id="@+id/tvTipC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_22dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:text="店铺信息"
+            android:textColor="@color/textBlack"
+            android:textSize="@dimen/dimen_17sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivShopCreate"/>
+
+        <TextView
+            android:id="@+id/tvTipE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_22dp"
+            android:text="Store Information"
+            android:textColor="@color/textBlack"
+            android:textSize="@dimen/dimen_14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTipC"/>
+
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/dimen_10dp"
+            android:layout_marginStart="@dimen/dimen_10dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/shop_create_background"
+            app:layout_constraintBottom_toBottomOf="@+id/llCenter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/llCenter"/>
+
+        <LinearLayout
+            android:id="@+id/llCenter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_10dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTipE">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimen_10dp"
+                android:text="店铺地址"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dimen_16sp"/>
+
+            <EditText
+                android:id="@+id/edSpName"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_40dp"
+                android:layout_marginEnd="@dimen/dimen_10dp"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:background="@drawable/shape_5_white"
+                android:hint="请输入店铺名"
+                android:inputType="text"
+                android:paddingEnd="@dimen/dimen_10dp"
+                android:paddingStart="@dimen/dimen_10dp"
+                android:textColor="@color/color999"
+                android:textColorHint="@color/color999"
+                android:textSize="@dimen/dimen_13sp"/>
+
+            <TextView
+                android:id="@+id/edSpLocal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_40dp"
+                android:layout_marginEnd="@dimen/dimen_10dp"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:background="@drawable/shape_5_white"
+                android:gravity="center_vertical"
+                android:hint="请选择地区"
+                android:paddingEnd="@dimen/dimen_10dp"
+                android:paddingStart="@dimen/dimen_10dp"
+                android:textColor="@color/color999"
+                android:textColorHint="@color/color999"
+                android:textSize="@dimen/dimen_13sp"/>
+
+            <EditText
+                android:id="@+id/edSpAddr"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_40dp"
+                android:layout_marginEnd="@dimen/dimen_10dp"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:background="@drawable/shape_5_white"
+                android:hint="请输入详细地址"
+                android:inputType="text"
+                android:paddingEnd="@dimen/dimen_10dp"
+                android:paddingStart="@dimen/dimen_10dp"
+                android:textColor="@color/color999"
+                android:textColorHint="@color/color999"
+                android:textSize="@dimen/dimen_13sp"/>
+
+            <EditText
+                android:id="@+id/edSpUserName"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_40dp"
+                android:layout_marginEnd="@dimen/dimen_10dp"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:background="@drawable/shape_5_white"
+                android:hint="请输入法人代表"
+                android:inputType="text"
+                android:paddingEnd="@dimen/dimen_10dp"
+                android:paddingStart="@dimen/dimen_10dp"
+                android:textColor="@color/color999"
+                android:textColorHint="@color/color999"
+                android:textSize="@dimen/dimen_13sp"/>
+
+            <EditText
+                android:id="@+id/edSpPhone"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_40dp"
+                android:layout_marginEnd="@dimen/dimen_10dp"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                android:background="@drawable/shape_5_white"
+                android:hint="请输入联系方式"
+                android:inputType="phone"
+                android:paddingEnd="@dimen/dimen_10dp"
+                android:paddingStart="@dimen/dimen_10dp"
+                android:textColor="@color/color999"
+                android:textColorHint="@color/color999"
+                android:textSize="@dimen/dimen_13sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimen_10dp"
+                android:text="上传营业执照"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dimen_16sp"/>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_160dp"
+                android:layout_marginEnd="@dimen/dimen_10dp"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:background="@drawable/shape_5_white">
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|top"
+                    android:layout_marginTop="@dimen/dimen_30dp"
+                    android:src="@drawable/shop_create_add"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|bottom"
+                    android:layout_marginBottom="@dimen/dimen_20dp"
+                    android:text="营业执照正面照"
+                    android:textColor="@color/color999"/>
+
+                <ImageView
+                    android:id="@+id/ivShopLic"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"/>
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimen_10dp"
+                android:text="上传店铺照片"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dimen_16sp"/>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_160dp"
+                android:layout_marginBottom="@dimen/dimen_10dp"
+                android:layout_marginEnd="@dimen/dimen_10dp"
+                android:layout_marginStart="@dimen/dimen_10dp"
+                android:background="@drawable/shape_5_white">
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|top"
+                    android:layout_marginTop="@dimen/dimen_30dp"
+                    android:src="@drawable/shop_create_add"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center|bottom"
+                    android:layout_marginBottom="@dimen/dimen_20dp"
+                    android:text="店铺照片"
+                    android:textColor="@color/color999"/>
+
+                <ImageView
+                    android:id="@+id/ivShopImg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"/>
+            </FrameLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnCreate"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_50dp"
+            android:layout_marginEnd="@dimen/dimen_10dp"
+            android:layout_marginStart="@dimen/dimen_10dp"
+            android:layout_marginTop="@dimen/dimen_20dp"
+            android:background="@drawable/shape_5_blue"
+            android:text="申请入驻"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llCenter"/>
+
+        <TextView
+            android:id="@+id/tvInfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:text="@string/shop_info"
+            android:textColor="@color/color999"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnCreate"/>
+    </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>
