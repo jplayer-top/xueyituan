@@ -13,6 +13,7 @@ import com.xueyituanchina.xueyituan.mpbe.bean.UpdateUrlBean;
 import com.xueyituanchina.xueyituan.mpbe.event.FileSelect;
 import com.xueyituanchina.xueyituan.mpbe.presenter.SharePresenter;
 import com.xueyituanchina.xueyituan.ui.MainActivity;
+import com.xueyituanchina.xueyituan.ui.dialog.ShareShowDialog;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -70,7 +71,7 @@ public class ShareFragment extends SuperBaseFragment {
     TextView tvUserAgent;
     private Unbinder mUnbinder;
     private SharePresenter mPresenter;
-    private File mFile;
+    public File mFile;
     private PickerUtils mPickerUtils;
 
     @Override
@@ -130,7 +131,14 @@ public class ShareFragment extends SuperBaseFragment {
             ActivityUtils.init().start(mActivity, WebViewActivity.class, "", bundle);
         });
         mTvToolRightLeft.setOnClickListener(v -> {
-
+            new ShareShowDialog(getActivity())
+                    .setImg(mFile)
+                    .setTvTitle(mEdTitle.getText().toString())
+                    .setTvLocal(mEdLocal.getText().toString())
+                    .setTvPhone(mEdPhone.getText().toString())
+                    .setTvDesc(mEdDesc.getText().toString())
+                    .setTvTime(mEdStartTime.getText().toString(), mEdEndTime.getText().toString())
+                    .show();
         });
         mPickerUtils = new PickerUtils();
         mEdStartTime.setOnClickListener(v -> {

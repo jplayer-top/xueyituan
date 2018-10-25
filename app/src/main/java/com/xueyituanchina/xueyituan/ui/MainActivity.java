@@ -34,7 +34,7 @@ import top.jplayer.baseprolibrary.utils.SharePreUtil;
 
 public class MainActivity extends SuperBaseActivity implements IMyLocationChangedListener {
     public MainActivity mMainActivity;
-    private File mFile;
+    public File mFile;
 
     @Override
     protected int initRootLayout() {
