@@ -105,6 +105,10 @@ public interface XYTServer {
     @GET("activity/nearList")
     Observable<NearbyActiveBean> active_nearby_list();
 
+    //活动
+    @GET("home/weekList")
+    Observable<NearbyActiveBean> week_list();
+
     //我的
     @GET("my/index?")
     Observable<MyInfoBean> myInfo();

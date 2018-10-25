@@ -36,7 +36,7 @@ import top.jplayer.baseprolibrary.utils.ActivityUtils;
  */
 
 public class StoreActivity extends CommonToolBarActivity {
-//27:0e:f8:5b:ea:24:36:e1:e7:a9:f0:7a:d9:e6:0b:3d
+    //27:0e:f8:5b:ea:24:36:e1:e7:a9:f0:7a:d9:e6:0b:3d
     private StoreAdapter mAdapter;
     private StorePresenter mPresenter;
     private View mHeader;
@@ -74,6 +74,12 @@ public class StoreActivity extends CommonToolBarActivity {
         initHeaderView();
         initFooterView();
         mBtnPay = rootView.findViewById(R.id.btnPay);
+        mAdapter.setOnItemClickListener((adapter, view, position) -> {
+            StoreBean.GoodsListBean listBean = mAdapter.getData().get(position);
+            Bundle bundle = new Bundle();
+            bundle.putString("id", listBean.goods_id + "");
+            ActivityUtils.init().start(this, ShopItemActivity.class, listBean.goods_title, bundle);
+        });
     }
 
     private void initFooterView() {

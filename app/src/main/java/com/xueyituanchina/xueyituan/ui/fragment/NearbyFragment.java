@@ -1,14 +1,18 @@
 package com.xueyituanchina.xueyituan.ui.fragment;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import com.xueyituanchina.xueyituan.R;
+import com.xueyituanchina.xueyituan.XYTApplication;
 import com.xueyituanchina.xueyituan.mpbe.bean.NearbyActiveBean;
 import com.xueyituanchina.xueyituan.mpbe.presenter.ActivePresenter;
 import com.xueyituanchina.xueyituan.ui.adapter.NearbyAdapter;
 
+import top.jplayer.baseprolibrary.ui.activity.WebViewActivity;
 import top.jplayer.baseprolibrary.ui.fragment.SuperBaseFragment;
+import top.jplayer.baseprolibrary.utils.ActivityUtils;
 
 /**
  * Created by Obl on 2018/8/21.
@@ -39,6 +43,12 @@ public class NearbyFragment extends SuperBaseFragment {
         mPresenter = new ActivePresenter(this);
         mPresenter.nearbyActiveList();
         showLoading();
+        mAdapter.setOnItemClickListener((adapter, view, position) -> {
+            Bundle bundle = new Bundle();
+            NearbyActiveBean.ListBean listBean = mAdapter.getData().get(position);
+            bundle.putString("url", "https://www.xueyituanchina.cn/info/article_active.html?id=" + listBean.id + "&uid=" + XYTApplication.uid);
+            ActivityUtils.init().start(getActivity(), WebViewActivity.class, "", bundle);
+        });
     }
 
     @Override

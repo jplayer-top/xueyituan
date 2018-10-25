@@ -39,6 +39,7 @@ public class HomeGoodsList extends BaseBean {
         public double score;
         public String sp_area;
         public String sp_img;
+        public String dist;
         public int other;
         public List<GoodslistBean> goodslist;
 

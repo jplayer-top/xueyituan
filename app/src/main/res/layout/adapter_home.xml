@@ -64,7 +64,6 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dimen_15dp"
             android:layout_marginTop="@dimen/dimen_10dp"
-            android:text="500m"
             app:layout_constraintBottom_toTopOf="@+id/tvLocal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -74,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dimen_15dp"
-            android:drawableStart="@drawable/local"
+            android:drawableStart="@drawable/pic_local"
             android:textSize="@dimen/dimen_12sp"
             app:layout_constraintBottom_toBottomOf="@+id/ivSrc"
             app:layout_constraintEnd_toEndOf="parent"

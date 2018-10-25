@@ -25,6 +25,10 @@ public class ActiveModel extends BaseModel<XYTServer> {
         return mServer.active_nearby_list().compose(new IoMainSchedule<>());
     }
 
+    public Observable<NearbyActiveBean> weekList() {
+        return mServer.week_list().compose(new IoMainSchedule<>());
+    }
+
     public Observable<BaseBean> pubActivity(RequestBody body) {
         return mServer.pubActivity(body)
                 .compose(new IoMainSchedule<>());

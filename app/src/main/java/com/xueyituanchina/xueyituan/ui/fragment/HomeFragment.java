@@ -22,6 +22,7 @@ import com.xueyituanchina.xueyituan.mpbe.bean.HomeTopBean;
 import com.xueyituanchina.xueyituan.mpbe.presenter.HomePresenter;
 import com.xueyituanchina.xueyituan.ui.activity.SearchActivity;
 import com.xueyituanchina.xueyituan.ui.activity.StoreActivity;
+import com.xueyituanchina.xueyituan.ui.activity.WeekListActivity;
 import com.xueyituanchina.xueyituan.ui.adapter.HomeAdapter;
 import com.xueyituanchina.xueyituan.ui.adapter.LocalSetAdapter;
 import com.xueyituanchina.xueyituan.ui.adapter.SelectCatAdapter;
@@ -133,7 +134,9 @@ public class HomeFragment extends SuperBaseFragment {
         mHeader = View.inflate(getContext(), R.layout.header_home, null);
         mView = mHeader.findViewById(R.id.viAr);
         mViewFlipper = mHeader.findViewById(R.id.viewFlipper);
-
+        mHeader.findViewById(R.id.llWeek).setOnClickListener(v -> {
+            ActivityUtils.init().start(getActivity(), WeekListActivity.class, "周末亲子游");
+        });
         mTabLayout = mHeader.findViewById(R.id.tabLayout);
 
         mBgaBanner = mHeader.findViewById(R.id.bgaBanner);

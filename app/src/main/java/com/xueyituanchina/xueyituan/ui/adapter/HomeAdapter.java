@@ -40,6 +40,7 @@ public class HomeAdapter extends BaseQuickAdapter<HomeGoodsList.ListBean, BaseVi
         helper.setVisible(R.id.tvIsGood, item.is_best)
                 .setText(R.id.tvShopTitle, item.sp_name)
                 .setRating(R.id.ratingBar, (float) item.score)
+                .setText(R.id.tvLocalLen, item.dist)
                 .setText(R.id.tvLocal, item.sp_area);
         ImageView ivSrc = helper.itemView.findViewById(R.id.ivSrc);
         RecyclerView recyclerItem = helper.itemView.findViewById(R.id.recyclerItem);
