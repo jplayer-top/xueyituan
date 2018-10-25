@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.github.florent37.viewanimator.ViewAnimator;
 import com.kingja.magicmirror.MagicMirrorView;
 import com.xueyituanchina.xueyituan.R;
+import com.xueyituanchina.xueyituan.XYTApplication;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeGoodsList;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeListBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeTopBean;
@@ -404,7 +405,7 @@ public class HomeFragment extends SuperBaseFragment {
                     if ("2".equals(bannerBean.banner_type)) {
                         Bundle bundle = new Bundle();
                         bundle.putString("url", "https://www.xueyituanchina.cn/info/article_active.html?id=" +
-                                bannerBean.banner_id);
+                                bannerBean.banner_id + "&uid=" + XYTApplication.uid);
                         ActivityUtils.init().start(getActivity(), WebViewActivity.class, "", bundle);
                     } else {
                         clickToStore("", bannerBean.banner_id + "");
@@ -425,6 +426,11 @@ public class HomeFragment extends SuperBaseFragment {
         tvTitle.setText(listBean.title);
         tvSubTitle.setText(listBean.sub_title);
         Glide.with(mActivity).load(listBean.sp_img).apply(GlideUtils.init().options(R.mipmap.ic_launcher)).into(ivSrc);
+        view.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("url", "https://www.xueyituanchina.cn/info/article_active.html?id=" + listBean.id + "&uid=" + XYTApplication.uid);
+            ActivityUtils.init().start(getActivity(), WebViewActivity.class, "", bundle);
+        });
         return view;
     }
 

@@ -216,7 +216,6 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_160dp"
-                android:layout_marginBottom="@dimen/dimen_10dp"
                 android:layout_marginEnd="@dimen/dimen_10dp"
                 android:layout_marginStart="@dimen/dimen_10dp"
                 android:background="@drawable/shape_5_white">
@@ -242,7 +241,42 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"/>
+
             </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_50dp"
+                android:gravity="center_vertical"
+                android:paddingEnd="@dimen/dimen_15dp"
+                android:paddingStart="@dimen/dimen_15dp">
+
+                <CheckBox
+                    android:id="@+id/checkbox"
+                    style="@style/Widget.AppCompat.CompoundButton.CheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/white"
+                    android:checked="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="我已阅读并同意"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dimen_12sp"/>
+
+                <TextView
+                    android:id="@+id/tvUserAgent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="《学艺团商家入驻协议书》"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/dimen_14sp"/>
+
+            </LinearLayout>
         </LinearLayout>
 
         <Button
@@ -258,6 +292,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/llCenter"/>
+
 
         <TextView
             android:id="@+id/tvInfo"

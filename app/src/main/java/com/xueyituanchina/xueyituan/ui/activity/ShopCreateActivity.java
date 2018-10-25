@@ -1,7 +1,9 @@
 package com.xueyituanchina.xueyituan.ui.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -29,6 +31,8 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
+import top.jplayer.baseprolibrary.ui.activity.WebViewActivity;
+import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.CameraUtil;
 import top.jplayer.baseprolibrary.utils.StringUtils;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
@@ -59,6 +63,10 @@ public class ShopCreateActivity extends CommonToolBarActivity {
     Button mBtnCreate;
     @BindView(R.id.tvInfo)
     TextView mTvInfo;
+    @BindView(R.id.tvUserAgent)
+    TextView tvUserAgent;
+    @BindView(R.id.checkbox)
+    CheckBox mCheckBox;
     private Unbinder mBind;
     private int isLic = -1;
     private File fileLic;
@@ -95,6 +103,11 @@ public class ShopCreateActivity extends CommonToolBarActivity {
                 mPresenter.areaLocal();
             }
         });
+        tvUserAgent.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("url", "https://www.xueyituanchina.cn/info/shopagent.html");
+            ActivityUtils.init().start(mActivity, WebViewActivity.class, "", bundle);
+        });
         mBtnCreate.setOnClickListener(v -> {
             if (fileLic == null) {
                 ToastUtils.init().showQuickToast(mActivity, "请上传营业执照");
@@ -122,6 +135,10 @@ public class ShopCreateActivity extends CommonToolBarActivity {
             }
             if (StringUtils.init().isEmpty(mEdSpPhone)) {
                 ToastUtils.init().showQuickToast(mActivity, "请输入手机号码");
+                return;
+            }
+            if (!mCheckBox.isChecked()) {
+                ToastUtils.init().showQuickToast(mActivity, "请阅读并同意商家协议");
                 return;
             }
             MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM)

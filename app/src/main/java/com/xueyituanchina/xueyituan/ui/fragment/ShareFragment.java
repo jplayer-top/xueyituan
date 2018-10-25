@@ -27,6 +27,7 @@ import okhttp3.RequestBody;
 import top.jplayer.baseprolibrary.ui.activity.WebViewActivity;
 import top.jplayer.baseprolibrary.ui.fragment.SuperBaseFragment;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
+import top.jplayer.baseprolibrary.utils.PickerUtils;
 import top.jplayer.baseprolibrary.utils.StringUtils;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
 import top.jplayer.baseprolibrary.widgets.ShSwitchView;
@@ -54,9 +55,9 @@ public class ShareFragment extends SuperBaseFragment {
     @BindView(R.id.edTitle)
     EditText mEdTitle;
     @BindView(R.id.edStartTime)
-    EditText mEdStartTime;
+    TextView mEdStartTime;
     @BindView(R.id.edEndTime)
-    EditText mEdEndTime;
+    TextView mEdEndTime;
     @BindView(R.id.edLocal)
     EditText mEdLocal;
     @BindView(R.id.edDesc)
@@ -70,6 +71,7 @@ public class ShareFragment extends SuperBaseFragment {
     private Unbinder mUnbinder;
     private SharePresenter mPresenter;
     private File mFile;
+    private PickerUtils mPickerUtils;
 
     @Override
     public int initLayout() {
@@ -138,10 +140,22 @@ public class ShareFragment extends SuperBaseFragment {
         mTvToolRightLeft.setOnClickListener(v -> {
 
         });
+        mPickerUtils = new PickerUtils();
+        mEdStartTime.setOnClickListener(v -> {
+            mPickerUtils.initTimePicker(getActivity(), (date, patternDate) -> {
+                mEdStartTime.setText(patternDate);
+            });
+            mPickerUtils.timeShow();
+        });
+        mEdEndTime.setOnClickListener(v -> {
+            mPickerUtils.initTimePicker(getActivity(), (date, patternDate) -> {
+                mEdEndTime.setText(patternDate);
+            });
+            mPickerUtils.timeShow();
+        });
     }
 
     @Subscribe
-
     public void onEvent(FileSelect event) {
         mFile = event.mFile;
         Glide.with(mActivity).load(mFile).into(mIvBigSrc);
@@ -150,7 +164,7 @@ public class ShareFragment extends SuperBaseFragment {
     @Override
     protected void initImmersionBar() {
         super.initImmersionBar();
-        mImmersionBar.statusBarView(R.id.statusBarShare).init();
+        mImmersionBar.statusBarView(R.id.statusBarShare).keyboardEnable(true).init();
     }
 
     @Override
