@@ -1,6 +1,5 @@
 package top.jplayer.baseprolibrary.ui.activity;
 
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -8,18 +7,20 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.tencent.smtt.sdk.WebChromeClient;
+import com.tencent.smtt.sdk.WebSettings;
+import com.tencent.smtt.sdk.WebView;
+import com.tencent.smtt.sdk.WebViewClient;
+
 import top.jplayer.baseprolibrary.R;
 import top.jplayer.baseprolibrary.utils.LogUtil;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
+
 
 public class WebViewActivity extends CommonToolBarActivity {
 
