@@ -2,7 +2,6 @@ package com.xueyituanchina.xueyituan.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -34,9 +33,7 @@ import top.jplayer.baseprolibrary.ui.dialog.DialogEdit;
 import top.jplayer.baseprolibrary.ui.dialog.DialogLogout;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.CameraUtil;
-import top.jplayer.baseprolibrary.utils.LogUtil;
 import top.jplayer.baseprolibrary.utils.SharePreUtil;
-import top.jplayer.baseprolibrary.widgets.dialog.BaseCustomDialog;
 
 /**
  * Created by Obl on 2018/8/28.
@@ -163,6 +160,11 @@ public class SettingActivity extends CommonToolBarActivity {
     }
 
     public void logout() {
+
+        SharePreUtil.saveData(this, "login_phone", "");
+        SharePreUtil.saveData(this, "login_password", "");
+        SharePreUtil.saveData(this, "login_uid", "");
+        SharePreUtil.saveData(this, "login_token", "");
         EventBus.getDefault().post(new LogoutEvent());
         finish();
     }

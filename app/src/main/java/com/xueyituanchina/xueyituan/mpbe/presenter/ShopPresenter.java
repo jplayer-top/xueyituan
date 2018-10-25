@@ -8,6 +8,7 @@ import com.xueyituanchina.xueyituan.mpbe.model.HomeModel;
 import com.xueyituanchina.xueyituan.ui.activity.ShopItemActivity;
 
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
+import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
 import top.jplayer.baseprolibrary.net.tip.GetImplTip;
 import top.jplayer.baseprolibrary.net.tip.LoaddingImplTip;
@@ -39,7 +40,7 @@ public class ShopPresenter extends BasePresenter<ShopItemActivity> {
                 lnglat = data;
             }
         }
-        mModel.shopInfo(id,lnglat).subscribe(new NetCallBackObserver<ShopItemBean>(new GetImplTip(mIView.mActivity)) {
+        mModel.shopInfo(id, lnglat).subscribe(new NetCallBackObserver<ShopItemBean>(new GetImplTip(mIView.mActivity)) {
             @Override
             public void responseSuccess(ShopItemBean bean) {
                 mIView.responseSuccess();
@@ -48,6 +49,34 @@ public class ShopPresenter extends BasePresenter<ShopItemActivity> {
 
             @Override
             public void responseFail(ShopItemBean shopItemBean) {
+
+            }
+        });
+    }
+
+    public void favKeep(String type, String id) {
+        mModel.collectionType(type, id).subscribe(new NetCallBackObserver<BaseBean>(new LoaddingImplTip(mIView)) {
+            @Override
+            public void responseSuccess(BaseBean orderBean) {
+
+            }
+
+            @Override
+            public void responseFail(BaseBean orderBean) {
+
+            }
+        });
+    }
+
+    public void favUnKeep(String type, String id) {
+        mModel.unCollectionType(type, id).subscribe(new NetCallBackObserver<BaseBean>(new LoaddingImplTip(mIView)) {
+            @Override
+            public void responseSuccess(BaseBean orderBean) {
+
+            }
+
+            @Override
+            public void responseFail(BaseBean orderBean) {
 
             }
         });

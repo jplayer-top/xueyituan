@@ -147,6 +147,7 @@
                 tools:ignore="RtlHardcoded"/>
 
             <TextView
+                android:textColorHint="@color/color999"
                 android:id="@+id/tvPassword"
                 android:layout_width="0dp"
                 android:layout_height="?attr/actionBarSize"

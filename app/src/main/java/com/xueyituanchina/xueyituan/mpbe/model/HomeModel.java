@@ -86,6 +86,10 @@ public class HomeModel extends BaseModel<XYTServer> {
         return mServer.collectionType(favType, favId).compose(new IoMainSchedule<>());
     }
 
+    public Observable<BaseBean> unCollectionType(String favType, String favId) {
+        return mServer.cancelCollectionType(favType, favId).compose(new IoMainSchedule<>());
+    }
+
     public Observable<BaseBean> createShop(RequestBody body) {
         return mServer.shopCreate(body)
                 .compose(new IoMainSchedule<>());

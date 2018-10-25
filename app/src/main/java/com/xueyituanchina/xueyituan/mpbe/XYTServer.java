@@ -16,6 +16,7 @@ import com.xueyituanchina.xueyituan.mpbe.bean.PointDetailBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.PointRecodeBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.ShopItemBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.StoreBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.UpdateUrlBean;
 import com.xueyituanchina.xueyituan.wxapi.WxPayInfoBean;
 
 import java.util.Map;
@@ -138,6 +139,10 @@ public interface XYTServer {
     @Multipart
     @POST("user/updateavatar?")
     Observable<MyInfoBean> updateAvatar(@Part MultipartBody.Part file);
+
+    @Multipart
+    @POST("uploadposter")
+    Observable<UpdateUrlBean> updatePoster(@Part MultipartBody.Part file);
 
     @POST("user/updatepw?")
     Observable<BaseBean> updatePw(@Query("opw") String opw, @Query("npw") String npw);

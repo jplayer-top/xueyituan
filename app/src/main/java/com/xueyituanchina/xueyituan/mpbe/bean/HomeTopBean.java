@@ -42,7 +42,7 @@ public class HomeTopBean extends BaseBean {
          */
 
         public String banner_type;
-        public int banner_id;
+        public String banner_id;
         public String banner_img;
     }
 

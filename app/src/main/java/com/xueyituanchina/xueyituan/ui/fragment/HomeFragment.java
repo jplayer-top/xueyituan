@@ -406,18 +406,23 @@ public class HomeFragment extends SuperBaseFragment {
                         .into((ImageView) itemView);
                 itemView.setOnClickListener(v -> {
                     if ("2".equals(bannerBean.banner_type)) {
-                        Bundle bundle = new Bundle();
-                        bundle.putString("url", "https://www.xueyituanchina.cn/info/article_active.html?id=" +
-                                bannerBean.banner_id + "&uid=" + XYTApplication.uid);
-                        ActivityUtils.init().start(getActivity(), WebViewActivity.class, "", bundle);
+                        startWeb("https://www.xueyituanchina.cn/info/article_active.html?id=" + bannerBean.banner_id + "&uid=" + XYTApplication.uid);
+                    } else if ("1".equals(bannerBean.banner_type)) {
+                        clickToStore("", bannerBean.banner_id);
                     } else {
-                        clickToStore("", bannerBean.banner_id + "");
+                        startWeb(bannerBean.banner_id);
                     }
                 });
             }
 
         });
         mBgaBanner.setData(homeTopBean.banner, null);
+    }
+
+    private void startWeb(String url) {
+        Bundle bundle = new Bundle();
+        bundle.putString("url", url);
+        ActivityUtils.init().start(getActivity(), WebViewActivity.class, "", bundle);
     }
 
 

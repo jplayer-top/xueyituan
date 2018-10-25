@@ -56,6 +56,7 @@ public class MainActivity extends SuperBaseActivity implements IMyLocationChange
         if ("".equals(lnglat)) {
             SharePreUtil.saveData(this, "lnglat", "115.9853071091,36.4570202778");
         }
+        isCheckKeyboard = false;
     }
 
     @Override

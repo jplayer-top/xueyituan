@@ -49,7 +49,9 @@
                 android:id="@+id/ivToolRightLeft"
                 android:layout_width="?attr/actionBarSize"
                 android:layout_height="?attr/actionBarSize"
-                android:padding="@dimen/dp_20"
+                android:paddingTop="@dimen/dimen_20dp"
+                android:paddingBottom="@dimen/dimen_20dp"
+                android:paddingStart="@dimen/dp_40"
                 android:visibility="gone"/>
 
             <ImageView
@@ -57,8 +59,8 @@
                 android:layout_width="?attr/actionBarSize"
                 android:layout_height="?attr/actionBarSize"
                 android:padding="@dimen/dp_20"
-                android:src="@drawable/message"
-                android:visibility="gone"/>
+                android:visibility="gone"
+                android:src="@drawable/message"/>
 
 
             <TextView

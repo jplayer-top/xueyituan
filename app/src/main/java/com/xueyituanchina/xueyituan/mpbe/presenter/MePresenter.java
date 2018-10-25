@@ -8,6 +8,8 @@ import com.xueyituanchina.xueyituan.ui.fragment.MeFragment;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
 import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
 import top.jplayer.baseprolibrary.net.tip.GetImplTip;
+import top.jplayer.baseprolibrary.utils.SharePreUtil;
+import top.jplayer.baseprolibrary.utils.ToastUtils;
 
 /**
  * Created by Obl on 2018/8/27.
@@ -26,16 +28,21 @@ public class MePresenter extends BasePresenter<MeFragment> {
     }
 
     public void requestMyInfo() {
-        mModel.requestMyInfo().subscribe(new NetCallBackObserver<MyInfoBean>(new GetImplTip(mIView.mActivity)) {
-            @Override
-            public void responseSuccess(MyInfoBean myInfoBean) {
-                mIView.responseMyInfo(myInfoBean);
-            }
+        String login_uid = (String) SharePreUtil.getData(mIView.mActivity, "login_uid", "");
+        if ("".equals(login_uid)) {
+            ToastUtils.init().showInfoToast(mIView.getContext(), "请先登录");
+        } else {
+            mModel.requestMyInfo().subscribe(new NetCallBackObserver<MyInfoBean>(new GetImplTip(mIView.mActivity)) {
+                @Override
+                public void responseSuccess(MyInfoBean myInfoBean) {
+                    mIView.responseMyInfo(myInfoBean);
+                }
 
-            @Override
-            public void responseFail(MyInfoBean myInfoBean) {
+                @Override
+                public void responseFail(MyInfoBean myInfoBean) {
 
-            }
-        });
+                }
+            });
+        }
     }
 }

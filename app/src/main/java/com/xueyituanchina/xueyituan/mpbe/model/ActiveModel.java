@@ -2,8 +2,13 @@ package com.xueyituanchina.xueyituan.mpbe.model;
 
 import com.xueyituanchina.xueyituan.mpbe.XYTServer;
 import com.xueyituanchina.xueyituan.mpbe.bean.NearbyActiveBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.UpdateUrlBean;
+
+import java.io.File;
 
 import io.reactivex.Observable;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import top.jplayer.baseprolibrary.mvp.model.BaseModel;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
@@ -31,6 +36,15 @@ public class ActiveModel extends BaseModel<XYTServer> {
 
     public Observable<BaseBean> pubActivity(RequestBody body) {
         return mServer.pubActivity(body)
+                .compose(new IoMainSchedule<>());
+    }
+
+    public Observable<UpdateUrlBean> updatePoster(File file) {
+        RequestBody requestFile =
+                RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData("img", file.getName(), requestFile);
+        return mServer.updatePoster(body)
                 .compose(new IoMainSchedule<>());
     }
 }

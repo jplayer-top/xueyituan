@@ -65,6 +65,7 @@ public class ShopItemActivity extends CommonToolBarActivity {
     private TextView mTvChatTip;
     private TextView mTvGiftTip;
     private WXShare mWxShare;
+    private boolean keep;
 
     @Override
     public int initAddLayout() {
@@ -88,15 +89,25 @@ public class ShopItemActivity extends CommonToolBarActivity {
             String login_phone = (String) SharePreUtil.getData(this, "login_phone", "");
             mPresenter.createOrder(mId, "1", login_phone);
         });
-        toolRightVisible(mIvToolRight, R.drawable.share);
+        toolRightVisible(mIvToolRight, R.drawable.collection);
+        mIvToolRightLeft.setImageResource(R.drawable.share);
         mWxShare = new WXShare(this);
 
     }
 
     @Override
+    public void toolRightLeft(int isVisible, View.OnClickListener listener) {
+        super.toolRightLeft(View.VISIBLE, v -> new ShareDialog(mActivity).show());
+    }
+
+    @Override
     public void toolRightBtn(View v) {
         super.toolRightBtn(v);
-        new ShareDialog(this).show();
+        if (this.keep) {
+            mPresenter.favUnKeep("2", mId);
+        } else {
+            mPresenter.favKeep("2", mId);
+        }
     }
 
     private void initFooterView() {
@@ -121,6 +132,7 @@ public class ShopItemActivity extends CommonToolBarActivity {
     }
 
     public void shopInfo(ShopItemBean bean) {
+        this.keep = bean.keep;
         mAdapter.setNewData(bean.goods.goods_desc_img);
         initBanner(bean.goods.goods_thumb_img);
         initHeaderData(bean);

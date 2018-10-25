@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.xueyituanchina.xueyituan.R;
+import com.xueyituanchina.xueyituan.mpbe.bean.UpdateUrlBean;
 import com.xueyituanchina.xueyituan.mpbe.event.FileSelect;
 import com.xueyituanchina.xueyituan.mpbe.presenter.SharePresenter;
 import com.xueyituanchina.xueyituan.ui.MainActivity;
@@ -21,7 +22,6 @@ import java.io.File;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import top.jplayer.baseprolibrary.ui.activity.WebViewActivity;
@@ -116,16 +116,8 @@ public class ShareFragment extends SuperBaseFragment {
                 ToastUtils.init().showQuickToast(mActivity, "请输入手机号码");
                 return;
             }
-            MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM)
-                    .addFormDataPart("title", mEdTitle.getText().toString())
-                    .addFormDataPart("description", mEdDesc.getText().toString())
-                    .addFormDataPart("beginTime", mEdStartTime.getText().toString())
-                    .addFormDataPart("endTime", mEdEndTime.getText().toString())
-                    .addFormDataPart("addr", mEdLocal.getText().toString())
-                    .addFormDataPart("plan", mSwitchView.isOn() ? "1" : "0")
-                    .addFormDataPart("poster", mFile.getName(), RequestBody.create(MediaType.parse("image/*"), mFile));
-            RequestBody requestBody = builder.build();
-            mPresenter.pubActivity(requestBody);
+            mPresenter.updatePoster(mFile);
+
         });
         tvAdPlan.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
@@ -176,5 +168,18 @@ public class ShareFragment extends SuperBaseFragment {
 
     public void pubSuccess() {
 
+    }
+
+    public void upSuccess(UpdateUrlBean bean) {
+        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                .addFormDataPart("title", mEdTitle.getText().toString())
+                .addFormDataPart("description", mEdDesc.getText().toString())
+                .addFormDataPart("beginTime", mEdStartTime.getText().toString())
+                .addFormDataPart("endTime", mEdEndTime.getText().toString())
+                .addFormDataPart("addr", mEdLocal.getText().toString())
+                .addFormDataPart("plan", mSwitchView.isOn() ? "1" : "0")
+                .addFormDataPart("poster", bean.url);
+        RequestBody requestBody = builder.build();
+        mPresenter.pubActivity(requestBody);
     }
 }
