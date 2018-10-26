@@ -18,10 +18,12 @@ import com.xueyituanchina.xueyituan.mpbe.presenter.MePresenter;
 import com.xueyituanchina.xueyituan.ui.activity.CollectionActivity;
 import com.xueyituanchina.xueyituan.ui.activity.IssueActivity;
 import com.xueyituanchina.xueyituan.ui.activity.LoginActivity;
+import com.xueyituanchina.xueyituan.ui.activity.RechargeActivity;
 import com.xueyituanchina.xueyituan.ui.activity.SettingActivity;
 import com.xueyituanchina.xueyituan.ui.activity.ShopCreateActivity;
 import com.xueyituanchina.xueyituan.ui.activity.StoreActivity;
 import com.xueyituanchina.xueyituan.ui.adapter.MeOrderAdapter;
+import com.xueyituanchina.xueyituan.wxapi.WXPayEntryActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -187,6 +189,10 @@ public class MeFragment extends SuperBaseFragment {
         mPresenter.requestMyInfo();
     }
 
+    @Subscribe
+    public void wxPayOk(WXPayEntryActivity.WxPayEvent event) {
+        mPresenter.requestMyInfo();
+    }
 
     public void responseMyInfo(MyInfoBean bean) {
         this.bean = bean;
@@ -194,6 +200,13 @@ public class MeFragment extends SuperBaseFragment {
         mTvNick.setText(String.format(Locale.CHINA, "会员昵称：%s", StringUtils.init().fixNullStr(bean.nick)));
         mTvPoints.setText(String.format(Locale.CHINA, "会员积分：%d", bean.points));
         mIvIsVip.setSelected(bean.vip != 0);
+        mIvIsVip.setOnClickListener(v -> {
+            if (bean.vip == 0) {
+                Bundle bundle = new Bundle();
+                bundle.putString("recharge", this.bean.recharge);
+                ActivityUtils.init().start(this.getActivity(), RechargeActivity.class, "会员充值", bundle);
+            }
+        });
         initRecomend(bean.avator, mIvAvatar);
         List<MyInfoBean.RmdListBean> rmdList = bean.rmdList;
         if (rmdList.size() > 0) {

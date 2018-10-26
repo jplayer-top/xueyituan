@@ -91,6 +91,15 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".ui.activity.ShopOrderActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.RechargeActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+
+        <activity
             android:name=".ui.activity.LocalSelMapActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
