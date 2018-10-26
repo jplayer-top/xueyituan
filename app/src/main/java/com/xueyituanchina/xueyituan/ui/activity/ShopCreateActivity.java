@@ -16,9 +16,13 @@ import com.xueyituanchina.xueyituan.R;
 import com.xueyituanchina.xueyituan.mpbe.bean.AreaAllBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.PostLocalBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.UpdateUrlBean;
+import com.xueyituanchina.xueyituan.mpbe.event.LocalSelEvent;
 import com.xueyituanchina.xueyituan.mpbe.presenter.ShopCreatePresenter;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.Permission;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -34,6 +38,7 @@ import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
 import top.jplayer.baseprolibrary.ui.activity.WebViewActivity;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.CameraUtil;
+import top.jplayer.baseprolibrary.utils.SharePreUtil;
 import top.jplayer.baseprolibrary.utils.StringUtils;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
 
@@ -67,6 +72,8 @@ public class ShopCreateActivity extends CommonToolBarActivity {
     TextView tvUserAgent;
     @BindView(R.id.checkbox)
     CheckBox mCheckBox;
+    @BindView(R.id.ivSel4Map)
+    ImageView ivSel4Map;
     private Unbinder mBind;
     private int isLic = -1;
     private File fileLic;
@@ -88,6 +95,8 @@ public class ShopCreateActivity extends CommonToolBarActivity {
     public void initAddView(FrameLayout rootView) {
         super.initAddView(rootView);
         mBind = ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
+        curLnglat = (String) SharePreUtil.getData(this, "lnglat", "");
         mIvShopLic.setOnClickListener(v -> {
             setOnClick(0);
         });
@@ -102,6 +111,9 @@ public class ShopCreateActivity extends CommonToolBarActivity {
             } else {
                 mPresenter.areaLocal();
             }
+        });
+        ivSel4Map.setOnClickListener(v -> {
+            ActivityUtils.init().start(this, LocalSelMapActivity.class, "店铺位置");
         });
         tvUserAgent.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
@@ -143,6 +155,21 @@ public class ShopCreateActivity extends CommonToolBarActivity {
             }
             mPresenter.updateLic(fileLic);
         });
+    }
+
+    public String curLnglat = "";
+    public String curAddr = "";
+
+    @Subscribe
+    public void onEvent(LocalSelEvent event) {
+        curLnglat = event.curLnglat;
+        curAddr = event.curAddr;
+        if (!"".equals(curAddr)) {
+            mEdSpAddr.setText(curAddr);
+        }
+        if ("".equals(curLnglat)) {
+            curLnglat = (String) SharePreUtil.getData(this, "lnglat", "");
+        }
     }
 
     public void setOnClick(int isLic) {
@@ -253,6 +280,7 @@ public class ShopCreateActivity extends CommonToolBarActivity {
     protected void onDestroy() {
         super.onDestroy();
         mBind.unbind();
+        EventBus.getDefault().unregister(this);
     }
 
     public void createSuccess() {
@@ -266,14 +294,14 @@ public class ShopCreateActivity extends CommonToolBarActivity {
     public void upSuccess(String url, String url1) {
         MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM)
                 .addFormDataPart("sp_name", mEdSpName.getText().toString())
-                .addFormDataPart("sp_province", "")
-                .addFormDataPart("sp_city", "")
-                .addFormDataPart("sp_area", "")
+                .addFormDataPart("sp_province", mProvince_name)
+                .addFormDataPart("sp_city", mCity_name)
+                .addFormDataPart("sp_area", mArea_name)
                 .addFormDataPart("sp_addr", mEdSpAddr.getText().toString())
                 .addFormDataPart("sp_link_name", mEdSpUserName.getText().toString())
                 .addFormDataPart("sp_link_phone", mEdSpPhone.getText().toString())
+                .addFormDataPart("lnglat", curLnglat)
                 .addFormDataPart("sp_img", url)
-                .addFormDataPart("lnglat", url)
                 .addFormDataPart("sp_lic", url1);
         RequestBody requestBody = builder.build();
         mPresenter.createShop(requestBody);

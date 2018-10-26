@@ -24,6 +24,7 @@ import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
 import top.jplayer.baseprolibrary.net.tip.DialogLoading;
 import top.jplayer.baseprolibrary.utils.BitmapUtil;
 import top.jplayer.baseprolibrary.utils.LogUtil;
+import top.jplayer.baseprolibrary.utils.ToastUtils;
 
 /**
  * Created by Obl on 2018/8/20.
@@ -61,14 +62,17 @@ public class ShopCreatePresenter extends BasePresenter<ShopCreateActivity> {
 
                                 @Override
                                 public void responseFail(UpdateUrlBean bean) {
-
+                                    if (mLoading != null && mLoading.isShowing()) {
+                                        mLoading.dismiss();
+                                    }
+                                    ToastUtils.init().showErrorToast(mIView, bean.msg);
                                 }
                             });
                 });
 
     }
 
-    public void updateImg(File file,String url) {
+    public void updateImg(File file, String url) {
         Observable.just(file)
                 .subscribeOn(Schedulers.io())
                 .map(BitmapUtil::compressImage)
@@ -80,12 +84,15 @@ public class ShopCreatePresenter extends BasePresenter<ShopCreateActivity> {
                             .subscribe(new NetCallBackObserver<UpdateUrlBean>() {
                                 @Override
                                 public void responseSuccess(UpdateUrlBean bean) {
-                                    mIView.upSuccess(bean.url,url);
+                                    mIView.upSuccess(bean.url, url);
                                 }
 
                                 @Override
                                 public void responseFail(UpdateUrlBean bean) {
-
+                                    if (mLoading != null && mLoading.isShowing()) {
+                                        mLoading.dismiss();
+                                    }
+                                    ToastUtils.init().showErrorToast(mIView, bean.msg);
                                 }
                             });
                 });
@@ -105,7 +112,10 @@ public class ShopCreatePresenter extends BasePresenter<ShopCreateActivity> {
 
                     @Override
                     public void responseFail(BaseBean bean) {
-
+                        if (mLoading != null && mLoading.isShowing()) {
+                            mLoading.dismiss();
+                        }
+                        ToastUtils.init().showErrorToast(mIView, bean.msg);
                     }
                 });
     }

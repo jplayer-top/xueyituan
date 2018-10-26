@@ -119,21 +119,37 @@
                 android:textColorHint="@color/color999"
                 android:textSize="@dimen/dimen_13sp"/>
 
-            <EditText
-                android:id="@+id/edSpAddr"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_40dp"
+                android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/dimen_10dp"
                 android:layout_marginStart="@dimen/dimen_10dp"
                 android:layout_marginTop="@dimen/dimen_10dp"
-                android:background="@drawable/shape_5_white"
-                android:hint="请输入详细地址"
-                android:inputType="text"
-                android:paddingEnd="@dimen/dimen_10dp"
-                android:paddingStart="@dimen/dimen_10dp"
-                android:textColor="@color/color999"
-                android:textColorHint="@color/color999"
-                android:textSize="@dimen/dimen_13sp"/>
+                android:gravity="center">
+
+                <EditText
+                    android:id="@+id/edSpAddr"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/dimen_40dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/shape_5_white"
+                    android:hint="请输入详细地址"
+                    android:inputType="text"
+                    android:paddingEnd="@dimen/dimen_10dp"
+                    android:paddingStart="@dimen/dimen_10dp"
+                    android:textColor="@color/color999"
+                    android:textColorHint="@color/color999"
+                    android:textSize="@dimen/dimen_13sp"/>
+
+                <ImageView
+                    android:id="@+id/ivSel4Map"
+                    android:layout_width="@dimen/dimen_40dp"
+                    android:layout_height="@dimen/dimen_40dp"
+                    android:layout_margin="@dimen/dimen_3dp"
+                    android:background="@drawable/shape_5_white"
+                    android:padding="@dimen/dimen_10dp"
+                    android:src="@drawable/pic_local"/>
+            </LinearLayout>
 
             <EditText
                 android:id="@+id/edSpUserName"

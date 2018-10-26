@@ -90,7 +90,10 @@
             android:name=".ui.activity.ShopCreateActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
-
+        <activity
+            android:name=".ui.activity.LocalSelMapActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
         <!--微信-->
         <activity
             android:name=".wxapi.WXPayEntryActivity"
@@ -126,6 +129,7 @@
             android:screenOrientation="behind"
             android:windowSoftInputMode="adjustResize|stateHidden">
         </activity>
+
         <!--7.0 -->
         <provider
             android:name="android.support.v4.content.FileProvider"
