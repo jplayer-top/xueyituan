@@ -12,6 +12,7 @@ import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
 import top.jplayer.baseprolibrary.net.tip.GetImplTip;
 import top.jplayer.baseprolibrary.net.tip.LoaddingImplTip;
+import top.jplayer.baseprolibrary.net.tip.PostImplTip;
 import top.jplayer.baseprolibrary.utils.SharePreUtil;
 
 /**
@@ -55,7 +56,7 @@ public class ShopPresenter extends BasePresenter<ShopItemActivity> {
     }
 
     public void favKeep(String type, String id) {
-        mModel.collectionType(type, id).subscribe(new NetCallBackObserver<BaseBean>(new LoaddingImplTip(mIView)) {
+        mModel.collectionType(type, id).subscribe(new NetCallBackObserver<BaseBean>(new PostImplTip(mIView)) {
             @Override
             public void responseSuccess(BaseBean orderBean) {
 
@@ -69,7 +70,7 @@ public class ShopPresenter extends BasePresenter<ShopItemActivity> {
     }
 
     public void favUnKeep(String type, String id) {
-        mModel.unCollectionType(type, id).subscribe(new NetCallBackObserver<BaseBean>(new LoaddingImplTip(mIView)) {
+        mModel.unCollectionType(type, id).subscribe(new NetCallBackObserver<BaseBean>(new PostImplTip(mIView)) {
             @Override
             public void responseSuccess(BaseBean orderBean) {
 

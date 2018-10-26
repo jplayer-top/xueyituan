@@ -1,10 +1,12 @@
 package com.xueyituanchina.xueyituan.mpbe.model;
 
+import com.xueyituanchina.xueyituan.XYTApplication;
 import com.xueyituanchina.xueyituan.aliapi.AliPayInfoBean;
 import com.xueyituanchina.xueyituan.mpbe.XYTServer;
 import com.xueyituanchina.xueyituan.mpbe.bean.AreaAllBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.AreaBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.BrandBBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.FavListBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeGoodsList;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeListBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeTopBean;
@@ -43,6 +45,10 @@ public class HomeModel extends BaseModel<XYTServer> {
 
     public Observable<WxPayInfoBean> wxShop(String money) {
         return mServer.wallWxShop(money, "2").compose(new IoMainSchedule<>());
+    }
+
+    public Observable<FavListBean> favList(String favType, String lnglat) {
+        return mServer.favList(favType, lnglat).compose(new IoMainSchedule<>());
     }
 
     public Observable<AliPayInfoBean> aliRecharge(String money) {
@@ -103,11 +109,11 @@ public class HomeModel extends BaseModel<XYTServer> {
     }
 
     public Observable<BaseBean> collectionType(String favType, String favId) {
-        return mServer.collectionType(favType, favId).compose(new IoMainSchedule<>());
+        return mServer.collectionType(favType, favId, XYTApplication.uid).compose(new IoMainSchedule<>());
     }
 
     public Observable<BaseBean> unCollectionType(String favType, String favId) {
-        return mServer.cancelCollectionType(favType, favId).compose(new IoMainSchedule<>());
+        return mServer.cancelCollectionType(favType, favId, XYTApplication.uid).compose(new IoMainSchedule<>());
     }
 
     public Observable<BaseBean> createShop(RequestBody body) {
@@ -125,7 +131,7 @@ public class HomeModel extends BaseModel<XYTServer> {
     }
 
     public Observable<BaseBean> cancelCollectionType(String favType, String favId) {
-        return mServer.cancelCollectionType(favType, favId).compose(new IoMainSchedule<>());
+        return mServer.cancelCollectionType(favType, favId, XYTApplication.uid).compose(new IoMainSchedule<>());
     }
 
     public Observable<BaseBean> storeJoin(String id, String phone) {

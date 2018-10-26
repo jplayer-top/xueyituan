@@ -4,6 +4,7 @@ import com.xueyituanchina.xueyituan.aliapi.AliPayInfoBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.AreaAllBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.AreaBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.BrandBBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.FavListBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.GiftDetailBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeGoodsList;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeListBean;
@@ -74,10 +75,12 @@ public interface XYTServer {
 
     //类型 1商家 2商品 3内容
     @GET("my/fav?")
-    Observable<BaseBean> collectionType(@Query("favType") String favType, @Query("favId") String favId);
+    Observable<BaseBean> collectionType(@Query("favType") String favType, @Query("favId") String favId, @Query("uid")
+            String uid);
 
     @GET("my/cancelfav")
-    Observable<BaseBean> cancelCollectionType(@Query("favType") String favType, @Query("favId") String favId);
+    Observable<BaseBean> cancelCollectionType(@Query("favType") String favType, @Query("favId") String favId, @Query("uid")
+            String uid);
 
     //积分
     @GET("points/index")
@@ -127,6 +130,9 @@ public interface XYTServer {
 
     @GET("user/logout?")
     Observable<BaseBean> logout();
+
+    @GET("my/favlist")
+    Observable<FavListBean> favList(@Query("favType") String favType, @Query("lnglat") String lnglat);
 
     @POST("user/verfiysmcode?")
     Observable<LoginBean> verfiyCode(@Query("phone") String phone, @Query("smCode") String password);

@@ -3,12 +3,15 @@ package com.xueyituanchina.xueyituan.ui.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
+import com.xueyituanchina.xueyituan.ui.fragment.ActivityItemFragment;
+import com.xueyituanchina.xueyituan.ui.fragment.ShopItemFragment;
+import com.xueyituanchina.xueyituan.ui.fragment.StoreItemFragment;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import top.jplayer.baseprolibrary.ui.adapter.BaseViewPagerFragmentAdapter;
 import top.jplayer.baseprolibrary.ui.fragment.SuperBaseFragment;
-import top.jplayer.baseprolibrary.ui.fragment.TestFragment;
 
 /**
  * Created by Obl on 2018/9/4.
@@ -22,9 +25,9 @@ public class AdapterPagerTab extends BaseViewPagerFragmentAdapter<String> {
         super(supportFragmentManager, strings);
         mFragmentList = new ArrayList<>();
 
-        mFragmentList.add(new TestFragment());
-        mFragmentList.add(new TestFragment());
-        mFragmentList.add(new TestFragment());
+        mFragmentList.add(new StoreItemFragment());
+        mFragmentList.add(new ShopItemFragment());
+        mFragmentList.add(new ActivityItemFragment());
 
     }
 

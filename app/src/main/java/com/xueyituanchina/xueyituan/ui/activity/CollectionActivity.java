@@ -49,7 +49,6 @@ public class CollectionActivity extends CommonToolBarActivity {
         mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                ToastUtils.init().showQuickToast("当前位置：" + position);
             }
         });
     }
