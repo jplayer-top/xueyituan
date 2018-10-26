@@ -40,8 +40,36 @@ public class RechargePresenter extends BasePresenter<RechargeActivity> {
         });
     }
 
+    public void wxPayShop(String money) {
+        mModel.wxShop(money).subscribe(new NetCallBackObserver<WxPayInfoBean>(new LoaddingImplTip(mIView)) {
+            @Override
+            public void responseSuccess(WxPayInfoBean orderBean) {
+                mIView.wxPay(orderBean);
+            }
+
+            @Override
+            public void responseFail(WxPayInfoBean orderBean) {
+
+            }
+        });
+    }
+
     public void aliPay(String money) {
         mModel.aliRecharge(money).subscribe(new NetCallBackObserver<AliPayInfoBean>(new LoaddingImplTip(mIView)) {
+            @Override
+            public void responseSuccess(AliPayInfoBean orderBean) {
+                mIView.aliPay(orderBean);
+            }
+
+            @Override
+            public void responseFail(AliPayInfoBean orderBean) {
+
+            }
+        });
+    }
+
+    public void aliPayShop(String money) {
+        mModel.aliShop(money).subscribe(new NetCallBackObserver<AliPayInfoBean>(new LoaddingImplTip(mIView)) {
             @Override
             public void responseSuccess(AliPayInfoBean orderBean) {
                 mIView.aliPay(orderBean);

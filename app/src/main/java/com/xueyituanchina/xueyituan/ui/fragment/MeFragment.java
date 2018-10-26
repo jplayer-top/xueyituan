@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.xueyituanchina.xueyituan.R;
 import com.xueyituanchina.xueyituan.mpbe.bean.MyInfoBean;
+import com.xueyituanchina.xueyituan.mpbe.event.AliPayOkEvent;
 import com.xueyituanchina.xueyituan.mpbe.event.LoginSuccessEvent;
 import com.xueyituanchina.xueyituan.mpbe.event.LogoutEvent;
 import com.xueyituanchina.xueyituan.mpbe.event.MessageOkEvent;
@@ -37,8 +38,10 @@ import butterknife.Unbinder;
 import io.rong.imkit.RongIM;
 import io.rong.imlib.model.Conversation;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
+import top.jplayer.baseprolibrary.ui.dialog.DialogLogout;
 import top.jplayer.baseprolibrary.ui.fragment.SuperBaseFragment;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
+import top.jplayer.baseprolibrary.utils.LogUtil;
 import top.jplayer.baseprolibrary.utils.SharePreUtil;
 import top.jplayer.baseprolibrary.utils.StringUtils;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
@@ -141,9 +144,6 @@ public class MeFragment extends SuperBaseFragment {
         mIvRecommend02.setOnClickListener(v -> {
             clickToStore("", bean.rmdList.get(1).user_id + "");
         });
-        mLlWork.setOnClickListener(v -> {
-            ActivityUtils.init().start(mActivity, ShopCreateActivity.class, "商家入驻");
-        });
 
         mLlChat.setOnClickListener(v -> {
             if (assert2Login(mActivity)) {
@@ -190,13 +190,44 @@ public class MeFragment extends SuperBaseFragment {
     }
 
     @Subscribe
-    public void wxPayOk(WXPayEntryActivity.WxPayEvent event) {
+    public void onEvent(WXPayEntryActivity.WxPayEvent event) {
+        mPresenter.requestMyInfo();
+    }
+
+    @Subscribe
+    public void onEvent(AliPayOkEvent event) {
         mPresenter.requestMyInfo();
     }
 
     public void responseMyInfo(MyInfoBean bean) {
         this.bean = bean;
         mTvToLogin.setVisibility(View.INVISIBLE);
+        mLlWork.setOnClickListener(v -> {
+            if ("0".equals(bean.merchant)) {
+                ActivityUtils.init().start(mActivity, ShopCreateActivity.class, "商家入驻");
+            } else if ("1".equals(bean.merchant)) {
+                DialogLogout dialogLogout = new DialogLogout(mActivity);
+                dialogLogout
+                        .setTitle("温馨提示")
+                        .setSubTitle("当前已提交入驻信息\n请提交一百元审核金")
+                        .show(R.id.btnSure, view -> {
+                            Bundle bundle = new Bundle();
+                            bundle.putString("recharge", "0.01");
+                            ActivityUtils.init().start(this.getActivity(), RechargeActivity.class, "商铺审核金", bundle);
+                            dialogLogout.dismiss();
+                        });
+            } else if ("2".equals(bean.merchant)) {
+                DialogLogout dialogLogout = new DialogLogout(mActivity);
+                dialogLogout
+                        .setTitle("温馨提示")
+                        .setSubTitle("当前已认缴一百元审核金\n请耐心等待审核")
+                        .show(R.id.btnSure, view -> {
+                            dialogLogout.dismiss();
+                        });
+            } else {
+                LogUtil.str("sdasda");
+            }
+        });
         mTvNick.setText(String.format(Locale.CHINA, "会员昵称：%s", StringUtils.init().fixNullStr(bean.nick)));
         mTvPoints.setText(String.format(Locale.CHINA, "会员积分：%d", bean.points));
         mIvIsVip.setSelected(bean.vip != 0);

@@ -13,10 +13,12 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.xueyituanchina.xueyituan.R;
 import com.xueyituanchina.xueyituan.aliapi.AliPayInfoBean;
+import com.xueyituanchina.xueyituan.mpbe.event.AliPayOkEvent;
 import com.xueyituanchina.xueyituan.mpbe.presenter.RechargePresenter;
 import com.xueyituanchina.xueyituan.wxapi.WXPayEntryActivity;
 import com.xueyituanchina.xueyituan.wxapi.WxPayInfoBean;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.util.Map;
@@ -48,6 +50,7 @@ public class RechargeActivity extends CommonToolBarActivity {
     private Unbinder mUnbinder;
     private String mRecharge;
     private RechargePresenter mPresenter;
+    private boolean mIsVip;
 
     @Override
     public int initAddLayout() {
@@ -59,6 +62,9 @@ public class RechargeActivity extends CommonToolBarActivity {
         super.initAddView(rootView);
         mUnbinder = ButterKnife.bind(this);
         mRecharge = mBundle.getString("recharge");
+        EventBus.getDefault().register(this);
+        String string = mTvToolTitle.getText().toString();
+        mIsVip = string.contains("会员");
         mTvRecharge.setText(mRecharge);
         mCheckbox1.setOnCheckedChangeListener((buttonView, isChecked) -> {
             mCheckbox1.setChecked(isChecked);
@@ -72,9 +78,17 @@ public class RechargeActivity extends CommonToolBarActivity {
         mTv2Pay.setOnClickListener(v -> {
             boolean checked = mCheckbox1.isChecked();
             if (checked) {
-                mPresenter.wxPay(mRecharge);
+                if (mIsVip) {
+                    mPresenter.wxPay(mRecharge);
+                } else {
+                    mPresenter.wxPayShop(mRecharge);
+                }
             } else {
-                mPresenter.aliPay(mRecharge);
+                if (mIsVip) {
+                    mPresenter.aliPay(mRecharge);
+                } else {
+                    mPresenter.aliPayShop(mRecharge);
+                }
             }
         });
     }
@@ -170,10 +184,9 @@ public class RechargeActivity extends CommonToolBarActivity {
     }
 
     private void payOk() {
-//        Bundle bundle = new Bundle();
-//        bundle.putString("money", mTvPayMoney.getText().toString());
-//        ActivityUtils.init().start(this, ShopPayRechargeOkActivity.class, "支付成功", bundle);
-//        finish();
+        EventBus.getDefault().post(new AliPayOkEvent());
+        ToastUtils.init().showSuccessToast(this, "充值成功");
+        finish();
     }
 
     private static final int SDK_PAY_FLAG = 1;
@@ -182,6 +195,7 @@ public class RechargeActivity extends CommonToolBarActivity {
     protected void onDestroy() {
         super.onDestroy();
         mUnbinder.unbind();
+        EventBus.getDefault().unregister(this);
     }
 
 

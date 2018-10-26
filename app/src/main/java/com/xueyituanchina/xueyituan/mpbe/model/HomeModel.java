@@ -41,8 +41,16 @@ public class HomeModel extends BaseModel<XYTServer> {
         return mServer.wallWXRecharge(money, "2").compose(new IoMainSchedule<>());
     }
 
+    public Observable<WxPayInfoBean> wxShop(String money) {
+        return mServer.wallWxShop(money, "2").compose(new IoMainSchedule<>());
+    }
+
     public Observable<AliPayInfoBean> aliRecharge(String money) {
         return mServer.wallAliRecharge(money, "1").compose(new IoMainSchedule<>());
+    }
+
+    public Observable<AliPayInfoBean> aliShop(String money) {
+        return mServer.wallAliShop(money, "1").compose(new IoMainSchedule<>());
     }
 
     public Observable<HomeTopBean> homeTop() {

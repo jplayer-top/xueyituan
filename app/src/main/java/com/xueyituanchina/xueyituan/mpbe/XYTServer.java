@@ -134,11 +134,17 @@ public interface XYTServer {
     @POST("user/smcode?")
     Observable<LoginBean> getSmsBean(@QueryMap() Map<String, String> map);
 
-    @POST("my/walletrecharge")
+    @POST("my/viprecharge")
     Observable<WxPayInfoBean> wallWXRecharge(@Query("money") String money, @Query("pay_type") String pay_type);
 
-    @POST("my/walletrecharge")
+    @POST("my/viprecharge")
     Observable<AliPayInfoBean> wallAliRecharge(@Query("money") String money, @Query("pay_type") String pay_type);
+
+    @POST("my/walletrecharge")
+    Observable<WxPayInfoBean> wallWxShop(@Query("money") String money, @Query("pay_type") String pay_type);
+
+    @POST("my/walletrecharge")
+    Observable<AliPayInfoBean> wallAliShop(@Query("money") String money, @Query("pay_type") String pay_type);
 
     @POST("user/login?")
     Observable<LoginBean> getLoginBean(@Query("username") String phone, @Query("password") String password);
