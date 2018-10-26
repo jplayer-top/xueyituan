@@ -98,6 +98,10 @@
             android:name=".ui.activity.RechargeActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.OrderListActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".ui.activity.LocalSelMapActivity"

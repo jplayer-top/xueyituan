@@ -20,6 +20,7 @@ import com.xueyituanchina.xueyituan.mpbe.presenter.MePresenter;
 import com.xueyituanchina.xueyituan.ui.activity.CollectionActivity;
 import com.xueyituanchina.xueyituan.ui.activity.IssueActivity;
 import com.xueyituanchina.xueyituan.ui.activity.LoginActivity;
+import com.xueyituanchina.xueyituan.ui.activity.OrderListActivity;
 import com.xueyituanchina.xueyituan.ui.activity.RechargeActivity;
 import com.xueyituanchina.xueyituan.ui.activity.SettingActivity;
 import com.xueyituanchina.xueyituan.ui.activity.ShopCreateActivity;
@@ -158,7 +159,7 @@ public class MeFragment extends SuperBaseFragment {
             }
         });
         tvLoadMoreOrder.setOnClickListener(v -> {
-//            ActivityUtils.init().start(mActivity,OrderListActivity.class,"订单列表");
+            ActivityUtils.init().start(mActivity,OrderListActivity.class,"订单列表");
         });
     }
 
