@@ -1,5 +1,7 @@
 package com.xueyituanchina.xueyituan.ui.fragment;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -8,17 +10,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.xueyituanchina.xueyituan.R;
+import com.xueyituanchina.xueyituan.mpbe.bean.ShareBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.UpdateUrlBean;
 import com.xueyituanchina.xueyituan.mpbe.event.FileSelect;
+import com.xueyituanchina.xueyituan.mpbe.event.ShareAllEvent;
+import com.xueyituanchina.xueyituan.mpbe.event.ShareOneEvent;
 import com.xueyituanchina.xueyituan.mpbe.presenter.SharePresenter;
 import com.xueyituanchina.xueyituan.ui.MainActivity;
+import com.xueyituanchina.xueyituan.ui.dialog.ShareDialog;
 import com.xueyituanchina.xueyituan.ui.dialog.ShareShowDialog;
+import com.xueyituanchina.xueyituan.wxapi.WXShare;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import java.io.File;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -73,6 +82,7 @@ public class ShareFragment extends SuperBaseFragment {
     private SharePresenter mPresenter;
     public File mFile;
     private PickerUtils mPickerUtils;
+    private WXShare mWxShare;
 
     @Override
     public int initLayout() {
@@ -83,6 +93,7 @@ public class ShareFragment extends SuperBaseFragment {
     protected void initData(View rootView) {
         mUnbinder = ButterKnife.bind(this, rootView);
         initImmersionBar();
+        mWxShare = new WXShare(getActivity());
         mPresenter = new SharePresenter(this);
         EventBus.getDefault().register(this);
         mIvBigSrc.setOnClickListener(v -> {
@@ -117,8 +128,7 @@ public class ShareFragment extends SuperBaseFragment {
                 ToastUtils.init().showQuickToast(mActivity, "请输入手机号码");
                 return;
             }
-            mPresenter.updatePoster(mFile);
-
+            new ShareDialog(getActivity()).show();
         });
         tvAdPlan.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
@@ -161,6 +171,20 @@ public class ShareFragment extends SuperBaseFragment {
         Glide.with(mActivity).load(mFile).into(mIvBigSrc);
     }
 
+    public boolean isOne = true;
+
+    @Subscribe
+    public void shareEvent(ShareOneEvent event) {
+        isOne = true;
+        mPresenter.updatePoster(mFile);
+    }
+
+    @Subscribe
+    public void shareEvent(ShareAllEvent event) {
+        isOne = false;
+        mPresenter.updatePoster(mFile);
+    }
+
     @Override
     protected void initImmersionBar() {
         super.initImmersionBar();
@@ -174,8 +198,31 @@ public class ShareFragment extends SuperBaseFragment {
         EventBus.getDefault().unregister(this);
     }
 
-    public void pubSuccess() {
+    public String shareId = "";
 
+    public void pubSuccess(ShareBean bean) {
+        shareId = bean.id;
+        if (isOne) {
+            if (mWxShare.checkWX()) {
+                String url = String.format(Locale.CHINA, "https://www.xueyituanchina.cn/info/share.html?id=%s", shareId);
+                Bitmap thumb = BitmapFactory
+                        .decodeResource(getResources(), R.mipmap.ic_launcher);
+                mWxShare.shareUrl(url, mEdTitle.getText().toString(), thumb,
+                        mEdDesc.getText().toString(), SendMessageToWX.Req.WXSceneSession);
+            } else {
+                ToastUtils.init().showInfoToast(getContext(), "请先安装微信");
+            }
+        } else {
+            if (mWxShare.checkWX()) {
+                String url = String.format(Locale.CHINA, "https://www.xueyituanchina.cn/info/share.html?id=%s", shareId);
+                Bitmap thumb = BitmapFactory
+                        .decodeResource(getResources(), R.mipmap.ic_launcher);
+                mWxShare.shareUrl(url, mEdTitle.getText().toString(), thumb,
+                        mEdDesc.getText().toString(), SendMessageToWX.Req.WXSceneTimeline);
+            } else {
+                ToastUtils.init().showInfoToast(getContext(), "请先安装微信");
+            }
+        }
     }
 
     public void upSuccess(UpdateUrlBean bean) {

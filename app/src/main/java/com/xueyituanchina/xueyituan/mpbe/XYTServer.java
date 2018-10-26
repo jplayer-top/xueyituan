@@ -14,6 +14,7 @@ import com.xueyituanchina.xueyituan.mpbe.bean.NearbyActiveBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.OrderBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.PointDetailBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.PointRecodeBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.ShareBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.ShopItemBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.StoreBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.UpdateUrlBean;
@@ -151,7 +152,7 @@ public interface XYTServer {
     Observable<BaseBean> verifyPw(@Query("pw") String pw);
 
     @POST("activity/pub")
-    Observable<BaseBean> pubActivity(@Body RequestBody Body);
+    Observable<ShareBean> pubActivity(@Body RequestBody Body);
 
     @POST("api/my/mctentry")
     Observable<BaseBean> shopCreate(@Body RequestBody Body);

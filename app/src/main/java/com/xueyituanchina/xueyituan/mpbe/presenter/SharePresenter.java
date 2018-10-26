@@ -1,6 +1,7 @@
 package com.xueyituanchina.xueyituan.mpbe.presenter;
 
 import com.xueyituanchina.xueyituan.mpbe.XYTServer;
+import com.xueyituanchina.xueyituan.mpbe.bean.ShareBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.UpdateUrlBean;
 import com.xueyituanchina.xueyituan.mpbe.model.ActiveModel;
 import com.xueyituanchina.xueyituan.ui.fragment.ShareFragment;
@@ -12,10 +13,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.RequestBody;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
-import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
 import top.jplayer.baseprolibrary.net.tip.DialogLoading;
-import top.jplayer.baseprolibrary.net.tip.PostImplTip;
+import top.jplayer.baseprolibrary.net.tip.LoaddingImplTip;
 import top.jplayer.baseprolibrary.utils.BitmapUtil;
 
 /**
@@ -37,17 +37,17 @@ public class SharePresenter extends BasePresenter<ShareFragment> {
 
     public void pubActivity(RequestBody body) {
         mModel.pubActivity(body)
-                .subscribe(new NetCallBackObserver<BaseBean>(new PostImplTip(mIView.mActivity)) {
+                .subscribe(new NetCallBackObserver<ShareBean>(new LoaddingImplTip(mIView.mActivity)) {
                     @Override
-                    public void responseSuccess(BaseBean bean) {
+                    public void responseSuccess(ShareBean bean) {
                         if (mLoading != null && mLoading.isShowing()) {
                             mLoading.dismiss();
                         }
-                        mIView.pubSuccess();
+                        mIView.pubSuccess(bean);
                     }
 
                     @Override
-                    public void responseFail(BaseBean bean) {
+                    public void responseFail(ShareBean bean) {
 
                     }
                 });

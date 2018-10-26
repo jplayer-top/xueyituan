@@ -131,7 +131,7 @@ public class LoginActivity extends SuperBaseActivity implements TextWatcher, ICo
         params.topMargin = ScreenUtils.getStatusBar(this) + SizeUtils.dp2px(2);
         mMap = new HashMap<>();
         mLlWxBindIssue.setVisibility(View.INVISIBLE);
-        isCheckKeyboard = true;
+        isCheckKeyboard = false;
     }
 
     @Override
