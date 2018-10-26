@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.xueyituanchina.xueyituan.R;
+import com.xueyituanchina.xueyituan.XYTApplication;
 import com.xueyituanchina.xueyituan.mpbe.bean.MyInfoBean;
 import com.xueyituanchina.xueyituan.mpbe.event.AliPayOkEvent;
 import com.xueyituanchina.xueyituan.mpbe.event.LoginSuccessEvent;
@@ -92,6 +93,8 @@ public class MeFragment extends SuperBaseFragment {
     ImageView mIvIsVip;
     @BindView(R.id.ivAvatar)
     ImageView mIvAvatar;
+    @BindView(R.id.tvLoadMoreOrder)
+    TextView tvLoadMoreOrder;
     @BindView(R.id.llShowMsgUser)
     LinearLayout mLlShowMsgUser;
     private Unbinder mUnbinder;
@@ -139,16 +142,23 @@ public class MeFragment extends SuperBaseFragment {
             ActivityUtils.init().start(mActivity, IssueActivity.class, "我的评价");
         });
         mIvRecommend01.setOnClickListener(v -> {
-            clickToStore("", bean.rmdList.get(0).user_id + "");
+            if (XYTApplication.assert2Login(mActivity)) {
+                clickToStore("", bean.rmdList.get(0).user_id + "");
+            }
         });
         mIvRecommend02.setOnClickListener(v -> {
-            clickToStore("", bean.rmdList.get(1).user_id + "");
+            if (XYTApplication.assert2Login(mActivity)) {
+                clickToStore("", bean.rmdList.get(1).user_id + "");
+            }
         });
 
         mLlChat.setOnClickListener(v -> {
             if (assert2Login(mActivity)) {
                 RongIM.getInstance().startConversation(mActivity, Conversation.ConversationType.PRIVATE, "1", "客服");
             }
+        });
+        tvLoadMoreOrder.setOnClickListener(v -> {
+//            ActivityUtils.init().start(mActivity,OrderListActivity.class,"订单列表");
         });
     }
 

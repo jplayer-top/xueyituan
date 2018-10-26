@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <View
@@ -36,12 +37,11 @@
                     android:id="@+id/ivToolRightLeft"
                     android:layout_width="@dimen/dimen_30dp"
                     android:layout_height="@dimen/dimen_30dp"
-                    android:padding="@dimen/dimen_3dp"
                     android:layout_marginEnd="@dimen/dimen_15dp"
+                    android:padding="@dimen/dimen_3dp"
                     android:src="@drawable/icon_set"/>
 
                 <ImageView
-                    android:visibility="gone"
                     android:id="@+id/ivToolRight"
                     android:layout_width="@dimen/dimen_30dp"
                     android:layout_height="@dimen/dimen_30dp"
@@ -49,7 +49,8 @@
                     android:layout_marginStart="@dimen/dimen_5dp"
                     android:padding="@dimen/dimen_3dp"
                     android:src="@drawable/message"
-                    android:tint="@color/color999"/>
+                    android:tint="@color/color999"
+                    android:visibility="gone"/>
             </LinearLayout>
         </FrameLayout>
     </android.support.v7.widget.Toolbar>
@@ -296,6 +297,18 @@
                     android:textSize="@dimen/dimen_18sp"
                     android:textStyle="bold"
                     app:layout_constraintTop_toBottomOf="@+id/llWork"/>
+
+                <TextView
+                    android:id="@+id/tvLoadMoreOrder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dimen_15dp"
+                    android:drawableEnd="@drawable/right_arrow"
+                    android:text="查看更多"
+                    android:textColor="@color/color666"
+                    app:layout_constraintBottom_toBottomOf="@+id/llOrder"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/llOrder"/>
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerView"

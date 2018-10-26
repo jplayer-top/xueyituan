@@ -146,10 +146,10 @@ public interface XYTServer {
     @POST("my/viprecharge")
     Observable<AliPayInfoBean> wallAliRecharge(@Query("money") String money, @Query("pay_type") String pay_type);
 
-    @POST("my/walletrecharge")
+    @POST("my/signrecharge")
     Observable<WxPayInfoBean> wallWxShop(@Query("money") String money, @Query("pay_type") String pay_type);
 
-    @POST("my/walletrecharge")
+    @POST("my/signrecharge")
     Observable<AliPayInfoBean> wallAliShop(@Query("money") String money, @Query("pay_type") String pay_type);
 
     @POST("user/login?")

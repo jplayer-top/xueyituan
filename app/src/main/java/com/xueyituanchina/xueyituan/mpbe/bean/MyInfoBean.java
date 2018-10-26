@@ -1,5 +1,8 @@
 package com.xueyituanchina.xueyituan.mpbe.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
@@ -32,7 +35,7 @@ public class MyInfoBean extends BaseBean{
     public List<OrderListBean> orderList;
     public List<RmdListBean> rmdList;
 
-    public static class OrderListBean {
+    public static class OrderListBean implements Parcelable{
         /**
          * order_id : 2018082410292124581
          * order_title : aaa_1111
@@ -60,6 +63,54 @@ public class MyInfoBean extends BaseBean{
         public String sp_name;
         public String pricestr;
         public String totalpricestr;
+
+        protected OrderListBean(Parcel in) {
+            order_id = in.readString();
+            order_title = in.readString();
+            goods_id = in.readInt();
+            goods_thumb_img = in.readString();
+            total_price = in.readInt();
+            price = in.readInt();
+            amount = in.readInt();
+            rp_phone = in.readString();
+            create_time = in.readString();
+            sp_name = in.readString();
+            pricestr = in.readString();
+            totalpricestr = in.readString();
+        }
+
+        public static final Creator<OrderListBean> CREATOR = new Creator<OrderListBean>() {
+            @Override
+            public OrderListBean createFromParcel(Parcel in) {
+                return new OrderListBean(in);
+            }
+
+            @Override
+            public OrderListBean[] newArray(int size) {
+                return new OrderListBean[size];
+            }
+        };
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(order_id);
+            dest.writeString(order_title);
+            dest.writeInt(goods_id);
+            dest.writeString(goods_thumb_img);
+            dest.writeInt(total_price);
+            dest.writeInt(price);
+            dest.writeInt(amount);
+            dest.writeString(rp_phone);
+            dest.writeString(create_time);
+            dest.writeString(sp_name);
+            dest.writeString(pricestr);
+            dest.writeString(totalpricestr);
+        }
     }
 
     public static class RmdListBean {
