@@ -100,6 +100,9 @@ public class ShopItemActivity extends CommonToolBarActivity {
                 RongIM.getInstance().startConversation(mActivity, Conversation.ConversationType.PRIVATE, "1", "客服");
             }
         });
+        findViewById(R.id.tvXYTCall).setOnClickListener(v -> {
+            dialPhoneNumber("0635-8091618");
+        });
     }
 
     @Override

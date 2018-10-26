@@ -1,5 +1,7 @@
 package com.xueyituanchina.xueyituan.ui.activity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.v7.widget.LinearLayoutManager;
@@ -91,8 +93,17 @@ public class StoreActivity extends CommonToolBarActivity {
                 RongIM.getInstance().startConversation(mActivity, Conversation.ConversationType.PRIVATE, "1", "客服");
             }
         });
+        findViewById(R.id.tvXYTCall).setOnClickListener(v -> {
+            dialPhoneNumber("0635-8091618");
+        });
     }
-
+    public void dialPhoneNumber(String phoneNumber) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        intent.setData(Uri.parse("tel:" + phoneNumber));
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }
     private void initFooterView() {
         mFooter = View.inflate(this, R.layout.layout_footer_store, null);
         mTvSol = mFooter.findViewById(R.id.tvSol);
