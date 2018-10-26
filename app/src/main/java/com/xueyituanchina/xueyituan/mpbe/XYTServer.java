@@ -145,6 +145,10 @@ public interface XYTServer {
     @POST("uploadposter")
     Observable<UpdateUrlBean> updatePoster(@Part MultipartBody.Part file);
 
+    @Multipart
+    @POST("upload")
+    Observable<UpdateUrlBean> updateLic(@Part MultipartBody.Part file);
+
     @POST("user/updatepw?")
     Observable<BaseBean> updatePw(@Query("opw") String opw, @Query("npw") String npw);
 
@@ -154,6 +158,6 @@ public interface XYTServer {
     @POST("activity/pub")
     Observable<ShareBean> pubActivity(@Body RequestBody Body);
 
-    @POST("api/my/mctentry")
+    @POST("my/mctentry")
     Observable<BaseBean> shopCreate(@Body RequestBody Body);
 }

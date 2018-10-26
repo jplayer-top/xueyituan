@@ -15,6 +15,7 @@ import com.jaiky.imagespickers.ImageSelectorActivity;
 import com.xueyituanchina.xueyituan.R;
 import com.xueyituanchina.xueyituan.mpbe.bean.AreaAllBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.PostLocalBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.UpdateUrlBean;
 import com.xueyituanchina.xueyituan.mpbe.presenter.ShopCreatePresenter;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.Permission;
@@ -27,7 +28,6 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
@@ -141,18 +141,7 @@ public class ShopCreateActivity extends CommonToolBarActivity {
                 ToastUtils.init().showQuickToast(mActivity, "请阅读并同意商家协议");
                 return;
             }
-            MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM)
-                    .addFormDataPart("sp_name", mEdSpName.getText().toString())
-                    .addFormDataPart("sp_province", "")
-                    .addFormDataPart("sp_city", "")
-                    .addFormDataPart("sp_area", "")
-                    .addFormDataPart("sp_addr", mEdSpAddr.getText().toString())
-                    .addFormDataPart("sp_link_name", mEdSpUserName.getText().toString())
-                    .addFormDataPart("sp_link_phone", mEdSpPhone.getText().toString())
-                    .addFormDataPart("sp_img", fileImg.getName(), RequestBody.create(MediaType.parse("image/*"), fileImg))
-                    .addFormDataPart("sp_lic", fileLic.getName(), RequestBody.create(MediaType.parse("image/*"), fileLic));
-            RequestBody requestBody = builder.build();
-            mPresenter.createShop(requestBody);
+            mPresenter.updateLic(fileLic);
         });
     }
 
@@ -268,5 +257,25 @@ public class ShopCreateActivity extends CommonToolBarActivity {
 
     public void createSuccess() {
 
+    }
+
+    public void upLicSuccess(UpdateUrlBean bean) {
+        mPresenter.updateImg(fileImg, bean.url);
+    }
+
+    public void upSuccess(String url, String url1) {
+        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                .addFormDataPart("sp_name", mEdSpName.getText().toString())
+                .addFormDataPart("sp_province", "")
+                .addFormDataPart("sp_city", "")
+                .addFormDataPart("sp_area", "")
+                .addFormDataPart("sp_addr", mEdSpAddr.getText().toString())
+                .addFormDataPart("sp_link_name", mEdSpUserName.getText().toString())
+                .addFormDataPart("sp_link_phone", mEdSpPhone.getText().toString())
+                .addFormDataPart("sp_img", url)
+                .addFormDataPart("lnglat", url)
+                .addFormDataPart("sp_lic", url1);
+        RequestBody requestBody = builder.build();
+        mPresenter.createShop(requestBody);
     }
 }

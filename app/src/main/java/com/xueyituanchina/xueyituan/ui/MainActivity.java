@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.view.View;
 
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
 import com.jaiky.imagespickers.ImageSelectorActivity;
 import com.xueyituanchina.xueyituan.R;
 import com.xueyituanchina.xueyituan.XYTApplication;
@@ -23,18 +26,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import devlight.io.library.ntb.NavigationTabBar;
-import io.rong.imkit.plugin.location.AMapLocationInfo;
-import io.rong.imkit.plugin.location.IMyLocationChangedListener;
-import io.rong.imkit.plugin.location.LocationManager;
-import io.rong.imlib.model.Conversation;
 import top.jplayer.baseprolibrary.ui.activity.SuperBaseActivity;
 import top.jplayer.baseprolibrary.utils.CameraUtil;
+import top.jplayer.baseprolibrary.utils.LogUtil;
 import top.jplayer.baseprolibrary.utils.QuickNavigationBar;
 import top.jplayer.baseprolibrary.utils.SharePreUtil;
 
-public class MainActivity extends SuperBaseActivity implements IMyLocationChangedListener {
+public class MainActivity extends SuperBaseActivity {
     public MainActivity mMainActivity;
     public File mFile;
+    //声明AMapLocationClient类对象
+    public AMapLocationClient mLocationClient = null;
+    public AMapLocationClientOption mLocationOption = null;
+    //声明定位回调监听器
+    public AMapLocationListener mLocationListener = aMapLocation -> {
+        String lnglat = aMapLocation.getLongitude() + "," + aMapLocation.getLatitude();
+        XYTApplication.lnglat = lnglat;
+        SharePreUtil.saveData(this, "lnglat", lnglat);
+        LogUtil.str(aMapLocation);
+    };
 
     @Override
     protected int initRootLayout() {
@@ -50,13 +60,39 @@ public class MainActivity extends SuperBaseActivity implements IMyLocationChange
                 .idRes(R.id.flRoot)
                 .dataList(initBarList())
                 .create(navigationBar);
-        LocationManager.getInstance().bindConversation(mActivity, Conversation.ConversationType.PRIVATE, "10000");
-        LocationManager.getInstance().setMyLocationChangedListener(this);
         String lnglat = (String) SharePreUtil.getData(this, "lnglat", "");
         if ("".equals(lnglat)) {
             SharePreUtil.saveData(this, "lnglat", "115.9853071091,36.4570202778");
         }
+        AndPermission.with(this)
+                .permission(Permission.CAMERA, Permission.WRITE_EXTERNAL_STORAGE, Permission.ACCESS_COARSE_LOCATION)
+                .onGranted(permissions -> {
+                    if (null != mLocationClient) {
+                        mLocationClient.setLocationOption(mLocationOption);
+                        mLocationClient.stopLocation();
+                        mLocationClient.startLocation();
+                        mLocationClient.setLocationListener(mLocationListener);
+                    }
+                })
+                .onDenied(permissions -> AndPermission.hasAlwaysDeniedPermission(mActivity, permissions))
+                .start();
         isCheckKeyboard = false;
+        initLocation();
+
+    }
+
+    private void initLocation() {
+        mLocationOption = new AMapLocationClientOption();
+        mLocationClient = new AMapLocationClient(this);
+        mLocationOption.setLocationPurpose(AMapLocationClientOption.AMapLocationPurpose.SignIn);
+        mLocationOption.setInterval(60000);
+        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+        if (null != mLocationClient) {
+            mLocationClient.setLocationOption(mLocationOption);
+            mLocationClient.stopLocation();
+            mLocationClient.startLocation();
+            mLocationClient.setLocationListener(mLocationListener);
+        }
     }
 
     @Override
@@ -87,11 +123,20 @@ public class MainActivity extends SuperBaseActivity implements IMyLocationChange
         return list;
     }
 
+//    @Override
+//    public void onMyLocationChanged(AMapLocationInfo aMapLocationInfo) {
+//        String lnglat = aMapLocationInfo.getLng() + "," + aMapLocationInfo.getLat();
+//        XYTApplication.lnglat = lnglat;
+//        SharePreUtil.saveData(this, "lnglat", lnglat);
+//    }
+
     @Override
-    public void onMyLocationChanged(AMapLocationInfo aMapLocationInfo) {
-        String lnglat = aMapLocationInfo.getLng() + "," + aMapLocationInfo.getLat();
-        XYTApplication.lnglat = lnglat;
-        SharePreUtil.saveData(this, "lnglat", lnglat);
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mLocationClient != null) {
+            mLocationClient.stopLocation();
+            mLocationClient.onDestroy();
+        }
     }
 
     public void setOnClick() {

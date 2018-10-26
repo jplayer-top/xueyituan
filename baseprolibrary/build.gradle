@@ -72,4 +72,5 @@ dependencies {
     annotationProcessor rootProject.ext.annotationProcessorLibs
     implementation files('libs/jpinyin-1.0.jar')
     implementation files('libs/tbs.jar')
+    api files('libs/AMap_Location.jar')
 }

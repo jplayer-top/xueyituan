@@ -147,7 +147,7 @@
         <!--高德地图-->
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="1bccdbbc720a0902d77ef13dd7edb040"/>
+            android:value="f686fac8600ab159e2ca9558214504c6"/>
     </application>
 
 </manifest>

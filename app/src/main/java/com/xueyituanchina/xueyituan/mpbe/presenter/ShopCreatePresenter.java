@@ -6,9 +6,11 @@ import android.os.SystemClock;
 import com.google.gson.Gson;
 import com.xueyituanchina.xueyituan.mpbe.XYTServer;
 import com.xueyituanchina.xueyituan.mpbe.bean.AreaAllBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.UpdateUrlBean;
 import com.xueyituanchina.xueyituan.mpbe.model.HomeModel;
 import com.xueyituanchina.xueyituan.ui.activity.ShopCreateActivity;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -19,7 +21,8 @@ import okhttp3.RequestBody;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
-import top.jplayer.baseprolibrary.net.tip.PostImplTip;
+import top.jplayer.baseprolibrary.net.tip.DialogLoading;
+import top.jplayer.baseprolibrary.utils.BitmapUtil;
 import top.jplayer.baseprolibrary.utils.LogUtil;
 
 /**
@@ -32,18 +35,71 @@ import top.jplayer.baseprolibrary.utils.LogUtil;
 public class ShopCreatePresenter extends BasePresenter<ShopCreateActivity> {
 
     private final HomeModel mModel;
+    private DialogLoading mLoading;
 
     public ShopCreatePresenter(ShopCreateActivity iView) {
         super(iView);
         mModel = new HomeModel(XYTServer.class);
     }
 
+    public void updateLic(File file) {
+        mLoading = new DialogLoading(mIView.mActivity);
+        mLoading.show();
+        Observable.just(file)
+                .subscribeOn(Schedulers.io())
+                .map(BitmapUtil::compressImage)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(image -> {
+                    mModel.updateLic(image)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new NetCallBackObserver<UpdateUrlBean>() {
+                                @Override
+                                public void responseSuccess(UpdateUrlBean bean) {
+                                    mIView.upLicSuccess(bean);
+                                }
+
+                                @Override
+                                public void responseFail(UpdateUrlBean bean) {
+
+                                }
+                            });
+                });
+
+    }
+
+    public void updateImg(File file,String url) {
+        Observable.just(file)
+                .subscribeOn(Schedulers.io())
+                .map(BitmapUtil::compressImage)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(image -> {
+                    mModel.updateLic(image)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new NetCallBackObserver<UpdateUrlBean>() {
+                                @Override
+                                public void responseSuccess(UpdateUrlBean bean) {
+                                    mIView.upSuccess(bean.url,url);
+                                }
+
+                                @Override
+                                public void responseFail(UpdateUrlBean bean) {
+
+                                }
+                            });
+                });
+
+    }
 
     public void createShop(RequestBody body) {
         mModel.createShop(body)
-                .subscribe(new NetCallBackObserver<BaseBean>(new PostImplTip(mIView.mActivity)) {
+                .subscribe(new NetCallBackObserver<BaseBean>() {
                     @Override
                     public void responseSuccess(BaseBean bean) {
+                        if (mLoading != null && mLoading.isShowing()) {
+                            mLoading.dismiss();
+                        }
                         mIView.createSuccess();
                     }
 
@@ -70,7 +126,8 @@ public class ShopCreatePresenter extends BasePresenter<ShopCreateActivity> {
                     String txt = readAssetsTxt(mIView, s);
                     return new Gson().fromJson(txt, AreaAllBean.class);
                 }).observeOn(AndroidSchedulers.mainThread()).subscribe(areaAllBean -> mIView.setLocalBean
-                (areaAllBean),throwable -> {});
+                (areaAllBean), throwable -> {
+        });
 
     }
 

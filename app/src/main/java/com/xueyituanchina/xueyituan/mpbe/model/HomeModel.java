@@ -11,11 +11,15 @@ import com.xueyituanchina.xueyituan.mpbe.bean.HomeTopBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.OrderBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.ShopItemBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.StoreBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.UpdateUrlBean;
 import com.xueyituanchina.xueyituan.wxapi.WxPayInfoBean;
 
+import java.io.File;
 import java.util.Map;
 
 import io.reactivex.Observable;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import top.jplayer.baseprolibrary.mvp.model.BaseModel;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
@@ -95,6 +99,14 @@ public class HomeModel extends BaseModel<XYTServer> {
                 .compose(new IoMainSchedule<>());
     }
 
+    public Observable<UpdateUrlBean> updateLic(File file) {
+        RequestBody requestFile =
+                RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData("img", file.getName(), requestFile);
+        return mServer.updateLic(body)
+                .compose(new IoMainSchedule<>());
+    }
 
     public Observable<BaseBean> cancelCollectionType(String favType, String favId) {
         return mServer.cancelCollectionType(favType, favId).compose(new IoMainSchedule<>());
