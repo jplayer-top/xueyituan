@@ -32,12 +32,16 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.rong.imkit.RongIM;
+import io.rong.imlib.model.Conversation;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.ui.fragment.SuperBaseFragment;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.SharePreUtil;
 import top.jplayer.baseprolibrary.utils.StringUtils;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
+
+import static com.xueyituanchina.xueyituan.XYTApplication.assert2Login;
 
 /**
  * Created by Obl on 2018/8/27.
@@ -137,6 +141,12 @@ public class MeFragment extends SuperBaseFragment {
         });
         mLlWork.setOnClickListener(v -> {
             ActivityUtils.init().start(mActivity, ShopCreateActivity.class, "商家入驻");
+        });
+
+        mLlChat.setOnClickListener(v -> {
+            if (assert2Login(mActivity)) {
+                RongIM.getInstance().startConversation(mActivity, Conversation.ConversationType.PRIVATE, "1", "客服");
+            }
         });
     }
 

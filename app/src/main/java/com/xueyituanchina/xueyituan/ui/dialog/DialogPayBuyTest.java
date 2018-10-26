@@ -17,17 +17,25 @@ import top.jplayer.baseprolibrary.widgets.dialog.BaseCustomDialog;
  */
 
 public class DialogPayBuyTest extends BaseCustomDialog {
+
+    private EditText mEditPhone;
+
     public DialogPayBuyTest(Context context) {
         super(context);
     }
 
     @Override
     protected void initView(View view) {
-        EditText editPhone = view.findViewById(R.id.editPhone);
+        mEditPhone = view.findViewById(R.id.editPhone);
         String login_phone = (String) SharePreUtil.getData(getContext(), "login_phone", "");
         if (login_phone != null && !"".equals(login_phone)) {
-            editPhone.setText(login_phone);
+            mEditPhone.setText(login_phone);
         }
+    }
+
+    @Override
+    public void setSureListener(SureListener listener) {
+        listener.onSure(mEditPhone);
     }
 
     @Override

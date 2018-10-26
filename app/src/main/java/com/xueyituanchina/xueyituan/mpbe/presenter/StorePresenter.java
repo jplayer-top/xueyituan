@@ -40,7 +40,7 @@ public class StorePresenter extends BasePresenter<StoreActivity> {
                 lnglat = data;
             }
         }
-        mModel.storeInfo(id,lnglat).subscribe(new NetCallBackObserver<StoreBean>(new GetImplTip(mIView.mActivity)) {
+        mModel.storeInfo(id, lnglat).subscribe(new NetCallBackObserver<StoreBean>(new GetImplTip(mIView.mActivity)) {
             @Override
             public void responseSuccess(StoreBean bean) {
                 mIView.responseSuccess();
@@ -70,12 +70,28 @@ public class StorePresenter extends BasePresenter<StoreActivity> {
         });
     }
 
+
     public void cancelCollType(String favType, String favId) {
         mModel.cancelCollectionType(favType, favId).subscribe(new NetCallBackObserver<BaseBean>(new PostImplTip(mIView
                 .mActivity)) {
             @Override
             public void responseSuccess(BaseBean bean) {
                 mIView.collection(R.drawable.collection, "收藏");
+            }
+
+            @Override
+            public void responseFail(BaseBean bean) {
+
+            }
+
+        });
+    }
+
+    public void storeJoin(String id, String phone) {
+        mModel.storeJoin(id, phone).subscribe(new NetCallBackObserver<BaseBean>(new PostImplTip(mIView.mActivity)) {
+            @Override
+            public void responseSuccess(BaseBean bean) {
+
             }
 
             @Override

@@ -160,7 +160,7 @@ public class SettingActivity extends CommonToolBarActivity {
     }
 
     public void logout() {
-
+        SharePreUtil.saveData(mActivity, "mark_login", "0");
         SharePreUtil.saveData(this, "login_phone", "");
         SharePreUtil.saveData(this, "login_password", "");
         SharePreUtil.saveData(this, "login_uid", "");

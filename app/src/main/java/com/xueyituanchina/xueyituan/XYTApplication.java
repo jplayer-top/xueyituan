@@ -1,9 +1,16 @@
 package com.xueyituanchina.xueyituan;
 
+import android.app.Activity;
 import android.support.multidex.MultiDexApplication;
+
+import com.xueyituanchina.xueyituan.ui.activity.LoginActivity;
+
+import java.lang.ref.WeakReference;
 
 import io.rong.imkit.RongIM;
 import top.jplayer.baseprolibrary.BaseInitApplication;
+import top.jplayer.baseprolibrary.utils.ActivityUtils;
+import top.jplayer.baseprolibrary.utils.SharePreUtil;
 
 import static io.rong.imkit.utils.SystemUtils.getCurProcessName;
 
@@ -32,5 +39,15 @@ public class XYTApplication extends MultiDexApplication {
                 .zxing()
                 .skin()
                 .fixFileProvide();
+    }
+    public static boolean assert2Login(Activity activity) {
+        activity = new WeakReference<>(activity).get();
+        String isLogin = (String) SharePreUtil.getData(activity, "mark_login", "0");
+        if (!"1".equals(isLogin)) {
+            ActivityUtils.init().start(activity, LoginActivity.class);
+            return false;
+        } else {
+            return true;
+        }
     }
 }

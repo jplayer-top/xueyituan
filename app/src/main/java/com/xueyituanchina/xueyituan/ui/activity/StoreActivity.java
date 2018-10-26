@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -24,9 +25,14 @@ import java.util.List;
 import java.util.Locale;
 
 import cn.bingoogolapple.bgabanner.BGABanner;
+import io.rong.imkit.RongIM;
+import io.rong.imlib.model.Conversation;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
+import top.jplayer.baseprolibrary.utils.ToastUtils;
+
+import static com.xueyituanchina.xueyituan.XYTApplication.assert2Login;
 
 /**
  * Created by Obl on 2018/9/5.
@@ -80,6 +86,11 @@ public class StoreActivity extends CommonToolBarActivity {
             bundle.putString("id", listBean.goods_id + "");
             ActivityUtils.init().start(this, ShopItemActivity.class, listBean.goods_title, bundle);
         });
+        findViewById(R.id.tvChat).setOnClickListener(v -> {
+            if (assert2Login(mActivity)) {
+                RongIM.getInstance().startConversation(mActivity, Conversation.ConversationType.PRIVATE, "1", "客服");
+            }
+        });
     }
 
     private void initFooterView() {
@@ -124,9 +135,18 @@ public class StoreActivity extends CommonToolBarActivity {
         initBanner(strings);
         initHeader(bean.shop);
         initFooter(bean);
-        mBtnPay.setOnClickListener(v -> {
-            new DialogPayBuyTest(this).show();
-        });
+        mBtnPay.setOnClickListener(v -> new DialogPayBuyTest(this).show(R.id.btnJoin, view -> {
+            EditText editText = (EditText) view;
+            String phone = editText.getText().toString();
+            if (!"".equals(phone)) {
+                List<StoreBean.GoodsListBean> mAdapterData = mAdapter.getData();
+                if (mAdapterData != null && mAdapterData.size() > 0) {
+                    mPresenter.storeJoin(mAdapterData.get(0).goods_id + "", phone);
+                }
+            } else {
+                ToastUtils.init().showInfoToast(this, "请输入预约电话");
+            }
+        }));
     }
 
     @Override

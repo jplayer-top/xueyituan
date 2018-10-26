@@ -89,6 +89,9 @@ public interface XYTServer {
     @POST("points/create?")
     Observable<BaseBean> createBills(@QueryMap Map<String, String> map);
 
+    @GET("home/bespoke?")
+    Observable<BaseBean> storeJoin(@Query("goodsId") String goodsId, @Query("phone") String phone);
+
     @POST("home/pay")
     Observable<AliPayInfoBean> payAliOrder(@Query("orderId") String orderId, @Query("payType") String payType);
 

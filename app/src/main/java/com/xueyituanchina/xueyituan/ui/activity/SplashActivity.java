@@ -1,5 +1,6 @@
 package com.xueyituanchina.xueyituan.ui.activity;
 
+import android.util.Log;
 import android.view.View;
 
 import com.github.florent37.viewanimator.ViewAnimator;
@@ -12,10 +13,14 @@ import com.xueyituanchina.xueyituan.ui.MainActivity;
 
 import java.util.Date;
 
+import io.rong.imkit.RongIM;
+import io.rong.imlib.RongIMClient;
 import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
 import top.jplayer.baseprolibrary.ui.activity.SuperBaseActivity;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.SharePreUtil;
+
+import static io.rong.imkit.utils.SystemUtils.getCurProcessName;
 
 /**
  * Created by Obl on 2018/7/27.
@@ -53,12 +58,12 @@ public class SplashActivity extends SuperBaseActivity {
                         public void responseSuccess(LoginBean loginBean) {
                             String imtoken = loginBean.imtoken;
                             String uid = loginBean.uid + "";
-
+                            connectIm(loginBean);
                             SharePreUtil.saveData(mActivity, "login_phone", phone);
                             SharePreUtil.saveData(mActivity, "login_password", password);
                             SharePreUtil.saveData(mActivity, "login_uid", uid);
                             SharePreUtil.saveData(mActivity, "login_token", imtoken);
-
+                            SharePreUtil.saveData(mActivity, "mark_login", "1");
                             XYTApplication.uid = uid;
                             XYTApplication.token = imtoken;
                         }
@@ -82,6 +87,43 @@ public class SplashActivity extends SuperBaseActivity {
                 })
                 .start();
 
+    }
+
+    private void connectIm(LoginBean loginBean) {
+        String imtoken = loginBean.imtoken;
+        if (imtoken == null) {
+            String token = (String) SharePreUtil.getData(this, "token", "");
+            if (token != null && !token.equals("")) {
+                connect(token);
+            }
+        } else {
+            connect(imtoken);
+        }
+    }
+
+    private void connect(String token) {
+
+        if (this.getApplicationInfo().packageName.equals(getCurProcessName(this.getApplicationContext()))) {
+
+            RongIM.connect(token, new RongIMClient.ConnectCallback() {
+
+                @Override
+                public void onTokenIncorrect() {
+
+                }
+
+                @Override
+                public void onSuccess(String userid) {
+                    Log.d("LoginActivity", "--onSuccess" + userid);
+
+                }
+
+                @Override
+                public void onError(RongIMClient.ErrorCode errorCode) {
+
+                }
+            });
+        }
     }
 
     private void responseLogin() {

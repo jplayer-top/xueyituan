@@ -30,12 +30,15 @@ import java.util.List;
 import java.util.Locale;
 
 import cn.bingoogolapple.bgabanner.BGABanner;
+import io.rong.imkit.RongIM;
+import io.rong.imlib.model.Conversation;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.SharePreUtil;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
 
+import static com.xueyituanchina.xueyituan.XYTApplication.assert2Login;
 import static top.jplayer.baseprolibrary.BaseInitApplication.getContext;
 
 /**
@@ -92,7 +95,11 @@ public class ShopItemActivity extends CommonToolBarActivity {
         toolRightVisible(mIvToolRight, R.drawable.collection);
         mIvToolRightLeft.setImageResource(R.drawable.share);
         mWxShare = new WXShare(this);
-
+        findViewById(R.id.tvChat).setOnClickListener(v -> {
+            if (assert2Login(mActivity)) {
+                RongIM.getInstance().startConversation(mActivity, Conversation.ConversationType.PRIVATE, "1", "客服");
+            }
+        });
     }
 
     @Override

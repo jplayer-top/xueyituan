@@ -1,6 +1,7 @@
 package com.xueyituanchina.xueyituan.mpbe.presenter;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Button;
 
 import com.xueyituanchina.xueyituan.XYTApplication;
@@ -14,6 +15,8 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.util.Map;
 
+import io.rong.imkit.RongIM;
+import io.rong.imlib.RongIMClient;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
@@ -21,6 +24,8 @@ import top.jplayer.baseprolibrary.net.tip.GetImplTip;
 import top.jplayer.baseprolibrary.net.tip.LoaddingImplTip;
 import top.jplayer.baseprolibrary.net.tip.PostImplTip;
 import top.jplayer.baseprolibrary.utils.SharePreUtil;
+
+import static io.rong.imkit.utils.SystemUtils.getCurProcessName;
 
 /**
  * Created by Obl on 2018/8/13.
@@ -93,15 +98,14 @@ public class LoginPresenter extends BasePresenter<LoginActivity> {
             @Override
             public void responseSuccess(LoginBean loginBean) {
                 mIView.login(loginBean);
-
+                connectIm(loginBean);
                 String imtoken = loginBean.imtoken;
                 String uid = loginBean.uid + "";
-
                 SharePreUtil.saveData(mIView, "login_phone", phone);
                 SharePreUtil.saveData(mIView, "login_password", password);
                 SharePreUtil.saveData(mIView, "login_uid", uid);
                 SharePreUtil.saveData(mIView, "login_token", imtoken);
-
+                SharePreUtil.saveData(mIView, "mark_login", "1");
                 XYTApplication.uid = uid;
                 XYTApplication.token = imtoken;
 
@@ -129,5 +133,41 @@ public class LoginPresenter extends BasePresenter<LoginActivity> {
 
             }
         });
+    }
+
+    private void connectIm(LoginBean loginBean) {
+        String imtoken = loginBean.imtoken;
+        if (imtoken == null) {
+            String token = (String) SharePreUtil.getData(mIView, "token", "");
+            if (token != null && !token.equals("")) {
+                connect(token);
+            }
+        } else {
+            connect(imtoken);
+        }
+    }
+    private void connect(String token) {
+
+        if (mIView.getApplicationInfo().packageName.equals(getCurProcessName(mIView.getApplicationContext()))) {
+
+            RongIM.connect(token, new RongIMClient.ConnectCallback() {
+
+                @Override
+                public void onTokenIncorrect() {
+
+                }
+
+                @Override
+                public void onSuccess(String userid) {
+                    Log.d("LoginActivity", "--onSuccess" + userid);
+
+                }
+
+                @Override
+                public void onError(RongIMClient.ErrorCode errorCode) {
+
+                }
+            });
+        }
     }
 }

@@ -110,5 +110,7 @@ public class HomeModel extends BaseModel<XYTServer> {
 
     public Observable<BaseBean> cancelCollectionType(String favType, String favId) {
         return mServer.cancelCollectionType(favType, favId).compose(new IoMainSchedule<>());
+    }public Observable<BaseBean> storeJoin(String id, String phone) {
+        return mServer.storeJoin(id, phone).compose(new IoMainSchedule<>());
     }
 }
