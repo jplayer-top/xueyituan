@@ -13,6 +13,8 @@ import com.xueyituanchina.xueyituan.mpbe.bean.LoginBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.MyInfoBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.NearbyActiveBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.OrderBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.OrderInfoBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.OrderIssueListBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.PointDetailBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.PointRecodeBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.ShareBean;
@@ -121,6 +123,10 @@ public interface XYTServer {
     @GET("my/index?")
     Observable<MyInfoBean> myInfo();
 
+    //我的
+    @GET("home/info?")
+    Observable<OrderInfoBean> orderInfo(@Query("orderId") String orderId);
+
     //个人信息
     @POST("user/register?")
     Observable<BaseBean> register(@QueryMap() Map<String, String> map);
@@ -136,6 +142,15 @@ public interface XYTServer {
 
     @POST("user/verfiysmcode?")
     Observable<LoginBean> verfiyCode(@Query("phone") String phone, @Query("smCode") String password);
+
+    @POST("my/comment?")
+    Observable<BaseBean> orderIssue(@Query("orderId") String orderId,
+                                    @Query("descd") String descd,
+                                    @Query("anonymous") String anonymous,
+                                    @Query("score") String score);
+
+    @GET("my/comments")
+    Observable<OrderIssueListBean> orderIssueList();
 
     @POST("user/smcode?")
     Observable<LoginBean> getSmsBean(@QueryMap() Map<String, String> map);

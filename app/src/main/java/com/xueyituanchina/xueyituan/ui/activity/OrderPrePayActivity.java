@@ -7,6 +7,10 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.xueyituanchina.xueyituan.R;
+import com.xueyituanchina.xueyituan.mpbe.event.PayOKStateEvent;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.Locale;
 
@@ -25,7 +29,7 @@ import top.jplayer.baseprolibrary.utils.ToastUtils;
  * github : https://github.com/oblivion0001
  */
 
-public class OrderActivity extends CommonToolBarActivity {
+public class OrderPrePayActivity extends CommonToolBarActivity {
     @BindView(R.id.tvTitle)
     TextView mTvTitle;
     @BindView(R.id.tvPrice)
@@ -65,7 +69,7 @@ public class OrderActivity extends CommonToolBarActivity {
         mOrderId = mBundle.getString("orderId");
         mTotalPrice = mBundle.getString("totalPrice");
         mTitle = mBundle.getString("title");
-
+        EventBus.getDefault().register(this);
         mBtnPay.setText(String.format(Locale.CHINA, "去支付%s元", mTotalPrice));
         String phone = (String) SharePreUtil.getData(this, "login_phone", "暂无");
         mTvPayPhone.setText(phone);
@@ -100,6 +104,11 @@ public class OrderActivity extends CommonToolBarActivity {
         });
     }
 
+    @Subscribe
+    public void onEvent(PayOKStateEvent event) {
+        finish();
+    }
+
     private void numChange(int num, int value) {
         num += value;
         mTvEditNum.setText(String.valueOf(num));
@@ -109,5 +118,6 @@ public class OrderActivity extends CommonToolBarActivity {
     protected void onDestroy() {
         super.onDestroy();
         mUnbinder.unbind();
+        EventBus.getDefault().unregister(this);
     }
 }

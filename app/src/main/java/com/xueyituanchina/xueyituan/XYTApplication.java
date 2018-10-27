@@ -24,6 +24,7 @@ import static io.rong.imkit.utils.SystemUtils.getCurProcessName;
 public class XYTApplication extends MultiDexApplication {
     public static String uid = "";
     public static String token = "";
+    public static String login_name = "匿名";
     public final static String APP_ID = "wx2afd95f49d8dd6be";
     public static String lnglat = null;
 
@@ -40,6 +41,7 @@ public class XYTApplication extends MultiDexApplication {
                 .skin()
                 .fixFileProvide();
     }
+
     public static boolean assert2Login(Activity activity) {
         activity = new WeakReference<>(activity).get();
         String isLogin = (String) SharePreUtil.getData(activity, "mark_login", "0");

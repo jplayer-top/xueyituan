@@ -20,6 +20,7 @@ import com.xueyituanchina.xueyituan.mpbe.presenter.MePresenter;
 import com.xueyituanchina.xueyituan.ui.activity.CollectionActivity;
 import com.xueyituanchina.xueyituan.ui.activity.IssueActivity;
 import com.xueyituanchina.xueyituan.ui.activity.LoginActivity;
+import com.xueyituanchina.xueyituan.ui.activity.OrderInfoActivity;
 import com.xueyituanchina.xueyituan.ui.activity.OrderListActivity;
 import com.xueyituanchina.xueyituan.ui.activity.RechargeActivity;
 import com.xueyituanchina.xueyituan.ui.activity.SettingActivity;
@@ -31,6 +32,7 @@ import com.xueyituanchina.xueyituan.wxapi.WXPayEntryActivity;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -126,7 +128,7 @@ public class MeFragment extends SuperBaseFragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false));
         mAdapter = new MeOrderAdapter(null);
         mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setEmptyView(View.inflate(this.getContext(), R.layout.layout_empty_view, null));
+        mAdapter.setEmptyView(View.inflate(this.getContext(), R.layout.layout_empty_view_card, null));
         mIvToolRightLeft.setOnClickListener(v -> {
             toSettingActivity();
         });
@@ -159,7 +161,14 @@ public class MeFragment extends SuperBaseFragment {
             }
         });
         tvLoadMoreOrder.setOnClickListener(v -> {
-            ActivityUtils.init().start(mActivity,OrderListActivity.class,"订单列表");
+            Bundle bundle = new Bundle();
+            bundle.putParcelableArrayList("order_list", (ArrayList<MyInfoBean.OrderListBean>) bean.orderList);
+            ActivityUtils.init().start(mActivity, OrderListActivity.class, "订单列表", bundle);
+        });
+        mAdapter.setOnItemClickListener((adapter, view, position) -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("orderId", mAdapter.getData().get(position).order_id);
+            ActivityUtils.init().start(mActivity, OrderInfoActivity.class, "订单详情", bundle);
         });
     }
 
@@ -240,6 +249,7 @@ public class MeFragment extends SuperBaseFragment {
             }
         });
         mTvNick.setText(String.format(Locale.CHINA, "会员昵称：%s", StringUtils.init().fixNullStr(bean.nick)));
+        XYTApplication.login_name = StringUtils.init().fixNullStr(bean.nick);
         mTvPoints.setText(String.format(Locale.CHINA, "会员积分：%d", bean.points));
         mIvIsVip.setSelected(bean.vip != 0);
         mIvIsVip.setOnClickListener(v -> {
@@ -247,6 +257,8 @@ public class MeFragment extends SuperBaseFragment {
                 Bundle bundle = new Bundle();
                 bundle.putString("recharge", this.bean.recharge);
                 ActivityUtils.init().start(this.getActivity(), RechargeActivity.class, "会员充值", bundle);
+            } else {
+                ToastUtils.init().showInfoToast(getContext(), "当前已是Vip会员");
             }
         });
         initRecomend(bean.avator, mIvAvatar);
@@ -257,8 +269,13 @@ public class MeFragment extends SuperBaseFragment {
                 initRecomend(rmdList.get(1).img, mIvRecommend02);
             }
         }
-        if (bean.orderList != null && bean.orderList.size() > 0) {
-            mAdapter.setNewData(bean.orderList.subList(0, 2));
+        if (bean.orderList != null) {
+            if (bean.orderList.size() > 2) {
+                mAdapter.setNewData(bean.orderList.subList(0, 2));
+            } else {
+                mAdapter.setNewData(bean.orderList);
+
+            }
         }
     }
 

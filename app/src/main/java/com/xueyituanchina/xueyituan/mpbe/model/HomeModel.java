@@ -11,6 +11,8 @@ import com.xueyituanchina.xueyituan.mpbe.bean.HomeGoodsList;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeListBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeTopBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.OrderBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.OrderInfoBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.OrderIssueListBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.ShopItemBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.StoreBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.UpdateUrlBean;
@@ -49,6 +51,18 @@ public class HomeModel extends BaseModel<XYTServer> {
 
     public Observable<FavListBean> favList(String favType, String lnglat) {
         return mServer.favList(favType, lnglat).compose(new IoMainSchedule<>());
+    }
+
+    public Observable<OrderInfoBean> orderInfo(String orderId) {
+        return mServer.orderInfo(orderId).compose(new IoMainSchedule<>());
+    }
+
+    public Observable<OrderIssueListBean> orderIssueList() {
+        return mServer.orderIssueList().compose(new IoMainSchedule<>());
+    }
+
+    public Observable<BaseBean> orderIssue(String orderId, String desc, String score, String checked) {
+        return mServer.orderIssue(orderId, desc, score, checked).compose(new IoMainSchedule<>());
     }
 
     public Observable<AliPayInfoBean> aliRecharge(String money) {

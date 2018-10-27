@@ -239,6 +239,6 @@ public class ShopItemActivity extends CommonToolBarActivity {
         bundle.putString("totalPrice", orderBean.totalPrice);
         bundle.putString("title", mTvToolTitle.getText().toString());
         bundle.putString("price", mTvNewPrice.getText().toString());
-        ActivityUtils.init().start(this, OrderActivity.class, "提交订单", bundle);
+        ActivityUtils.init().start(this, OrderPrePayActivity.class, "订单信息", bundle);
     }
 }
