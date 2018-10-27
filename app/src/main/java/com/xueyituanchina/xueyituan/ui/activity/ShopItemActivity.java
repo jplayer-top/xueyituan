@@ -17,10 +17,12 @@ import com.google.gson.reflect.TypeToken;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.xueyituanchina.xueyituan.R;
 import com.xueyituanchina.xueyituan.mpbe.bean.HasIssueBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.LookWhatBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.OrderBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.ShopItemBean;
 import com.xueyituanchina.xueyituan.mpbe.event.ShareAllEvent;
 import com.xueyituanchina.xueyituan.mpbe.event.ShareOneEvent;
+import com.xueyituanchina.xueyituan.mpbe.model.LoookWhatDaoModel;
 import com.xueyituanchina.xueyituan.mpbe.presenter.ShopPresenter;
 import com.xueyituanchina.xueyituan.ui.adapter.ShopAdapter;
 import com.xueyituanchina.xueyituan.ui.dialog.ShareDialog;
@@ -73,6 +75,8 @@ public class ShopItemActivity extends CommonToolBarActivity {
     private TextView mTvGiftTip;
     private WXShare mWxShare;
     private boolean keep;
+    private LoookWhatDaoModel mDaoModel;
+    private LookWhatBean mWhatBean;
 
     @Override
     public int initAddLayout() {
@@ -107,6 +111,16 @@ public class ShopItemActivity extends CommonToolBarActivity {
         findViewById(R.id.tvXYTCall).setOnClickListener(v -> {
             dialPhoneNumber("0635-8091618");
         });
+        mDaoModel = new LoookWhatDaoModel(this);
+        List<LookWhatBean> lookWhatBeans = mDaoModel.queryAllbean();
+
+        for (LookWhatBean lookWhatBean : lookWhatBeans) {
+            if (mId.equals(lookWhatBean.goods_id + "")) {
+                mWhatBean = lookWhatBean;
+                break;
+            }
+            mWhatBean = null;
+        }
     }
 
     @Override
@@ -147,6 +161,18 @@ public class ShopItemActivity extends CommonToolBarActivity {
 
     public void shopInfo(ShopItemBean bean) {
         this.keep = bean.keep;
+        if (mWhatBean == null) {
+            ShopItemBean.GoodsBean goods = bean.goods;
+            mWhatBean = new LookWhatBean(null,
+                    goods.goods_id,
+                    goods.goods_title,
+                    goods.goods_thumb_img != null && goods.goods_thumb_img.size() > 0 ? goods.goods_thumb_img.get(0) : "",
+                    goods.goods_subtitle,
+                    goods.goodsBestPriceStr,
+                    goods.goodsOrgPriceStr,
+                    "");
+            mDaoModel.insertUser(mWhatBean);
+        }
         mAdapter.setNewData(bean.goods.goods_desc_img);
         initBanner(bean.goods.goods_thumb_img);
         initHeaderData(bean);
@@ -176,6 +202,7 @@ public class ShopItemActivity extends CommonToolBarActivity {
         mTvWasPay.setText(String.format(Locale.CHINA, "已售 %d", goodsBean.sales));
         mHeader.findViewById(R.id.ivToCall).setOnClickListener(v -> dialPhoneNumber(shopBean.phone));
         mBtnPay.setText(String.format(Locale.CHINA, "%s元试课", goodsBean.goodsBestPriceStr));
+
     }
 
     private void initBanner(List<String> bean) {
