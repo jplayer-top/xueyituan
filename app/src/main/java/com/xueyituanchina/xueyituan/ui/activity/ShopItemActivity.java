@@ -12,8 +12,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.xueyituanchina.xueyituan.R;
+import com.xueyituanchina.xueyituan.mpbe.bean.HasIssueBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.OrderBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.ShopItemBean;
 import com.xueyituanchina.xueyituan.mpbe.event.ShareAllEvent;
@@ -26,6 +29,7 @@ import com.xueyituanchina.xueyituan.wxapi.WXShare;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -160,6 +164,15 @@ public class ShopItemActivity extends CommonToolBarActivity {
         mTvStoreLocalLen.setText("暂无");
         mTvOldPrice.setText(String.format(Locale.CHINA, "门市价：%s", goodsBean.goodsOrgPriceStr));
         mTvChatTip.setText(String.format(Locale.CHINA, "用户评论（%d）", bean.commentsList.size()));
+        mTvChatTip.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            Gson gson = new Gson();
+            String toJson = gson.toJson(bean.commentsList);
+            ArrayList<HasIssueBean> json = gson.fromJson(toJson, new TypeToken<List<HasIssueBean>>() {
+            }.getType());
+            bundle.putParcelableArrayList("issue", json);
+            ActivityUtils.init().start(this, IssueHasListActivity.class, "课程评价", bundle);
+        });
         mTvWasPay.setText(String.format(Locale.CHINA, "已售 %d", goodsBean.sales));
         mHeader.findViewById(R.id.ivToCall).setOnClickListener(v -> dialPhoneNumber(shopBean.phone));
         mBtnPay.setText(String.format(Locale.CHINA, "%s元试课", goodsBean.goodsBestPriceStr));

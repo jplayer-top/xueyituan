@@ -29,7 +29,7 @@ public class ShopItemBean extends BaseBean {
     public String rate;
     public String hightRate;
     public boolean keep;
-    public List<?> commentsList;
+    public List<CommentsListBean> commentsList;
 
     public static class ShopBean {
         /**
@@ -77,5 +77,25 @@ public class ShopItemBean extends BaseBean {
         public double score;
         public List<String> goods_thumb_img;
         public List<String> goods_desc_img;
+    }
+
+    public static class CommentsListBean {
+        /**
+         * descd : 太好了
+         * score : 4.1
+         * goods_title : aaa_1111
+         * goods_thumb_img : https://xueyituan.oss-cn-beijing.aliyuncs.com/xyt/1.jpg
+         * sp_name : 松子儿舞蹈学院
+         * cat_name : 特长
+         * ct : 2018-09-05 15:19:08
+         */
+
+        public String descd;
+        public double score;
+        public String goods_title;
+        public String goods_thumb_img;
+        public String sp_name;
+        public String cat_name;
+        public String ct;
     }
 }

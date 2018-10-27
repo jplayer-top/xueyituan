@@ -15,7 +15,10 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.xueyituanchina.xueyituan.R;
+import com.xueyituanchina.xueyituan.mpbe.bean.HasIssueBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.StoreBean;
 import com.xueyituanchina.xueyituan.mpbe.presenter.StorePresenter;
 import com.xueyituanchina.xueyituan.ui.adapter.FooterAdapter;
@@ -97,6 +100,7 @@ public class StoreActivity extends CommonToolBarActivity {
             dialPhoneNumber("0635-8091618");
         });
     }
+
     public void dialPhoneNumber(String phoneNumber) {
         Intent intent = new Intent(Intent.ACTION_DIAL);
         intent.setData(Uri.parse("tel:" + phoneNumber));
@@ -104,10 +108,12 @@ public class StoreActivity extends CommonToolBarActivity {
             startActivity(intent);
         }
     }
+
     private void initFooterView() {
         mFooter = View.inflate(this, R.layout.layout_footer_store, null);
         mTvSol = mFooter.findViewById(R.id.tvSol);
         mTvChatTip = mFooter.findViewById(R.id.tvChatTip);
+
         mRecyclerViewTeach = mFooter.findViewById(R.id.recyclerViewTeach);
         mRvTeachNum = mFooter.findViewById(R.id.tvTeachNum);
         mTvBrandTip = mFooter.findViewById(R.id.tvBrandTip);
@@ -168,7 +174,16 @@ public class StoreActivity extends CommonToolBarActivity {
 
     private void initFooter(StoreBean bean) {
         mTvSol.setText(bean.slogan);
-        mTvChatTip.setText(String.format(Locale.CHINA, "用户评论（%d）", bean.shop.sales));
+        mTvChatTip.setText(String.format(Locale.CHINA, "用户评论（%d）", bean.commentsList.size()));
+        mTvChatTip.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            Gson gson = new Gson();
+            String toJson = gson.toJson(bean.commentsList);
+            ArrayList<HasIssueBean> json = gson.fromJson(toJson, new TypeToken<List<HasIssueBean>>() {
+            }.getType());
+            bundle.putParcelableArrayList("issue", json);
+            ActivityUtils.init().start(this, IssueHasListActivity.class, "店铺评价", bundle);
+        });
         mRecyclerViewTeach.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         mFooterAdapter = new FooterAdapter(bean.teacherList);
         mRecyclerViewTeach.setAdapter(mFooterAdapter);

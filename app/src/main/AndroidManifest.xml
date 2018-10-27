@@ -67,6 +67,10 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".ui.activity.IssueHasListActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".ui.activity.WeekListActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>

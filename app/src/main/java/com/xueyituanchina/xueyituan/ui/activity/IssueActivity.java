@@ -8,6 +8,8 @@ import com.xueyituanchina.xueyituan.mpbe.bean.OrderIssueListBean;
 import com.xueyituanchina.xueyituan.mpbe.model.HomeModel;
 import com.xueyituanchina.xueyituan.ui.adapter.IssueAdapter;
 
+import java.util.List;
+
 import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
 
@@ -40,7 +42,12 @@ public class IssueActivity extends CommonToolBarActivity {
             @Override
             public void responseSuccess(OrderIssueListBean orderIssueListBean) {
                 IssueActivity.this.responseSuccess();
-                mAdapter.setNewData(orderIssueListBean.list);
+                List<OrderIssueListBean.ListBean> list = orderIssueListBean.list;
+                if (list.size() < 1) {
+                    mMultipleStatusView.showEmpty();
+                } else {
+                    mAdapter.setNewData(list);
+                }
 
             }
 
