@@ -25,13 +25,14 @@
         android:textSize="@dimen/dimen_16sp"/>
 
     <LinearLayout
+        android:id="@+id/llToWall"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_2dp"
         android:background="@color/white"
         android:gravity="center_vertical"
-        android:paddingLeft="@dimen/dimen_15dp"
-        android:visibility="gone">
+        android:paddingLeft="@dimen/dimen_15dp">
 
 
         <EditText
@@ -52,7 +53,7 @@
             android:layout_height="match_parent"
             android:layout_marginEnd="@dimen/dimen_15dp"
             android:gravity="center"
-            android:text="（1孝心币=1元）"
+            android:text="（元）"
             android:textSize="@dimen/dimen_16sp"/>
     </LinearLayout>
 

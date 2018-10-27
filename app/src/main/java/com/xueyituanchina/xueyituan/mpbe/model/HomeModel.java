@@ -15,6 +15,7 @@ import com.xueyituanchina.xueyituan.mpbe.bean.OrderInfoBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.OrderIssueListBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.ShopItemBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.StoreBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.StoreInfoBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.UpdateUrlBean;
 import com.xueyituanchina.xueyituan.wxapi.WxPayInfoBean;
 
@@ -49,6 +50,14 @@ public class HomeModel extends BaseModel<XYTServer> {
         return mServer.wallWxShop(money, "2").compose(new IoMainSchedule<>());
     }
 
+    public Observable<WxPayInfoBean> wxWall(String money) {
+        return mServer.wallWxWall(money, "2").compose(new IoMainSchedule<>());
+    }
+
+    public Observable<AliPayInfoBean> wxAli(String money) {
+        return mServer.wallAliWall(money, "2").compose(new IoMainSchedule<>());
+    }
+
     public Observable<FavListBean> favList(String favType, String lnglat) {
         return mServer.favList(favType, lnglat).compose(new IoMainSchedule<>());
     }
@@ -61,12 +70,20 @@ public class HomeModel extends BaseModel<XYTServer> {
         return mServer.orderIssueList().compose(new IoMainSchedule<>());
     }
 
+    public Observable<StoreInfoBean> storeInfo() {
+        return mServer.storeInfo().compose(new IoMainSchedule<>());
+    }
+
     public Observable<BaseBean> orderIssue(String orderId, String desc, String score, String checked) {
         return mServer.orderIssue(orderId, desc, score, checked).compose(new IoMainSchedule<>());
     }
 
     public Observable<AliPayInfoBean> aliRecharge(String money) {
         return mServer.wallAliRecharge(money, "1").compose(new IoMainSchedule<>());
+    }
+
+    public Observable<AliPayInfoBean> aliWall(String money) {
+        return mServer.wallAliWall(money, "1").compose(new IoMainSchedule<>());
     }
 
     public Observable<AliPayInfoBean> aliShop(String money) {

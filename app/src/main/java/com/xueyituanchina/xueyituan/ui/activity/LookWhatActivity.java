@@ -1,5 +1,6 @@
 package com.xueyituanchina.xueyituan.ui.activity;
 
+import android.os.Bundle;
 import android.widget.FrameLayout;
 
 import com.xueyituanchina.xueyituan.R;
@@ -13,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.net.retrofit.IoMainSchedule;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
+import top.jplayer.baseprolibrary.utils.ActivityUtils;
 
 /**
  * Created by Obl on 2018/10/27.
@@ -38,6 +40,12 @@ public class LookWhatActivity extends CommonToolBarActivity {
         List<LookWhatBean> lookWhatBeans = mDaoModel.queryAllbean();
         mLookWhatAdapter = new LookWhatAdapter(lookWhatBeans);
         mRecyclerView.setAdapter(mLookWhatAdapter);
+        mLookWhatAdapter.setOnItemClickListener((adapter, view, position) -> {
+            LookWhatBean listBean = mLookWhatAdapter.getData().get(position);
+            Bundle bundle = new Bundle();
+            bundle.putString("id", listBean.goods_id + "");
+            ActivityUtils.init().start(mActivity, ShopItemActivity.class, listBean.goods_title, bundle);
+        });
     }
 
     @Override

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dimen_100dp"
+    android:layout_margin="@dimen/dimen_5dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_100dp">
+
+        <ImageView
+            android:id="@+id/ivOrderSrc"
+            android:layout_width="@dimen/dimen_60dp"
+            android:layout_height="@dimen/dimen_60dp"
+            android:layout_marginStart="@dimen/dimen_5dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvShopName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_10dp"
+            android:text="@string/app_name"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/ivOrderSrc"
+            app:layout_constraintTop_toTopOf="@+id/ivOrderSrc"/>
+
+        <TextView
+            android:id="@+id/tvOrderStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_10dp"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:text="支付状态："
+            android:textColor="@color/color999"
+            app:layout_constraintStart_toEndOf="@+id/ivOrderSrc"
+            app:layout_constraintTop_toBottomOf="@+id/tvShopName"/>
+
+        <TextView
+            android:id="@+id/tvOrderPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_10dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:drawableEnd="@drawable/shop_call"
+            android:drawablePadding="@dimen/dp_10"
+            android:text="家长电话"
+            android:textColor="@color/color666"
+            app:layout_constraintBottom_toBottomOf="@+id/ivOrderSrc"
+            app:layout_constraintStart_toEndOf="@+id/ivOrderSrc"
+            app:layout_constraintTop_toBottomOf="@+id/tvOrderStatus"/>
+
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dimen_15dp"
+            android:layout_marginTop="@dimen/dimen_25dp"
+            android:text="￥0.00"
+            android:textColor="@color/money_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+    </android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>

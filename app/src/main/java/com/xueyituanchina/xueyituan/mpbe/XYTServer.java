@@ -20,6 +20,7 @@ import com.xueyituanchina.xueyituan.mpbe.bean.PointRecodeBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.ShareBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.ShopItemBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.StoreBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.StoreInfoBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.UpdateUrlBean;
 import com.xueyituanchina.xueyituan.wxapi.WxPayInfoBean;
 
@@ -152,6 +153,9 @@ public interface XYTServer {
     @GET("my/comments")
     Observable<OrderIssueListBean> orderIssueList();
 
+    @GET("my/merchant")
+    Observable<StoreInfoBean> storeInfo();
+
     @POST("user/smcode?")
     Observable<LoginBean> getSmsBean(@QueryMap() Map<String, String> map);
 
@@ -163,6 +167,12 @@ public interface XYTServer {
 
     @POST("my/signrecharge")
     Observable<WxPayInfoBean> wallWxShop(@Query("money") String money, @Query("pay_type") String pay_type);
+
+    @POST("my/walletrecharge")
+    Observable<WxPayInfoBean> wallWxWall(@Query("money") String money, @Query("pay_type") String pay_type);
+
+    @POST("my/walletrecharge")
+    Observable<AliPayInfoBean> wallAliWall(@Query("money") String money, @Query("pay_type") String pay_type);
 
     @POST("my/signrecharge")
     Observable<AliPayInfoBean> wallAliShop(@Query("money") String money, @Query("pay_type") String pay_type);

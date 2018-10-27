@@ -3,8 +3,11 @@ package com.xueyituanchina.xueyituan.ui.activity;
 import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alipay.sdk.app.PayTask;
@@ -47,10 +50,15 @@ public class RechargeActivity extends CommonToolBarActivity {
     TextView mTv2Pay;
     @BindView(R.id.tvRecharge)
     TextView mTvRecharge;
+    @BindView(R.id.llToWall)
+    LinearLayout llToWall;
+    @BindView(R.id.tvPayMoney)
+    EditText tvPayMoney;
     private Unbinder mUnbinder;
     private String mRecharge;
     private RechargePresenter mPresenter;
     private boolean mIsVip;
+    private boolean mIsWall;
 
     @Override
     public int initAddLayout() {
@@ -65,6 +73,11 @@ public class RechargeActivity extends CommonToolBarActivity {
         EventBus.getDefault().register(this);
         String string = mTvToolTitle.getText().toString();
         mIsVip = string.contains("会员");
+        mIsWall = string.contains("商铺充值");
+        if (mIsWall) {
+            llToWall.setVisibility(View.VISIBLE);
+            mTvRecharge.setVisibility(View.GONE);
+        }
         mTvRecharge.setText(mRecharge);
         mCheckbox1.setOnCheckedChangeListener((buttonView, isChecked) -> {
             mCheckbox1.setChecked(isChecked);
@@ -77,17 +90,34 @@ public class RechargeActivity extends CommonToolBarActivity {
         mPresenter = new RechargePresenter(this);
         mTv2Pay.setOnClickListener(v -> {
             boolean checked = mCheckbox1.isChecked();
+            String money = tvPayMoney.getText().toString();
             if (checked) {
                 if (mIsVip) {
                     mPresenter.wxPay(mRecharge);
                 } else {
-                    mPresenter.wxPayShop(mRecharge);
+                    if (mIsWall) {
+                        if ("".equals(money)) {
+                            ToastUtils.init().showInfoToast(mActivity, "请输入充值金额");
+                            return;
+                        }
+                        mPresenter.wxPayWall(money);
+                    } else {
+                        mPresenter.wxPayShop(mRecharge);
+                    }
                 }
             } else {
                 if (mIsVip) {
                     mPresenter.aliPay(mRecharge);
                 } else {
-                    mPresenter.aliPayShop(mRecharge);
+                    if (mIsWall) {
+                        if ("".equals(money)) {
+                            ToastUtils.init().showInfoToast(mActivity, "请输入充值金额");
+                            return;
+                        }
+                        mPresenter.aliWall(money);
+                    } else {
+                        mPresenter.aliPayShop(mRecharge);
+                    }
                 }
             }
         });

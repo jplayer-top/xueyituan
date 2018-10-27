@@ -27,6 +27,7 @@ import com.xueyituanchina.xueyituan.ui.activity.RechargeActivity;
 import com.xueyituanchina.xueyituan.ui.activity.SettingActivity;
 import com.xueyituanchina.xueyituan.ui.activity.ShopCreateActivity;
 import com.xueyituanchina.xueyituan.ui.activity.StoreActivity;
+import com.xueyituanchina.xueyituan.ui.activity.StoreInfoActivity;
 import com.xueyituanchina.xueyituan.ui.adapter.MeOrderAdapter;
 import com.xueyituanchina.xueyituan.wxapi.WXPayEntryActivity;
 
@@ -46,7 +47,6 @@ import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.ui.dialog.DialogLogout;
 import top.jplayer.baseprolibrary.ui.fragment.SuperBaseFragment;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
-import top.jplayer.baseprolibrary.utils.LogUtil;
 import top.jplayer.baseprolibrary.utils.SharePreUtil;
 import top.jplayer.baseprolibrary.utils.StringUtils;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
@@ -144,6 +144,9 @@ public class MeFragment extends SuperBaseFragment {
         });
         mLlLook.setOnClickListener(v -> {
             ActivityUtils.init().start(mActivity, LookWhatActivity.class, "我的足迹");
+        });
+        mLlShop.setOnClickListener(v -> {
+            ActivityUtils.init().start(mActivity, StoreInfoActivity.class, "");
         });
         mLlIssue.setOnClickListener(v -> {
             ActivityUtils.init().start(mActivity, IssueActivity.class, "我的评价");
@@ -249,7 +252,7 @@ public class MeFragment extends SuperBaseFragment {
                             dialogLogout.dismiss();
                         });
             } else {
-                LogUtil.str("sdasda");
+                ActivityUtils.init().start(mActivity, StoreInfoActivity.class, "");
             }
         });
         mTvNick.setText(String.format(Locale.CHINA, "会员昵称：%s", StringUtils.init().fixNullStr(bean.nick)));
