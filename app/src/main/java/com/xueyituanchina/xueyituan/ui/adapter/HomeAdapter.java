@@ -47,16 +47,19 @@ public class HomeAdapter extends BaseQuickAdapter<HomeGoodsList.ListBean, BaseVi
         Glide.with(mContext).load(item.sp_img).apply(GlideUtils.init().options(R.mipmap.ic_launcher)).into(ivSrc);
 
         recyclerItem.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
-        AdapterItemClass adapter = new AdapterItemClass(item.goodslist.size() > 2 ? item.goodslist.subList(0, 2) : item.goodslist);
-        int other = item.other;
-        isShowFooter(adapter, other, item.goodslist);
-        recyclerItem.setAdapter(adapter);
-        adapter.setOnItemClickListener((adapter1, view, position) -> {
-            HomeGoodsList.ListBean.GoodslistBean goodslistBean = adapter.getData().get(position);
-            Bundle bundle = new Bundle();
-            bundle.putString("id", goodslistBean.goods_id + "");
-            ActivityUtils.init().start((Activity) mContext, ShopItemActivity.class, goodslistBean.goods_title, bundle);
-        });
+        if (item.goodslist != null) {
+            AdapterItemClass adapter = new AdapterItemClass(item.goodslist.size() > 2 ? item.goodslist.subList(0, 2) : item.goodslist);
+            int other = item.other;
+            isShowFooter(adapter, other, item.goodslist);
+            recyclerItem.setAdapter(adapter);
+            adapter.setOnItemClickListener((adapter1, view, position) -> {
+                HomeGoodsList.ListBean.GoodslistBean goodslistBean = adapter.getData().get(position);
+                Bundle bundle = new Bundle();
+                bundle.putString("id", goodslistBean.goods_id + "");
+                ActivityUtils.init().start((Activity) mContext, ShopItemActivity.class, goodslistBean.goods_title, bundle);
+            });
+
+        }
     }
 
     private void isShowFooter(AdapterItemClass adapter, int other, List<HomeGoodsList.ListBean.GoodslistBean> goodslist) {

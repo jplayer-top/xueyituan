@@ -81,7 +81,7 @@ public class HomeFragment extends SuperBaseFragment {
     private View mLlShow0;
     private View mLlShop1;
     private RecyclerView mRecyclerViewLocal;
-    private boolean mIsGone;
+    private boolean mIsGone = true;
     private LocalSetAdapter mLocalSetAdapter;
     private TextView mTvLocal;
     // popup window
@@ -267,7 +267,6 @@ public class HomeFragment extends SuperBaseFragment {
     }
 
     private void dissmisDilaog() {
-        mIsGone = mRecyclerViewLocal.getVisibility() == View.GONE;
         if (mIsGone) {
             fadeInLocal(mRecyclerViewLocal);
         } else {
@@ -276,13 +275,12 @@ public class HomeFragment extends SuperBaseFragment {
     }
 
     private void fadeInLocal(View view) {
-        ViewAnimator.animate()
+        ViewAnimator.animate(view)
                 .fadeIn()
-                .duration(300)
+                .duration(0)
                 .onStart(() -> {
-                    if (view.getVisibility() == View.GONE) {
-                        view.setVisibility(View.VISIBLE);
-                    }
+                    view.setVisibility(View.VISIBLE);
+                    mIsGone = false;
                 })
                 .start();
     }
@@ -290,11 +288,10 @@ public class HomeFragment extends SuperBaseFragment {
     private void fadeOutLocal(View view) {
         ViewAnimator.animate(view)
                 .fadeOut()
-                .duration(300)
+                .duration(0)
                 .onStop(() -> {
-                    if (view.getVisibility() == View.VISIBLE) {
-                        view.setVisibility(View.GONE);
-                    }
+                    mIsGone = true;
+                    view.setVisibility(View.GONE);
                 })
                 .start();
     }
