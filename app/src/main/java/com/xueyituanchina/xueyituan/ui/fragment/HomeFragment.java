@@ -433,7 +433,8 @@ public class HomeFragment extends SuperBaseFragment {
         Glide.with(mActivity).load(listBean.sp_img).apply(GlideUtils.init().options(R.mipmap.ic_launcher)).into(ivSrc);
         view.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
-            bundle.putString("url", "https://www.xueyituanchina.cn/info/article_active.html?id=" + listBean.id + "&uid=" + XYTApplication.uid);
+            bundle.putString("url", "https://www.xueyituanchina.cn/info/topinfo.html?id=" + listBean.id + "&uid=" +
+                    XYTApplication.uid);
             ActivityUtils.init().start(getActivity(), WebViewActivity.class, "", bundle);
         });
         return view;
