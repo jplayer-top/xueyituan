@@ -11,6 +11,7 @@
         android:layout_height="@dimen/dimen_100dp">
 
         <ImageView
+            android:scaleType="centerCrop"
             android:id="@+id/ivOrderSrc"
             android:layout_width="@dimen/dimen_60dp"
             android:layout_height="@dimen/dimen_60dp"

@@ -72,9 +72,9 @@
     </android.support.constraint.ConstraintLayout>
 
     <FrameLayout
-
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -95,9 +95,9 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerViewLocal"
             android:layout_width="@dimen/dimen_80dp"
-            android:visibility="gone"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dimen_10dp"/>
+            android:layout_marginStart="@dimen/dimen_10dp"
+            android:visibility="gone"/>
 
     </FrameLayout>
 </android.support.constraint.ConstraintLayout>

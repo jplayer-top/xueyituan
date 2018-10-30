@@ -38,6 +38,7 @@
         android:layout_width="@dimen/dimen_50dp"
         android:layout_height="@dimen/dimen_50dp"
         android:layout_marginEnd="@dimen/dimen_5dp"
+        android:scaleType="centerCrop"
         android:src="@mipmap/ic_launcher"/>
 
 </LinearLayout>

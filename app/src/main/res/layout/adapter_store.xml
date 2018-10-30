@@ -10,6 +10,7 @@
         android:layout_width="@dimen/dimen_70dp"
         android:layout_height="@dimen/dimen_70dp"
         android:layout_marginStart="@dimen/dimen_15dp"
+        android:scaleType="centerCrop"
         android:src="@mipmap/ic_launcher"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,12 +28,16 @@
 
     <TextView
         android:id="@+id/tvSubTitle"
-        android:layout_width="wrap_content"
+
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_10dp"
         android:layout_marginTop="@dimen/dimen_3dp"
-        android:text="@string/app_name"
+        android:gravity="center_vertical"
+        android:lines="1"
+        android:textColor="@color/color666"
         android:textSize="@dimen/dimen_12sp"
+        app:layout_constraintEnd_toStartOf="@+id/tvBuyNum"
         app:layout_constraintStart_toEndOf="@+id/ivShopSrc"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle"/>
 
@@ -68,6 +73,7 @@
         android:drawableEnd="@drawable/right_arrow"
         android:text="已售出(0)"
         android:textColor="@color/color999"
+        android:textSize="@dimen/dimen_11sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>

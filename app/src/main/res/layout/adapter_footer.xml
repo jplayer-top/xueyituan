@@ -15,13 +15,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="查看其它团购"
-            android:textColor="@color/aquamarine"/>
+            android:textColor="@color/colorPrimary"/>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/home_local_sel"
-            android:tint="@color/aquamarine"/>
+            android:tint="@color/colorPrimary"/>
     </LinearLayout>
 
 </FrameLayout>
