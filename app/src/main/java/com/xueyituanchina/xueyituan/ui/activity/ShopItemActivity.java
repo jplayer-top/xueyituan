@@ -107,7 +107,7 @@ public class ShopItemActivity extends CommonToolBarActivity {
         findViewById(R.id.tvChat).setOnClickListener(v -> {
             if (assert2Login(mActivity)) {
                 RongIM.getInstance().startConversation(mActivity, Conversation.ConversationType.PRIVATE,
-                        XYTApplication.cuid, "客服");
+                        "u_" + XYTApplication.cuid, "客服");
             }
         });
         findViewById(R.id.tvXYTCall).setOnClickListener(v -> {

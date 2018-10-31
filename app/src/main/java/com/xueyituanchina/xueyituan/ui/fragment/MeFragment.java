@@ -171,7 +171,7 @@ public class MeFragment extends SuperBaseFragment {
         mLlChat.setOnClickListener(v -> {
             if (assert2Login(mActivity)) {
                 RongIM.getInstance().startConversation(mActivity, Conversation.ConversationType.PRIVATE,
-                        XYTApplication.cuid, "客服");
+                        "u_" + XYTApplication.cuid, "客服");
             }
         });
         tvLoadMoreOrder.setOnClickListener(v -> {
