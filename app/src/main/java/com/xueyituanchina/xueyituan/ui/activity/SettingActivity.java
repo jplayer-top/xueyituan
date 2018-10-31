@@ -2,15 +2,19 @@ package com.xueyituanchina.xueyituan.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.ArrayMap;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.jaiky.imagespickers.ImageSelectorActivity;
 import com.xueyituanchina.xueyituan.R;
+import com.xueyituanchina.xueyituan.XYTApplication;
 import com.xueyituanchina.xueyituan.mpbe.event.LogoutEvent;
 import com.xueyituanchina.xueyituan.mpbe.event.MessageEvent;
 import com.xueyituanchina.xueyituan.mpbe.event.MessageOkEvent;
@@ -23,10 +27,13 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.rong.imkit.RongIM;
+import io.rong.imlib.model.Conversation;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
 import top.jplayer.baseprolibrary.ui.dialog.DialogEdit;
@@ -56,6 +63,8 @@ public class SettingActivity extends CommonToolBarActivity {
     TextView mTvPoint;
     @BindView(R.id.btnLogout)
     Button mBtnLogout;
+    @BindView(R.id.llChatList)
+    LinearLayout mLlChatList;
     private Unbinder mUnbinder;
     private File mFile;
     private SettingPresenter mPresenter;
@@ -108,6 +117,14 @@ public class SettingActivity extends CommonToolBarActivity {
                         mPresenter.verifyPw(opw);
                     });
         });
+        if (XYTApplication.cuid.equals(XYTApplication.uid)) {
+            mLlChatList.setVisibility(View.VISIBLE);
+        }
+        mLlChatList.setOnClickListener(v -> {
+            Map<String, Boolean> map = new ArrayMap<>();
+            map.put(Conversation.ConversationType.PRIVATE.getName(), false);
+            RongIM.getInstance().startConversationList(this, map);
+        });
     }
 
     @Override
@@ -127,7 +144,7 @@ public class SettingActivity extends CommonToolBarActivity {
         if ("昵称".equals(event.key)) {
             mPresenter.updateNick(event.preText);
         } else {
-            mPresenter.updatePw( event.preText, event.preText);
+            mPresenter.updatePw(event.preText, event.preText);
         }
     }
 

@@ -28,6 +28,9 @@ public class HasIssueBean implements Parcelable {
     public String sp_name;
     public String cat_name;
     public String ct;
+    public String nick;
+    public boolean anonymous;
+
 
     protected HasIssueBean(Parcel in) {
         descd = in.readString();
@@ -37,6 +40,8 @@ public class HasIssueBean implements Parcelable {
         sp_name = in.readString();
         cat_name = in.readString();
         ct = in.readString();
+        nick = in.readString();
+        anonymous = in.readByte() != 0;
     }
 
     public static final Creator<HasIssueBean> CREATOR = new Creator<HasIssueBean>() {
@@ -65,5 +70,7 @@ public class HasIssueBean implements Parcelable {
         dest.writeString(sp_name);
         dest.writeString(cat_name);
         dest.writeString(ct);
+        dest.writeString(nick);
+        dest.writeByte((byte) (anonymous ? 1 : 0));
     }
 }

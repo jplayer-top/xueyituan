@@ -156,7 +156,7 @@ public class SearchActivity extends SuperBaseActivity {
                 mTvLocal.setText(data);
                 for (AreaBean.AreasBean.SubsBean bean : mAreaBean.areas.subs) {
                     if (data.equals(bean.area_name)) {
-                        mMap.put("areaCode", bean.area_code);
+                        mMap.put("areaCode", bean.area_name);
                         break;
                     }
                 }
@@ -218,7 +218,6 @@ public class SearchActivity extends SuperBaseActivity {
             fadeOutLocal();
         }
     }
-
 
     public void homeGoodsList(HomeGoodsList bean) {
         mAdapter.setNewData(bean.list);

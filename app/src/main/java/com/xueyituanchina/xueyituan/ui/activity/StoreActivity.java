@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.xueyituanchina.xueyituan.R;
+import com.xueyituanchina.xueyituan.XYTApplication;
 import com.xueyituanchina.xueyituan.mpbe.bean.HasIssueBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.StoreBean;
 import com.xueyituanchina.xueyituan.mpbe.presenter.StorePresenter;
@@ -93,7 +94,8 @@ public class StoreActivity extends CommonToolBarActivity {
         });
         findViewById(R.id.tvChat).setOnClickListener(v -> {
             if (assert2Login(mActivity)) {
-                RongIM.getInstance().startConversation(mActivity, Conversation.ConversationType.PRIVATE, "1", "客服");
+                RongIM.getInstance().startConversation(mActivity, Conversation.ConversationType.PRIVATE,
+                        XYTApplication.cuid, "客服");
             }
         });
         findViewById(R.id.tvXYTCall).setOnClickListener(v -> {

@@ -97,5 +97,7 @@ public class ShopItemBean extends BaseBean {
         public String sp_name;
         public String cat_name;
         public String ct;
+        public String nick;
+        public boolean anonymous;
     }
 }

@@ -62,8 +62,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:srlEnablePreviewInEditMode="true"
-        app:srlEnablePureScrollMode="true"
         app:srlPrimaryColor="@color/white">
+
+        <com.scwang.smartrefresh.layout.header.ClassicsHeader
+            android:id="@+id/classics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -361,5 +365,9 @@
             </android.support.constraint.ConstraintLayout>
 
         </android.support.v4.widget.NestedScrollView>
+
+        <com.scwang.smartrefresh.layout.footer.FalsifyFooter
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 </LinearLayout>

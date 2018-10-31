@@ -16,6 +16,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.xueyituanchina.xueyituan.R;
+import com.xueyituanchina.xueyituan.XYTApplication;
 import com.xueyituanchina.xueyituan.mpbe.bean.HasIssueBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.LookWhatBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.OrderBean;
@@ -105,7 +106,8 @@ public class ShopItemActivity extends CommonToolBarActivity {
         mWxShare = new WXShare(this);
         findViewById(R.id.tvChat).setOnClickListener(v -> {
             if (assert2Login(mActivity)) {
-                RongIM.getInstance().startConversation(mActivity, Conversation.ConversationType.PRIVATE, "1", "客服");
+                RongIM.getInstance().startConversation(mActivity, Conversation.ConversationType.PRIVATE,
+                        XYTApplication.cuid, "客服");
             }
         });
         findViewById(R.id.tvXYTCall).setOnClickListener(v -> {

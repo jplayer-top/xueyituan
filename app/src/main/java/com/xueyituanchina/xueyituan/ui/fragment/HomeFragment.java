@@ -16,6 +16,7 @@ import com.github.florent37.viewanimator.ViewAnimator;
 import com.kingja.magicmirror.MagicMirrorView;
 import com.xueyituanchina.xueyituan.R;
 import com.xueyituanchina.xueyituan.XYTApplication;
+import com.xueyituanchina.xueyituan.mpbe.bean.AreaBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeGoodsList;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeListBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeTopBean;
@@ -39,6 +40,7 @@ import top.jplayer.baseprolibrary.ui.fragment.SuperBaseFragment;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.LogUtil;
 import top.jplayer.baseprolibrary.utils.ScreenUtils;
+import top.jplayer.baseprolibrary.utils.SharePreUtil;
 import top.jplayer.baseprolibrary.widgets.popup.CommonPopupWindow;
 
 /**
@@ -89,6 +91,9 @@ public class HomeFragment extends SuperBaseFragment {
     private CommonPopupWindow.LayoutGravity layoutGravity;
     private View mView;
     private RecyclerView mRecyclerViewSelect;
+    private String mData;
+    private String selLocal;
+    private View mFooter;
 
     @Override
     public int initLayout() {
@@ -99,14 +104,23 @@ public class HomeFragment extends SuperBaseFragment {
     protected void initData(View rootView) {
         initImmersionBar();
         initRefreshStatusView(rootView);
+        mFooter = View.inflate(mActivity, R.layout.layout_empty_view_card, null);
+        TextView emptyText = mFooter.findViewById(R.id.empty_retry_view);
+        emptyText.setText("暂无相关商家及课程");
         mAdapter = new HomeAdapter(new ArrayList<>());
         initHeader();
         mRecyclerView.setAdapter(mAdapter);
         mPresenter = new HomePresenter(this);
         mPresenter.homeTop();
         mPresenter.homeList();
+        mPresenter.areaList();
         mMap = new HashMap<>();
         mMap.put("orderType", "0");
+        selLocal = (String) SharePreUtil.getData(getActivity(), "sel_local", "");
+        mTvLocal.setText("".equals(selLocal) ? "聊城市" : selLocal);
+        if (!"".equals(selLocal)) {
+            mMap.put("areaCode", selLocal);
+        }
         mPresenter.homeGoodsList(mMap);
         rootView.findViewById(R.id.tvSearch).setOnClickListener(v -> {
             clickToSearch(0);
@@ -126,7 +140,8 @@ public class HomeFragment extends SuperBaseFragment {
             protected void initEvent() {
             }
         };
-        layoutGravity = new CommonPopupWindow.LayoutGravity(CommonPopupWindow.LayoutGravity.ALIGN_LEFT | CommonPopupWindow.LayoutGravity.TO_BOTTOM);
+        layoutGravity = new CommonPopupWindow.LayoutGravity(CommonPopupWindow.LayoutGravity.ALIGN_LEFT |
+                CommonPopupWindow.LayoutGravity.TO_BOTTOM);
     }
 
     private void initHeader() {
@@ -228,6 +243,7 @@ public class HomeFragment extends SuperBaseFragment {
                 tab.setText(data);
             }
             mMap.put("catId", sendListBean.pid + "");
+            window.getPopupWindow().dismiss();
             mPresenter.homeGoodsList(mMap);
         });
     }
@@ -235,16 +251,8 @@ public class HomeFragment extends SuperBaseFragment {
     private void initRecyclerLocal() {
         mRecyclerViewLocal = rootView.findViewById(R.id.recyclerViewLocal);
         mRecyclerViewLocal.setLayoutManager(new LinearLayoutManager(this.getContext()));
-        ArrayList<String> strings = new ArrayList<>();
-        strings.add("东昌府区");
-        strings.add("临清市");
-        strings.add("阳谷县");
-        strings.add("莘县");
-        strings.add("荏平县");
-        strings.add("东阿县");
-        strings.add("冠县");
-        strings.add("高唐县");
-        mLocalSetAdapter = new LocalSetAdapter(strings);
+
+        mLocalSetAdapter = new LocalSetAdapter(null);
         mRecyclerViewLocal.setAdapter(mLocalSetAdapter);
         mTvLocal = rootView.findViewById(R.id.tvLocal);
         mTvLocal.setOnClickListener(v -> {
@@ -260,9 +268,12 @@ public class HomeFragment extends SuperBaseFragment {
             }
         });
         mLocalSetAdapter.setOnItemClickListener((adapter, view, position) -> {
-            String data = mLocalSetAdapter.getData().get(position);
-            mTvLocal.setText(data);
+            mData = mLocalSetAdapter.getData().get(position);
+            mTvLocal.setText(mData);
+            SharePreUtil.saveData(mActivity, "sel_local", mData);
+            mMap.put("areaCode", mData);
             fadeOutLocal(mRecyclerViewLocal);
+            mPresenter.homeGoodsList(mMap);
         });
     }
 
@@ -317,6 +328,10 @@ public class HomeFragment extends SuperBaseFragment {
     }
 
     public void homeGoodsList(HomeGoodsList homeGoodsList) {
+        mAdapter.removeAllFooterView();
+        if (homeGoodsList.list == null || homeGoodsList.list.size() < 1) {
+            mAdapter.addFooterView(mFooter);
+        }
         mAdapter.setNewData(homeGoodsList.list);
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             HomeGoodsList.ListBean bean = mAdapter.getData().get(position);
@@ -336,6 +351,11 @@ public class HomeFragment extends SuperBaseFragment {
         isLoadding = 0;
         mPresenter.homeTop();
         mPresenter.homeList();
+        mMap.put("catId", "");
+        TabLayout.Tab tab = mTabLayout.getTabAt(5);
+        if (tab != null) {
+            tab.setText("筛选");
+        }
         mPresenter.homeGoodsList(mMap);
     }
 
@@ -444,5 +464,18 @@ public class HomeFragment extends SuperBaseFragment {
     public void onDestroy() {
         super.onDestroy();
         mPresenter.detachView();
+    }
+
+    List<String> mListLocalString;
+    AreaBean mAreaBean;
+
+    public void areaList(AreaBean listBean) {
+        if (mListLocalString == null) {
+            mListLocalString = new ArrayList<>();
+        }
+        mListLocalString.clear();
+        mAreaBean = listBean;
+        Observable.fromIterable(listBean.areas.subs).subscribe(bean -> mListLocalString.add(bean.area_name));
+        mLocalSetAdapter.setNewData(mListLocalString);
     }
 }

@@ -28,7 +28,7 @@ public class StoreItemAdapter extends BaseQuickAdapter<FavListBean.ListBean, Bas
     protected void convert(BaseViewHolder helper, FavListBean.ListBean item) {
         helper.setText(R.id.tvTitle, item.sp_name)
                 .setText(R.id.tvLocalLen, "距离" + item.dist)
-                .setRating(R.id.ratingBar, (float) (item.score / 10))
+                .setRating(R.id.ratingBar, item.score)
                 .setText(R.id.tvLocal, item.sp_city + "  " + item.sp_area);
         ImageView ivSrc = helper.itemView.findViewById(R.id.ivSrc);
         Glide.with(mContext).load(item.sp_img).apply(GlideUtils.init().options(R.drawable.placeholder)).into(ivSrc);

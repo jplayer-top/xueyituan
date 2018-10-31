@@ -45,4 +45,23 @@ public class MePresenter extends BasePresenter<MeFragment> {
             });
         }
     }
+
+    public void requestMyInfoNoLoadding() {
+        String login_uid = (String) SharePreUtil.getData(mIView.mActivity, "login_uid", "");
+        if ("".equals(login_uid)) {
+            ToastUtils.init().showInfoToast(mIView.getContext(), "请先登录");
+        } else {
+            mModel.requestMyInfo().subscribe(new NetCallBackObserver<MyInfoBean>() {
+                @Override
+                public void responseSuccess(MyInfoBean myInfoBean) {
+                    mIView.responseMyInfo(myInfoBean);
+                }
+
+                @Override
+                public void responseFail(MyInfoBean myInfoBean) {
+
+                }
+            });
+        }
+    }
 }

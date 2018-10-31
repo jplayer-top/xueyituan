@@ -17,8 +17,10 @@ ext {
             rxAndroid               : "2.0.1"
     ]
     url = [
+//            "debug"  : "http://nm17067348.51mypc.cn:11505/xytuan/api/",
+//            "debug"  : "http://123.206.45.111:8080/xytuan/api/",
             "debug"  : "https://www.xueyituanchina.cn/xytuan/api/",
-            "release": "http://123.206.45.111:8080/xytuan/api/",
+            "release": "https://www.xueyituanchina.cn/xytuan/api/",
     ]
     key_rong = [
             "debug"  : "tdrvipkstxlp5",

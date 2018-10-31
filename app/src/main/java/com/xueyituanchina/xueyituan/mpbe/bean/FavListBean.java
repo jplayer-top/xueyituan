@@ -52,7 +52,7 @@ public class FavListBean extends BaseBean {
         public String goods_org_price;
         public int user_id;
         public String sp_img;
-        public int score;
+        public float score;
         public String sp_city;
         public String sp_area;
         public String sp_lnglat;

@@ -37,11 +37,12 @@
 
         <ImageView
             android:id="@+id/tvIsGood"
-            android:layout_width="@dimen/dimen_40dp"
-            android:layout_height="@dimen/dimen_20dp"
+            android:layout_width="@dimen/dimen_30dp"
+            android:layout_height="@dimen/dimen_15dp"
             android:layout_marginStart="@dimen/dimen_5dp"
             android:scaleType="centerCrop"
             android:src="@drawable/good_shop"
+            app:layout_constraintBottom_toBottomOf="@+id/tvShopTitle"
             app:layout_constraintStart_toEndOf="@id/tvShopTitle"
             app:layout_constraintTop_toTopOf="@+id/tvShopTitle"/>
 
@@ -60,6 +61,8 @@
             app:layout_constraintTop_toBottomOf="@+id/tvShopTitle"/>
 
         <TextView
+            android:textColor="@color/color999"
+            android:textSize="@dimen/dimen_11sp"
             android:id="@+id/tvLocalLen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

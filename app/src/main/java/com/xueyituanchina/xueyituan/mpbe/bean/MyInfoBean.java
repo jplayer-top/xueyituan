@@ -14,7 +14,7 @@ import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
  * github : https://github.com/oblivion0001
  */
 
-public class MyInfoBean extends BaseBean{
+public class MyInfoBean extends BaseBean {
 
 
     /**
@@ -32,10 +32,11 @@ public class MyInfoBean extends BaseBean{
     public String recharge;
     public String avator;
     public String merchant;
+    public String customerId;
     public List<OrderListBean> orderList;
     public List<RmdListBean> rmdList;
 
-    public static class OrderListBean implements Parcelable{
+    public static class OrderListBean implements Parcelable {
         /**
          * order_id : 2018082410292124581
          * order_title : aaa_1111

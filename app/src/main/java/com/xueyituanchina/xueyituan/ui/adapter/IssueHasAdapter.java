@@ -26,7 +26,7 @@ public class IssueHasAdapter extends BaseQuickAdapter<HasIssueBean, BaseViewHold
 
     @Override
     protected void convert(BaseViewHolder helper, HasIssueBean item) {
-        helper.setText(R.id.tvName, "匿名")
+        helper.setText(R.id.tvName, item.anonymous ? "匿名" : item.nick)
                 .setText(R.id.tvTime, item.ct)
                 .setText(R.id.tvDesc, item.descd)
                 .setText(R.id.tvSpName, item.sp_name)

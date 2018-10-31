@@ -48,6 +48,15 @@ public class HomePresenter extends BasePresenter<HomeFragment> {
         addSubscription(disposable);
     }
 
+    public void areaList() {
+        mModel.area_list().subscribe(areaListBean -> {
+            if (areaListBean != null) {
+                mIView.areaList(areaListBean);
+            }
+        }, throwable -> {
+        });
+    }
+
     public void homeGoodsList(Map<String, String> map) {
         if (XYTApplication.lnglat != null) {
             map.put("lnglat", XYTApplication.lnglat);

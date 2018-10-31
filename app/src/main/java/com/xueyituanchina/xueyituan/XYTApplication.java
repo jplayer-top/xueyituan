@@ -23,6 +23,7 @@ import static io.rong.imkit.utils.SystemUtils.getCurProcessName;
 
 public class XYTApplication extends MultiDexApplication {
     public static String uid = "";
+    public static String cuid = "1";
     public static String token = "";
     public static String login_name = "匿名";
     public final static String APP_ID = "wx2afd95f49d8dd6be";

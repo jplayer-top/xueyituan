@@ -15,6 +15,7 @@ import top.jplayer.baseprolibrary.net.retrofit.IoMainSchedule;
 import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
 import top.jplayer.baseprolibrary.ui.fragment.SuperBaseFragment;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
+import top.jplayer.baseprolibrary.utils.LogUtil;
 import top.jplayer.baseprolibrary.utils.SharePreUtil;
 
 /**
@@ -63,7 +64,14 @@ public class StoreItemFragment extends SuperBaseFragment {
 
                     @Override
                     public void responseFail(FavListBean favListBean) {
+                        LogUtil.str(favListBean);
 
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        LogUtil.str(e);
                     }
                 });
     }

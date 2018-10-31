@@ -40,6 +40,9 @@ public class LookWhatActivity extends CommonToolBarActivity {
         List<LookWhatBean> lookWhatBeans = mDaoModel.queryAllbean();
         mLookWhatAdapter = new LookWhatAdapter(lookWhatBeans);
         mRecyclerView.setAdapter(mLookWhatAdapter);
+        if (lookWhatBeans.size() < 1) {
+            mMultipleStatusView.showEmpty();
+        }
         mLookWhatAdapter.setOnItemClickListener((adapter, view, position) -> {
             LookWhatBean listBean = mLookWhatAdapter.getData().get(position);
             Bundle bundle = new Bundle();

@@ -95,8 +95,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_20dp"
         android:text="距离1km"
-        android:textColor="@color/color666"
+        android:textColor="@color/color999"
         android:textSize="@dimen/dimen_12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvShopLocal"/>

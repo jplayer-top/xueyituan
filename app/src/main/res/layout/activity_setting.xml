@@ -147,7 +147,6 @@
                 tools:ignore="RtlHardcoded"/>
 
             <TextView
-                android:textColorHint="@color/color999"
                 android:id="@+id/tvPassword"
                 android:layout_width="0dp"
                 android:layout_height="?attr/actionBarSize"
@@ -157,7 +156,27 @@
                 android:drawableRight="@drawable/right_arrow"
                 android:gravity="center|right"
                 android:hint="已设置"
+                android:textColorHint="@color/color999"
                 tools:ignore="RtlHardcoded"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llChatList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@drawable/selector_white_muti_press"
+                android:drawablePadding="@dimen/dp_10"
+                android:gravity="center_vertical"
+                android:text="聊天列表"
+                tools:ignore="RtlHardcoded"/>
+
 
         </LinearLayout>
 
@@ -165,7 +184,6 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
 
             <Button
                 android:id="@+id/btnLogout"

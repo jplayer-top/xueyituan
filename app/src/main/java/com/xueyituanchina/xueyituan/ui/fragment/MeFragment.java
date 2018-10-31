@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.xueyituanchina.xueyituan.R;
 import com.xueyituanchina.xueyituan.XYTApplication;
 import com.xueyituanchina.xueyituan.mpbe.bean.MyInfoBean;
@@ -101,6 +102,8 @@ public class MeFragment extends SuperBaseFragment {
     TextView tvLoadMoreOrder;
     @BindView(R.id.llShowMsgUser)
     LinearLayout mLlShowMsgUser;
+    @BindView(R.id.smartRefreshLayout)
+    SmartRefreshLayout smartRefreshLayout;
     private Unbinder mUnbinder;
     private MePresenter mPresenter;
     private MeOrderAdapter mAdapter;
@@ -130,6 +133,9 @@ public class MeFragment extends SuperBaseFragment {
         mAdapter = new MeOrderAdapter(null);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setEmptyView(View.inflate(this.getContext(), R.layout.layout_empty_view_card, null));
+        smartRefreshLayout.setOnRefreshListener(refreshLayout -> {
+            mPresenter.requestMyInfoNoLoadding();
+        });
         mIvToolRightLeft.setOnClickListener(v -> {
             toSettingActivity();
         });
@@ -164,7 +170,8 @@ public class MeFragment extends SuperBaseFragment {
 
         mLlChat.setOnClickListener(v -> {
             if (assert2Login(mActivity)) {
-                RongIM.getInstance().startConversation(mActivity, Conversation.ConversationType.PRIVATE, "1", "客服");
+                RongIM.getInstance().startConversation(mActivity, Conversation.ConversationType.PRIVATE,
+                        XYTApplication.cuid, "客服");
             }
         });
         tvLoadMoreOrder.setOnClickListener(v -> {
@@ -228,6 +235,8 @@ public class MeFragment extends SuperBaseFragment {
 
     public void responseMyInfo(MyInfoBean bean) {
         this.bean = bean;
+        XYTApplication.cuid = bean.customerId;
+        smartRefreshLayout.finishRefresh();
         mTvToLogin.setVisibility(View.INVISIBLE);
         mLlWork.setOnClickListener(v -> {
             if ("0".equals(bean.merchant)) {
