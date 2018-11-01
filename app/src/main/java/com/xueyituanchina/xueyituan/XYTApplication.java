@@ -1,8 +1,12 @@
 package com.xueyituanchina.xueyituan;
 
 import android.app.Activity;
+import android.content.Context;
+import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 
+import com.tencent.bugly.Bugly;
+import com.tencent.bugly.beta.Beta;
 import com.xueyituanchina.xueyituan.ui.activity.LoginActivity;
 
 import java.lang.ref.WeakReference;
@@ -30,6 +34,15 @@ public class XYTApplication extends MultiDexApplication {
     public static String lnglat = null;
 
     @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        // you must install multiDex whatever tinker is installed!
+        MultiDex.install(base);
+        // 安装tinker
+        Beta.installTinker();
+    }
+
+    @Override
     public void onCreate() {
         super.onCreate();
         if (getApplicationInfo().packageName.equals(getCurProcessName(getApplicationContext()))) {
@@ -41,6 +54,7 @@ public class XYTApplication extends MultiDexApplication {
                 .zxing()
                 .skin()
                 .fixFileProvide();
+        Bugly.init(this, "236a5634ef", false);
     }
 
     public static boolean assert2Login(Activity activity) {

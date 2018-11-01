@@ -77,7 +77,6 @@ public class MainActivity extends SuperBaseActivity {
                 .start();
         isCheckKeyboard = false;
         initLocation();
-
     }
 
     private void initLocation() {
