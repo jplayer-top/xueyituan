@@ -148,10 +148,7 @@ public class StoreActivity extends CommonToolBarActivity {
 
     public void storeInfo(StoreBean bean) {
         mAdapter.setNewData(bean.goodsList);
-        String sp_img = bean.shop.sp_img;
-        ArrayList<String> strings = new ArrayList<>();
-        strings.add(sp_img);
-        initBanner(strings);
+        initBanner(bean.envirmtList);
         initHeader(bean.shop);
         initFooter(bean);
         mBtnPay.setOnClickListener(v -> new DialogPayBuyTest(this).show(R.id.btnJoin, view -> {

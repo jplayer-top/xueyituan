@@ -14,7 +14,7 @@ import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
  * github : https://github.com/oblivion0001
  */
 
-public class StoreBean  extends BaseBean{
+public class StoreBean extends BaseBean {
 
     /**
      * keep : false
@@ -29,6 +29,7 @@ public class StoreBean  extends BaseBean{
     public ShopBean shop;
     public String slogan;
     public List<TeacherListBean> teacherList;
+    public List<String> envirmtList;
     public List<GoodsListBean> goodsList;
     public List<CommentsListBean> commentsList;
 

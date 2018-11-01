@@ -30,15 +30,15 @@
         app:layout_constraintTop_toBottomOf="@+id/bgaBanner"/>
 
     <TextView
-        android:gravity="center_vertical"
-        app:layout_constraintEnd_toEndOf="parent"
         android:id="@+id/tvShopSubTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_15dp"
         android:layout_marginTop="@dimen/dimen_15dp"
+        android:gravity="center_vertical"
         android:text="@string/app_name"
         android:textSize="@dimen/dimen_13sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvShopName"/>
 
@@ -79,6 +79,7 @@
             android:textSize="@dimen/dimen_14sp"/>
 
         <TextView
+            android:id="@+id/tvScore"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

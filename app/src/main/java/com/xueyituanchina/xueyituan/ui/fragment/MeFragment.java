@@ -159,12 +159,16 @@ public class MeFragment extends SuperBaseFragment {
         });
         mIvRecommend01.setOnClickListener(v -> {
             if (XYTApplication.assert2Login(mActivity)) {
-                clickToStore("", bean.rmdList.get(0).user_id + "");
+                if (bean.rmdList != null && bean.rmdList.size() > 0) {
+                    clickToStore("", bean.rmdList.get(0).user_id + "");
+                }
             }
         });
         mIvRecommend02.setOnClickListener(v -> {
             if (XYTApplication.assert2Login(mActivity)) {
-                clickToStore("", bean.rmdList.get(1).user_id + "");
+                if (bean.rmdList != null && bean.rmdList.size() > 1) {
+                    clickToStore("", bean.rmdList.get(1).user_id + "");
+                }
             }
         });
 
@@ -260,8 +264,10 @@ public class MeFragment extends SuperBaseFragment {
                         .show(R.id.btnSure, view -> {
                             dialogLogout.dismiss();
                         });
-            } else {
-                ActivityUtils.init().start(mActivity, StoreInfoActivity.class, "");
+            } else if ("3".equals(bean.merchant)) {
+                ToastUtils.init().showSuccessToast(mActivity, "当前已是商家，请直接查看商家端");
+            } else if ("4".equals(bean.merchant)) {
+                ActivityUtils.init().start(mActivity, ShopCreateActivity.class, "商家入驻");
             }
         });
         mTvNick.setText(String.format(Locale.CHINA, "会员昵称：%s", StringUtils.init().fixNullStr(bean.nick)));

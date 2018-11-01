@@ -78,6 +78,7 @@ public class ShopItemActivity extends CommonToolBarActivity {
     private boolean keep;
     private LoookWhatDaoModel mDaoModel;
     private LookWhatBean mWhatBean;
+    private TextView mTvScore;
 
     @Override
     public int initAddLayout() {
@@ -159,6 +160,7 @@ public class ShopItemActivity extends CommonToolBarActivity {
         mTvStoreLocal = mHeader.findViewById(R.id.tvStoreLocal);
         mTvStoreLocalLen = mHeader.findViewById(R.id.tvStoreLocalLen);
         mTvGiftTip = mHeader.findViewById(R.id.tvGiftTip);
+        mTvScore = mHeader.findViewById(R.id.tvScore);
     }
 
     public void shopInfo(ShopItemBean bean) {
@@ -192,6 +194,7 @@ public class ShopItemActivity extends CommonToolBarActivity {
         mTvStoreLocalLen.setText("暂无");
         mTvOldPrice.setText(String.format(Locale.CHINA, "门市价：%s", goodsBean.goodsOrgPriceStr));
         mTvChatTip.setText(String.format(Locale.CHINA, "用户评论（%d）", bean.commentsList.size()));
+        mTvScore.setText(String.format(Locale.CHINA, "%s分", bean.goods.score + ""));
         mTvChatTip.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
             Gson gson = new Gson();

@@ -176,7 +176,13 @@ public class ShopCreateActivity extends CommonToolBarActivity {
         this.isLic = isLic;
         AndPermission.with(this)
                 .permission(Permission.CAMERA, Permission.WRITE_EXTERNAL_STORAGE, Permission.READ_EXTERNAL_STORAGE)
-                .onGranted(permissions -> CameraUtil.getInstance().openSingalCamerNoCrop(this))
+                .onGranted(permissions -> {
+                    if (isLic == 0) {
+                        CameraUtil.getInstance().openSingalCamerNoCrop(this);
+                    } else {
+                        CameraUtil.getInstance().openSingalCamer(this);
+                    }
+                })
                 .onDenied(permissions -> AndPermission.hasAlwaysDeniedPermission(mActivity, permissions))
                 .start();
     }
@@ -284,7 +290,10 @@ public class ShopCreateActivity extends CommonToolBarActivity {
     }
 
     public void createSuccess() {
-
+        Bundle bundle = new Bundle();
+        bundle.putString("recharge", "0.01");
+        ActivityUtils.init().start(this, RechargeActivity.class, "商铺审核金", bundle);
+        finish();
     }
 
     public void upLicSuccess(UpdateUrlBean bean) {

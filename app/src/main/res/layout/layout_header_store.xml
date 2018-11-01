@@ -10,7 +10,7 @@
         xmlns:bga="http://schemas.android.com/apk/res-auto"
         android:id="@+id/bgaBanner"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="180dp"
         bga:banner_indicatorGravity="bottom"
         bga:banner_pointAutoPlayAble="true"
         bga:banner_pointContainerBackground="@color/trans"
