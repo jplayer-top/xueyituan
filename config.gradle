@@ -23,7 +23,7 @@ ext {
             "release": "https://www.xueyituanchina.cn/xytuan/api/",
     ]
     key_rong = [
-            "debug"  : "tdrvipkstxlp5",
+            "debug"  : "3argexb63m5xe",
             "release": "3argexb63m5xe"
     ]
     supportDeps = [
