@@ -85,6 +85,9 @@ public class SearchActivity extends SuperBaseActivity {
         mMap = new HashMap<>();
         mPid = mBundle.getString("pid");
         mMap.put("orderType", "0");
+        if (!mPid.equals("0")) {
+            mMap.put("catId", mPid);
+        }
         mPresenter.homeGoodsList(mMap);
         mPresenter.homeList(mPid);
         mPresenter.areaList();

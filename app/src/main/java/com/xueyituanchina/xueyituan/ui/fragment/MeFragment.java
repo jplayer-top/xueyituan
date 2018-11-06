@@ -181,8 +181,11 @@ public class MeFragment extends SuperBaseFragment {
         });
         tvLoadMoreOrder.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
-            bundle.putParcelableArrayList("order_list", (ArrayList<MyInfoBean.OrderListBean>) bean.orderList);
-            ActivityUtils.init().start(mActivity, OrderListActivity.class, "订单列表", bundle);
+            if (bean != null && bean.orderList != null) {
+                List<MyInfoBean.OrderListBean> orderList = bean.orderList;
+                bundle.putParcelableArrayList("order_list", (ArrayList<MyInfoBean.OrderListBean>) orderList);
+                ActivityUtils.init().start(mActivity, OrderListActivity.class, "订单列表", bundle);
+            }
         });
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             Bundle bundle = new Bundle();
