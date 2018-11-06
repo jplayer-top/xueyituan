@@ -17,6 +17,7 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.xueyituanchina.xueyituan.R;
 import com.xueyituanchina.xueyituan.aliapi.AliPayInfoBean;
 import com.xueyituanchina.xueyituan.mpbe.event.AliPayOkEvent;
+import com.xueyituanchina.xueyituan.mpbe.event.NoPayBackEvent;
 import com.xueyituanchina.xueyituan.mpbe.presenter.RechargePresenter;
 import com.xueyituanchina.xueyituan.wxapi.WXPayEntryActivity;
 import com.xueyituanchina.xueyituan.wxapi.WxPayInfoBean;
@@ -225,6 +226,7 @@ public class RechargeActivity extends CommonToolBarActivity {
     protected void onDestroy() {
         super.onDestroy();
         mUnbinder.unbind();
+        EventBus.getDefault().post(new NoPayBackEvent());
         EventBus.getDefault().unregister(this);
     }
 

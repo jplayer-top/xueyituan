@@ -2,6 +2,8 @@ package com.xueyituanchina.xueyituan.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -95,6 +97,7 @@ public class ShopCreateActivity extends CommonToolBarActivity {
     public void initAddView(FrameLayout rootView) {
         super.initAddView(rootView);
         mBind = ButterKnife.bind(this);
+        isCheckKeyboard = false;
         EventBus.getDefault().register(this);
         curLnglat = (String) SharePreUtil.getData(this, "lnglat", "");
         mIvShopLic.setOnClickListener(v -> {
@@ -102,6 +105,23 @@ public class ShopCreateActivity extends CommonToolBarActivity {
         });
         mIvShopImg.setOnClickListener(v -> {
             setOnClick(1);
+        });
+        mEdSpName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                StringUtils.init().tipEditTextLength(mEdSpName,s,10,"店铺名称不超过十个字");
+
+            }
         });
         mPresenter = new ShopCreatePresenter(this);
         initPicker();
@@ -291,7 +311,7 @@ public class ShopCreateActivity extends CommonToolBarActivity {
 
     public void createSuccess() {
         Bundle bundle = new Bundle();
-        bundle.putString("recharge", "0.01");
+        bundle.putString("recharge", "100.00");
         ActivityUtils.init().start(this, RechargeActivity.class, "商铺审核金", bundle);
         finish();
     }

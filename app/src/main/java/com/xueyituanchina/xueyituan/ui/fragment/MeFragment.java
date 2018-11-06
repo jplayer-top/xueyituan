@@ -17,6 +17,7 @@ import com.xueyituanchina.xueyituan.mpbe.event.AliPayOkEvent;
 import com.xueyituanchina.xueyituan.mpbe.event.LoginSuccessEvent;
 import com.xueyituanchina.xueyituan.mpbe.event.LogoutEvent;
 import com.xueyituanchina.xueyituan.mpbe.event.MessageOkEvent;
+import com.xueyituanchina.xueyituan.mpbe.event.NoPayBackEvent;
 import com.xueyituanchina.xueyituan.mpbe.presenter.MePresenter;
 import com.xueyituanchina.xueyituan.ui.activity.CollectionActivity;
 import com.xueyituanchina.xueyituan.ui.activity.IssueActivity;
@@ -228,6 +229,11 @@ public class MeFragment extends SuperBaseFragment {
     }
 
     @Subscribe
+    public void onEvent(NoPayBackEvent event) {
+        mPresenter.requestMyInfo();
+    }
+
+    @Subscribe
     public void onEvent(WXPayEntryActivity.WxPayEvent event) {
         mPresenter.requestMyInfo();
     }
@@ -252,7 +258,7 @@ public class MeFragment extends SuperBaseFragment {
                         .setSubTitle("当前已提交入驻信息\n请提交一百元审核金")
                         .show(R.id.btnSure, view -> {
                             Bundle bundle = new Bundle();
-                            bundle.putString("recharge", "0.01");
+                            bundle.putString("recharge", "100.00");
                             ActivityUtils.init().start(this.getActivity(), RechargeActivity.class, "商铺审核金", bundle);
                             dialogLogout.dismiss();
                         });

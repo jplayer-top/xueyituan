@@ -126,6 +126,7 @@
             android:orientation="horizontal">
 
             <View
+                android:visibility="invisible"
                 android:id="@+id/viewLeft"
                 android:layout_width="0dp"
                 android:layout_height="1px"
@@ -137,6 +138,7 @@
                 app:layout_constraintTop_toTopOf="@+id/tvQuickLogin"/>
 
             <View
+                android:visibility="invisible"
                 android:id="@+id/viewRight"
                 android:layout_width="0dp"
                 android:layout_height="1px"
@@ -148,6 +150,7 @@
                 app:layout_constraintTop_toTopOf="@+id/tvQuickLogin"/>
 
             <TextView
+                android:visibility="invisible"
                 android:id="@+id/tvQuickLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -163,6 +166,7 @@
                 app:layout_constraintTop_toTopOf="parent"/>
 
             <ImageView
+                android:visibility="invisible"
                 android:id="@+id/wechat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
