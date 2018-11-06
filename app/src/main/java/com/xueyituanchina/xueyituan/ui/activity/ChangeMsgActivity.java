@@ -1,6 +1,5 @@
 package com.xueyituanchina.xueyituan.ui.activity;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -79,7 +78,7 @@ public class ChangeMsgActivity extends CommonToolBarActivity {
             return;
 
         }
-        EventBus.getDefault().post(new MessageEvent(preText, key));
+        EventBus.getDefault().post(new MessageEvent(atfText, key));
         finish();
     }
 

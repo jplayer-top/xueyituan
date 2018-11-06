@@ -21,8 +21,15 @@ public class ConversationOneActivity extends CommonToolBarActivity {
     }
 
     @Override
+    protected void initImmersionBar() {
+        super.initImmersionBar();
+        mImmersionBar.keyboardEnable(true).init();
+    }
+
+    @Override
     public void initAddView(FrameLayout rootView) {
         super.initAddView(rootView);
         mTvToolTitle.setText("客服");
+        isCheckKeyboard = false;
     }
 }

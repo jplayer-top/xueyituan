@@ -144,7 +144,7 @@ public class SettingActivity extends CommonToolBarActivity {
         if ("昵称".equals(event.key)) {
             mPresenter.updateNick(event.preText);
         } else {
-            mPresenter.updatePw(event.preText, event.preText);
+            mPresenter.updatePw(opw, event.preText);
         }
     }
 
