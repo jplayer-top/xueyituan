@@ -64,7 +64,9 @@ public class BrandInfoActivity extends CommonToolBarActivity {
             BrandBBean.BrandBean brand = brandBBean.brand;
             if (brand != null) {
                 mAdapter.setNewData(brand.envirmtList);
-                Glide.with(this).load(brand.logo).apply(GlideUtils.init().options(R.mipmap.ic_launcher)).into(mIvAvatarSrc);
+                Glide.with(this).load(brand.envirmtList != null && brand.envirmtList.size() > 0 ?
+                        brand.envirmtList.get(0) : brand.logo).apply
+                        (GlideUtils.init().options(R.mipmap.ic_launcher)).into(mIvAvatarSrc);
                 mTvTitle.setText(brand.brand);
                 mTvSol.setText(brand.slogan);
                 mTvBrandBestText.setText(brand.feature);
