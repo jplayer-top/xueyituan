@@ -55,7 +55,7 @@
             android:textColor="@color/white"
             android:textSize="@dimen/dimen_12sp"
             app:layout_constraintBottom_toBottomOf="@+id/ivSpBg"
-            app:layout_constraintEnd_toStartOf="@+id/tvShopName"/>
+            app:layout_constraintEnd_toStartOf="@+id/ivSpSrc"/>
 
         <TextView
             android:id="@+id/tvToPay"
@@ -70,7 +70,7 @@
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/dimen_12sp"
             app:layout_constraintBottom_toBottomOf="@+id/ivSpBg"
-            app:layout_constraintStart_toEndOf="@+id/tvShopName"/>
+            app:layout_constraintStart_toEndOf="@+id/ivSpSrc"/>
 
         <TextView
             android:id="@+id/tvOrderTip"

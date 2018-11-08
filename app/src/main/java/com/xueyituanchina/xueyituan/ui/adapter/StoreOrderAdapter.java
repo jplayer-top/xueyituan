@@ -33,6 +33,7 @@ public class StoreOrderAdapter extends BaseQuickAdapter<StoreInfoBean.OrderListB
         helper.setText(R.id.tvPrice, String.format(Locale.CHINA, "￥%s", item.priceStr))
                 .setText(R.id.tvShopName, item.order_title)
                 .setText(R.id.tvOrderPhone, String.format(Locale.CHINA, "家长电话：%s", item.rp_phone))
-                .setText(R.id.tvOrderStatus, String.format(Locale.CHINA, "支付状态：%s", item.pay_type == 2 ? "已支付" : "未支付"));
+                .setText(R.id.tvOrderStatus, String.format(Locale.CHINA, "支付状态：%s", item.pay_status == 1 ? "已支付" :
+                        "未支付"));
     }
 }
