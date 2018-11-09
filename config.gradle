@@ -19,8 +19,8 @@ ext {
     url = [
 //            "debug"  : "http://nm17067348.51mypc.cn:11505/xytuan/api/",
 //            "debug"  : "http://123.206.45.111:8080/xytuan/api/",
-            "debug"  : "https://www.xueyituanchina.cn/xytuan/api/",
-            "release": "https://www.xueyituanchina.cn/xytuan/api/",
+"debug"  : "https://www.xueyituanchina.cn/xytuan/api/",
+"release": "https://www.xueyituanchina.cn/xytuan/api/",
     ]
     key_rong = [
             "debug"  : "3argexb63m5xe",
@@ -149,10 +149,12 @@ tasks {
                         list.add(it.substring(pre, aft))
                     }
                 }
-                File fileDel = new File(list.get(0))
-                logger.error(">>>>>> 要删除的文件夹路径：" + fileDel.getAbsolutePath())
-                def isDel = fileDel.deleteDir()
-                logger.error(">>>>>> 文件夹是否删除：" + isDel)
+                if (list.size() > 0) {
+                    File fileDel = new File(list.get(0))
+                    logger.error(">>>>>> 要删除的文件夹路径：" + fileDel.getAbsolutePath())
+                    def isDel = fileDel.deleteDir()
+                    logger.error(">>>>>> 文件夹是否删除：" + isDel)
+                }
             }
         }
     }
