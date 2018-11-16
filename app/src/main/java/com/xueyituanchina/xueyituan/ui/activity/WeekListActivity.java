@@ -35,7 +35,6 @@ public class WeekListActivity extends CommonToolBarActivity {
         mRecyclerView.setAdapter(mAdapter);
         mPresenter = new WeekPresenter(this);
         mPresenter.weekList();
-        showLoading();
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             Bundle bundle = new Bundle();
             NearbyActiveBean.ListBean listBean = mAdapter.getData().get(position);

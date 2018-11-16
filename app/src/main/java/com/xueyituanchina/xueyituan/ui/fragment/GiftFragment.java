@@ -62,7 +62,6 @@ public class GiftFragment extends SuperBaseFragment {
         mRecyclerView.setAdapter(mAdapter);
         mPresenter = new GiftDetailPresenter(this);
         mPresenter.giftDetail();
-        showLoading();
         mHeader = View.inflate(this.getContext(), R.layout.header_gift, null);
         mTvPoints = mHeader.findViewById(R.id.tvPoints);
         mBgaBanner = mHeader.findViewById(R.id.bgaBanner);

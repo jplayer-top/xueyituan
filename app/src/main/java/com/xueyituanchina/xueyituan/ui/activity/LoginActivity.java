@@ -275,7 +275,6 @@ public class LoginActivity extends SuperBaseActivity implements TextWatcher, ICo
                     //mPresenter.wxLogin(token, mRNum, mRCode);
                     break;
                 }
-                showLoading();
                 mPresenter.verifySms(mRNum, mRCode);
                 break;
             case R.id.bt_login1://正式登陆
@@ -321,7 +320,6 @@ public class LoginActivity extends SuperBaseActivity implements TextWatcher, ICo
                     } else {
                         mMap.put("check", "0");
                     }
-                    showLoading();
                     mPresenter.sendSms(mMap, mRtnCode);
                 }
                 break;

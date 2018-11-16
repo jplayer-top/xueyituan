@@ -94,7 +94,6 @@ public class ShopItemActivity extends CommonToolBarActivity {
         mRecyclerView.setAdapter(mAdapter);
         mId = mBundle.getString("id");
         mPresenter.shopInfo(mId);
-        showLoading();
         initHeaderView();
         initFooterView();
         mBtnPay = rootView.findViewById(R.id.btnPay);

@@ -7,7 +7,6 @@ import com.xueyituanchina.xueyituan.ui.fragment.MeFragment;
 
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
 import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
-import top.jplayer.baseprolibrary.net.tip.LoaddingImplTip;
 import top.jplayer.baseprolibrary.utils.SharePreUtil;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
 
@@ -32,7 +31,7 @@ public class MePresenter extends BasePresenter<MeFragment> {
         if ("".equals(login_uid)) {
             ToastUtils.init().showInfoToast(mIView.getContext(), "请先登录");
         } else {
-            mModel.requestMyInfo().subscribe(new NetCallBackObserver<MyInfoBean>(new LoaddingImplTip(mIView.mActivity)) {
+            mModel.requestMyInfo().subscribe(new NetCallBackObserver<MyInfoBean>() {
                 @Override
                 public void responseSuccess(MyInfoBean myInfoBean) {
                     mIView.responseMyInfo(myInfoBean);

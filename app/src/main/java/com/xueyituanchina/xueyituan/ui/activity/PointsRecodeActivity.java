@@ -34,7 +34,6 @@ public class PointsRecodeActivity extends CommonToolBarActivity {
         presenterStart();
         mAdapter = new PointRecodeAdapter(null);
         mRecyclerView.setAdapter(mAdapter);
-        showLoading();
     }
 
     private void presenterStart() {

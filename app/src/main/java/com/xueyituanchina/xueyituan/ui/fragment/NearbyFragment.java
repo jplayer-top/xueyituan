@@ -42,7 +42,6 @@ public class NearbyFragment extends SuperBaseFragment {
         mRecyclerView.setAdapter(mAdapter);
         mPresenter = new ActivePresenter(this);
         mPresenter.nearbyActiveList();
-        showLoading();
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             Bundle bundle = new Bundle();
             NearbyActiveBean.ListBean listBean = mAdapter.getData().get(position);

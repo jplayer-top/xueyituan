@@ -40,7 +40,6 @@ public class BrandInfoActivity extends CommonToolBarActivity {
     public void initAddView(FrameLayout rootView) {
         super.initAddView(rootView);
         mPresenter = new BrandPresenter(this);
-        showLoading();
         mPresenter.brandInfo(mBundle.getString("id"));
         mAdapter = new BrandInfoAdapter(null);
         mRecyclerView.setAdapter(mAdapter);

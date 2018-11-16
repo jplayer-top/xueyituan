@@ -93,7 +93,6 @@ public class SearchActivity extends SuperBaseActivity {
         mPresenter.areaList();
         initSelect(rootView);
         ivGoBack.setOnClickListener(v -> finish());
-        showLoading();
         editSearch.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 KeyboardUtils.init().hideKeyboard(this, editSearch);

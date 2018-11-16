@@ -34,7 +34,6 @@ public class PointsDetailActivity extends CommonToolBarActivity {
         presenterStart();
         mAdapter = new PointDetailAdapter(null);
         mRecyclerView.setAdapter(mAdapter);
-        showLoading();
     }
 
     private void presenterStart() {

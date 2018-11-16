@@ -82,7 +82,6 @@ public class StoreActivity extends CommonToolBarActivity {
         mRecyclerView.setAdapter(mAdapter);
         mId = mBundle.getString("id");
         mPresenter.storeInfo(mId);
-        showLoading();
         initHeaderView();
         initFooterView();
         mBtnPay = rootView.findViewById(R.id.btnPay);
