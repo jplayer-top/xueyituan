@@ -37,6 +37,13 @@ public class CameraUtil {
      * 打开相册
      */
     public void openSingalCamer(Activity activity) {
+        openSingalCamer(activity, 200, 200);
+    }
+
+    /**
+     * 打开相册
+     */
+    public void openSingalCamer(Activity activity, int x, int y) {
         ImageConfig imageConfig
                 = new ImageConfig.Builder(new GlideLoader())
                 .steepToolBarColor(activity.getResources().getColor(R.color.colorPrimary))
@@ -45,7 +52,7 @@ public class CameraUtil {
                 .titleTextColor(activity.getResources().getColor(R.color.white))
                 // 开启单选   （默认为多选）
                 .singleSelect()
-                .crop(1, 1, 200, 200)
+                .crop(1, 1, x, y)
                 // 开启拍照功能 （默认关闭）
                 .showCamera()
                 // 拍照后存放的图片路径（默认 /temp/picture） （会自动创建）
@@ -80,11 +87,11 @@ public class CameraUtil {
                 .filePath("/ImageSelector/Pictures")
                 .requestCode(1)
                 .build();
-        open(activity,fragment, imageConfig);   // 开启图片选择器
+        open(activity, fragment, imageConfig);   // 开启图片选择器
 
     }
 
-    public static void open(Activity activity,Fragment fragment, ImageConfig config) {
+    public static void open(Activity activity, Fragment fragment, ImageConfig config) {
         if (config == null) {
             return;
         }
@@ -100,7 +107,7 @@ public class CameraUtil {
         }
 
         Intent intent = new Intent(activity, ImageSelectorActivity.class);
-        fragment.startActivityForResult(intent,config.getRequestCode());
+        fragment.startActivityForResult(intent, config.getRequestCode());
     }
 
     /**

@@ -27,6 +27,7 @@ import com.xueyituanchina.xueyituan.ui.activity.OrderInfoActivity;
 import com.xueyituanchina.xueyituan.ui.activity.OrderListActivity;
 import com.xueyituanchina.xueyituan.ui.activity.RechargeActivity;
 import com.xueyituanchina.xueyituan.ui.activity.SettingActivity;
+import com.xueyituanchina.xueyituan.ui.activity.MyShareActivity;
 import com.xueyituanchina.xueyituan.ui.activity.ShopCreateActivity;
 import com.xueyituanchina.xueyituan.ui.activity.StoreActivity;
 import com.xueyituanchina.xueyituan.ui.activity.StoreInfoActivity;
@@ -105,6 +106,8 @@ public class MeFragment extends SuperBaseFragment {
     LinearLayout mLlShowMsgUser;
     @BindView(R.id.smartRefreshLayout)
     SmartRefreshLayout smartRefreshLayout;
+    @BindView(R.id.tvMyInv)
+    TextView tvMyInv;
     private Unbinder mUnbinder;
     private MePresenter mPresenter;
     private MeOrderAdapter mAdapter;
@@ -139,6 +142,9 @@ public class MeFragment extends SuperBaseFragment {
         });
         mIvToolRightLeft.setOnClickListener(v -> {
             toSettingActivity();
+        });
+        tvMyInv.setOnClickListener(v -> {
+            ActivityUtils.init().start(mActivity,MyShareActivity.class,"课程分享");
         });
         mLlShowMsgUser.setOnClickListener(v -> {
             toSettingActivity();

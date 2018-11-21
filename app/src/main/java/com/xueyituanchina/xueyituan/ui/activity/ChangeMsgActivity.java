@@ -78,7 +78,7 @@ public class ChangeMsgActivity extends CommonToolBarActivity {
             return;
 
         }
-        EventBus.getDefault().post(new MessageEvent(atfText, key));
+        EventBus.getDefault().post(new MessageEvent(preText, key));
         finish();
     }
 

@@ -39,6 +39,7 @@ ext {
     ]
 
 
+
     retrofit = [
             //------ retrofit和RxJava ---------
             retrofit                 : "com.squareup.retrofit2:retrofit:$dependVersion.retrofitSdkVersion",

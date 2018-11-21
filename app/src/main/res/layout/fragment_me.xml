@@ -143,6 +143,14 @@
                     app:layout_constraintStart_toEndOf="@+id/ivAvatar"
                     app:layout_constraintTop_toTopOf="@+id/ivAvatar"/>
 
+                <TextView
+                    android:id="@+id/tvMyInv"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_50dp"
+                    android:background="@color/color999"
+                    android:text="我的邀请"
+                    app:layout_constraintBottom_toTopOf="@+id/llCollection"/>
+
                 <LinearLayout
                     android:id="@+id/llCollection"
                     android:layout_width="wrap_content"

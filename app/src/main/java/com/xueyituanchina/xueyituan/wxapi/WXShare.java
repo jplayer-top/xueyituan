@@ -10,6 +10,7 @@ import android.os.Parcelable;
 
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
+import com.tencent.mm.opensdk.modelmsg.WXImageObject;
 import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
 import com.tencent.mm.opensdk.modelmsg.WXTextObject;
 import com.tencent.mm.opensdk.modelmsg.WXWebpageObject;
@@ -75,9 +76,20 @@ public class WXShare {
             e.printStackTrace();
         }
     }
-
-    public void shareOne(String text) {
-        share(text, SendMessageToWX.Req.WXSceneSession);
+//    sendtype==0?SendMessageToWX.Req.WXSceneSession(好友):SendMessageToWX.Req.WXSceneTimeline（朋友圈）;
+    public void shareImage(String imgurl, Bitmap bitmap, int scene) {
+        WXImageObject imgObj = new WXImageObject();
+        imgObj.setImagePath(imgurl);
+        WXMediaMessage msg = new WXMediaMessage();
+        msg.mediaObject = imgObj;
+        Bitmap thumbBmp = Bitmap.createScaledBitmap(bitmap, 108, 192, true);
+        msg.setThumbImage(thumbBmp);
+        thumbBmp.recycle();
+        SendMessageToWX.Req req = new SendMessageToWX.Req();
+        req.transaction = String.valueOf(System.currentTimeMillis());
+        req.message = msg;
+        req.scene = scene;
+        api.sendReq(req);
     }
 
     public boolean shareUrl(String url, String title, Bitmap thumb, String description, int scene) {
@@ -87,16 +99,20 @@ public class WXShare {
         return share(webPage, title, thumb, description, scene);
     }
 
-    public void shareAll(String text) {
-        share(text, SendMessageToWX.Req.WXSceneTimeline);
-    }
+    public boolean shareText(String text, int scene) {
+        WXTextObject textObj = new WXTextObject();
+        textObj.text = text;
 
-    private boolean share(WXMediaMessage.IMediaObject mediaObject, Bitmap thumb, int scene) {
-        return share(mediaObject, null, thumb, null, scene);
-    }
+        WXMediaMessage msg = new WXMediaMessage();
+        msg.mediaObject = textObj;
+        //    msg.title = "Will be ignored";
+        msg.description = text;
 
-    private boolean share(WXMediaMessage.IMediaObject mediaObject, String description, int scene) {
-        return share(mediaObject, null, null, description, scene);
+        SendMessageToWX.Req req = new SendMessageToWX.Req();
+        req.transaction = buildTransaction("text");
+        req.message = msg;
+        req.scene = scene;
+        return api.sendReq(req);
     }
 
     private boolean share(WXMediaMessage.IMediaObject mediaObject, String title, Bitmap thumb, String description, int scene) {
@@ -119,24 +135,6 @@ public class WXShare {
         return api.sendReq(req);
     }
 
-    public WXShare share(String text, int type) {
-        WXTextObject textObj = new WXTextObject();
-        textObj.text = text;
-
-        WXMediaMessage msg = new WXMediaMessage();
-        msg.mediaObject = textObj;
-        //    msg.title = "Will be ignored";
-        msg.description = text;
-
-        SendMessageToWX.Req req = new SendMessageToWX.Req();
-        req.transaction = buildTransaction("text");
-        req.message = msg;
-        req.scene = type;
-
-        boolean result = api.sendReq(req);
-        LogUtil.e("text shared: " + result);
-        return this;
-    }
 
     public IWXAPI getApi() {
         return api;
@@ -255,6 +253,7 @@ public class WXShare {
 
         void onFail(String message);
     }
+
     private byte[] bmpToByteArray(final Bitmap bmp, final boolean needRecycle) {
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.PNG, 100, output);

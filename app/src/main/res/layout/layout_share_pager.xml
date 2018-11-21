@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingEnd="@dimen/dimen_15dp"
+    android:paddingStart="@dimen/dimen_15dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clSharePic"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/ivShareSrc"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitXY"
+            android:src="@color/color999"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#fef1e1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivShareSrc"/>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardQcode"
+            android:layout_width="@dimen/dimen_120dp"
+            android:layout_height="@dimen/dimen_120dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.6">
+
+            <ImageView
+                android:id="@+id/ivQCode"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#fef1e1"
+                android:padding="@dimen/dimen_2dp"/>
+
+        </android.support.v7.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:text="我是董先生"
+            android:textColor="@color/colorBlackGold"
+            android:textSize="@dimen/dimen_18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardQcode"/>
+
+        <TextView
+            android:id="@+id/tvTip0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我为学艺团代言"
+            android:textColor="@color/colorBlackGold"
+            android:textSize="@dimen/dimen_25sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvName"/>
+
+        <TextView
+            android:id="@+id/tvTip1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_3dp"
+            android:text="扫码注册"
+            android:textColor="@color/color666"
+            android:textSize="@dimen/dimen_13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTip0"/>
+
+        <TextView
+            android:id="@+id/tvTip2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_3dp"
+            android:text="下载学艺团APP"
+            android:textColor="@color/color666"
+            android:textSize="@dimen/dimen_13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTip1"/>
+
+        <TextView
+            android:id="@+id/tvTip3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_3dp"
+            android:text="即可学习海量免费课程"
+            android:textColor="@color/color666"
+            android:textSize="@dimen/dimen_13sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toBottomOf="@+id/tvTip2"/>
+
+        <TextView
+            android:id="@+id/tvTip4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:background="@drawable/shape_45_theme"
+            android:paddingEnd="@dimen/dimen_15dp"
+            android:paddingStart="@dimen/dimen_15dp"
+            android:text="学习改变生活"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTip3"/>
+
+
+    </android.support.constraint.ConstraintLayout>
+</FrameLayout>

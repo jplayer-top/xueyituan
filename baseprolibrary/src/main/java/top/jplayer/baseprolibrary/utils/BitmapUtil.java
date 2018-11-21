@@ -18,6 +18,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -44,6 +45,18 @@ public class BitmapUtil {
         ByteArrayOutputStream o = new ByteArrayOutputStream();
         b.compress(Bitmap.CompressFormat.PNG, 100, o);
         return o.toByteArray();
+    }
+
+    /**
+     * 使用View的缓存功能，截取指定区域的View
+     */
+    public static Bitmap screenShotView(View view) {
+        //开启缓存功能
+        view.setDrawingCacheEnabled(true);
+        //创建缓存
+        view.buildDrawingCache();
+        //获取缓存Bitmap
+        return Bitmap.createBitmap(view.getDrawingCache());
     }
 
     /**
@@ -154,6 +167,7 @@ public class BitmapUtil {
         bm = BitmapFactory.decodeFile(absolutePath, opt);
         return bm;
     }  //ab
+
     public static Bitmap createBitmapThumbnail(Bitmap bitMap, boolean needRecycle, int newHeight, int newWidth) {
         int width = bitMap.getWidth();
         int height = bitMap.getHeight();
@@ -195,6 +209,13 @@ public class BitmapUtil {
 
     public static boolean saveBitmap(Bitmap bitmap, String absPath) {
         return saveBitmap(bitmap, new File(absPath));
+    }
+
+    public static String saveBitmap(Bitmap bitmap) {
+        File file = new File(BaseInitApplication.getContext().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS),
+                "share.png");
+        saveBitmap(bitmap, file);
+        return file.getAbsolutePath();
     }
 
     public static Intent buildImageGetIntent(Uri saveTo, int outputX, int outputY, boolean returnData) {
@@ -317,6 +338,7 @@ public class BitmapUtil {
         Log.i(TAG, "Bitmap compressed success, size: " + bytes.length);
         return bytes;
     }
+
     /**
      * 压缩图片（质量压缩）
      */
@@ -348,6 +370,7 @@ public class BitmapUtil {
         recycleBitmap(bitmap);
         return file;
     }
+
     public static void recycleBitmap(Bitmap... bitmaps) {
         if (bitmaps == null) {
             return;
@@ -376,6 +399,7 @@ public class BitmapUtil {
     public byte[] compressBitmapQuiklySmallTo(String filePath, int maxLenth) {
         return compressBitmapSmallTo(filePath, 480, 800, maxLenth);
     }
+
     /**
      * 将本地图片文件转换成可解码二维码的 Bitmap。为了避免图片太大，这里对图片进行了压缩。感谢 https://github.com/devilsen 提的 PR
      *
