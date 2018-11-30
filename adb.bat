@@ -1,0 +1,1 @@
+adb -s efeae018 shell dumpsys activity | findstr "mFocusedActivity"

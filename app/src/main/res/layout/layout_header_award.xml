@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/whiteF8">
+
+    <cn.bingoogolapple.bgabanner.BGABanner
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:bga="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/bgaBanner"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        bga:banner_indicatorGravity="bottom"
+        bga:banner_pointAutoPlayAble="true"
+        bga:banner_pointContainerBackground="@color/trans"
+        bga:banner_pointDrawable="@drawable/selector_banner_point_bar"/>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clCN"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bgaBanner">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_60dp"
+            android:layout_marginEnd="@dimen/dimen_15dp"
+            android:layout_marginStart="@dimen/dimen_15dp"
+            android:background="@drawable/shape_45_white"
+            android:divider="@drawable/shape_divider"
+            android:dividerPadding="@dimen/dimen_10dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:showDividers="middle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <RelativeLayout
+                android:id="@+id/rlCounts"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/ivCounts"
+                    android:layout_width="@dimen/dimen_40dp"
+                    android:layout_height="@dimen/dimen_40dp"
+                    android:layout_marginStart="@dimen/dimen_15dp"
+                    android:src="@drawable/award_counts"/>
+
+                <TextView
+                    android:id="@+id/tvCounts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15dp"
+                    android:layout_toEndOf="@+id/ivCounts"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:text="0"
+                    android:textColor="@color/colorBlackGold"
+                    android:textSize="@dimen/dimen_17sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvCounts"
+                    android:layout_marginStart="@dimen/dimen_15dp"
+                    android:layout_toEndOf="@+id/ivCounts"
+                    android:text="已分享"
+                    android:textColor="@color/color999"
+                    android:textSize="@dimen/dimen_11sp"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlNums"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_15dp"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/ivNums"
+                    android:layout_width="@dimen/dimen_40dp"
+                    android:layout_height="@dimen/dimen_40dp"
+                    android:src="@drawable/awrad_nums"/>
+
+                <TextView
+                    android:id="@+id/tvNums"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dimen_15dp"
+                    android:layout_toEndOf="@+id/ivNums"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:text="0"
+                    android:textColor="@color/colorBlackGold"
+                    android:textSize="@dimen/dimen_17sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvNums"
+                    android:layout_marginStart="@dimen/dimen_15dp"
+                    android:layout_toEndOf="@+id/ivNums"
+                    android:text="任务数量"
+                    android:textColor="@color/color999"
+                    android:textSize="@dimen/dimen_11sp"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/llNotice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_15dp"
+        android:background="@color/white"
+        android:paddingEnd="@dimen/dimen_20dp"
+        android:paddingStart="@dimen/dimen_20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clCN">
+
+        <ImageView
+            android:id="@+id/ivNotice"
+            android:layout_width="@dimen/dimen_23dp"
+            android:layout_height="@dimen/dimen_20dp"
+            android:layout_margin="@dimen/dimen_10dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:src="@drawable/award_notice"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bgaBanner"/>
+
+        <ViewFlipper
+            android:id="@+id/viewFlipper"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_marginStart="@dimen/dimen_5dp"
+            android:autoStart="true"
+            android:flipInterval="3000"
+            android:inAnimation="@anim/slide_in_bottom"
+            android:outAnimation="@anim/slide_out_top"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_40dp"
+        android:layout_marginTop="@dimen/dimen_15dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingEnd="@dimen/dimen_15dp"
+        android:paddingStart="@dimen/dimen_15dp"
+        app:layout_constraintTop_toBottomOf="@+id/llNotice">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="今日任务"
+            android:textColor="@color/colorBlackGold"
+            android:textSize="@dimen/dimen_18sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableEnd="@drawable/right_arrow"
+            android:text="查看全部"
+            android:textColor="@color/color999"/>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
