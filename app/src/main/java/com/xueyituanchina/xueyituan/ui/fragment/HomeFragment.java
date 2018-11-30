@@ -94,6 +94,7 @@ public class HomeFragment extends SuperBaseFragment {
     private String mData;
     private String selLocal;
     private View mFooter;
+    private int pageNumber = 1;
 
     @Override
     public int initLayout() {
@@ -116,6 +117,7 @@ public class HomeFragment extends SuperBaseFragment {
         mPresenter.areaList();
         mMap = new HashMap<>();
         mMap.put("orderType", "0");
+        mMap.put("pageNumber", "1");
         selLocal = (String) SharePreUtil.getData(getActivity(), "sel_local", "");
         mTvLocal.setText("".equals(selLocal) ? "聊城市" : selLocal);
         if (!"".equals(selLocal)) {
@@ -142,6 +144,15 @@ public class HomeFragment extends SuperBaseFragment {
         };
         layoutGravity = new CommonPopupWindow.LayoutGravity(CommonPopupWindow.LayoutGravity.ALIGN_LEFT |
                 CommonPopupWindow.LayoutGravity.TO_BOTTOM);
+        mSmartRefreshLayout.setOnLoadMoreListener(refreshLayout -> {
+            if (hasMore) {
+                mMap.put("pageNumber", ++pageNumber + "");
+                mPresenter.homeGoodsList(mMap);
+            } else {
+                mSmartRefreshLayout.finishLoadMore(1000);
+
+            }
+        });
     }
 
     private void initHeader() {
@@ -202,6 +213,8 @@ public class HomeFragment extends SuperBaseFragment {
                 int position = tab.getPosition();
                 if (position != 5) {
                     mMap.put("orderType", position + "");
+                    mMap.put("pageNumber", "1");
+                    pageNumber = 1;
                     mPresenter.homeGoodsList(mMap);
                 } else {
                     if (sendList != null) {
@@ -244,6 +257,8 @@ public class HomeFragment extends SuperBaseFragment {
             }
             mMap.put("catId", sendListBean.pid + "");
             window.getPopupWindow().dismiss();
+            mMap.put("pageNumber", "1");
+            pageNumber = 1;
             mPresenter.homeGoodsList(mMap);
         });
     }
@@ -273,6 +288,8 @@ public class HomeFragment extends SuperBaseFragment {
             SharePreUtil.saveData(mActivity, "sel_local", mData);
             mMap.put("areaCode", mData);
             fadeOutLocal(mRecyclerViewLocal);
+            mMap.put("pageNumber", "1");
+            pageNumber = 1;
             mPresenter.homeGoodsList(mMap);
         });
     }
@@ -327,12 +344,20 @@ public class HomeFragment extends SuperBaseFragment {
         initClassify(homeListBean.list);
     }
 
+    private boolean hasMore;
+
     public void homeGoodsList(HomeGoodsList homeGoodsList) {
-        mAdapter.removeAllFooterView();
-        if (homeGoodsList.list == null || homeGoodsList.list.size() < 1) {
-            mAdapter.addFooterView(mFooter);
+        hasMore = homeGoodsList.more;
+        if (pageNumber > 1) {
+            mSmartRefreshLayout.finishLoadMore();
+            mAdapter.addData(homeGoodsList.list);
+        } else {
+            mAdapter.removeAllFooterView();
+            if (homeGoodsList.list == null || homeGoodsList.list.size() < 1) {
+                mAdapter.addFooterView(mFooter);
+            }
+            mAdapter.setNewData(homeGoodsList.list);
         }
-        mAdapter.setNewData(homeGoodsList.list);
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             HomeGoodsList.ListBean bean = mAdapter.getData().get(position);
             clickToStore(bean.sp_name, bean.user_id + "");
@@ -356,6 +381,8 @@ public class HomeFragment extends SuperBaseFragment {
         if (tab != null) {
             tab.setText("筛选");
         }
+        mMap.put("pageNumber", "1");
+        pageNumber = 1;
         mPresenter.homeGoodsList(mMap);
     }
 

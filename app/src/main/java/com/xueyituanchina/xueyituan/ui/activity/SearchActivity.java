@@ -62,6 +62,7 @@ public class SearchActivity extends SuperBaseActivity {
     private ArrayList<String> mStrings;
     private int clickSelect = -1;
     private String mPid;
+    private int pagerNumber = 1;
 
     @Override
     protected void initImmersionBar() {
@@ -85,6 +86,7 @@ public class SearchActivity extends SuperBaseActivity {
         mMap = new HashMap<>();
         mPid = mBundle.getString("pid");
         mMap.put("orderType", "0");
+        mMap.put("pageNumber", "1");
         if (!mPid.equals("0")) {
             mMap.put("catId", mPid);
         }
@@ -102,6 +104,15 @@ public class SearchActivity extends SuperBaseActivity {
                 mPresenter.homeGoodsList(mMap, true);
             }
             return false;
+        });
+        mSmartRefreshLayout.setOnLoadMoreListener(refreshLayout -> {
+            if (hasMore) {
+                mMap.put("pageNumber", ++pagerNumber + "");
+                mPresenter.homeGoodsList(mMap);
+            } else {
+                mSmartRefreshLayout.finishLoadMore(1000);
+
+            }
         });
     }
 
@@ -221,8 +232,16 @@ public class SearchActivity extends SuperBaseActivity {
         }
     }
 
+    private boolean hasMore;
+
     public void homeGoodsList(HomeGoodsList bean) {
-        mAdapter.setNewData(bean.list);
+        hasMore = bean.more;
+        if (pagerNumber > 1) {
+            mSmartRefreshLayout.finishLoadMore();
+            mAdapter.addData(bean.list);
+        } else {
+            mAdapter.setNewData(bean.list);
+        }
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             HomeGoodsList.ListBean listBean = mAdapter.getData().get(position);
             clickToStore(listBean.sp_name, listBean.user_id + "");
@@ -243,6 +262,8 @@ public class SearchActivity extends SuperBaseActivity {
         mTvType.setText("全部分类");
         mTvLocal.setText("全城");
         editSearch.setText("");
+        mMap.put("pageNumber", "1");
+        pagerNumber = 1;
         mPresenter.homeGoodsList(mMap);
     }
 

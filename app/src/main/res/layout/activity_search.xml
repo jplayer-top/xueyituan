@@ -114,7 +114,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/llSelect">
 
-        <include layout="@layout/layout_refresh_white_nofoot"/>
+        <include layout="@layout/layout_refresh_white_hasfoot"/>
     </FrameLayout>
 
 
