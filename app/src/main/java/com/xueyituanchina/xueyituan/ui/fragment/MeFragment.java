@@ -1,8 +1,6 @@
 package com.xueyituanchina.xueyituan.ui.fragment;
 
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -22,16 +20,12 @@ import com.xueyituanchina.xueyituan.mpbe.presenter.MePresenter;
 import com.xueyituanchina.xueyituan.ui.activity.CollectionActivity;
 import com.xueyituanchina.xueyituan.ui.activity.IssueActivity;
 import com.xueyituanchina.xueyituan.ui.activity.LoginActivity;
-import com.xueyituanchina.xueyituan.ui.activity.LookWhatActivity;
-import com.xueyituanchina.xueyituan.ui.activity.OrderInfoActivity;
 import com.xueyituanchina.xueyituan.ui.activity.OrderListActivity;
 import com.xueyituanchina.xueyituan.ui.activity.RechargeActivity;
 import com.xueyituanchina.xueyituan.ui.activity.SettingActivity;
-import com.xueyituanchina.xueyituan.ui.activity.MyShareActivity;
 import com.xueyituanchina.xueyituan.ui.activity.ShopCreateActivity;
 import com.xueyituanchina.xueyituan.ui.activity.StoreActivity;
 import com.xueyituanchina.xueyituan.ui.activity.StoreInfoActivity;
-import com.xueyituanchina.xueyituan.ui.adapter.MeOrderAdapter;
 import com.xueyituanchina.xueyituan.wxapi.WXPayEntryActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -64,53 +58,40 @@ import static com.xueyituanchina.xueyituan.XYTApplication.assert2Login;
  */
 
 public class MeFragment extends SuperBaseFragment {
-    @BindView(R.id.ivToolRightLeft)
-    ImageView mIvToolRightLeft;
-    @BindView(R.id.ivToolRight)
-    ImageView mIvToolRight;
+
     @BindView(R.id.llCollection)
     LinearLayout mLlCollection;
     @BindView(R.id.llIssue)
     LinearLayout mLlIssue;
-    @BindView(R.id.llLook)
-    LinearLayout mLlLook;
+
     @BindView(R.id.llWork)
-    LinearLayout mLlWork;
+    TextView mLlWork;
     @BindView(R.id.llShop)
-    LinearLayout mLlShop;
+    TextView mLlShop;
     @BindView(R.id.llChat)
-    LinearLayout mLlChat;
+    TextView mLlChat;
 
-    @BindView(R.id.recyclerView)
-    RecyclerView mRecyclerView;
-
-    @BindView(R.id.ivRecommend01)
-    ImageView mIvRecommend01;
-    @BindView(R.id.ivRecommend02)
-    ImageView mIvRecommend02;
 
     @BindView(R.id.tvToLogin)
     TextView mTvToLogin;
 
     @BindView(R.id.tvNick)
     TextView mTvNick;
-    @BindView(R.id.tvPoints)
-    TextView mTvPoints;
+    @BindView(R.id.llSetting)
+    TextView tvSetting;
     @BindView(R.id.ivIsVip)
     ImageView mIvIsVip;
     @BindView(R.id.ivAvatar)
     ImageView mIvAvatar;
     @BindView(R.id.tvLoadMoreOrder)
-    TextView tvLoadMoreOrder;
+    LinearLayout tvLoadMoreOrder;
     @BindView(R.id.llShowMsgUser)
     LinearLayout mLlShowMsgUser;
     @BindView(R.id.smartRefreshLayout)
     SmartRefreshLayout smartRefreshLayout;
-    @BindView(R.id.tvMyInv)
-    TextView tvMyInv;
+
     private Unbinder mUnbinder;
     private MePresenter mPresenter;
-    private MeOrderAdapter mAdapter;
     private MyInfoBean bean;
 
     @Override
@@ -118,11 +99,6 @@ public class MeFragment extends SuperBaseFragment {
         return R.layout.fragment_me;
     }
 
-    @Override
-    protected void initImmersionBar() {
-        super.initImmersionBar();
-        mImmersionBar.statusBarView(R.id.statusBarMe).init();
-    }
 
     @Override
     protected void initData(View rootView) {
@@ -133,50 +109,28 @@ public class MeFragment extends SuperBaseFragment {
         mTvToLogin.setOnClickListener(v -> ActivityUtils.init().start(this.getActivity(), LoginActivity.class));
         mPresenter = new MePresenter(this);
         mPresenter.requestMyInfo();
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false));
-        mAdapter = new MeOrderAdapter(null);
-        mRecyclerView.setAdapter(mAdapter);
-        mAdapter.setEmptyView(View.inflate(this.getContext(), R.layout.layout_empty_view_card, null));
         smartRefreshLayout.setOnRefreshListener(refreshLayout -> {
             mPresenter.requestMyInfoNoLoadding();
         });
-        mIvToolRightLeft.setOnClickListener(v -> {
+
+
+        tvSetting.setOnClickListener(v -> {
             toSettingActivity();
         });
-        tvMyInv.setOnClickListener(v -> {
-            ActivityUtils.init().start(mActivity,MyShareActivity.class,"课程分享");
-        });
-        mLlShowMsgUser.setOnClickListener(v -> {
-            toSettingActivity();
-        });
-        mIvAvatar.setOnClickListener(v -> {
-            toSettingActivity();
-        });
+//        mIvAvatar.setOnClickListener(v -> {
+//            toSettingActivity();
+//        });
         mLlCollection.setOnClickListener(v -> {
             ActivityUtils.init().start(mActivity, CollectionActivity.class, "收藏");
         });
-        mLlLook.setOnClickListener(v -> {
-            ActivityUtils.init().start(mActivity, LookWhatActivity.class, "我的足迹");
-        });
+//        mLlLook.setOnClickListener(v -> {
+//            ActivityUtils.init().start(mActivity, LookWhatActivity.class, "我的足迹");
+//        });
         mLlShop.setOnClickListener(v -> {
             ActivityUtils.init().start(mActivity, StoreInfoActivity.class, "");
         });
         mLlIssue.setOnClickListener(v -> {
             ActivityUtils.init().start(mActivity, IssueActivity.class, "我的评价");
-        });
-        mIvRecommend01.setOnClickListener(v -> {
-            if (XYTApplication.assert2Login(mActivity)) {
-                if (bean.rmdList != null && bean.rmdList.size() > 0) {
-                    clickToStore("", bean.rmdList.get(0).user_id + "");
-                }
-            }
-        });
-        mIvRecommend02.setOnClickListener(v -> {
-            if (XYTApplication.assert2Login(mActivity)) {
-                if (bean.rmdList != null && bean.rmdList.size() > 1) {
-                    clickToStore("", bean.rmdList.get(1).user_id + "");
-                }
-            }
         });
 
         mLlChat.setOnClickListener(v -> {
@@ -192,11 +146,6 @@ public class MeFragment extends SuperBaseFragment {
                 bundle.putParcelableArrayList("order_list", (ArrayList<MyInfoBean.OrderListBean>) orderList);
                 ActivityUtils.init().start(mActivity, OrderListActivity.class, "订单列表", bundle);
             }
-        });
-        mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            Bundle bundle = new Bundle();
-            bundle.putString("orderId", mAdapter.getData().get(position).order_id);
-            ActivityUtils.init().start(mActivity, OrderInfoActivity.class, "订单详情", bundle);
         });
     }
 
@@ -287,7 +236,6 @@ public class MeFragment extends SuperBaseFragment {
         });
         mTvNick.setText(String.format(Locale.CHINA, "会员昵称：%s", StringUtils.init().fixNullStr(bean.nick)));
         XYTApplication.login_name = StringUtils.init().fixNullStr(bean.nick);
-        mTvPoints.setText(String.format(Locale.CHINA, "会员积分：%d", bean.points));
         mIvIsVip.setSelected(bean.vip != 0);
         mIvIsVip.setOnClickListener(v -> {
             if (bean.vip == 0) {
@@ -300,20 +248,7 @@ public class MeFragment extends SuperBaseFragment {
         });
         initRecomend(bean.avator, mIvAvatar);
         List<MyInfoBean.RmdListBean> rmdList = bean.rmdList;
-        if (rmdList.size() > 0) {
-            initRecomend(rmdList.get(0).img, mIvRecommend01);
-            if (rmdList.size() > 1) {
-                initRecomend(rmdList.get(1).img, mIvRecommend02);
-            }
-        }
-        if (bean.orderList != null) {
-            if (bean.orderList.size() > 2) {
-                mAdapter.setNewData(bean.orderList.subList(0, 2));
-            } else {
-                mAdapter.setNewData(bean.orderList);
 
-            }
-        }
     }
 
     private void initRecomend(String img, ImageView iv) {

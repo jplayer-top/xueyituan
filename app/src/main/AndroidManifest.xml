@@ -120,6 +120,11 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".ui.activity.AwardActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+
+        <activity
             android:name=".ui.activity.StoreOrderListActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>

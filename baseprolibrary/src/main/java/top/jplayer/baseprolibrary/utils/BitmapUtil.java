@@ -207,8 +207,10 @@ public class BitmapUtil {
         return false;
     }
 
-    public static boolean saveBitmap(Bitmap bitmap, String absPath) {
-        return saveBitmap(bitmap, new File(absPath));
+    public static boolean saveBitmap(Bitmap bitmap, String name) {
+        File file = new File(BaseInitApplication.getContext().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS),
+                name);
+        return saveBitmap(bitmap, file);
     }
 
     public static String saveBitmap(Bitmap bitmap) {

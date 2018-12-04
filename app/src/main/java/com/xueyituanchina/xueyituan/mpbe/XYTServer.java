@@ -3,6 +3,7 @@ package com.xueyituanchina.xueyituan.mpbe;
 import com.xueyituanchina.xueyituan.aliapi.AliPayInfoBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.AreaAllBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.AreaBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.AwardBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.BrandBBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.FavListBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.GiftDetailBean;
@@ -63,6 +64,15 @@ public interface XYTServer {
 
     @GET("home/list")
     Observable<HomeListBean> home_list(@Query("pid") String pid);
+
+    @GET("home2/index")
+    Observable<AwardBean> awardList();
+
+    @POST("task/share")
+    Observable<BaseBean> shareOk(@Query("taskId") String taskId);
+
+    @POST("task/beforeshare")
+    Observable<BaseBean> canShare(@Query("taskId") String taskId);
 
     @GET("home/goodsinfo?")
     Observable<ShopItemBean> shopInfo(@Query("id") String id, @Query("lnglat") String lnglat);

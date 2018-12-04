@@ -1,5 +1,9 @@
 package com.xueyituanchina.xueyituan.mpbe.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
@@ -25,9 +29,9 @@ public class AwardBean extends BaseBean {
     public int totalShared;
     public List<String> bannerList;
     public List<String> broadMsgList;
-    public List<TaskListBean> taskList;
+    public ArrayList<TaskListBean> taskList;
 
-    public static class TaskListBean {
+    public static class TaskListBean implements Parcelable {
         /**
          * task_id : gtask2018112616050419241
          * goods_title : 我是测试
@@ -51,5 +55,49 @@ public class AwardBean extends BaseBean {
         public String sp_img;
         public String sp_name;
         public boolean shared;
+
+        protected TaskListBean(Parcel in) {
+            task_id = in.readString();
+            goods_title = in.readString();
+            goods_subtitle = in.readString();
+            amount = in.readInt();
+            share_img = in.readString();
+            cat_name = in.readString();
+            goods_thumb_img = in.readString();
+            sp_img = in.readString();
+            sp_name = in.readString();
+            shared = in.readByte() != 0;
+        }
+
+        public static final Creator<TaskListBean> CREATOR = new Creator<TaskListBean>() {
+            @Override
+            public TaskListBean createFromParcel(Parcel in) {
+                return new TaskListBean(in);
+            }
+
+            @Override
+            public TaskListBean[] newArray(int size) {
+                return new TaskListBean[size];
+            }
+        };
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(task_id);
+            dest.writeString(goods_title);
+            dest.writeString(goods_subtitle);
+            dest.writeInt(amount);
+            dest.writeString(share_img);
+            dest.writeString(cat_name);
+            dest.writeString(goods_thumb_img);
+            dest.writeString(sp_img);
+            dest.writeString(sp_name);
+            dest.writeByte((byte) (shared ? 1 : 0));
+        }
     }
 }

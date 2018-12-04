@@ -261,6 +261,7 @@ public class HomeFragment extends SuperBaseFragment {
             pageNumber = 1;
             mPresenter.homeGoodsList(mMap);
         });
+
     }
 
     private void initRecyclerLocal() {

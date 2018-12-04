@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_150dp"
+        android:layout_marginEnd="@dimen/dp_10"
+        android:layout_marginStart="@dimen/dp_10">
+
+        <LinearLayout
+            android:id="@+id/tvAllShare"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_50dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="@dimen/dimen_25dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="@dimen/dimen_25dp"
+                android:src="@drawable/dialog_wx_one"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_15dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="分享到朋友圈"
+                android:textStyle="bold"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/dialog_share_all"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dimen_15dp"
+                android:layout_marginStart="@dimen/dimen_5dp"
+                android:src="@drawable/right_arrow"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tvOneShare"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_50dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="@dimen/dimen_25dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="@dimen/dimen_25dp"
+                android:src="@drawable/dialog_wx_all"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_15dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="分享给微信好友"
+                android:textStyle="bold"/>
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dimen_15dp"
+                android:layout_marginStart="@dimen/dimen_5dp"
+                android:src="@drawable/right_arrow"/>
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_10">
+
+        <TextView
+            android:id="@+id/tvClose"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="取消"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

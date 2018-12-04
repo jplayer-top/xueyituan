@@ -15,6 +15,8 @@ import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.xueyituanchina.xueyituan.XYTApplication;
 
+import org.greenrobot.eventbus.EventBus;
+
 import top.jplayer.baseprolibrary.utils.ToastUtils;
 
 
@@ -72,7 +74,7 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
 
     private void check(BaseResp resp, String msg) {
         if (resp instanceof SendMessageToWX.Resp) {
-            ToastUtils.init().showSuccessToast(this, msg);
+            EventBus.getDefault().post(new WXShareBean(resp.errCode));
         } else {
             if (TextUtils.equals("分享成功", msg)) {
                 wxLogin((SendAuth.Resp) resp);
