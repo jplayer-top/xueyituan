@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/whiteF8">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_60dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bgg"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:drawablePadding="@dimen/dimen_5dp"
+            android:drawableStart="@drawable/task_notice"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="点击下方极速审核按钮，复制并添加客服微信xueyika01,可极速审核"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_10sp"/>
+
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/smartRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/dimen_15dp"
+            android:layout_marginStart="@dimen/dimen_15dp"
+            android:layout_marginTop="@dimen/dimen_35dp"
+            android:background="@drawable/shape_5_white"
+            app:srlEnablePreviewInEditMode="true">
+
+            <com.scwang.smartrefresh.layout.header.ClassicsHeader
+                android:id="@+id/classics"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <top.jplayer.baseprolibrary.widgets.MultipleStatusView
+                android:id="@+id/multipleStatusView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:emptyView="@layout/layout_empty_view"
+                app:errorView="@layout/layout_error_view"
+                app:loadingView="@layout/layout_loading_view"
+                app:noNetworkView="@layout/layout_network_view">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/dimen_5dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/whiteF8"/>
+            </top.jplayer.baseprolibrary.widgets.MultipleStatusView>
+
+            <com.scwang.smartrefresh.layout.footer.FalsifyFooter
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/tvCopyTo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_15dp"
+        android:layout_marginEnd="@dimen/dimen_30dp"
+        android:layout_marginStart="@dimen/dimen_30dp"
+        android:layout_marginTop="@dimen/dimen_15dp"
+        android:background="@drawable/shape_45_theme"
+        android:text="极速审核"
+        android:textColor="@color/white"/>
+</LinearLayout>

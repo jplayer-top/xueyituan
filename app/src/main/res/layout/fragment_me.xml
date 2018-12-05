@@ -253,13 +253,14 @@
                                 android:textStyle="bold"/>
 
                             <TextView
+                                android:id="@+id/tvTipVip"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:layout_weight="1"
                                 android:gravity="end"
                                 android:text="查看我的会员权益"
-                                android:textSize="@dimen/dimen_16sp"
+                                android:textSize="@dimen/dimen_12sp"
                                 android:textStyle="bold"/>
 
                             <ImageView

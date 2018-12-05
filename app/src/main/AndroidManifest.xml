@@ -79,6 +79,11 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".ui.activity.TaskPushActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+
+        <activity
             android:name=".ui.activity.SearchActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
@@ -110,7 +115,10 @@
             android:name=".ui.activity.MyShareActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
-
+        <activity
+            android:name=".ui.activity.UserTaskListActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.activity.OrderListActivity"
             android:launchMode="singleTop"
@@ -206,6 +214,7 @@
                     android:scheme="rong"/>
             </intent-filter>
         </activity>
+
 
         <!--7.0 -->
         <provider

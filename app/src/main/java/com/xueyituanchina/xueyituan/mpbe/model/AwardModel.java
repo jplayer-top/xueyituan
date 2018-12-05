@@ -2,8 +2,15 @@ package com.xueyituanchina.xueyituan.mpbe.model;
 
 import com.xueyituanchina.xueyituan.mpbe.XYTServer;
 import com.xueyituanchina.xueyituan.mpbe.bean.AwardBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.UpdateUrlBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.UserTaskListBean;
+
+import java.io.File;
 
 import io.reactivex.Observable;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import top.jplayer.baseprolibrary.mvp.model.BaseModel;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.net.retrofit.IoMainSchedule;
@@ -24,7 +31,24 @@ public class AwardModel extends BaseModel<XYTServer> {
         return mServer.awardList().compose(new IoMainSchedule<>());
     }
 
+    public Observable<UserTaskListBean> taskList() {
+        return mServer.taskList().compose(new IoMainSchedule<>());
+    }
+
     public Observable<BaseBean> shareOk(String taskId) {
         return mServer.shareOk(taskId).compose(new IoMainSchedule<>());
+    }
+
+    public Observable<BaseBean> pushShare(String taskId,String url) {
+        return mServer.pushShare(taskId,url).compose(new IoMainSchedule<>());
+    }
+
+    public Observable<UpdateUrlBean> updateScreen(File file) {
+        RequestBody requestFile =
+                RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData("img", file.getName(), requestFile);
+        return mServer.updateScreen(body)
+                .compose(new IoMainSchedule<>());
     }
 }

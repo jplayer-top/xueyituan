@@ -26,6 +26,7 @@ import com.xueyituanchina.xueyituan.ui.activity.SettingActivity;
 import com.xueyituanchina.xueyituan.ui.activity.ShopCreateActivity;
 import com.xueyituanchina.xueyituan.ui.activity.StoreActivity;
 import com.xueyituanchina.xueyituan.ui.activity.StoreInfoActivity;
+import com.xueyituanchina.xueyituan.ui.activity.UserTaskListActivity;
 import com.xueyituanchina.xueyituan.wxapi.WXPayEntryActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -83,6 +84,8 @@ public class MeFragment extends SuperBaseFragment {
     ImageView mIvIsVip;
     @BindView(R.id.ivAvatar)
     ImageView mIvAvatar;
+    @BindView(R.id.ivSubmitTask)
+    ImageView ivSubmitTask;
     @BindView(R.id.tvLoadMoreOrder)
     LinearLayout tvLoadMoreOrder;
     @BindView(R.id.llShowMsgUser)
@@ -117,9 +120,9 @@ public class MeFragment extends SuperBaseFragment {
         tvSetting.setOnClickListener(v -> {
             toSettingActivity();
         });
-//        mIvAvatar.setOnClickListener(v -> {
-//            toSettingActivity();
-//        });
+        ivSubmitTask.setOnClickListener(v -> {
+            ActivityUtils.init().start(mActivity, UserTaskListActivity.class,"提交任务");
+        });
         mLlCollection.setOnClickListener(v -> {
             ActivityUtils.init().start(mActivity, CollectionActivity.class, "收藏");
         });

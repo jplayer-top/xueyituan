@@ -23,6 +23,7 @@ import com.xueyituanchina.xueyituan.mpbe.bean.ShopItemBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.StoreBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.StoreInfoBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.UpdateUrlBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.UserTaskListBean;
 import com.xueyituanchina.xueyituan.wxapi.WxPayInfoBean;
 
 import java.util.Map;
@@ -55,6 +56,9 @@ public interface XYTServer {
     @GET("home/list")
     Observable<HomeListBean> home_list();
 
+    @GET("home/list")
+    Observable<HomeListBean> home_list(@Query("pid") String pid);
+
     @GET()
     Observable<AreaBean> area_list(@Url String url);
 
@@ -62,8 +66,9 @@ public interface XYTServer {
     Observable<AreaAllBean> area(@Url String url);
 
 
-    @GET("home/list")
-    Observable<HomeListBean> home_list(@Query("pid") String pid);
+    @POST("task/sharelist")
+    Observable<UserTaskListBean> taskList();
+
 
     @GET("home2/index")
     Observable<AwardBean> awardList();
@@ -73,6 +78,9 @@ public interface XYTServer {
 
     @POST("task/beforeshare")
     Observable<BaseBean> canShare(@Query("taskId") String taskId);
+
+    @POST("task/submit")
+    Observable<BaseBean> pushShare(@Query("id") String taskId, @Query("url") String url);
 
     @GET("home/goodsinfo?")
     Observable<ShopItemBean> shopInfo(@Query("id") String id, @Query("lnglat") String lnglat);
@@ -200,6 +208,10 @@ public interface XYTServer {
     @Multipart
     @POST("uploadposter")
     Observable<UpdateUrlBean> updatePoster(@Part MultipartBody.Part file);
+
+    @Multipart
+    @POST("uploadscreens")
+    Observable<UpdateUrlBean> updateScreen(@Part MultipartBody.Part file);
 
     @Multipart
     @POST("upload")

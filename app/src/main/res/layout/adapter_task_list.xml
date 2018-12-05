@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dimen_125dp"
+    android:layout_marginBottom="@dimen/dimen_10dp"
+    android:background="@drawable/shape_5_white">
+
+    <TextView
+        android:id="@+id/tvType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_17dp"
+        android:background="@drawable/award_type"
+        android:paddingBottom="@dimen/dimen_2dp"
+        android:text="类别"
+        android:textColor="@color/white"
+        android:textSize="@dimen/dimen_9sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvAwardTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_5dp"
+        android:layout_marginTop="@dimen/dimen_15dp"
+        android:text="学艺团"
+        android:textSize="@dimen/dimen_16sp"
+        app:layout_constraintStart_toEndOf="@+id/tvType"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+    <TextView
+        android:id="@+id/tvAwardSubTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:gravity="center_vertical"
+        android:text="课程"
+        android:textColor="@color/color666"
+        android:textSize="@dimen/dimen_12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvType"/>
+
+    <top.jplayer.baseprolibrary.widgets.polygon.PolygonImageView
+        android:id="@+id/ivPushAvatar"
+        android:layout_width="@dimen/dimen_30dp"
+        android:layout_height="@dimen/dimen_30dp"
+        android:layout_marginBottom="@dimen/dimen_15dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:src="@mipmap/ic_launcher"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:poly_vertices="0"/>
+
+    <TextView
+        android:id="@+id/tvPushName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_8dp"
+        android:text="商家"
+        android:textColor="@color/color666"
+        android:textSize="@dimen/dimen_12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/ivPushAvatar"
+        app:layout_constraintStart_toEndOf="@id/ivPushAvatar"
+        app:layout_constraintTop_toTopOf="@+id/ivPushAvatar"/>
+
+    <TextView
+        android:id="@+id/tvAwardShare"
+        android:layout_width="@dimen/dimen_80dp"
+        android:layout_height="@dimen/dimen_30dp"
+        android:layout_marginBottom="@dimen/dimen_7dp"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:background="@drawable/award_share"
+        android:paddingEnd="@dimen/dimen_10dp"
+        android:paddingStart="@dimen/dimen_10dp"
+        android:text="上架审核"
+        android:textColor="@color/white"
+        android:textSize="@dimen/dimen_14sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvPushNum"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvPushNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dimen_10dp"
+        android:text="审核有效期"
+        android:textColor="@color/color666"
+        android:textSize="@dimen/dimen_12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/tvAwardShare"/>
+
+</android.support.constraint.ConstraintLayout>
