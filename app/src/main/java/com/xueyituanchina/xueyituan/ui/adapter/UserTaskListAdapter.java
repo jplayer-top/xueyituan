@@ -32,14 +32,14 @@ public class UserTaskListAdapter extends BaseQuickAdapter<UserTaskListBean.ListB
     @Override
     protected void convert(BaseViewHolder helper, UserTaskListBean.ListBean item) {
         String status = item.status;
-
+        String dataSub = getDataSub(item.ct, status);
         helper.setText(R.id.tvType, item.cat_name)
                 .setText(R.id.tvAwardTitle, item.goods_title)
                 .setBackgroundRes(R.id.tvAwardShare, getStatusColor(status))
-                .setText(R.id.tvAwardShare, String.format(Locale.CHINA, "%s", getStatus(status)))
                 .setText(R.id.tvAwardSubTitle, item.goods_subtitle)
                 .setText(R.id.tvPushName, item.sp_name)
-                .setText(R.id.tvPushNum, getDataSub(item.ct, status))
+                .setText(R.id.tvPushNum, dataSub)
+                .setText(R.id.tvAwardShare, String.format(Locale.CHINA, "%s", getStatus(status)))
                 .addOnClickListener(R.id.tvAwardShare);
         ImageView ivAvatar = helper.itemView.findViewById(R.id.ivPushAvatar);
         helper.itemView.findViewById(R.id.tvPushNum)
@@ -69,6 +69,7 @@ public class UserTaskListAdapter extends BaseQuickAdapter<UserTaskListBean.ListB
 
     public String getStatus(String status) {
         if ("0".equals(status)) {
+
             return "上传审核";
         } else if ("1".equals(status)) {
             return "审核通过";

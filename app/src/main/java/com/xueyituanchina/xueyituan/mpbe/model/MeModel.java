@@ -1,6 +1,7 @@
 package com.xueyituanchina.xueyituan.mpbe.model;
 
 import com.xueyituanchina.xueyituan.mpbe.XYTServer;
+import com.xueyituanchina.xueyituan.mpbe.bean.EquityBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.MyInfoBean;
 
 import java.io.File;
@@ -53,5 +54,9 @@ public class MeModel extends BaseModel<XYTServer> {
 
     public Observable<BaseBean> logout() {
         return mServer.logout().compose(new IoMainSchedule<>());
+    }
+
+    public Observable<EquityBean> equity() {
+        return mServer.equity().compose(new IoMainSchedule<>());
     }
 }

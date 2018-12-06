@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/whiteF8">
+
+        <ImageView
+            android:id="@+id/ivVipHeader"
+            android:layout_width="match_parent"
+            android:layout_height="210dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/vip_header"/>
+
+        <ImageView
+            android:id="@+id/ivTipVip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_25dp"
+            android:layout_marginTop="@dimen/dimen_25dp"
+            android:src="@drawable/vip_icon"
+            app:layout_constraintStart_toStartOf="@+id/ivVipHeader"
+            app:layout_constraintTop_toTopOf="@+id/ivVipHeader"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1dp"
+            android:layout_marginEnd="@dimen/dimen_20dp"
+            android:layout_marginStart="@dimen/dimen_20dp"
+            android:layout_marginTop="@dimen/dimen_5dp"
+            android:background="@drawable/shape_divider"
+            android:visibility="invisible"
+            app:layout_constraintTop_toBottomOf="@+id/ivTipVip"/>
+
+        <TextView
+            android:id="@+id/tvPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:textColor="@color/color666"
+            android:textSize="@dimen/dimen_15sp"
+            app:layout_constraintStart_toStartOf="@+id/ivTipVip"
+            app:layout_constraintTop_toBottomOf="@+id/ivTipVip"/>
+
+        <TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_3dp"
+            android:layout_marginTop="@dimen/dimen_3dp"
+            android:textColor="@color/color666"
+            android:textSize="@dimen/dimen_15sp"
+            app:layout_constraintStart_toStartOf="@+id/tvPhone"
+            app:layout_constraintTop_toBottomOf="@+id/tvPhone"/>
+
+        <top.jplayer.baseprolibrary.widgets.polygon.PolygonImageView
+            android:id="@+id/ivAvatar"
+            android:layout_width="@dimen/dimen_35dp"
+            android:layout_height="@dimen/dimen_35dp"
+            android:layout_marginEnd="@dimen/dimen_60dp"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintBottom_toBottomOf="@+id/ivTipVip"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ivTipVip"
+            app:poly_vertices="0"/>
+
+        <TextView
+            android:id="@+id/tvVipSol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dimen_25dp"
+            android:text="开通会员-立享特权"
+            android:textColor="@color/color666"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvPhone"/>
+
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dimen_20dp"
+            android:layout_marginStart="@dimen/dimen_20dp"
+            android:layout_marginTop="@dimen/dimen_180dp"
+            android:background="@drawable/vip_add"
+            android:text="立即加入"
+            android:textSize="@dimen/dimen_17sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <LinearLayout
+            android:id="@+id/llTip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnAdd">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="※ 加入会员即代表您已阅读并同意"
+                android:textSize="@dimen/dimen_11sp"/>
+
+            <TextView
+                android:id="@+id/tvWeb01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="会员权益"
+                android:textColor="#9B0508"
+                android:textSize="@dimen/dimen_11sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="及"
+                android:textSize="@dimen/dimen_11sp"/>
+
+            <TextView
+                android:id="@+id/tvWeb02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="会员协议"
+                android:textColor="#9B0508"
+                android:textSize="@dimen/dimen_11sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llTip1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llTip">
+
+            <LinearLayout
+                android:layout_width="0dp"
+
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/youzhi"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_5dp"
+                    android:text="优质资源"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="多的超乎想象"
+                    android:textColor="@color/color666"
+                    android:textSize="@dimen/dimen_8sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/zhuanshu"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_5dp"
+                    android:text="专属讲师"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="24小时 专业达人"
+                    android:textColor="@color/color666"
+                    android:textSize="@dimen/dimen_8sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/fanbei"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_5dp"
+                    android:text="翻倍奖金"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="惠人惠己  服务教学"
+                    android:textColor="@color/color666"
+                    android:textSize="@dimen/dimen_8sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/huwaihuodong"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dimen_5dp"
+                    android:text="户外活动"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="全方位发展福利"
+                    android:textColor="@color/color666"
+                    android:textSize="@dimen/dimen_8sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="@dimen/dimen_2dp"
+            android:layout_height="@dimen/dimen_35dp"
+            android:layout_marginStart="@dimen/dimen_15dp"
+            android:background="#FACD89"
+            app:layout_constraintBottom_toBottomOf="@+id/tvTipE"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvTipC"/>
+
+        <TextView
+            android:id="@+id/tvTipC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_27dp"
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:text="会员权益"
+            android:textColor="@color/textBlack"
+            android:textSize="@dimen/dimen_17sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llTip1"/>
+
+        <TextView
+            android:id="@+id/tvTipE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_27dp"
+            android:text="Member Benefits"
+            android:textColor="@color/color666"
+            android:textSize="@dimen/dimen_14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTipC"/>
+
+        <TextView
+            android:id="@+id/tvVipContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dimen_25dp"
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:gravity="center_vertical"
+            android:lineSpacingExtra="@dimen/dimen_5dp"
+            android:text="@string/vip_tip"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTipE"/>
+    </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>

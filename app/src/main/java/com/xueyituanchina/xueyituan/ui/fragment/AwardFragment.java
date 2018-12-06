@@ -139,7 +139,7 @@ public class AwardFragment extends SuperBaseFragment {
         mTvNums = mHeader.findViewById(R.id.tvNums);
         mTvAwardAll = mHeader.findViewById(R.id.tvAwardAll);
         mHeader.findViewById(R.id.tvShareInvit).setOnClickListener(v -> {
-            ActivityUtils.init().start(mActivity, MyShareActivity.class, "课程分享");
+            ActivityUtils.init().start(mActivity, MyShareActivity.class, "邀请好友");
         });
         mTvAwardAll.setOnClickListener(v -> {
             Bundle bundle = new Bundle();

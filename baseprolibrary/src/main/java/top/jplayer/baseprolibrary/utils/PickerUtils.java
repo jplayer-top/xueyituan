@@ -4,9 +4,11 @@ import android.content.Context;
 import android.graphics.Color;
 import android.widget.TextView;
 
+import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.TimePickerView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -68,6 +70,42 @@ public class PickerUtils {
         if (!mTimePickerView.isShowing()) {
             mTimePickerView.show();
         }
+    }
+
+    public void initStringPicker(final ArrayList<String> optionsItems, int position, Context context) {
+        OptionsPickerView optionsPickerView =
+                new OptionsPickerView.Builder(context, (options1, options2, options3, v) -> {
+                    String value = optionsItems.get(options1);
+                    if (mPickerClick != null) {
+                        mPickerClick.onStringPickerClick(options1);
+                    }
+                    if (v != null) {
+                        TextView textView = (TextView) v;
+                        textView.setText(value);
+                    }
+                }).setSubmitText("确定")//确定按钮文字
+                        .setCancelText("取消")//取消按钮文字
+                        .setSubCalSize(18)//确定和取消文字大小
+                        .setContentTextSize(21)//滚轮文字大小
+                        .setDividerColor(Color.DKGRAY)
+                        .setCyclic(false, false, false)//循环与否
+                        .setSelectOptions(position)  //设置默认选中项
+                        .setOutSideCancelable(false)//点击外部dismiss default true
+                        .build();
+        optionsPickerView.setPicker(optionsItems);//添加数据源
+        if (!optionsPickerView.isShowing()) {
+            optionsPickerView.show();
+        }
+    }
+
+    public void setOnClickString(StringPickerClick mPickerClick) {
+        this.mPickerClick = mPickerClick;
+    }
+
+    private StringPickerClick mPickerClick;
+
+    public interface StringPickerClick {
+        void onStringPickerClick(int pos);
     }
 
     private String patternDate(Date date, String pattern) {//可根据需要自行截取数据显示

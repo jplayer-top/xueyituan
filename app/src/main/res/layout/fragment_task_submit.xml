@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarPush"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/whiteF8"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|bottom"
+                app:tabIndicatorColor="#1BCDCF"
+                app:tabMode="scrollable"
+                app:tabSelectedTextColor="@color/colorBlackGold"
+                app:tabTextColor="@color/color999">
+
+                <android.support.design.widget.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="发布"/>
+
+                <android.support.design.widget.TabItem
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="历史"/>
+            </android.support.design.widget.TabLayout>
+
+
+        </FrameLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <FrameLayout
+        android:id="@+id/flContent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarPush">
+
+        <LinearLayout
+            android:id="@+id/llPushTask"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:animateLayoutChanges="true"
+            android:background="@color/whiteF2F5F9"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvGoodsList"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_50dp"
+                android:layout_margin="@dimen/dimen_15dp"
+                android:background="@drawable/shape_5_white"
+                android:gravity="center_vertical"
+                android:hint="点击选择要推广的课程"
+                android:paddingStart="@dimen/dimen_35dp"
+                android:textColorHint="@color/color999"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_15dp"
+                android:background="@color/white"
+                android:divider="@drawable/shape_divider"
+                android:dividerPadding="@dimen/dimen_15dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical"
+                android:showDividers="middle">
+
+                <EditText
+                    android:id="@+id/tvTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_50dp"
+                    android:background="@null"
+                    android:drawablePadding="@dimen/dimen_15dp"
+                    android:drawableStart="@drawable/feedback"
+                    android:gravity="center_vertical"
+                    android:hint="请输入活动推广标题（最多15个字符）"
+                    android:paddingEnd="@dimen/dimen_15dp"
+                    android:paddingStart="@dimen/dimen_15dp"
+                    android:textColorHint="@color/colorBlackGold"
+                    android:textSize="@dimen/dimen_14sp"
+                    android:textStyle="bold"/>
+
+                <EditText
+                    android:id="@+id/llNums"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_50dp"
+                    android:background="@null"
+                    android:drawablePadding="@dimen/dimen_15dp"
+                    android:drawableStart="@drawable/account"
+                    android:gravity="center_vertical"
+                    android:hint="请输入任务发布数量"
+                    android:inputType="number"
+                    android:paddingEnd="@dimen/dimen_15dp"
+                    android:paddingStart="@dimen/dimen_15dp"
+                    android:textColorHint="@color/color666"
+                    android:textSize="@dimen/dimen_14sp"/>
+
+                <EditText
+                    android:id="@+id/llPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dimen_50dp"
+                    android:background="@null"
+                    android:digits="0123456789."
+                    android:drawablePadding="@dimen/dimen_15dp"
+                    android:drawableStart="@drawable/jinrong"
+                    android:gravity="center_vertical"
+                    android:hint="请输入单笔任务金额"
+                    android:inputType="text"
+                    android:paddingEnd="@dimen/dimen_15dp"
+                    android:paddingStart="@dimen/dimen_15dp"
+                    android:textColorHint="@color/color666"
+                    android:textSize="@dimen/dimen_14sp"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnPush"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dimen_15dp"
+                android:background="@drawable/task_push_add"
+                android:text="确认并提交"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llTaskList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:animateLayoutChanges="true"
+            android:background="@color/whiteF2F5F9"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <com.scwang.smartrefresh.layout.SmartRefreshLayout
+                android:id="@+id/smartRefreshLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="@dimen/dimen_15dp"
+                android:layout_marginStart="@dimen/dimen_15dp"
+                android:layout_marginTop="@dimen/dimen_10dp"
+                app:srlEnablePreviewInEditMode="true">
+
+                <com.scwang.smartrefresh.layout.header.ClassicsHeader
+                    android:id="@+id/classics"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <top.jplayer.baseprolibrary.widgets.MultipleStatusView
+                    android:id="@+id/multipleStatusView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:emptyView="@layout/layout_empty_view"
+                    app:errorView="@layout/layout_error_view"
+                    app:loadingView="@layout/layout_loading_view"
+                    app:noNetworkView="@layout/layout_network_view">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/dimen_5dp"/>
+                </top.jplayer.baseprolibrary.widgets.MultipleStatusView>
+
+                <com.scwang.smartrefresh.layout.footer.FalsifyFooter
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+        </LinearLayout>
+    </FrameLayout>
+</android.support.constraint.ConstraintLayout>

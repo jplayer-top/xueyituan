@@ -20,6 +20,7 @@ import com.xueyituanchina.xueyituan.mpbe.presenter.MePresenter;
 import com.xueyituanchina.xueyituan.ui.activity.CollectionActivity;
 import com.xueyituanchina.xueyituan.ui.activity.IssueActivity;
 import com.xueyituanchina.xueyituan.ui.activity.LoginActivity;
+import com.xueyituanchina.xueyituan.ui.activity.MeInvActivity;
 import com.xueyituanchina.xueyituan.ui.activity.OrderListActivity;
 import com.xueyituanchina.xueyituan.ui.activity.RechargeActivity;
 import com.xueyituanchina.xueyituan.ui.activity.SettingActivity;
@@ -27,6 +28,7 @@ import com.xueyituanchina.xueyituan.ui.activity.ShopCreateActivity;
 import com.xueyituanchina.xueyituan.ui.activity.StoreActivity;
 import com.xueyituanchina.xueyituan.ui.activity.StoreInfoActivity;
 import com.xueyituanchina.xueyituan.ui.activity.UserTaskListActivity;
+import com.xueyituanchina.xueyituan.ui.activity.VipShowActivity;
 import com.xueyituanchina.xueyituan.wxapi.WXPayEntryActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -64,6 +66,8 @@ public class MeFragment extends SuperBaseFragment {
     LinearLayout mLlCollection;
     @BindView(R.id.llIssue)
     LinearLayout mLlIssue;
+    @BindView(R.id.llInvit)
+    LinearLayout llInvit;
 
     @BindView(R.id.llWork)
     TextView mLlWork;
@@ -80,12 +84,16 @@ public class MeFragment extends SuperBaseFragment {
     TextView mTvNick;
     @BindView(R.id.llSetting)
     TextView tvSetting;
+    @BindView(R.id.tvTipVip)
+    TextView tvTipVip;
     @BindView(R.id.ivIsVip)
     ImageView mIvIsVip;
     @BindView(R.id.ivAvatar)
     ImageView mIvAvatar;
     @BindView(R.id.ivSubmitTask)
     ImageView ivSubmitTask;
+    @BindView(R.id.ivVipSet)
+    ImageView ivVipSet;
     @BindView(R.id.tvLoadMoreOrder)
     LinearLayout tvLoadMoreOrder;
     @BindView(R.id.llShowMsgUser)
@@ -121,14 +129,14 @@ public class MeFragment extends SuperBaseFragment {
             toSettingActivity();
         });
         ivSubmitTask.setOnClickListener(v -> {
-            ActivityUtils.init().start(mActivity, UserTaskListActivity.class,"提交任务");
+            ActivityUtils.init().start(mActivity, UserTaskListActivity.class, "提交任务");
         });
         mLlCollection.setOnClickListener(v -> {
             ActivityUtils.init().start(mActivity, CollectionActivity.class, "收藏");
         });
-//        mLlLook.setOnClickListener(v -> {
-//            ActivityUtils.init().start(mActivity, LookWhatActivity.class, "我的足迹");
-//        });
+        llInvit.setOnClickListener(v -> {
+            ActivityUtils.init().start(mActivity, MeInvActivity.class, "邀请好友");
+        });
         mLlShop.setOnClickListener(v -> {
             ActivityUtils.init().start(mActivity, StoreInfoActivity.class, "");
         });
@@ -239,7 +247,11 @@ public class MeFragment extends SuperBaseFragment {
         });
         mTvNick.setText(String.format(Locale.CHINA, "会员昵称：%s", StringUtils.init().fixNullStr(bean.nick)));
         XYTApplication.login_name = StringUtils.init().fixNullStr(bean.nick);
-        mIvIsVip.setSelected(bean.vip != 0);
+        boolean isVip = bean.vip != 0;
+        XYTApplication.isVip = isVip;
+        mIvIsVip.setSelected(isVip);
+        tvTipVip.setText(isVip ? "查看我的会员权益" : "开通即可免费听课");
+        ivVipSet.setImageResource(isVip ? R.drawable.me_vip_new : R.drawable.me_vip_old);
         mIvIsVip.setOnClickListener(v -> {
             if (bean.vip == 0) {
                 Bundle bundle = new Bundle();
@@ -249,8 +261,17 @@ public class MeFragment extends SuperBaseFragment {
                 ToastUtils.init().showInfoToast(getContext(), "当前已是Vip会员");
             }
         });
+        tvTipVip.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putBoolean("isVip", XYTApplication.isVip);
+            bundle.putString("avator", bean.avator);
+            bundle.putString("name", bean.nick);
+            bundle.putString("recharge", bean.recharge);
+            String login_phone = (String) SharePreUtil.getData(getContext(), "login_phone", "");
+            bundle.putString("phone", login_phone);
+            ActivityUtils.init().start(this.mActivity, VipShowActivity.class, "会员中心", bundle);
+        });
         initRecomend(bean.avator, mIvAvatar);
-        List<MyInfoBean.RmdListBean> rmdList = bean.rmdList;
 
     }
 

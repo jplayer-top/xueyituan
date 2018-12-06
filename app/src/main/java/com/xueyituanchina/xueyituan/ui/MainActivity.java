@@ -12,10 +12,10 @@ import com.xueyituanchina.xueyituan.R;
 import com.xueyituanchina.xueyituan.XYTApplication;
 import com.xueyituanchina.xueyituan.mpbe.event.FileSelect;
 import com.xueyituanchina.xueyituan.ui.fragment.AwardFragment;
-import com.xueyituanchina.xueyituan.ui.fragment.GiftFragment;
 import com.xueyituanchina.xueyituan.ui.fragment.HomeFragment;
 import com.xueyituanchina.xueyituan.ui.fragment.MeFragment;
 import com.xueyituanchina.xueyituan.ui.fragment.NearbyFragment;
+import com.xueyituanchina.xueyituan.ui.fragment.TaskSubmitFragment;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.Permission;
 
@@ -116,8 +116,8 @@ public class MainActivity extends SuperBaseActivity {
         List<QuickNavigationBar.NavihationInfo> list = new ArrayList<>();
         list.add(new QuickNavigationBar.NavihationInfo("首页", R.drawable.main_home, new AwardFragment()));
         list.add(new QuickNavigationBar.NavihationInfo("商家", R.drawable.main_home, new HomeFragment()));
+        list.add(new QuickNavigationBar.NavihationInfo("发布", R.drawable.main_shop, new TaskSubmitFragment()));
         list.add(new QuickNavigationBar.NavihationInfo("活动", R.drawable.main_act, new NearbyFragment()));
-        list.add(new QuickNavigationBar.NavihationInfo("发布", R.drawable.main_shop, new GiftFragment()));
         list.add(new QuickNavigationBar.NavihationInfo("我的", R.drawable.main_me, new MeFragment()));
         return list;
     }

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">学艺团</string>
     <string name="shop_info">请详细核实信息，并按照规范填写有效合法信息\n如对消息有疑问，请咨询0635-8091618</string>
+    <string name="vip_tip">1.会员可以免费购买商家 VIP课程\n2.app内报全年班参与免单抽奖\n3.会员免费参与学艺团户外活动\n4.邀请好友成为会员奖学金翻倍\n5.开通学艺团城市合伙人权限</string>
 </resources>

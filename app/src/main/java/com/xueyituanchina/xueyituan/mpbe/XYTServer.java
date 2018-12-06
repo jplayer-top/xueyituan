@@ -5,6 +5,7 @@ import com.xueyituanchina.xueyituan.mpbe.bean.AreaAllBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.AreaBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.AwardBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.BrandBBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.EquityBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.FavListBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.GiftDetailBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeGoodsList;
@@ -18,10 +19,13 @@ import com.xueyituanchina.xueyituan.mpbe.bean.OrderInfoBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.OrderIssueListBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.PointDetailBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.PointRecodeBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.PushTaskBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.PushTaskDestoryBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.ShareBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.ShopItemBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.StoreBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.StoreInfoBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.TaskGoodsListBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.UpdateUrlBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.UserTaskListBean;
 import com.xueyituanchina.xueyituan.wxapi.WxPayInfoBean;
@@ -72,6 +76,18 @@ public interface XYTServer {
 
     @GET("home2/index")
     Observable<AwardBean> awardList();
+
+    @GET("my/equity")
+    Observable<EquityBean> equity();
+
+    @POST("task/goodslist")
+    Observable<TaskGoodsListBean> taskGoodsList();
+
+    @POST("task/pubhis")
+    Observable<PushTaskDestoryBean> tasksDestory();
+
+    @POST("task/pub")
+    Observable<PushTaskBean> taskPub(@QueryMap() Map<String, String> map);
 
     @POST("task/share")
     Observable<BaseBean> shareOk(@Query("taskId") String taskId);

@@ -107,7 +107,7 @@
                                 android:id="@+id/tvToLogin"
                                 android:layout_width="0dp"
                                 android:layout_height="0dp"
-                                android:layout_marginStart="@dimen/dimen_15dp"
+                                android:layout_marginStart="@dimen/dimen_5dp"
                                 android:background="@color/white"
                                 android:gravity="center_vertical"
                                 android:text="点击登录"

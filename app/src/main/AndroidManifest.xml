@@ -116,6 +116,11 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".ui.activity.VipShowActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+
+        <activity
             android:name=".ui.activity.UserTaskListActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
@@ -127,6 +132,11 @@
             android:name=".ui.activity.LookWhatActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.MeInvActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
+
         <activity
             android:name=".ui.activity.AwardActivity"
             android:launchMode="singleTop"

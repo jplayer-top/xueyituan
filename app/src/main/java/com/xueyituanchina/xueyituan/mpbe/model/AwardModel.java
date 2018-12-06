@@ -2,10 +2,14 @@ package com.xueyituanchina.xueyituan.mpbe.model;
 
 import com.xueyituanchina.xueyituan.mpbe.XYTServer;
 import com.xueyituanchina.xueyituan.mpbe.bean.AwardBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.PushTaskBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.PushTaskDestoryBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.TaskGoodsListBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.UpdateUrlBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.UserTaskListBean;
 
 import java.io.File;
+import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.MediaType;
@@ -39,8 +43,20 @@ public class AwardModel extends BaseModel<XYTServer> {
         return mServer.shareOk(taskId).compose(new IoMainSchedule<>());
     }
 
-    public Observable<BaseBean> pushShare(String taskId,String url) {
-        return mServer.pushShare(taskId,url).compose(new IoMainSchedule<>());
+    public Observable<BaseBean> pushShare(String taskId, String url) {
+        return mServer.pushShare(taskId, url).compose(new IoMainSchedule<>());
+    }
+
+    public Observable<TaskGoodsListBean> taskGoodsList() {
+        return mServer.taskGoodsList().compose(new IoMainSchedule<>());
+    }
+
+    public Observable<PushTaskDestoryBean> tasksDestory() {
+        return mServer.tasksDestory().compose(new IoMainSchedule<>());
+    }
+
+    public Observable<PushTaskBean> taskPub(Map<String, String> map) {
+        return mServer.taskPub(map).compose(new IoMainSchedule<>());
     }
 
     public Observable<UpdateUrlBean> updateScreen(File file) {
