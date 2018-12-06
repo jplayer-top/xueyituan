@@ -52,10 +52,14 @@ public class UserTaskListActivity extends CommonToolBarActivity {
             getWechatApi();
         });
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
-            Bundle bundle = new Bundle();
-            bundle.putString("rules", rules);
-            bundle.putString("id", mAdapter.getData().get(position).id + "");
-            ActivityUtils.init().start(this, TaskPushActivity.class, "提交审核", bundle);
+            UserTaskListBean.ListBean listBean = mAdapter.getData().get(position);
+            String status = listBean.status;
+            if ("0".equals(status) || "2".equals(status)) {
+                Bundle bundle = new Bundle();
+                bundle.putString("rules", rules);
+                bundle.putString("id", listBean.id + "");
+                ActivityUtils.init().start(this, TaskPushActivity.class, "提交审核", bundle);
+            }
             return false;
         });
     }

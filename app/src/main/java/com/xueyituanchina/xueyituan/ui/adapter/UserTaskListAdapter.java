@@ -1,5 +1,7 @@
 package com.xueyituanchina.xueyituan.ui.adapter;
 
+import android.support.annotation.DrawableRes;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -29,35 +31,45 @@ public class UserTaskListAdapter extends BaseQuickAdapter<UserTaskListBean.ListB
 
     @Override
     protected void convert(BaseViewHolder helper, UserTaskListBean.ListBean item) {
+        String status = item.status;
+
         helper.setText(R.id.tvType, item.cat_name)
                 .setText(R.id.tvAwardTitle, item.goods_title)
-                .setText(R.id.tvAwardShare, String.format(Locale.CHINA, "%s", getStatus(item.status)))
+                .setBackgroundRes(R.id.tvAwardShare, getStatusColor(status))
+                .setText(R.id.tvAwardShare, String.format(Locale.CHINA, "%s", getStatus(status)))
                 .setText(R.id.tvAwardSubTitle, item.goods_subtitle)
                 .setText(R.id.tvPushName, item.sp_name)
-                .setText(R.id.tvPushNum, getDataSub(item.ct))
+                .setText(R.id.tvPushNum, getDataSub(item.ct, status))
                 .addOnClickListener(R.id.tvAwardShare);
         ImageView ivAvatar = helper.itemView.findViewById(R.id.ivPushAvatar);
+        helper.itemView.findViewById(R.id.tvPushNum)
+                .setVisibility("0".equals(status) || "2".equals(status) ? View.VISIBLE : View.INVISIBLE);
         Glide.with(this.mContext).load(item.sp_img).into(ivAvatar);
     }
 
-    private String getDataSub(String preDate) {
+    private String getDataSub(String preDate, String status) {
+        if ("0".equals(status) || "2".equals(status)) {
+            try {
+                int l = (int) ((new Date().getTime() - DateUtils.getDateByPattern(preDate, "yyyy-MM-dd " + "HH:mm:ss").getTime())) / 1000;
+                int dayAll = 3600 * 24;
+                int h = (dayAll - l) / 3600;
+                int m = (dayAll - l) % 3600 / 60;
+                if (h < 0) {
+                    return "";
+                }
+                return String.format(Locale.CHINA, "剩余%d时%d分", h, m);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
-        try {
-            int l = (int) ((new Date().getTime() - DateUtils.getDateByPattern(preDate, "yyyy-MM-dd " + "HH:mm:ss").getTime())) / 1000;
-            int dayAll = 3600 * 24;
-            int h = (dayAll - l) / 3600;
-            int m = (dayAll - l) % 3600 / 60;
-            return String.format(Locale.CHINA, "剩余%d时%d分", h, m);
-        } catch (ParseException e) {
-            e.printStackTrace();
         }
-        return "审核时间";
+        return "";
     }
 
 
-    private String getStatus(String status) {
+    public String getStatus(String status) {
         if ("0".equals(status)) {
-            return "提交审核";
+            return "上传审核";
         } else if ("1".equals(status)) {
             return "审核通过";
         } else if ("2".equals(status)) {
@@ -68,5 +80,21 @@ public class UserTaskListAdapter extends BaseQuickAdapter<UserTaskListBean.ListB
             return "审核中";
         }
         return "已过期";
+    }
+
+    public @DrawableRes
+    int getStatusColor(String status) {
+        if ("0".equals(status)) {
+            return R.drawable.shape_45_task0;
+        } else if ("1".equals(status)) {
+            return R.drawable.shape_45_task2;
+        } else if ("2".equals(status)) {
+            return R.drawable.shape_45_task1;
+        } else if ("3".equals(status)) {
+            return R.drawable.shape_45_task3;
+        } else if ("4".equals(status)) {
+            return R.drawable.shape_45_task1;
+        }
+        return R.drawable.shape_45_task1;
     }
 }

@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <color name="white">#FFFFFF</color><!--白色-->
+    <color name="task0">#1bcdcf</color>
+    <color name="task1">#FF9028</color>
+    <color name="task2">#71CF4F</color>
+    <color name="task3">#D8DCDD</color>
 </resources>
