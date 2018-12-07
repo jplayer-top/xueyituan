@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+
+    <EditText
+        android:id="@+id/tvName"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dimen_50dp"
+        android:layout_margin="@dimen/dimen_15dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:background="@null"
+        android:gravity="center_vertical|end"
+        android:hint="请输入提款账户姓名"
+        android:inputType="text"
+        android:textColorHint="@color/color999"
+        android:textSize="@dimen/dimen_14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvTip"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvTip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:text="提款账户名:"
+        app:layout_constraintBottom_toBottomOf="@+id/tvName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvName"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:background="@drawable/shape_divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvName"/>
+
+    <EditText
+        android:id="@+id/tvPhone"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dimen_50dp"
+        android:layout_margin="@dimen/dimen_15dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:background="@null"
+        android:gravity="center_vertical|end"
+        android:hint="请输入提款账户银行预留号码"
+        android:inputType="phone"
+        android:textColorHint="@color/color999"
+        android:textSize="@dimen/dimen_14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvTip"
+        app:layout_constraintTop_toBottomOf="@+id/tvName"/>
+
+    <TextView
+        android:id="@+id/tvTip1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:text="预留手机号:"
+        app:layout_constraintBottom_toBottomOf="@+id/tvPhone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvPhone"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:background="@drawable/shape_divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPhone"/>
+
+    <EditText
+        android:id="@+id/tvBankCard"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dimen_50dp"
+        android:layout_margin="@dimen/dimen_15dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:background="@null"
+        android:gravity="center_vertical|end"
+        android:hint="请输入提款账户银行卡号"
+        android:inputType="phone"
+        android:textColorHint="@color/color999"
+        android:textSize="@dimen/dimen_14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvTip2"
+        app:layout_constraintTop_toBottomOf="@+id/tvPhone"/>
+
+    <TextView
+        android:id="@+id/tvTip2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:text="银行卡号:"
+        app:layout_constraintBottom_toBottomOf="@+id/tvBankCard"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvBankCard"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:background="@drawable/shape_divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvBankCard"/>
+
+    <EditText
+        android:id="@+id/tvPWD"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dimen_50dp"
+        android:layout_margin="@dimen/dimen_15dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:background="@null"
+        android:gravity="center_vertical|end"
+        android:hint="请设置提现密码"
+        android:inputType="phone"
+        android:textColorHint="@color/color999"
+        android:textSize="@dimen/dimen_14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvTip3"
+        app:layout_constraintTop_toBottomOf="@+id/tvBankCard"/>
+
+    <TextView
+        android:id="@+id/tvTip3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:text="提现密码:"
+        app:layout_constraintBottom_toBottomOf="@+id/tvPWD"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvPWD"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:background="@drawable/shape_divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPWD"/>
+
+    <Button
+        android:id="@+id/btnToTx"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dimen_15dp"
+        android:layout_marginStart="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_15dp"
+        android:background="@drawable/shape_45_theme"
+        android:text="确认并保存"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPWD"/>
+
+    <TextView
+        android:id="@+id/tvTip4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_15dp"
+        android:text="温馨提示:"
+        android:textColor="@color/color999"
+        android:textSize="@dimen/dimen_16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnToTx"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_25dp"
+        android:layout_marginTop="@dimen/dimen_5dp"
+        android:gravity="center_vertical"
+        android:lineSpacingExtra="@dimen/dimen_5dp"
+        android:text="@string/bank_tip"
+        android:textColor="@color/color999"
+        android:textSize="@dimen/dimen_12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTip4"/>
+</android.support.constraint.ConstraintLayout>

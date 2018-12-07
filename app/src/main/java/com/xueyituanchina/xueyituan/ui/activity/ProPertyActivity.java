@@ -79,6 +79,9 @@ public class ProPertyActivity extends SuperBaseActivity {
         mLlTiX.setOnClickListener(v -> {
             ActivityUtils.init().start(this, TXActivity.class, "我要提现");
         });
+        mLlUserInput.setOnClickListener(v -> {
+            ActivityUtils.init().start(this, UserSignActivity.class, "银行卡绑定");
+        });
         mLlPay.setOnClickListener(v -> {
             ActivityUtils.init().start(this, WalletActivity.class, "充值中心");
         });
