@@ -22,10 +22,13 @@
 
         <ImageView
             android:id="@+id/ivInvBg2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:scaleType="centerCrop"
             android:src="@drawable/inv_bg2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ivInvBg1"/>
 
         <TextView
@@ -47,64 +50,36 @@
             android:text="邀请好友"
             android:textColor="#5E15C7"
             android:textSize="@dimen/dimen_21sp"
-            android:translationY="-40dp"
+            android:translationY="-20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ivInvBg1"/>
 
-        <android.support.constraint.ConstraintLayout
+
+        <ImageView
+            android:id="@+id/ivTip3"
             android:layout_width="0dp"
-            android:layout_height="240dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dimen_15dp"
             android:layout_marginStart="@dimen/dimen_15dp"
-            android:background="@drawable/shape_5_550fa7"
-            android:visibility="gone"
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/yaoqingjiangli"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvToInv">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/dimen_20dp"
-                android:layout_marginTop="@dimen/dimen_15dp"
-                android:src="@drawable/hongbao"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-            <TextView
-                android:id="@+id/tvTip0"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_20dp"
-                android:layout_marginTop="@dimen/dimen_20dp"
-                android:drawableEnd="@drawable/rightstar"
-                android:drawablePadding="@dimen/dimen_5dp"
-                android:drawableStart="@drawable/inv_left"
-                android:text="邀请奖励"
-                android:textColor="#FFEA67"
-                android:textSize="@dimen/dimen_20sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="邀请好友注册用户"
-                android:textColor="@color/white"
-                android:textSize="13sp"/>
-        </android.support.constraint.ConstraintLayout>
+            app:layout_constraintTop_toBottomOf="@+id/tvToInv"/>
 
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/clTip4"
             android:layout_width="0dp"
             android:layout_height="340dp"
             android:layout_marginEnd="@dimen/dimen_15dp"
             android:layout_marginStart="@dimen/dimen_15dp"
+            android:layout_marginTop="@dimen/dimen_15dp"
             android:background="@drawable/shape_5_550fa7"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvToInv">
+            app:layout_constraintTop_toBottomOf="@+id/ivTip3">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -156,7 +131,8 @@
                     android:layout_weight="1"
                     android:text="累计获得0元"
                     android:textColor="@color/chocolate"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp"
+                    android:visibility="invisible"/>
             </LinearLayout>
 
             <LinearLayout
@@ -183,21 +159,26 @@
                     android:layout_weight="1"
                     android:text="进度"
                     android:textColor="@color/white"
-                    android:textSize="16sp"/>
+                    android:textSize="14sp"/>
             </LinearLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:layout_margin="@dimen/dimen_15dp"
                 android:overScrollMode="never"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/llTip3">
-
+                app:layout_constraintTop_toBottomOf="@+id/llTip3"
+                app:layout_constraintVertical_bias="0">
             </android.support.v7.widget.RecyclerView>
         </android.support.constraint.ConstraintLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_15dp"
+            app:layout_constraintTop_toBottomOf="@+id/clTip4"/>
     </android.support.constraint.ConstraintLayout>
 </android.support.v4.widget.NestedScrollView>

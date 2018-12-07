@@ -22,6 +22,7 @@ import com.xueyituanchina.xueyituan.ui.activity.IssueActivity;
 import com.xueyituanchina.xueyituan.ui.activity.LoginActivity;
 import com.xueyituanchina.xueyituan.ui.activity.MeInvActivity;
 import com.xueyituanchina.xueyituan.ui.activity.OrderListActivity;
+import com.xueyituanchina.xueyituan.ui.activity.ProPertyActivity;
 import com.xueyituanchina.xueyituan.ui.activity.RechargeActivity;
 import com.xueyituanchina.xueyituan.ui.activity.SettingActivity;
 import com.xueyituanchina.xueyituan.ui.activity.ShopCreateActivity;
@@ -29,6 +30,7 @@ import com.xueyituanchina.xueyituan.ui.activity.StoreActivity;
 import com.xueyituanchina.xueyituan.ui.activity.StoreInfoActivity;
 import com.xueyituanchina.xueyituan.ui.activity.UserTaskListActivity;
 import com.xueyituanchina.xueyituan.ui.activity.VipShowActivity;
+import com.xueyituanchina.xueyituan.ui.dialog.DialogVip;
 import com.xueyituanchina.xueyituan.wxapi.WXPayEntryActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -86,6 +88,8 @@ public class MeFragment extends SuperBaseFragment {
     TextView tvSetting;
     @BindView(R.id.tvTipVip)
     TextView tvTipVip;
+    @BindView(R.id.tvProperty)
+    TextView tvProperty;
     @BindView(R.id.ivIsVip)
     ImageView mIvIsVip;
     @BindView(R.id.ivAvatar)
@@ -124,9 +128,23 @@ public class MeFragment extends SuperBaseFragment {
             mPresenter.requestMyInfoNoLoadding();
         });
 
-
+        new DialogVip(mActivity).show(R.id.btnToVip, view -> {
+            if (bean != null) {
+                Bundle bundle = new Bundle();
+                bundle.putBoolean("isVip", XYTApplication.isVip);
+                bundle.putString("avator", bean.avator);
+                bundle.putString("name", bean.nick);
+                bundle.putString("recharge", bean.recharge);
+                String login_phone = (String) SharePreUtil.getData(getContext(), "login_phone", "");
+                bundle.putString("phone", login_phone);
+                ActivityUtils.init().start(this.mActivity, VipShowActivity.class, "会员中心", bundle);
+            }
+        });
         tvSetting.setOnClickListener(v -> {
             toSettingActivity();
+        });
+        tvProperty.setOnClickListener(v -> {
+            ActivityUtils.init().start(mActivity, ProPertyActivity.class, "我的资产");
         });
         ivSubmitTask.setOnClickListener(v -> {
             ActivityUtils.init().start(mActivity, UserTaskListActivity.class, "提交任务");
@@ -215,6 +233,7 @@ public class MeFragment extends SuperBaseFragment {
     public void responseMyInfo(MyInfoBean bean) {
         this.bean = bean;
         XYTApplication.cuid = bean.customerId;
+        SharePreUtil.saveData(getContext(), "login_avatar", bean.avator);
         smartRefreshLayout.finishRefresh();
         mTvToLogin.setVisibility(View.INVISIBLE);
         mLlWork.setOnClickListener(v -> {

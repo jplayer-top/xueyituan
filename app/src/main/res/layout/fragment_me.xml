@@ -283,6 +283,7 @@
                             android:showDividers="middle">
 
                             <TextView
+                                android:id="@+id/tvProperty"
                                 android:layout_width="match_parent"
                                 android:layout_height="@dimen/dimen_50dp"
                                 android:drawableEnd="@drawable/right_arrow"

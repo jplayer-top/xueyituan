@@ -3,6 +3,9 @@ package com.xueyituanchina.xueyituan.mpbe.model;
 import com.xueyituanchina.xueyituan.mpbe.XYTServer;
 import com.xueyituanchina.xueyituan.mpbe.bean.EquityBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.MyInfoBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.MyInviteBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.ProPertyBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.UserOrderListBean;
 
 import java.io.File;
 
@@ -41,6 +44,18 @@ public class MeModel extends BaseModel<XYTServer> {
 
     public Observable<BaseBean> updatePw(String opw, String npw) {
         return mServer.updatePw(opw, npw).compose(new IoMainSchedule<>());
+    }
+
+    public Observable<MyInviteBean> inviteList() {
+        return mServer.inviteList().compose(new IoMainSchedule<>());
+    }
+
+    public Observable<ProPertyBean> property() {
+        return mServer.property().compose(new IoMainSchedule<>());
+    }
+
+    public Observable<UserOrderListBean> bill() {
+        return mServer.bill().compose(new IoMainSchedule<>());
     }
 
     public Observable<MyInfoBean> updateAvatar(File file) {
