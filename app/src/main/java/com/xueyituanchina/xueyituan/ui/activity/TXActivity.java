@@ -7,21 +7,16 @@ import android.widget.TextView;
 
 import com.xueyituanchina.xueyituan.R;
 import com.xueyituanchina.xueyituan.XYTApplication;
-import com.xueyituanchina.xueyituan.mpbe.XYTServer;
-import com.xueyituanchina.xueyituan.mpbe.event.ApplyEvent;
-import com.xueyituanchina.xueyituan.mpbe.model.MeModel;
+import com.xueyituanchina.xueyituan.mpbe.event.PayPasInputEvent;
+import com.xueyituanchina.xueyituan.mpbe.presenter.ApplySignPresenter;
+import com.xueyituanchina.xueyituan.ui.dialog.DialogApply;
 
 import org.greenrobot.eventbus.EventBus;
-
-import java.util.concurrent.TimeUnit;
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import io.reactivex.Observable;
-import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
-import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
-import top.jplayer.baseprolibrary.net.tip.PostImplTip;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
 
@@ -43,6 +38,7 @@ public class TXActivity extends CommonToolBarActivity {
     Button mBtnToTx;
     private Unbinder mBind;
     private String mCantx;
+    private ApplySignPresenter mPresenter;
 
     @Override
     public int initAddLayout() {
@@ -54,6 +50,8 @@ public class TXActivity extends CommonToolBarActivity {
         super.initAddView(rootView);
         mBind = ButterKnife.bind(this);
         String bank = mBundle.getString("bank");
+        EventBus.getDefault().register(this);
+        mPresenter = new ApplySignPresenter(this);
         mCantx = mBundle.getString("cantx");
         if (bank != null) {
             String bankStr = bank.substring(0, 5) + "**********" + bank.substring(bank.length() - 4, bank.length());
@@ -83,24 +81,24 @@ public class TXActivity extends CommonToolBarActivity {
             ToastUtils.init().showInfoToast(this, "成为会员，可以提现");
             return;
         }
-        new MeModel(XYTServer.class).apply(string).subscribe(new NetCallBackObserver<BaseBean>(new
-                PostImplTip(this)) {
-            @Override
-            public void responseSuccess(BaseBean bean) {
-                EventBus.getDefault().post(new ApplyEvent());
-                Observable.timer(1, TimeUnit.SECONDS).subscribe(a -> finish());
-            }
+        new DialogApply(this).show();
+//        mPresenter.applySign("");
+    }
 
-            @Override
-            public void responseFail(BaseBean bean) {
+    @Subscribe
 
-            }
-        });
+    public void onEvent(PayPasInputEvent event) {
+        mPresenter.applySign(event.pw);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         mBind.unbind();
+        EventBus.getDefault().unregister(this);
+    }
+
+    public void signOk() {
+        mPresenter.apply(mTvTxMoney.getText().toString());
     }
 }

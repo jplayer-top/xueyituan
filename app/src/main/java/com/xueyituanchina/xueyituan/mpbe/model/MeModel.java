@@ -43,6 +43,10 @@ public class MeModel extends BaseModel<XYTServer> {
         return mServer.verifyPw(pw).compose(new IoMainSchedule<>());
     }
 
+    public Observable<BaseBean> applySign(String pw) {
+        return mServer.applySign(pw).compose(new IoMainSchedule<>());
+    }
+
     public Observable<BaseBean> apply(String money) {
         return mServer.apply(money).compose(new IoMainSchedule<>());
     }
