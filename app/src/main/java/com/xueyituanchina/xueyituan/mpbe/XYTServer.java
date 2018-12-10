@@ -101,8 +101,14 @@ public interface XYTServer {
     @POST("task/pub")
     Observable<PushTaskBean> taskPub(@QueryMap() Map<String, String> map);
 
+    @POST("user/savebankinfo")
+    Observable<BaseBean> bankinfo(@QueryMap() Map<String, String> map);
+
     @POST("task/share")
     Observable<BaseBean> shareOk(@Query("taskId") String taskId);
+
+    @POST("swlt/apply")
+    Observable<BaseBean> apply(@Query("money") String money);
 
     @POST("task/beforeshare")
     Observable<BaseBean> canShare(@Query("taskId") String taskId);

@@ -98,9 +98,8 @@
                     android:hint="请输入活动推广标题（最多15个字符）"
                     android:paddingEnd="@dimen/dimen_15dp"
                     android:paddingStart="@dimen/dimen_15dp"
-                    android:textColorHint="@color/colorBlackGold"
-                    android:textSize="@dimen/dimen_14sp"
-                    android:textStyle="bold"/>
+                    android:textColorHint="@color/color666"
+                    android:textSize="@dimen/dimen_14sp"/>
 
                 <EditText
                     android:id="@+id/llNums"

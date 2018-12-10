@@ -11,7 +11,6 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
@@ -183,13 +182,7 @@ public class WebViewActivity extends CommonToolBarActivity {
         if (webBase.canGoBack()) {
             webBase.goBack();
         } else {
-            if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis()) {
-                super.onBackPressed();
-                return;
-            } else {
-                Toast.makeText(getBaseContext(), "再次点击返回键退出", Toast.LENGTH_SHORT).show();
-            }
-            mBackPressed = System.currentTimeMillis();
+            super.onBackPressed();
         }
     }
 

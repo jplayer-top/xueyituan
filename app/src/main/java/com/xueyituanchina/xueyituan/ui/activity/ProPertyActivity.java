@@ -1,5 +1,6 @@
 package com.xueyituanchina.xueyituan.ui.activity;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -8,7 +9,11 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.xueyituanchina.xueyituan.R;
 import com.xueyituanchina.xueyituan.mpbe.bean.ProPertyBean;
+import com.xueyituanchina.xueyituan.mpbe.event.ApplyEvent;
 import com.xueyituanchina.xueyituan.mpbe.presenter.PropertyPresenter;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.Locale;
 
@@ -18,6 +23,7 @@ import butterknife.Unbinder;
 import top.jplayer.baseprolibrary.ui.activity.SuperBaseActivity;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.SharePreUtil;
+import top.jplayer.baseprolibrary.utils.ToastUtils;
 import top.jplayer.baseprolibrary.widgets.polygon.PolygonImageView;
 
 /**
@@ -57,6 +63,7 @@ public class ProPertyActivity extends SuperBaseActivity {
         mBind = ButterKnife.bind(this);
         mPresenter = new PropertyPresenter(this);
         mPresenter.property();
+        EventBus.getDefault().register(this);
         mIvToolLeft.setOnClickListener(v -> finish());
     }
 
@@ -77,10 +84,21 @@ public class ProPertyActivity extends SuperBaseActivity {
         mTvAllMoney.setText(bean.income);
         Glide.with(this).load(SharePreUtil.getData(this, "login_avatar", "")).into(mIvAvatar);
         mLlTiX.setOnClickListener(v -> {
-            ActivityUtils.init().start(this, TXActivity.class, "我要提现");
+            if (bean.bankCard == null || "".equals(bean.bankCard)) {
+                ToastUtils.init().showInfoToast(this, "请先进行账户认证");
+            } else {
+                Bundle bundle = new Bundle();
+                bundle.putString("bank", bean.bankCard);
+                bundle.putString("cantx", bean.wallet);
+                ActivityUtils.init().start(this, TXActivity.class, "我要提现", bundle);
+            }
         });
         mLlUserInput.setOnClickListener(v -> {
-            ActivityUtils.init().start(this, UserSignActivity.class, "银行卡绑定");
+            if (bean.bankCard == null || "".equals(bean.bankCard)) {
+                ActivityUtils.init().start(this, UserSignActivity.class, "账户认证");
+            } else {
+                ToastUtils.init().showSuccessToast(this, "已设置过账户信息，如需修改，请联系客服热线");
+            }
         });
         mLlPay.setOnClickListener(v -> {
             ActivityUtils.init().start(this, WalletActivity.class, "充值中心");
@@ -90,9 +108,15 @@ public class ProPertyActivity extends SuperBaseActivity {
         });
     }
 
+    @Subscribe
+    public void onEvnet(ApplyEvent event) {
+        mPresenter.property();
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         mBind.unbind();
+        EventBus.getDefault().unregister(this);
     }
 }

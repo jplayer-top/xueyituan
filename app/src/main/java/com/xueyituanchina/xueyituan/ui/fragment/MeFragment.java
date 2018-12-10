@@ -30,7 +30,6 @@ import com.xueyituanchina.xueyituan.ui.activity.StoreActivity;
 import com.xueyituanchina.xueyituan.ui.activity.StoreInfoActivity;
 import com.xueyituanchina.xueyituan.ui.activity.UserTaskListActivity;
 import com.xueyituanchina.xueyituan.ui.activity.VipShowActivity;
-import com.xueyituanchina.xueyituan.ui.dialog.DialogVip;
 import com.xueyituanchina.xueyituan.wxapi.WXPayEntryActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -128,18 +127,18 @@ public class MeFragment extends SuperBaseFragment {
             mPresenter.requestMyInfoNoLoadding();
         });
 
-        new DialogVip(mActivity).show(R.id.btnToVip, view -> {
-            if (bean != null) {
-                Bundle bundle = new Bundle();
-                bundle.putBoolean("isVip", XYTApplication.isVip);
-                bundle.putString("avator", bean.avator);
-                bundle.putString("name", bean.nick);
-                bundle.putString("recharge", bean.recharge);
-                String login_phone = (String) SharePreUtil.getData(getContext(), "login_phone", "");
-                bundle.putString("phone", login_phone);
-                ActivityUtils.init().start(this.mActivity, VipShowActivity.class, "会员中心", bundle);
-            }
-        });
+//        new DialogVip(mActivity).show(R.id.btnToVip, view -> {
+//            if (bean != null) {
+//                Bundle bundle = new Bundle();
+//                bundle.putBoolean("isVip", XYTApplication.isVip);
+//                bundle.putString("avator", bean.avator);
+//                bundle.putString("name", bean.nick);
+//                bundle.putString("recharge", bean.recharge);
+//                String login_phone = (String) SharePreUtil.getData(getContext(), "login_phone", "");
+//                bundle.putString("phone", login_phone);
+//                ActivityUtils.init().start(this.mActivity, VipShowActivity.class, "会员中心", bundle);
+//            }
+//        });
         tvSetting.setOnClickListener(v -> {
             toSettingActivity();
         });

@@ -27,9 +27,14 @@ public class AwardBean extends BaseBean {
 
     public int taskNum;
     public int totalShared;
-    public List<String> bannerList;
+    public List<BannerBean> bannerList;
     public List<String> broadMsgList;
     public ArrayList<TaskListBean> taskList;
+
+    public static class BannerBean {
+        public String img;
+        public String url;
+    }
 
     public static class TaskListBean implements Parcelable {
         /**

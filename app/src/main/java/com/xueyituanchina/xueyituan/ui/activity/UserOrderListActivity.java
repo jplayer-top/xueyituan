@@ -42,10 +42,16 @@ public class UserOrderListActivity extends CommonToolBarActivity {
     }
 
     public void bill(UserOrderListBean bean) {
-
+        mSmartRefreshLayout.finishRefresh();
         generateData(bean.list);
 
         mAdapter.setNewData(mEntities);
+    }
+
+    @Override
+    public void refreshStart() {
+        super.refreshStart();
+        mPresenter.bill();
     }
 
     private void generateData(List<UserOrderListBean.ListBean> listBeans) {

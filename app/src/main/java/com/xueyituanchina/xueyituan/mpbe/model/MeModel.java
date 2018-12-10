@@ -8,6 +8,7 @@ import com.xueyituanchina.xueyituan.mpbe.bean.ProPertyBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.UserOrderListBean;
 
 import java.io.File;
+import java.util.Map;
 
 import io.reactivex.Observable;
 import okhttp3.MediaType;
@@ -42,12 +43,20 @@ public class MeModel extends BaseModel<XYTServer> {
         return mServer.verifyPw(pw).compose(new IoMainSchedule<>());
     }
 
+    public Observable<BaseBean> apply(String money) {
+        return mServer.apply(money).compose(new IoMainSchedule<>());
+    }
+
     public Observable<BaseBean> updatePw(String opw, String npw) {
         return mServer.updatePw(opw, npw).compose(new IoMainSchedule<>());
     }
 
     public Observable<MyInviteBean> inviteList() {
         return mServer.inviteList().compose(new IoMainSchedule<>());
+    }
+
+    public Observable<BaseBean> bankinfo(Map<String, String> map) {
+        return mServer.bankinfo(map).compose(new IoMainSchedule<>());
     }
 
     public Observable<ProPertyBean> property() {

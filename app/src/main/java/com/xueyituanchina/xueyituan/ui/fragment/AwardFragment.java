@@ -10,7 +10,6 @@ import com.bumptech.glide.Glide;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.xueyituanchina.xueyituan.R;
 import com.xueyituanchina.xueyituan.mpbe.bean.AwardBean;
-import com.xueyituanchina.xueyituan.mpbe.bean.HomeTopBean;
 import com.xueyituanchina.xueyituan.mpbe.event.ShareAwardAllEvent;
 import com.xueyituanchina.xueyituan.mpbe.event.ShareAwardOneEvent;
 import com.xueyituanchina.xueyituan.mpbe.presenter.AwardPresenter;
@@ -160,19 +159,21 @@ public class AwardFragment extends SuperBaseFragment {
     }
 
     private void initBanner(AwardBean bean) {
-        mBgaBanner.setAdapter((banner, itemView, model, position) -> {
-            HomeTopBean.BannerBean bannerBean = (HomeTopBean.BannerBean) model;
-            if (bannerBean != null) {
-                Glide.with(mActivity).load(bannerBean.banner_img)
-                        .apply(GlideUtils.init().options(R.drawable.placeholder))
-                        .into((ImageView) itemView);
-                itemView.setOnClickListener(v -> {
-                    startWeb(bannerBean.banner_id);
-                });
-            }
+        if (bean.bannerList != null) {
+            mBgaBanner.setAdapter((banner, itemView, model, position) -> {
+                AwardBean.BannerBean bannerBean = (AwardBean.BannerBean) model;
+                if (model != null) {
+                    Glide.with(mActivity).load(((AwardBean.BannerBean) model).img)
+                            .apply(GlideUtils.init().options(R.drawable.placeholder))
+                            .into((ImageView) itemView);
+                    itemView.setOnClickListener(v -> {
+                        startWeb(bannerBean.url);
+                    });
+                }
 
-        });
-        mBgaBanner.setData(bean.bannerList, null);
+            });
+            mBgaBanner.setData(bean.bannerList, null);
+        }
     }
 
     private void startWeb(String url) {
@@ -194,6 +195,7 @@ public class AwardFragment extends SuperBaseFragment {
         mMultipleStatusView.showContent();
         mAwardBean = bean;
         List<AwardBean.TaskListBean> taskList = bean.taskList;
+        initBanner(bean);
         if (taskList != null) {
             mAdapter.setNewData(taskList.subList(0, taskList.size() > 5 ? 5 : taskList.size()));
         }
