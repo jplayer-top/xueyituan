@@ -257,8 +257,14 @@ public interface XYTServer {
     @POST("user/updatepw?")
     Observable<BaseBean> updatePw(@Query("opw") String opw, @Query("npw") String npw);
 
+    @POST("user/updatecashpw?")
+    Observable<BaseBean> updateTxPw(@Query("opw") String opw, @Query("npw") String npw);
+
     @POST("user/verifypw?")
     Observable<BaseBean> verifyPw(@Query("pw") String pw);
+
+    @POST("user/verifycashpw?")
+    Observable<BaseBean> verifyTxPw(@Query("pw") String pw);
 
     @POST("activity/pub")
     Observable<ShareBean> pubActivity(@Body RequestBody Body);

@@ -1,5 +1,6 @@
 package com.xueyituanchina.xueyituan.ui.activity;
 
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.FrameLayout;
@@ -16,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
+import top.jplayer.baseprolibrary.ui.activity.WebViewActivity;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 
 /**
@@ -28,6 +30,8 @@ import top.jplayer.baseprolibrary.utils.ActivityUtils;
 public class MeInvActivity extends CommonToolBarActivity {
     @BindView(R.id.tvToInv)
     TextView mTvToInv;
+    @BindView(R.id.tvToWeb)
+    TextView mTvToWeb;
     @BindView(R.id.tvInvCounts)
     TextView tvInvCounts;
     @BindView(R.id.recyclerView)
@@ -44,8 +48,11 @@ public class MeInvActivity extends CommonToolBarActivity {
     public void initAddView(FrameLayout rootView) {
         super.initAddView(rootView);
         mBind = ButterKnife.bind(this);
-        mTvToInv.setOnClickListener(v -> {
-            ActivityUtils.init().start(this, MyShareActivity.class, "邀请好友");
+
+        mTvToWeb.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("url", "https://www.xueyituanchina.cn/info/shareagreement.html");
+            ActivityUtils.init().start(mActivity, WebViewActivity.class, "", bundle);
         });
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new InvListAdapter(null);
@@ -64,5 +71,12 @@ public class MeInvActivity extends CommonToolBarActivity {
         boolean b = bean.invList != null;
         String format = String.format(Locale.CHINA, "成功邀请%d人", b ? bean.invList.size() : 0);
         tvInvCounts.setText(format);
+        mTvToInv.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("name", bean.name);
+            bundle.putString("invUrl", bean.invUrl);
+            bundle.putString("invImg", bean.invImg);
+            ActivityUtils.init().start(this, MyShareActivity.class, "邀请好友", bundle);
+        });
     }
 }

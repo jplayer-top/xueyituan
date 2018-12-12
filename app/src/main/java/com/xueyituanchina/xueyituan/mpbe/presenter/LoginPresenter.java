@@ -24,6 +24,7 @@ import top.jplayer.baseprolibrary.net.tip.GetImplTip;
 import top.jplayer.baseprolibrary.net.tip.LoaddingImplTip;
 import top.jplayer.baseprolibrary.net.tip.PostImplTip;
 import top.jplayer.baseprolibrary.utils.SharePreUtil;
+import top.jplayer.baseprolibrary.utils.ToastUtils;
 
 import static io.rong.imkit.utils.SystemUtils.getCurProcessName;
 
@@ -108,8 +109,11 @@ public class LoginPresenter extends BasePresenter<LoginActivity> {
                 SharePreUtil.saveData(mIView, "mark_login", "1");
                 XYTApplication.uid = uid;
                 XYTApplication.token = imtoken;
-
-                EventBus.getDefault().post(new LoginSuccessEvent(uid));
+                if (loginBean.shield != 1) {
+                    EventBus.getDefault().post(new LoginSuccessEvent(uid));
+                } else {
+                    ToastUtils.init().showErrorToast(mIView, "当前账号为 黑名单账号");
+                }
             }
 
             @Override
@@ -146,6 +150,7 @@ public class LoginPresenter extends BasePresenter<LoginActivity> {
             connect(imtoken);
         }
     }
+
     private void connect(String token) {
 
         if (mIView.getApplicationInfo().packageName.equals(getCurProcessName(mIView.getApplicationContext()))) {

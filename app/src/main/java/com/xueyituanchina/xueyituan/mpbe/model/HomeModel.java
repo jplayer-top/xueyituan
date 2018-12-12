@@ -103,7 +103,7 @@ public class HomeModel extends BaseModel<XYTServer> {
     }
 
     public Observable<AreaAllBean> area() {
-        return mServer.area("http://192.168.0.105:8080/area.json").compose(new IoMainSchedule<>());
+        return mServer.area("http://123.206.45.111:8080/xytuan/area").compose(new IoMainSchedule<>());
     }
 
 

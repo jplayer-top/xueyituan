@@ -1,6 +1,8 @@
 package com.xueyituanchina.xueyituan.ui.adapter;
 
+import android.graphics.Paint;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -27,6 +29,8 @@ public class StoreAdapter extends BaseQuickAdapter<StoreBean.GoodsListBean, Base
 
     @Override
     protected void convert(BaseViewHolder helper, StoreBean.GoodsListBean item) {
+        TextView tvLocalGoodsPrice = helper.itemView.findViewById(R.id.tvOldPrice);
+        tvLocalGoodsPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         helper.setText(R.id.tvTitle, item.goods_title)
                 .setText(R.id.tvSubTitle, item.goods_subtitle)
                 .setText(R.id.tvBuyNum,  String.format(Locale.CHINA, "已售出（%d）", item.sales))

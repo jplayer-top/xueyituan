@@ -43,6 +43,10 @@ public class MeModel extends BaseModel<XYTServer> {
         return mServer.verifyPw(pw).compose(new IoMainSchedule<>());
     }
 
+    public Observable<BaseBean> verifyTxPw(String pw) {
+        return mServer.verifyTxPw(pw).compose(new IoMainSchedule<>());
+    }
+
     public Observable<BaseBean> applySign(String pw) {
         return mServer.applySign(pw).compose(new IoMainSchedule<>());
     }
@@ -53,6 +57,10 @@ public class MeModel extends BaseModel<XYTServer> {
 
     public Observable<BaseBean> updatePw(String opw, String npw) {
         return mServer.updatePw(opw, npw).compose(new IoMainSchedule<>());
+    }
+
+    public Observable<BaseBean> updateTxPw(String opw, String npw) {
+        return mServer.updateTxPw(opw, npw).compose(new IoMainSchedule<>());
     }
 
     public Observable<MyInviteBean> inviteList() {

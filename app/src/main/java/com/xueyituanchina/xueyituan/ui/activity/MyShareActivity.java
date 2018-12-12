@@ -14,6 +14,9 @@ import com.jaiky.imagespickers.ImageSelectorActivity;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.xueyituanchina.xueyituan.R;
+import com.xueyituanchina.xueyituan.mpbe.XYTServer;
+import com.xueyituanchina.xueyituan.mpbe.bean.MyInviteBean;
+import com.xueyituanchina.xueyituan.mpbe.model.MeModel;
 import com.xueyituanchina.xueyituan.wxapi.WXShare;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.Permission;
@@ -27,6 +30,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.Observable;
+import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
 import top.jplayer.baseprolibrary.ui.adapter.BaseViewPagerViewAdapter;
 import top.jplayer.baseprolibrary.utils.BitmapUtil;
@@ -49,6 +53,9 @@ public class MyShareActivity extends CommonToolBarActivity {
 
     private Unbinder mUnbinder;
     private ImageView mIvShareSrc;
+    private String mInvImg;
+    private String mName;
+    private String mInvUrl;
 
     @Override
     public int initAddLayout() {
@@ -60,9 +67,26 @@ public class MyShareActivity extends CommonToolBarActivity {
         super.initAddView(rootView);
         mUnbinder = ButterKnife.bind(this);
         toolRightVisible(mTvToolRight, "分享");
+        if (mBundle != null) {
+            mName = mBundle.getString("name");
+            mInvImg = mBundle.getString("invImg");
+            mInvUrl = mBundle.getString("invUrl");
+            initViewPager(null);
+
+        } else {
+            getInfo();
+        }
+    }
+
+    private void initViewPager(MyInviteBean bean) {
+        if (bean != null) {
+            mName = bean.name;
+            mInvImg = bean.invImg;
+            mInvUrl = bean.invUrl;
+        }
         List<String> strings = new ArrayList<>();
-        strings.add("asd");
-        strings.add("崇仁");
+        strings.add(mName);
+        strings.add(mName);
         mViewPager.setOffscreenPageLimit(strings.size());
         mViewPager.setPageTransformer(true, new CardTransformer(20));
         mViewPager.setAdapter(new BaseViewPagerViewAdapter<String>(strings, R.layout.layout_share_pager) {
@@ -70,9 +94,9 @@ public class MyShareActivity extends CommonToolBarActivity {
             public void bindView(View view, String s, int position) {
                 mIvShareSrc = view.findViewById(R.id.ivShareSrc);
                 TextView tvName = view.findViewById(R.id.tvName);
-                tvName.setText(String.format(Locale.CHINA, "我是%s", s));
+                tvName.setText(String.format(Locale.CHINA, "我是%s 我已加入学艺团", s));
                 ImageView ivQCode = view.findViewById(R.id.ivQCode);
-                String textContent = "https://www.jplayer.top";
+                String textContent = mInvUrl;
                 if (TextUtils.isEmpty(textContent)) {
                     ToastUtils.init().showQuickToast(textContent);
                     return;
@@ -80,17 +104,38 @@ public class MyShareActivity extends CommonToolBarActivity {
                 int px = ScreenUtils.dp2px(100);
                 Bitmap bitmap = CodeUtils.createImage(textContent, px, px, null);
                 ivQCode.setImageBitmap(bitmap);
-                mIvShareSrc.setOnClickListener(v -> {
-                    AndPermission.with(mActivity)
-                            .permission(Permission.CAMERA, Permission.WRITE_EXTERNAL_STORAGE, Permission.READ_EXTERNAL_STORAGE)
-                            .onGranted(permissions -> CameraUtil.getInstance().openSingalCamer(mActivity, 540, 540))
-                            .onDenied(permissions -> AndPermission.hasAlwaysDeniedPermission(mActivity, permissions))
-                            .start();
-                });
-                Glide.with(mActivity).load("http://xueyituan.oss-cn-beijing.aliyuncs.com/share/share.jpg?x-oss-process=image/resize,w_540").into(mIvShareSrc);
+
+                if (position == 0) {
+                    Glide.with(mActivity).load(mInvImg).into(mIvShareSrc);
+                } else {
+                    mIvShareSrc.setOnClickListener(v -> {
+                        AndPermission.with(mActivity)
+                                .permission(Permission.CAMERA, Permission.WRITE_EXTERNAL_STORAGE, Permission.READ_EXTERNAL_STORAGE)
+                                .onGranted(permissions -> CameraUtil.getInstance().openSingalCamer(mActivity, 540, 540))
+                                .onDenied(permissions -> AndPermission.hasAlwaysDeniedPermission(mActivity, permissions))
+                                .start();
+                    });
+                }
             }
         });
+    }
 
+    private void getInfo() {
+        new MeModel(XYTServer.class).inviteList().subscribe(new NetCallBackObserver<MyInviteBean>() {
+            @Override
+            public void responseSuccess(MyInviteBean bean) {
+                inviteList(bean);
+            }
+
+            @Override
+            public void responseFail(MyInviteBean bean) {
+
+            }
+        });
+    }
+
+    private void inviteList(MyInviteBean bean) {
+        initViewPager(bean);
     }
 
     @Override

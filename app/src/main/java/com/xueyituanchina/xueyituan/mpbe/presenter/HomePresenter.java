@@ -1,14 +1,25 @@
 package com.xueyituanchina.xueyituan.mpbe.presenter;
 
+import android.content.Context;
+import android.os.SystemClock;
+
+import com.google.gson.Gson;
 import com.xueyituanchina.xueyituan.XYTApplication;
 import com.xueyituanchina.xueyituan.mpbe.XYTServer;
+import com.xueyituanchina.xueyituan.mpbe.bean.AreaAllBean;
 import com.xueyituanchina.xueyituan.mpbe.model.HomeModel;
 import com.xueyituanchina.xueyituan.ui.fragment.HomeFragment;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map;
 
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
+import top.jplayer.baseprolibrary.utils.LogUtil;
 import top.jplayer.baseprolibrary.utils.SharePreUtil;
 
 /**
@@ -46,6 +57,40 @@ public class HomePresenter extends BasePresenter<HomeFragment> {
             }
         }, throwable -> isSuccess());
         addSubscription(disposable);
+    }
+
+    public void areaSD() {
+        LogUtil.str("start" + SystemClock.currentThreadTimeMillis());
+        Observable.just("area.json").subscribeOn(Schedulers.io())
+                .map(s -> {
+                    String txt = readAssetsTxt(mIView.mActivity, s);
+                    return new Gson().fromJson(txt, AreaAllBean.class);
+                }).observeOn(AndroidSchedulers.mainThread()).subscribe(areaAllBean -> mIView.areaSD(areaAllBean),
+                throwable -> {
+                });
+    }
+
+    /**
+     * 读取assets下的txt文件，返回utf-8 String
+     *
+     * @param context
+     * @param fileName 不包括后缀
+     * @return
+     */
+    public String readAssetsTxt(Context context, String fileName) {
+        try {
+            InputStream is = context.getAssets().open(fileName);
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            return new String(buffer, "utf-8");
+        } catch (IOException e) {
+            // Should never happen!
+//            throw new RuntimeException(e);
+            e.printStackTrace();
+        }
+        return "";
     }
 
     public void areaList() {

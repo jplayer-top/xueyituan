@@ -17,4 +17,6 @@ public class LoginBean extends BaseBean {
 
     public int uid;
     public String imtoken;
+    public int shield;
+    public boolean vip;
 }

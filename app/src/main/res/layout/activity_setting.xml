@@ -106,7 +106,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="0dp"
@@ -156,6 +157,34 @@
                 android:drawableRight="@drawable/right_arrow"
                 android:gravity="center|right"
                 android:hint="已设置"
+                android:textColorHint="@color/color999"
+                tools:ignore="RtlHardcoded"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@drawable/selector_white_muti_press"
+                android:drawablePadding="@dimen/dp_10"
+                android:gravity="center_vertical"
+                android:text="修改提现密码"
+                tools:ignore="RtlHardcoded"/>
+
+            <TextView
+                android:id="@+id/tvTxPassword"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_weight="1"
+                android:background="@drawable/selector_white_muti_press"
+                android:drawablePadding="@dimen/dp_10"
+                android:drawableRight="@drawable/right_arrow"
+                android:gravity="center|right"
                 android:textColorHint="@color/color999"
                 tools:ignore="RtlHardcoded"/>
 

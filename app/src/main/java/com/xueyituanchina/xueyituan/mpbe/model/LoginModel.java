@@ -3,6 +3,7 @@ package com.xueyituanchina.xueyituan.mpbe.model;
 
 import com.xueyituanchina.xueyituan.mpbe.XYTServer;
 import com.xueyituanchina.xueyituan.mpbe.bean.LoginBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.MyInfoBean;
 
 import java.util.Map;
 
@@ -22,7 +23,9 @@ public class LoginModel extends BaseModel<XYTServer> {
     public LoginModel(Class<XYTServer> t) {
         super(t);
     }
-
+    public Observable<MyInfoBean> requestMyInfo() {
+        return mServer.myInfo().compose(new IoMainSchedule<>());
+    }
     public Observable<LoginBean> requestLogin(String phone, String password) {
         return mServer.getLoginBean(phone, password)
                 .compose(new IoMainSchedule<>());

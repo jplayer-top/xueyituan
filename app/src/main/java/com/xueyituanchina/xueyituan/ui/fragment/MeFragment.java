@@ -232,7 +232,9 @@ public class MeFragment extends SuperBaseFragment {
     public void responseMyInfo(MyInfoBean bean) {
         this.bean = bean;
         XYTApplication.cuid = bean.customerId;
-        SharePreUtil.saveData(getContext(), "login_avatar", bean.avator);
+        if (bean.avator != null) {
+            SharePreUtil.saveData(getContext(), "login_avatar", bean.avator);
+        }
         smartRefreshLayout.finishRefresh();
         mTvToLogin.setVisibility(View.INVISIBLE);
         mLlWork.setOnClickListener(v -> {

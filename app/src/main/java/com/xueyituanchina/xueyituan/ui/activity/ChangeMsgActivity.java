@@ -1,6 +1,7 @@
 package com.xueyituanchina.xueyituan.ui.activity;
 
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 
@@ -51,6 +52,12 @@ public class ChangeMsgActivity extends CommonToolBarActivity {
                 editText01.setText(value);
                 editText01.setSelection(value.length());
             }
+        }
+        if (key.contains("提现密码")) {
+            editText01.setHint("请输入要修改的六位数提现密码");
+            editText02.setHint("请确认要修改的六位数提现密码");
+            editText01.setInputType(EditorInfo.TYPE_CLASS_NUMBER|EditorInfo.TYPE_NUMBER_FLAG_DECIMAL);
+            editText02.setInputType(EditorInfo.TYPE_CLASS_NUMBER|EditorInfo.TYPE_NUMBER_FLAG_DECIMAL);
         }
     }
 

@@ -54,6 +54,7 @@
             android:layout_marginBottom="@dimen/dimen_10dp"
             android:background="@color/whitesmoke"/>
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_50dp"
@@ -89,7 +90,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_50dp"
-            android:layout_marginBottom="@dimen/dimen_30dp"
+            android:layout_marginBottom="@dimen/dimen_10dp"
             android:background="@color/white"
             android:gravity="center_vertical"
             android:paddingLeft="@dimen/dimen_15dp"
@@ -110,6 +111,34 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llPayShare"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_50dp"
+            android:layout_marginBottom="@dimen/dimen_20dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dimen_15dp"
+            android:paddingRight="@dimen/dimen_15dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawablePadding="@dimen/dimen_21dp"
+                android:drawableStart="@drawable/pay_share"
+                android:gravity="start"
+                android:text="余额支付"
+                android:textSize="@dimen/dimen_15sp"/>
+
+            <CheckBox
+                android:id="@+id/checkbox3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"/>
         </LinearLayout>
 
         <TextView

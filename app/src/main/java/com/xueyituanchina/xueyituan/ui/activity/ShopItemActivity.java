@@ -3,6 +3,7 @@ package com.xueyituanchina.xueyituan.ui.activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -154,6 +155,7 @@ public class ShopItemActivity extends CommonToolBarActivity {
         mTvShopSubName = mHeader.findViewById(R.id.tvShopSubTitle);
         mTvNewPrice = mHeader.findViewById(R.id.tvNewPrice);
         mTvOldPrice = mHeader.findViewById(R.id.tvOldPrice);
+        mTvOldPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         mTvWasPay = mHeader.findViewById(R.id.tvWasPay);
         mTvStoreName = mHeader.findViewById(R.id.tvStoreName);
         mTvStoreLocal = mHeader.findViewById(R.id.tvStoreLocal);

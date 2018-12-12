@@ -22,6 +22,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
+import top.jplayer.baseprolibrary.ui.activity.WebViewActivity;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.widgets.polygon.PolygonImageView;
 
@@ -63,7 +64,11 @@ public class VipShowActivity extends CommonToolBarActivity {
         super.initAddView(rootView);
         mBind = ButterKnife.bind(this, rootView);
         EventBus.getDefault().register(this);
-
+        mTvWeb02.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("url", "https://www.xueyituanchina.cn/info/vipagreement.html");
+            ActivityUtils.init().start(mActivity, WebViewActivity.class, "", bundle);
+        });
         mTvPhone.setText(mBundle.getString("phone"));
         mTvName.setText(mBundle.getString("name"));
         mRecharge = mBundle.getString("recharge");

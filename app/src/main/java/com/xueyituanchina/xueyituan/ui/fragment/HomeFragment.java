@@ -11,15 +11,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import com.bigkoo.pickerview.OptionsPickerView;
 import com.bumptech.glide.Glide;
 import com.github.florent37.viewanimator.ViewAnimator;
+import com.google.gson.Gson;
 import com.kingja.magicmirror.MagicMirrorView;
 import com.xueyituanchina.xueyituan.R;
 import com.xueyituanchina.xueyituan.XYTApplication;
+import com.xueyituanchina.xueyituan.mpbe.bean.AreaAllBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.AreaBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeGoodsList;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeListBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeTopBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.PostLocalBean;
 import com.xueyituanchina.xueyituan.mpbe.presenter.HomePresenter;
 import com.xueyituanchina.xueyituan.ui.activity.SearchActivity;
 import com.xueyituanchina.xueyituan.ui.activity.StoreActivity;
@@ -31,6 +35,7 @@ import com.xueyituanchina.xueyituan.ui.adapter.SelectCatAdapter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import cn.bingoogolapple.bgabanner.BGABanner;
 import io.reactivex.Observable;
@@ -91,8 +96,6 @@ public class HomeFragment extends SuperBaseFragment {
     private CommonPopupWindow.LayoutGravity layoutGravity;
     private View mView;
     private RecyclerView mRecyclerViewSelect;
-    private String mData;
-    private String selLocal;
     private View mFooter;
     private int pageNumber = 1;
 
@@ -114,14 +117,15 @@ public class HomeFragment extends SuperBaseFragment {
         mPresenter = new HomePresenter(this);
         mPresenter.homeTop();
         mPresenter.homeList();
-        mPresenter.areaList();
+
         mMap = new HashMap<>();
         mMap.put("orderType", "0");
         mMap.put("pageNumber", "1");
-        selLocal = (String) SharePreUtil.getData(getActivity(), "sel_local", "");
-        mTvLocal.setText("".equals(selLocal) ? "聊城市" : selLocal);
-        if (!"".equals(selLocal)) {
-            mMap.put("areaCode", selLocal);
+        String sel_areaCode = (String) SharePreUtil.getData(getActivity(), "sel_areaCode", "");
+        String sel_local = (String) SharePreUtil.getData(getActivity(), "sel_local", "");
+        mTvLocal.setText("".equals(sel_local) ? "山东省" : sel_local);
+        if (!"".equals(sel_areaCode)) {
+            mMap.put("areaCode", sel_areaCode);
         }
         mPresenter.homeGoodsList(mMap);
         rootView.findViewById(R.id.tvSearch).setOnClickListener(v -> {
@@ -271,9 +275,19 @@ public class HomeFragment extends SuperBaseFragment {
         mLocalSetAdapter = new LocalSetAdapter(null);
         mRecyclerViewLocal.setAdapter(mLocalSetAdapter);
         mTvLocal = rootView.findViewById(R.id.tvLocal);
+
+        initPicker();
+
         mTvLocal.setOnClickListener(v -> {
-            dissmisDilaog();
+            if (mLocalBean != null) {
+                areaSD(mLocalBean);
+            } else {
+                mPresenter.areaSD();
+            }
         });
+//        mTvLocal.setOnClickListener(v -> {
+//            dissmisDilaog();
+//        });
         rootView.findViewById(R.id.flTouchView).setOnTouchListener((v, event) -> {
             v.performClick();
             if (event.getAction() == MotionEvent.ACTION_DOWN && mRecyclerViewLocal.getVisibility() == View.VISIBLE) {
@@ -283,16 +297,16 @@ public class HomeFragment extends SuperBaseFragment {
                 return false;
             }
         });
-        mLocalSetAdapter.setOnItemClickListener((adapter, view, position) -> {
-            mData = mLocalSetAdapter.getData().get(position);
-            mTvLocal.setText(mData);
-            SharePreUtil.saveData(mActivity, "sel_local", mData);
-            mMap.put("areaCode", mData);
-            fadeOutLocal(mRecyclerViewLocal);
-            mMap.put("pageNumber", "1");
-            pageNumber = 1;
-            mPresenter.homeGoodsList(mMap);
-        });
+//        mLocalSetAdapter.setOnItemClickListener((adapter, view, position) -> {
+//            mData = mLocalSetAdapter.getData().get(position);
+//            mTvLocal.setText(mData);
+//            fadeOutLocal(mRecyclerViewLocal);
+//            SharePreUtil.saveData(mActivity, "sel_local", mData);
+//            mMap.put("areaCode", mData);
+//            mMap.put("pageNumber", "1");
+//            pageNumber = 1;
+//            mPresenter.homeGoodsList(mMap);
+//        });
     }
 
     private void dissmisDilaog() {
@@ -505,5 +519,99 @@ public class HomeFragment extends SuperBaseFragment {
         mAreaBean = listBean;
         Observable.fromIterable(listBean.areas.subs).subscribe(bean -> mListLocalString.add(bean.area_name));
         mLocalSetAdapter.setNewData(mListLocalString);
+    }
+
+    private String mProvince_code;
+    private String mCity_code;
+    private String mArea_code;
+    private String mProvince_name;
+    private String mCity_name;
+    private String mArea_name;
+
+    private ArrayList<PostLocalBean> optionsLocalSItems = new ArrayList<>();
+    private ArrayList<ArrayList<PostLocalBean>> optionsLocalXItems = new ArrayList<>();
+    private ArrayList<ArrayList<ArrayList<PostLocalBean>>> optionsQItems = new ArrayList<>();
+    private OptionsPickerView mLocalPickerView;
+    private AreaAllBean mLocalBean;
+
+    private void initPicker() {
+        //地区
+        mLocalPickerView = new OptionsPickerView.Builder(getActivity(), (options1, option2, options3, v) -> {
+            mProvince_name = optionsLocalSItems.get(options1).name + "";
+            mProvince_code = optionsLocalSItems.get(options1).code;
+            PostLocalBean localBean = optionsLocalXItems.get(options1).get(option2);
+            mCity_name = (localBean.name) == null ? "" : (localBean.name + "");
+            mCity_code = localBean.code;
+            ArrayList<PostLocalBean> postLocalBeans = optionsQItems.get(options1).get(option2);
+            PostLocalBean areaBean = postLocalBeans.get(options3);
+            mArea_code = areaBean.code;
+            mArea_name = (areaBean.name) == null ? "" : areaBean.name + "";
+            mTvLocal.setText(String.format(Locale.CHINA, "%s", mArea_name));
+            LogUtil.str(String.format(Locale.CHINA, "%s%s%s", mProvince_name, mCity_name, mArea_name));
+
+            SharePreUtil.saveData(mActivity, "sel_local", mArea_name);
+            SharePreUtil.saveData(mActivity, "sel_areaCode", mArea_code);
+            SharePreUtil.saveData(mActivity, "sel_bean_local", new Gson().toJson(postLocalBeans));
+
+            LogUtil.str(postLocalBeans);
+            mMap.put("areaCode", mArea_code);
+            mMap.put("pageNumber", "1");
+            pageNumber = 1;
+            mPresenter.homeGoodsList(mMap);
+        }).setSubmitText("确定")//确定按钮文字
+                .setCancelText("取消")//取消按钮文字
+                .setSubCalSize(18)//确定和取消文字大小
+                .setSubmitColor(getResources().getColor(R.color.colorBlackGold))
+                .setCancelColor(getResources().getColor(R.color.grey))
+                .setContentTextSize(18)//滚轮文字大小
+                .setCyclic(false, false, false)//循环与否
+                .setSelectOptions(0, 0, 0)  //设置默认选中项
+                .setOutSideCancelable(false)//点击外部dismiss default true
+                .build();
+    }
+
+    public void areaSD(AreaAllBean localBean) {
+        mLocalBean = localBean;
+        if (optionsLocalSItems == null || optionsLocalSItems.size() < 1) {
+            if (localBean != null && localBean.areas.size() > 0) {
+                for (int i = 0; i < localBean.areas.size(); i++) {//省
+                    ArrayList<ArrayList<PostLocalBean>> minLocalItems = new ArrayList<>();
+                    ArrayList<PostLocalBean> subsString = new ArrayList<>();
+                    for (int j = 0; j < localBean.areas.get(i).subs.size(); j++) {
+                        String area_nameS = localBean.areas.get(i).subs.get(j).area_name;
+                        String area_codeS = localBean.areas.get(i).subs.get(j).area_code;
+                        PostLocalBean postLocalBeanS = new PostLocalBean();
+                        postLocalBeanS.name = area_nameS;
+                        postLocalBeanS.code = area_codeS;
+                        subsString.add(postLocalBeanS);
+                        ArrayList<PostLocalBean> subsXString = new ArrayList<>();
+                        for (int k = 0; k < localBean.areas.get(i).subs.get(j).subs.size(); k++) {
+                            String area_nameX = localBean.areas.get(i).subs.get(j).subs.get(k).area_name;
+                            String area_codeX = localBean.areas.get(i).subs.get(j).subs.get(k).area_code;
+                            PostLocalBean postLocalBeanX = new PostLocalBean();
+                            postLocalBeanX.name = area_nameX;
+                            postLocalBeanX.code = area_codeX;
+                            subsXString.add(postLocalBeanX);
+                        }
+                        minLocalItems.add(subsXString);
+                    }
+                    optionsLocalXItems.add(subsString);
+                    optionsQItems.add(minLocalItems);
+                    String area_name = localBean.areas.get(i).area_name;
+                    String area_code = localBean.areas.get(i).area_code;
+                    PostLocalBean postLocalBean = new PostLocalBean();
+                    postLocalBean.code = area_code;
+                    postLocalBean.name = area_name;
+                    optionsLocalSItems.add(postLocalBean);
+                }
+                if (optionsLocalSItems.size() != 0 & optionsLocalSItems != null) {
+                    mLocalPickerView.setPicker(optionsLocalSItems, optionsLocalXItems, optionsQItems);
+                }
+            }
+
+        }
+        if (!mLocalPickerView.isShowing()) {
+            mLocalPickerView.show();
+        }
     }
 }

@@ -9,6 +9,7 @@ import android.widget.ViewFlipper;
 import com.bumptech.glide.Glide;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.xueyituanchina.xueyituan.R;
+import com.xueyituanchina.xueyituan.XYTApplication;
 import com.xueyituanchina.xueyituan.mpbe.bean.AwardBean;
 import com.xueyituanchina.xueyituan.mpbe.event.ShareAwardAllEvent;
 import com.xueyituanchina.xueyituan.mpbe.event.ShareAwardOneEvent;
@@ -138,7 +139,9 @@ public class AwardFragment extends SuperBaseFragment {
         mTvNums = mHeader.findViewById(R.id.tvNums);
         mTvAwardAll = mHeader.findViewById(R.id.tvAwardAll);
         mHeader.findViewById(R.id.tvShareInvit).setOnClickListener(v -> {
-            ActivityUtils.init().start(mActivity, MyShareActivity.class, "邀请好友");
+            if (XYTApplication.assertNoLogin(getActivity())) {
+                ActivityUtils.init().start(mActivity, MyShareActivity.class, "邀请好友");
+            }
         });
         mTvAwardAll.setOnClickListener(v -> {
             Bundle bundle = new Bundle();
@@ -148,6 +151,7 @@ public class AwardFragment extends SuperBaseFragment {
     }
 
     private void initViewFlipper(List<String> broadMsgList) {
+        mViewFlipper.removeAllViews();
         Observable.fromIterable(broadMsgList).subscribe(str -> mViewFlipper.addView(getTextImageView(str)));
     }
 

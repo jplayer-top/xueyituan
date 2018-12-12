@@ -58,15 +58,15 @@ public class SearchPresenter extends BasePresenter<SearchActivity> {
         });
     }
 
-    public void areaList() {
-        mModel.area_list().subscribe(areaListBean -> {
-            if (areaListBean != null) {
-                mIView.responseSuccess();
-                mIView.areaList(areaListBean);
-            }
-        }, throwable -> {
-        });
-    }
+//    public void areaList() {
+//        mModel.area_list().subscribe(areaListBean -> {
+//            if (areaListBean != null) {
+//                mIView.responseSuccess();
+//                mIView.areaList(areaListBean);
+//            }
+//        }, throwable -> {
+//        });
+//    }
 
     public void homeGoodsList(Map<String, String> map, boolean isLoadding) {
         if (XYTApplication.lnglat != null) {

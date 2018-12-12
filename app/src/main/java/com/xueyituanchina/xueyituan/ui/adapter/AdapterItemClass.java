@@ -1,5 +1,8 @@
 package com.xueyituanchina.xueyituan.ui.adapter;
 
+import android.graphics.Paint;
+import android.widget.TextView;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.xueyituanchina.xueyituan.R;
@@ -22,6 +25,8 @@ class AdapterItemClass extends BaseQuickAdapter<HomeGoodsList.ListBean.Goodslist
 
     @Override
     protected void convert(BaseViewHolder helper, HomeGoodsList.ListBean.GoodslistBean item) {
+        TextView tvLocalGoodsPrice = helper.itemView.findViewById(R.id.tvLocalGoodsPrice);
+        tvLocalGoodsPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         helper.setText(R.id.tvGoodsName, item.goods_title)
                 .setText(R.id.tvGift, item.goods_subtitle)
                 .setText(R.id.tvGoodsPrice, String.format(Locale.CHINA, "团购价：￥%s", item.goodsBestPriceStr))

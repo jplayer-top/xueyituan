@@ -12,10 +12,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.github.florent37.viewanimator.ViewAnimator;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.xueyituanchina.xueyituan.R;
-import com.xueyituanchina.xueyituan.mpbe.bean.AreaBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeGoodsList;
 import com.xueyituanchina.xueyituan.mpbe.bean.HomeListBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.PostLocalBean;
 import com.xueyituanchina.xueyituan.mpbe.presenter.SearchPresenter;
 import com.xueyituanchina.xueyituan.ui.adapter.HomeAdapter;
 import com.xueyituanchina.xueyituan.ui.adapter.SelectAdapter;
@@ -30,6 +32,7 @@ import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.ui.activity.SuperBaseActivity;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.KeyboardUtils;
+import top.jplayer.baseprolibrary.utils.SharePreUtil;
 
 /**
  * Created by Obl on 2018/10/19.
@@ -63,6 +66,7 @@ public class SearchActivity extends SuperBaseActivity {
     private int clickSelect = -1;
     private String mPid;
     private int pagerNumber = 1;
+    private ArrayList<PostLocalBean> mPostLocalBeans;
 
     @Override
     protected void initImmersionBar() {
@@ -83,6 +87,16 @@ public class SearchActivity extends SuperBaseActivity {
         mAdapter = new HomeAdapter(new ArrayList<>());
         mRecyclerView.setAdapter(mAdapter);
         mPresenter = new SearchPresenter(this);
+        String json = (String) SharePreUtil.getData(this, "sel_bean_local", "");
+        if (!"".equals(json)) {
+            mPostLocalBeans = new Gson().fromJson(json, new TypeToken<ArrayList<PostLocalBean>>() {
+            }.getType());
+        } else {
+            json = " [{\"code\":\"371501\",\"name\":\"市辖区\"},{\"code\":\"371502\",\"name\":\"东昌府区\"}," +
+                    "{\"code\":\"371521\",\"name\":\"阳谷县\"},{\"code\":\"371522\",\"name\":\"莘　县\"},{\"code\":\"371523\",\"name\":\"茌平县\"},{\"code\":\"371524\",\"name\":\"东阿县\"},{\"code\":\"371525\",\"name\":\"冠　县\"},{\"code\":\"371526\",\"name\":\"高唐县\"},{\"code\":\"371581\",\"name\":\"临清市\"}]";
+            mPostLocalBeans = new Gson().fromJson(json, new TypeToken<ArrayList<PostLocalBean>>() {
+            }.getType());
+        }
         mMap = new HashMap<>();
         mPid = mBundle.getString("pid");
         mMap.put("orderType", "0");
@@ -92,7 +106,6 @@ public class SearchActivity extends SuperBaseActivity {
         }
         mPresenter.homeGoodsList(mMap);
         mPresenter.homeList(mPid);
-        mPresenter.areaList();
         initSelect(rootView);
         ivGoBack.setOnClickListener(v -> finish());
         editSearch.setOnEditorActionListener((v, actionId, event) -> {
@@ -125,8 +138,8 @@ public class SearchActivity extends SuperBaseActivity {
         mRecyclerViewSelect.setAdapter(mSelectAdapter);
         initLocalData();
         mTvLocal.setOnClickListener(v -> {
-            if (mAreaBean != null) {
-                areaList(mAreaBean);
+            if (mPostLocalBeans != null) {
+                areaList(mPostLocalBeans);
                 clickSelect = 2;
                 closeDialog();
             }
@@ -167,11 +180,12 @@ public class SearchActivity extends SuperBaseActivity {
                 }
             } else if (clickSelect == 2) {
                 mTvLocal.setText(data);
-                for (AreaBean.AreasBean.SubsBean bean : mAreaBean.areas.subs) {
-                    if (data.equals(bean.area_name)) {
-                        mMap.put("areaCode", bean.area_name);
+                for (PostLocalBean bean : mPostLocalBeans) {
+                    if (data.equals(bean.name)) {
+                        mMap.put("areaCode", bean.code);
                         break;
                     }
+
                 }
             }
             fadeOutLocal();
@@ -311,15 +325,13 @@ public class SearchActivity extends SuperBaseActivity {
         mSelectAdapter.setNewData(mStrings);
     }
 
-    private AreaBean mAreaBean;
 
-    public void areaList(AreaBean listBean) {
+    public void areaList(ArrayList<PostLocalBean> listBean) {
         if (mStrings == null) {
             mStrings = new ArrayList<>();
         }
         mStrings.clear();
-        mAreaBean = listBean;
-        Observable.fromIterable(listBean.areas.subs).subscribe(bean -> mStrings.add(bean.area_name));
+        Observable.fromIterable(listBean).subscribe(bean -> mStrings.add(bean.name));
         mSelectAdapter.setNewData(mStrings);
     }
 }

@@ -61,6 +61,8 @@ public class SettingActivity extends CommonToolBarActivity {
     TextView mTvPasswrod;
     @BindView(R.id.tvPoint)
     TextView mTvPoint;
+    @BindView(R.id.tvTxPassword)
+    TextView tvTxPassword;
     @BindView(R.id.btnLogout)
     Button mBtnLogout;
     @BindView(R.id.llChatList)
@@ -117,6 +119,16 @@ public class SettingActivity extends CommonToolBarActivity {
                         mPresenter.verifyPw(opw);
                     });
         });
+        tvTxPassword.setOnClickListener(view -> {
+            new DialogEdit(this)
+                    .setTitle("修改提现密码")
+                    .setSubTitle("请输入原提现密码")
+                    .show(R.id.btnSure, view1 -> {
+                        EditText editText = (EditText) view1;
+                        opw = editText.getText().toString();
+                        mPresenter.verifyTxPw(opw);
+                    });
+        });
         if (XYTApplication.cuid.equals(XYTApplication.uid)) {
             mLlChatList.setVisibility(View.VISIBLE);
         }
@@ -143,8 +155,10 @@ public class SettingActivity extends CommonToolBarActivity {
     public void onEvent(MessageEvent event) {
         if ("昵称".equals(event.key)) {
             mPresenter.updateNick(event.preText);
-        } else {
+        } else if ("密码".equals(event.key)) {
             mPresenter.updatePw(opw, event.preText);
+        } else if ("提现密码".equals(event.key)) {
+            mPresenter.updateTxPw(opw, event.preText);
         }
     }
 
@@ -163,6 +177,13 @@ public class SettingActivity extends CommonToolBarActivity {
     public void responseNick(String nick) {
         mTvName.setText(nick);
         EventBus.getDefault().post(new MessageOkEvent());
+    }
+
+    public void verifyTxPw(String pw) {
+        Bundle bundle = new Bundle();
+        bundle.putString("key", "提现密码");
+        bundle.putString("value", pw);
+        ActivityUtils.init().start(this, ChangeMsgActivity.class, "修改提现密码", bundle);
     }
 
     public void verifyPw(String pw) {
@@ -184,5 +205,10 @@ public class SettingActivity extends CommonToolBarActivity {
         SharePreUtil.saveData(this, "login_token", "");
         EventBus.getDefault().post(new LogoutEvent());
         finish();
+    }
+
+
+    public void updateTxPw() {
+
     }
 }

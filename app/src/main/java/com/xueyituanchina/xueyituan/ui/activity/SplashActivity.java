@@ -8,6 +8,7 @@ import com.xueyituanchina.xueyituan.R;
 import com.xueyituanchina.xueyituan.XYTApplication;
 import com.xueyituanchina.xueyituan.mpbe.XYTServer;
 import com.xueyituanchina.xueyituan.mpbe.bean.LoginBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.MyInfoBean;
 import com.xueyituanchina.xueyituan.mpbe.model.LoginModel;
 import com.xueyituanchina.xueyituan.ui.MainActivity;
 
@@ -19,6 +20,8 @@ import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
 import top.jplayer.baseprolibrary.ui.activity.SuperBaseActivity;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.SharePreUtil;
+import top.jplayer.baseprolibrary.utils.StringUtils;
+import top.jplayer.baseprolibrary.utils.ToastUtils;
 
 import static io.rong.imkit.utils.SystemUtils.getCurProcessName;
 
@@ -32,6 +35,7 @@ import static io.rong.imkit.utils.SystemUtils.getCurProcessName;
 public class SplashActivity extends SuperBaseActivity {
     long preDateTime;
     boolean isLoginOk = false;
+    private LoginModel mModel;
 
     @Override
     protected int initRootLayout() {
@@ -46,14 +50,14 @@ public class SplashActivity extends SuperBaseActivity {
                 .duration(1500)
                 .onStart(() -> {
                     preDateTime = new Date().getTime();
-                    LoginModel model = new LoginModel(XYTServer.class);
+                    mModel = new LoginModel(XYTServer.class);
                     String phone = (String) SharePreUtil.getData(this, "login_phone", "");
                     String password = (String) SharePreUtil.getData(this, "login_password", "");
                     if ("".equals(phone) || "".equals(password)) {
                         isLoginOk = true;
                         return;
                     }
-                    model.requestLogin(phone, password).subscribe(new NetCallBackObserver<LoginBean>() {
+                    mModel.requestLogin(phone, password).subscribe(new NetCallBackObserver<LoginBean>() {
                         @Override
                         public void responseSuccess(LoginBean loginBean) {
                             String imtoken = loginBean.imtoken;
@@ -66,15 +70,21 @@ public class SplashActivity extends SuperBaseActivity {
                             SharePreUtil.saveData(mActivity, "mark_login", "1");
                             XYTApplication.uid = uid;
                             XYTApplication.token = imtoken;
+                            if (loginBean.shield != 1) {
+                                requestMyInfo();
+                            } else {
+                                ToastUtils.init().showErrorToast(mActivity, "当前账号为 黑名单账号");
+                            }
                         }
 
                         @Override
                         public void responseFail(LoginBean loginBean) {
+                            responseLogin();
                         }
 
                         @Override
-                        public void onComplete() {
-                            super.onComplete();
+                        public void onError(Throwable e) {
+                            super.onError(e);
                             responseLogin();
                         }
                     });
@@ -87,6 +97,40 @@ public class SplashActivity extends SuperBaseActivity {
                 })
                 .start();
 
+    }
+
+    public void requestMyInfo() {
+        String login_uid = (String) SharePreUtil.getData(mActivity, "login_uid", "");
+        if ("".equals(login_uid)) {
+            ToastUtils.init().showInfoToast(mActivity, "请先登录");
+        } else {
+            mModel.requestMyInfo().subscribe(new NetCallBackObserver<MyInfoBean>() {
+                @Override
+                public void responseSuccess(MyInfoBean myInfoBean) {
+                    responseMyInfo(myInfoBean);
+                }
+
+                @Override
+                public void responseFail(MyInfoBean myInfoBean) {
+
+                }
+
+                @Override
+                public void onComplete() {
+                    super.onComplete();
+                    responseLogin();
+                }
+            });
+        }
+    }
+
+    private void responseMyInfo(MyInfoBean bean) {
+        XYTApplication.cuid = bean.customerId;
+        XYTApplication.login_name = StringUtils.init().fixNullStr(bean.nick);
+        XYTApplication.isVip = bean.vip != 0;
+        if (bean.avator != null) {
+            SharePreUtil.saveData(mActivity, "login_avatar", bean.avator);
+        }
     }
 
     private void connectIm(LoginBean loginBean) {

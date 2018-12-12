@@ -119,7 +119,7 @@ public class ShopCreateActivity extends CommonToolBarActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                StringUtils.init().tipEditTextLength(mEdSpName,s,10,"店铺名称不超过十个字");
+                StringUtils.init().tipEditTextLength(mEdSpName, s, 10, "店铺名称不超过十个字");
 
             }
         });
@@ -231,40 +231,43 @@ public class ShopCreateActivity extends CommonToolBarActivity {
 
     public void setLocalBean(AreaAllBean localBean) {
         mLocalBean = localBean;
-        if (localBean != null && localBean.areas.size() > 0) {
-            for (int i = 0; i < localBean.areas.size(); i++) {//省
-                ArrayList<ArrayList<PostLocalBean>> minLocalItems = new ArrayList<>();
-                ArrayList<PostLocalBean> subsString = new ArrayList<>();
-                for (int j = 0; j < localBean.areas.get(i).subs.size(); j++) {
-                    String area_nameS = localBean.areas.get(i).subs.get(j).area_name;
-                    String area_codeS = localBean.areas.get(i).subs.get(j).area_code;
-                    PostLocalBean postLocalBeanS = new PostLocalBean();
-                    postLocalBeanS.name = area_nameS;
-                    postLocalBeanS.code = area_codeS;
-                    subsString.add(postLocalBeanS);
-                    ArrayList<PostLocalBean> subsXString = new ArrayList<>();
-                    for (int k = 0; k < localBean.areas.get(i).subs.get(j).subs.size(); k++) {
-                        String area_nameX = localBean.areas.get(i).subs.get(j).subs.get(k).area_name;
-                        String area_codeX = localBean.areas.get(i).subs.get(j).subs.get(k).area_code;
-                        PostLocalBean postLocalBeanX = new PostLocalBean();
-                        postLocalBeanX.name = area_nameX;
-                        postLocalBeanX.code = area_codeX;
-                        subsXString.add(postLocalBeanX);
+        if (optionsLocalSItems == null || optionsLocalSItems.size() < 1) {
+            if (localBean != null && localBean.areas.size() > 0) {
+                for (int i = 0; i < localBean.areas.size(); i++) {//省
+                    ArrayList<ArrayList<PostLocalBean>> minLocalItems = new ArrayList<>();
+                    ArrayList<PostLocalBean> subsString = new ArrayList<>();
+                    for (int j = 0; j < localBean.areas.get(i).subs.size(); j++) {
+                        String area_nameS = localBean.areas.get(i).subs.get(j).area_name;
+                        String area_codeS = localBean.areas.get(i).subs.get(j).area_code;
+                        PostLocalBean postLocalBeanS = new PostLocalBean();
+                        postLocalBeanS.name = area_nameS;
+                        postLocalBeanS.code = area_codeS;
+                        subsString.add(postLocalBeanS);
+                        ArrayList<PostLocalBean> subsXString = new ArrayList<>();
+                        for (int k = 0; k < localBean.areas.get(i).subs.get(j).subs.size(); k++) {
+                            String area_nameX = localBean.areas.get(i).subs.get(j).subs.get(k).area_name;
+                            String area_codeX = localBean.areas.get(i).subs.get(j).subs.get(k).area_code;
+                            PostLocalBean postLocalBeanX = new PostLocalBean();
+                            postLocalBeanX.name = area_nameX;
+                            postLocalBeanX.code = area_codeX;
+                            subsXString.add(postLocalBeanX);
+                        }
+                        minLocalItems.add(subsXString);
                     }
-                    minLocalItems.add(subsXString);
+                    optionsLocalXItems.add(subsString);
+                    optionsQItems.add(minLocalItems);
+                    String area_name = localBean.areas.get(i).area_name;
+                    String area_code = localBean.areas.get(i).area_code;
+                    PostLocalBean postLocalBean = new PostLocalBean();
+                    postLocalBean.code = area_code;
+                    postLocalBean.name = area_name;
+                    optionsLocalSItems.add(postLocalBean);
                 }
-                optionsLocalXItems.add(subsString);
-                optionsQItems.add(minLocalItems);
-                String area_name = localBean.areas.get(i).area_name;
-                String area_code = localBean.areas.get(i).area_code;
-                PostLocalBean postLocalBean = new PostLocalBean();
-                postLocalBean.code = area_code;
-                postLocalBean.name = area_name;
-                optionsLocalSItems.add(postLocalBean);
+                if (optionsLocalSItems.size() != 0 & optionsLocalSItems != null) {
+                    mLocalPickerView.setPicker(optionsLocalSItems, optionsLocalXItems, optionsQItems);
+                }
             }
-            if (optionsLocalSItems.size() != 0 & optionsLocalSItems != null) {
-                mLocalPickerView.setPicker(optionsLocalSItems, optionsLocalXItems, optionsQItems);
-            }
+
         }
         if (!mLocalPickerView.isShowing()) {
             mLocalPickerView.show();
@@ -324,8 +327,11 @@ public class ShopCreateActivity extends CommonToolBarActivity {
         MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM)
                 .addFormDataPart("sp_name", mEdSpName.getText().toString())
                 .addFormDataPart("sp_province", mProvince_name)
+                .addFormDataPart("sp_province_code", mProvince_code)
                 .addFormDataPart("sp_city", mCity_name)
+                .addFormDataPart("sp_city_code", mCity_code)
                 .addFormDataPart("sp_area", mArea_name)
+                .addFormDataPart("sp_area_code", mArea_code)
                 .addFormDataPart("sp_addr", mEdSpAddr.getText().toString())
                 .addFormDataPart("sp_link_name", mEdSpUserName.getText().toString())
                 .addFormDataPart("sp_link_phone", mEdSpPhone.getText().toString())

@@ -54,11 +54,41 @@ public class SettingPresenter extends BasePresenter<SettingActivity> {
 
             }
         });
-    } public void updatePw(String opw,String npw) {
+    }
+
+    public void verifyTxPw(String pw) {
+        mModel.verifyTxPw(pw).subscribe(new NetCallBackObserver<BaseBean>(new PostImplTip(mIView)) {
+            @Override
+            public void responseSuccess(BaseBean baseBean) {
+                mIView.verifyTxPw(pw);
+            }
+
+            @Override
+            public void responseFail(BaseBean baseBean) {
+
+            }
+        });
+    }
+
+    public void updatePw(String opw, String npw) {
         mModel.updatePw(opw, npw).subscribe(new NetCallBackObserver<BaseBean>(new PostImplTip(mIView)) {
             @Override
             public void responseSuccess(BaseBean baseBean) {
                 mIView.updatePw();
+            }
+
+            @Override
+            public void responseFail(BaseBean baseBean) {
+
+            }
+        });
+    }
+
+    public void updateTxPw(String opw, String npw) {
+        mModel.updateTxPw(opw, npw).subscribe(new NetCallBackObserver<BaseBean>(new PostImplTip(mIView)) {
+            @Override
+            public void responseSuccess(BaseBean baseBean) {
+                mIView.updateTxPw();
             }
 
             @Override
