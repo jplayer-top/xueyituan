@@ -98,10 +98,7 @@ public class ShopItemActivity extends CommonToolBarActivity {
         initHeaderView();
         initFooterView();
         mBtnPay = rootView.findViewById(R.id.btnPay);
-        mBtnPay.setOnClickListener(v -> {
-            String login_phone = (String) SharePreUtil.getData(this, "login_phone", "");
-            mPresenter.createOrder(mId, "1", login_phone);
-        });
+
         toolRightVisible(mIvToolRight, R.drawable.collection);
         mIvToolRightLeft.setImageResource(R.drawable.share);
         mWxShare = new WXShare(this);
@@ -166,8 +163,8 @@ public class ShopItemActivity extends CommonToolBarActivity {
 
     public void shopInfo(ShopItemBean bean) {
         this.keep = bean.keep;
+        ShopItemBean.GoodsBean goods = bean.goods;
         if (mWhatBean == null) {
-            ShopItemBean.GoodsBean goods = bean.goods;
             mWhatBean = new LookWhatBean(null,
                     goods.goods_id,
                     goods.goods_title,
@@ -178,6 +175,7 @@ public class ShopItemActivity extends CommonToolBarActivity {
                     "");
             mDaoModel.insertUser(mWhatBean);
         }
+
         mAdapter.setNewData(bean.goods.goods_desc_img);
         initBanner(bean.goods.goods_thumb_img);
         initHeaderData(bean);
@@ -208,6 +206,19 @@ public class ShopItemActivity extends CommonToolBarActivity {
         mTvWasPay.setText(String.format(Locale.CHINA, "已售 %d", goodsBean.sales));
         mHeader.findViewById(R.id.ivToCall).setOnClickListener(v -> dialPhoneNumber(shopBean.phone));
         mBtnPay.setText(String.format(Locale.CHINA, "%s元试课", goodsBean.goodsBestPriceStr));
+
+        if (XYTApplication.isVip && goodsBean.vip == 1) {
+            mBtnPay.setText("会员0元专享");
+            mBtnPay.setOnClickListener(v -> {
+                String login_phone = (String) SharePreUtil.getData(this, "login_phone", "");
+                mPresenter.createOrder(mId, "1", login_phone, true);
+            });
+        } else {
+            mBtnPay.setOnClickListener(v -> {
+                String login_phone = (String) SharePreUtil.getData(this, "login_phone", "");
+                mPresenter.createOrder(mId, "1", login_phone);
+            });
+        }
 
     }
 
@@ -273,10 +284,18 @@ public class ShopItemActivity extends CommonToolBarActivity {
         }
     }
 
+    public void vipPay() {
+        ToastUtils.init().showSuccessToast(this, "已成功购买会员0元专享课程");
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+    }
+
+    public void createOrder(OrderBean orderBean, boolean isVip) {
+        mPresenter.vipPay(orderBean.orderId);
     }
 
     public void createOrder(OrderBean orderBean) {
@@ -287,4 +306,6 @@ public class ShopItemActivity extends CommonToolBarActivity {
         bundle.putString("price", mTvNewPrice.getText().toString());
         ActivityUtils.init().start(this, OrderPrePayActivity.class, "订单信息", bundle);
     }
+
+
 }

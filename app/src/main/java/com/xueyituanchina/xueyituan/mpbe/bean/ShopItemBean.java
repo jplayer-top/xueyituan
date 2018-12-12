@@ -74,6 +74,7 @@ public class ShopItemBean extends BaseBean {
         public String goodsOrgPriceStr;
         public String goodsBestPriceStr;
         public int sales;
+        public int vip;
         public double score;
         public List<String> goods_thumb_img;
         public List<String> goods_desc_img;

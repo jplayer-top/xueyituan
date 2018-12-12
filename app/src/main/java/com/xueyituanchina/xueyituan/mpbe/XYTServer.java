@@ -107,6 +107,9 @@ public interface XYTServer {
     @POST("task/share")
     Observable<BaseBean> shareOk(@Query("taskId") String taskId);
 
+    @POST("home/vippay")
+    Observable<BaseBean> vipPay(@Query("orderId") String orderId);
+
     @POST("swlt/pwd")
     Observable<BaseBean> applySign(@Query("pw") String pw);
 

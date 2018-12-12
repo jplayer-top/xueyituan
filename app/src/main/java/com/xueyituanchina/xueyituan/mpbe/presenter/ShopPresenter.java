@@ -83,11 +83,39 @@ public class ShopPresenter extends BasePresenter<ShopItemActivity> {
         });
     }
 
+    public void vipPay(String orderId) {
+        mModel.vipPay(orderId).subscribe(new NetCallBackObserver<BaseBean>(new LoaddingImplTip(mIView)) {
+            @Override
+            public void responseSuccess(BaseBean orderBean) {
+                mIView.vipPay();
+            }
+
+            @Override
+            public void responseFail(BaseBean orderBean) {
+
+            }
+        });
+    }
+
     public void createOrder(String goodsId, String amount, String phone) {
         mModel.createOrder(goodsId, amount, phone).subscribe(new NetCallBackObserver<OrderBean>(new LoaddingImplTip(mIView)) {
             @Override
             public void responseSuccess(OrderBean orderBean) {
                 mIView.createOrder(orderBean);
+            }
+
+            @Override
+            public void responseFail(OrderBean orderBean) {
+
+            }
+        });
+    }
+
+    public void createOrder(String goodsId, String amount, String phone, boolean isVip) {
+        mModel.createOrder(goodsId, amount, phone).subscribe(new NetCallBackObserver<OrderBean>(new LoaddingImplTip(mIView)) {
+            @Override
+            public void responseSuccess(OrderBean orderBean) {
+                mIView.createOrder(orderBean, isVip);
             }
 
             @Override

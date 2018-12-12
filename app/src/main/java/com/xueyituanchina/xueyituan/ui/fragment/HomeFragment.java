@@ -98,6 +98,7 @@ public class HomeFragment extends SuperBaseFragment {
     private RecyclerView mRecyclerViewSelect;
     private View mFooter;
     private int pageNumber = 1;
+    private View mBtnTop;
 
     @Override
     public int initLayout() {
@@ -156,6 +157,25 @@ public class HomeFragment extends SuperBaseFragment {
                 mSmartRefreshLayout.finishLoadMore(1000);
 
             }
+        });
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                int position = layoutManager.findLastVisibleItemPosition();
+                if (position >= 10) {
+                    mBtnTop.setVisibility(View.VISIBLE);
+                } else {
+                    mBtnTop.setVisibility(View.INVISIBLE);
+                }
+
+            }
+        });
+        mBtnTop = rootView.findViewById(R.id.btnTop);
+        mBtnTop.setOnClickListener(v -> {
+            mRecyclerView.scrollToPosition(0);
         });
     }
 
@@ -244,6 +264,8 @@ public class HomeFragment extends SuperBaseFragment {
                 }
             }
         });
+
+
     }
 
     SelectCatAdapter mSelectCatAdapter;

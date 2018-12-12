@@ -81,6 +81,16 @@
         app:layout_constraintTop_toBottomOf="@+id/constraint">
 
         <include layout="@layout/layout_refresh_white_hasfoot"/>
+
+        <Button
+            android:visibility="invisible"
+            android:id="@+id/btnTop"
+            android:layout_width="@dimen/dimen_40dp"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="@dimen/dimen_80dp"
+            android:layout_marginEnd="@dimen/dimen_15dp"
+            android:background="@drawable/top"/>
     </FrameLayout>
 
     <FrameLayout

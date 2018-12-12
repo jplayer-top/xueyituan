@@ -65,6 +65,9 @@ public class HomeModel extends BaseModel<XYTServer> {
     public Observable<OrderInfoBean> orderInfo(String orderId) {
         return mServer.orderInfo(orderId).compose(new IoMainSchedule<>());
     }
+    public Observable<BaseBean> vipPay(String orderId) {
+        return mServer.vipPay(orderId).compose(new IoMainSchedule<>());
+    }
 
     public Observable<OrderIssueListBean> orderIssueList() {
         return mServer.orderIssueList().compose(new IoMainSchedule<>());
