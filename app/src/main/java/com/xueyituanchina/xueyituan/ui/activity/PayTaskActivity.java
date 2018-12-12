@@ -14,7 +14,7 @@ import com.xueyituanchina.xueyituan.R;
 import com.xueyituanchina.xueyituan.XYTApplication;
 import com.xueyituanchina.xueyituan.aliapi.AliPayInfoBean;
 import com.xueyituanchina.xueyituan.mpbe.event.PayOKStateEvent;
-import com.xueyituanchina.xueyituan.mpbe.presenter.PayPresenter;
+import com.xueyituanchina.xueyituan.mpbe.presenter.PayTaskPresenter;
 import com.xueyituanchina.xueyituan.wxapi.WXPayEntryActivity;
 import com.xueyituanchina.xueyituan.wxapi.WxPayInfoBean;
 
@@ -29,7 +29,6 @@ import butterknife.Unbinder;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
 
@@ -40,9 +39,9 @@ import top.jplayer.baseprolibrary.utils.ToastUtils;
  * github : https://github.com/oblivion0001
  */
 
-public class PayActivity extends CommonToolBarActivity {
+public class PayTaskActivity extends CommonToolBarActivity {
 
-    private PayPresenter mPresenter;
+    private PayTaskPresenter mPresenter;
 
     @Override
     public int initAddLayout() {
@@ -63,6 +62,8 @@ public class PayActivity extends CommonToolBarActivity {
     TextView tv2Pay;
     @BindView(R.id.llPayOk)
     LinearLayout llPayOk;
+    @BindView(R.id.llPayShare)
+    LinearLayout llPayShare;
     private Unbinder mUnbinder;
 
     @Override
@@ -75,6 +76,7 @@ public class PayActivity extends CommonToolBarActivity {
         llPayOk.setVisibility(View.GONE);
         mTvPayMoney.setText(String.format(Locale.CHINA, "付款总额：%s", totalPrice));
         tvOrderId.setText(String.format(Locale.CHINA, "订单编号：%s", orderId));
+        llPayShare.setVisibility(View.INVISIBLE);
         mCheckbox1.setOnClickListener(v -> {
             mCheckbox1.setChecked(true);
             mCheckbox2.setChecked(false);
@@ -90,7 +92,7 @@ public class PayActivity extends CommonToolBarActivity {
             mCheckbox1.setChecked(false);
             mCheckbox2.setChecked(false);
         });
-        mPresenter = new PayPresenter(this);
+        mPresenter = new PayTaskPresenter(this);
 
         tv2Pay.setOnClickListener(v -> {
             boolean checked1 = mCheckbox1.isChecked();
@@ -98,11 +100,11 @@ public class PayActivity extends CommonToolBarActivity {
             boolean checked3 = mCheckbox3.isChecked();
 
             if (checked1) {
-                mPresenter.payWxOrder(orderId);
+                mPresenter.wxPay(orderId);
             } else if (checked2) {
-                mPresenter.payAliOrder(orderId);
+                mPresenter.aliPay(orderId);
             } else if (checked3) {
-                mPresenter.payUserOrder(orderId);
+//                mPresenter.payUserOrder(orderId);
             }
         });
     }
@@ -140,26 +142,15 @@ public class PayActivity extends CommonToolBarActivity {
         next4PayOk();
     }
 
-    public void payAliOrder(AliPayInfoBean response) {
-        Observable.just(response).subscribeOn(Schedulers.io())
-                .map(aliPayInfoBean -> {
-                    PayTask alipay = new PayTask(mActivity);
-                    return alipay.payV2(response.orderStr, true);
-                }).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(result -> {
-                    if (result.get("resultStatus").equals("9000")) {
-                        //支付成功
-                        payAliOk();
-                    } else if (result.get("resultStatus").equals("8000")) {
-                        //支付处理中
-                        ToastUtils.init().showErrorToast(mActivity, "支付处理中，请稍后");
-                    } else {
-                        ToastUtils.init().showErrorToast(mActivity, "订单支付失败");
-                    }
-                });
+    @Override
+
+    protected void onDestroy() {
+        super.onDestroy();
+        mUnbinder.unbind();
+        EventBus.getDefault().unregister(this);
     }
 
-    public void payWxOrder(WxPayInfoBean response) {
+    public void wxPay(WxPayInfoBean response) {
         WxPayInfoBean.OrderStrBean orderStrBean = response.orderStr;
         if (api == null) {
             api = WXAPIFactory.createWXAPI(this, response.orderStr.appid, true);
@@ -180,15 +171,22 @@ public class PayActivity extends CommonToolBarActivity {
         api.sendReq(request);
     }
 
-    @Override
-
-    protected void onDestroy() {
-        super.onDestroy();
-        mUnbinder.unbind();
-        EventBus.getDefault().unregister(this);
-    }
-
-    public void payUserOrder(BaseBean bean) {
-        next4PayOk();
+    public void aliPay(AliPayInfoBean response) {
+        Observable.just(response).subscribeOn(Schedulers.io())
+                .map(aliPayInfoBean -> {
+                    PayTask alipay = new PayTask(mActivity);
+                    return alipay.payV2(response.orderStr, true);
+                }).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(result -> {
+                    if (result.get("resultStatus").equals("9000")) {
+                        //支付成功
+                        payAliOk();
+                    } else if (result.get("resultStatus").equals("8000")) {
+                        //支付处理中
+                        ToastUtils.init().showErrorToast(mActivity, "支付处理中，请稍后");
+                    } else {
+                        ToastUtils.init().showErrorToast(mActivity, "订单支付失败");
+                    }
+                });
     }
 }

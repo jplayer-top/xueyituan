@@ -1,5 +1,6 @@
 package com.xueyituanchina.xueyituan.mpbe.model;
 
+import com.xueyituanchina.xueyituan.aliapi.AliPayInfoBean;
 import com.xueyituanchina.xueyituan.mpbe.XYTServer;
 import com.xueyituanchina.xueyituan.mpbe.bean.AwardBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.PushTaskBean;
@@ -7,6 +8,7 @@ import com.xueyituanchina.xueyituan.mpbe.bean.PushTaskDestoryBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.TaskGoodsListBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.UpdateUrlBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.UserTaskListBean;
+import com.xueyituanchina.xueyituan.wxapi.WxPayInfoBean;
 
 import java.io.File;
 import java.util.Map;
@@ -45,6 +47,14 @@ public class AwardModel extends BaseModel<XYTServer> {
 
     public Observable<BaseBean> pushShare(String taskId, String url) {
         return mServer.pushShare(taskId, url).compose(new IoMainSchedule<>());
+    }
+
+    public Observable<AliPayInfoBean> payTaskAli(String orderId) {
+        return mServer.payTaskAli(orderId, "1").compose(new IoMainSchedule<>());
+    }
+
+    public Observable<WxPayInfoBean> payTaskWx(String orderId) {
+        return mServer.payTaskWx(orderId, "2").compose(new IoMainSchedule<>());
     }
 
     public Observable<TaskGoodsListBean> taskGoodsList() {

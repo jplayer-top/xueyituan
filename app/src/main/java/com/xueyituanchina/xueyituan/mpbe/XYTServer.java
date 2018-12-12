@@ -162,6 +162,9 @@ public interface XYTServer {
     @POST("home/pay")
     Observable<WxPayInfoBean> payWxOrder(@Query("orderId") String orderId, @Query("payType") String payType);
 
+    @POST("home/rpay")
+    Observable<BaseBean> payUserOrder(@Query("orderId") String orderId);
+
     @POST("home/createorder?")
     Observable<OrderBean> createOrder(@Query("goodsId") String goodsId,
                                       @Query("amount") String amount,
@@ -222,6 +225,15 @@ public interface XYTServer {
 
     @POST("my/viprecharge")
     Observable<AliPayInfoBean> wallAliRecharge(@Query("money") String money, @Query("pay_type") String pay_type);
+
+    @POST("my/viprecharge")
+    Observable<BaseBean> payVipR(@Query("money") String money, @Query("pay_type") String pay_type);
+
+    @POST("task/pay")
+    Observable<WxPayInfoBean> payTaskWx(@Query("orderId") String orderId, @Query("payType") String pay_type);
+
+    @POST("task/pay")
+    Observable<AliPayInfoBean> payTaskAli(@Query("orderId") String orderId, @Query("payType") String pay_type);
 
     @POST("my/signrecharge")
     Observable<WxPayInfoBean> wallWxShop(@Query("money") String money, @Query("pay_type") String pay_type);

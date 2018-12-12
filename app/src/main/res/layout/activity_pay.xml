@@ -121,8 +121,7 @@
             android:background="@color/white"
             android:gravity="center_vertical"
             android:paddingLeft="@dimen/dimen_15dp"
-            android:paddingRight="@dimen/dimen_15dp"
-            android:visibility="gone">
+            android:paddingRight="@dimen/dimen_15dp">
 
             <TextView
                 android:layout_width="0dp"

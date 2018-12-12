@@ -7,6 +7,7 @@ import com.xueyituanchina.xueyituan.ui.activity.PayActivity;
 import com.xueyituanchina.xueyituan.wxapi.WxPayInfoBean;
 
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
+import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
 import top.jplayer.baseprolibrary.net.tip.LoaddingImplTip;
 
@@ -39,7 +40,9 @@ public class PayPresenter extends BasePresenter<PayActivity> {
 
             }
         });
-    }  public void payWxOrder(String id) {
+    }
+
+    public void payWxOrder(String id) {
         mModel.payWx(id).subscribe(new NetCallBackObserver<WxPayInfoBean>(new LoaddingImplTip(mIView)) {
             @Override
             public void responseSuccess(WxPayInfoBean bean) {
@@ -48,6 +51,20 @@ public class PayPresenter extends BasePresenter<PayActivity> {
 
             @Override
             public void responseFail(WxPayInfoBean bean) {
+
+            }
+        });
+    }
+
+    public void payUserOrder(String orderId) {
+        mModel.payUserOrder(orderId).subscribe(new NetCallBackObserver<BaseBean>(new LoaddingImplTip(mIView)) {
+            @Override
+            public void responseSuccess(BaseBean bean) {
+                mIView.payUserOrder(bean);
+            }
+
+            @Override
+            public void responseFail(BaseBean bean) {
 
             }
         });

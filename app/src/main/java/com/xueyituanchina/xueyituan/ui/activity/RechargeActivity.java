@@ -18,6 +18,7 @@ import com.xueyituanchina.xueyituan.R;
 import com.xueyituanchina.xueyituan.aliapi.AliPayInfoBean;
 import com.xueyituanchina.xueyituan.mpbe.event.AliPayOkEvent;
 import com.xueyituanchina.xueyituan.mpbe.event.NoPayBackEvent;
+import com.xueyituanchina.xueyituan.mpbe.event.PayVipROkEvent;
 import com.xueyituanchina.xueyituan.mpbe.presenter.RechargePresenter;
 import com.xueyituanchina.xueyituan.wxapi.WXPayEntryActivity;
 import com.xueyituanchina.xueyituan.wxapi.WxPayInfoBean;
@@ -30,6 +31,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
 import top.jplayer.baseprolibrary.utils.KeyboardUtils;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
@@ -47,12 +49,16 @@ public class RechargeActivity extends CommonToolBarActivity {
     CheckBox mCheckbox1;
     @BindView(R.id.checkbox2)
     CheckBox mCheckbox2;
+    @BindView(R.id.checkbox3)
+    CheckBox mCheckbox3;
     @BindView(R.id.tv2Pay)
     TextView mTv2Pay;
     @BindView(R.id.tvRecharge)
     TextView mTvRecharge;
     @BindView(R.id.llToWall)
     LinearLayout llToWall;
+    @BindView(R.id.llPayShare)
+    LinearLayout llPayShare;
     @BindView(R.id.tvPayMoney)
     EditText tvPayMoney;
     private Unbinder mUnbinder;
@@ -79,20 +85,34 @@ public class RechargeActivity extends CommonToolBarActivity {
             llToWall.setVisibility(View.VISIBLE);
             mTvRecharge.setVisibility(View.GONE);
         }
+        llPayShare.setVisibility(mIsVip ? View.VISIBLE : View.INVISIBLE);
         mTvRecharge.setText(mRecharge);
-        mCheckbox1.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            mCheckbox1.setChecked(isChecked);
-            mCheckbox2.setChecked(!isChecked);
+
+
+        mCheckbox1.setOnClickListener(v -> {
+            mCheckbox1.setChecked(true);
+            mCheckbox2.setChecked(false);
+            mCheckbox3.setChecked(false);
         });
-        mCheckbox2.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            mCheckbox2.setChecked(isChecked);
-            mCheckbox1.setChecked(!isChecked);
+        mCheckbox2.setOnClickListener(v -> {
+            mCheckbox2.setChecked(true);
+            mCheckbox1.setChecked(false);
+            mCheckbox3.setChecked(false);
         });
+        mCheckbox3.setOnClickListener(v -> {
+            mCheckbox3.setChecked(true);
+            mCheckbox1.setChecked(false);
+            mCheckbox2.setChecked(false);
+        });
+
+
         mPresenter = new RechargePresenter(this);
         mTv2Pay.setOnClickListener(v -> {
-            boolean checked = mCheckbox1.isChecked();
+            boolean checked1 = mCheckbox1.isChecked();
+            boolean checked2 = mCheckbox2.isChecked();
+            boolean checked3 = mCheckbox3.isChecked();
             String money = tvPayMoney.getText().toString();
-            if (checked) {
+            if (checked1) {
                 if (mIsVip) {
                     mPresenter.wxPay(mRecharge);
                 } else {
@@ -106,7 +126,7 @@ public class RechargeActivity extends CommonToolBarActivity {
                         mPresenter.wxPayShop(mRecharge);
                     }
                 }
-            } else {
+            } else if (checked2) {
                 if (mIsVip) {
                     mPresenter.aliPay(mRecharge);
                 } else {
@@ -120,6 +140,8 @@ public class RechargeActivity extends CommonToolBarActivity {
                         mPresenter.aliPayShop(mRecharge);
                     }
                 }
+            } else if (checked3) {
+                mPresenter.payVip(mRecharge);
             }
         });
     }
@@ -231,4 +253,9 @@ public class RechargeActivity extends CommonToolBarActivity {
     }
 
 
+    public void payVip(BaseBean orderBean) {
+        EventBus.getDefault().post(new PayVipROkEvent());
+        ToastUtils.init().showSuccessToast(this, "充值成功");
+        finish();
+    }
 }

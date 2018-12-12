@@ -16,6 +16,7 @@ import com.xueyituanchina.xueyituan.mpbe.event.LoginSuccessEvent;
 import com.xueyituanchina.xueyituan.mpbe.event.LogoutEvent;
 import com.xueyituanchina.xueyituan.mpbe.event.MessageOkEvent;
 import com.xueyituanchina.xueyituan.mpbe.event.NoPayBackEvent;
+import com.xueyituanchina.xueyituan.mpbe.event.PayVipROkEvent;
 import com.xueyituanchina.xueyituan.mpbe.presenter.MePresenter;
 import com.xueyituanchina.xueyituan.ui.activity.CollectionActivity;
 import com.xueyituanchina.xueyituan.ui.activity.IssueActivity;
@@ -226,6 +227,11 @@ public class MeFragment extends SuperBaseFragment {
 
     @Subscribe
     public void onEvent(AliPayOkEvent event) {
+        mPresenter.requestMyInfo();
+    }
+
+    @Subscribe
+    public void onEvent(PayVipROkEvent event) {
         mPresenter.requestMyInfo();
     }
 

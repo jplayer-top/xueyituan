@@ -7,6 +7,7 @@ import com.xueyituanchina.xueyituan.ui.activity.RechargeActivity;
 import com.xueyituanchina.xueyituan.wxapi.WxPayInfoBean;
 
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
+import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
 import top.jplayer.baseprolibrary.net.tip.LoaddingImplTip;
 
@@ -110,4 +111,17 @@ public class RechargePresenter extends BasePresenter<RechargeActivity> {
         });
     }
 
+    public void payVip(String recharge) {
+        mModel.payVip(recharge).subscribe(new NetCallBackObserver<BaseBean>(new LoaddingImplTip(mIView)) {
+            @Override
+            public void responseSuccess(BaseBean orderBean) {
+                mIView.payVip(orderBean);
+            }
+
+            @Override
+            public void responseFail(BaseBean orderBean) {
+
+            }
+        });
+    }
 }

@@ -1,5 +1,6 @@
 package com.xueyituanchina.xueyituan.ui.fragment;
 
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,7 @@ import com.xueyituanchina.xueyituan.mpbe.bean.PushTaskBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.PushTaskDestoryBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.TaskGoodsListBean;
 import com.xueyituanchina.xueyituan.mpbe.presenter.TaskFragmentPresenter;
+import com.xueyituanchina.xueyituan.ui.activity.PayTaskActivity;
 import com.xueyituanchina.xueyituan.ui.adapter.TaskPushAdapter;
 
 import java.util.ArrayList;
@@ -25,6 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import top.jplayer.baseprolibrary.ui.fragment.SuperBaseFragment;
+import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.PickerUtils;
 import top.jplayer.baseprolibrary.utils.StringUtils;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
@@ -160,7 +163,10 @@ public class TaskSubmitFragment extends SuperBaseFragment {
     }
 
     public void pushTaskOk(PushTaskBean bean) {
-        ToastUtils.init().showQuickToast("这里应该去付款了");
+        Bundle bundle = new Bundle();
+        bundle.putString("orderId", bean.orderId);
+        bundle.putString("totalPrice", bean.totalPrice);
+        ActivityUtils.init().start(mActivity, PayTaskActivity.class, "任务支付", bundle);
         mPresenter.tasksDestory();
     }
 
@@ -174,4 +180,5 @@ public class TaskSubmitFragment extends SuperBaseFragment {
             mMultipleStatusView.showEmpty();
         }
     }
+
 }

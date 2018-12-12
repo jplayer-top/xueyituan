@@ -11,6 +11,7 @@ import com.xueyituanchina.xueyituan.mpbe.XYTServer;
 import com.xueyituanchina.xueyituan.mpbe.bean.EquityBean;
 import com.xueyituanchina.xueyituan.mpbe.event.AliPayOkEvent;
 import com.xueyituanchina.xueyituan.mpbe.event.NoPayBackEvent;
+import com.xueyituanchina.xueyituan.mpbe.event.PayVipROkEvent;
 import com.xueyituanchina.xueyituan.mpbe.model.MeModel;
 import com.xueyituanchina.xueyituan.wxapi.WXPayEntryActivity;
 
@@ -115,6 +116,11 @@ public class VipShowActivity extends CommonToolBarActivity {
 
     @Subscribe
     public void onEvent(AliPayOkEvent event) {
+        isOkVip();
+    }
+
+    @Subscribe
+    public void onEvent(PayVipROkEvent event) {
         isOkVip();
     }
 

@@ -16,10 +16,16 @@ import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.xueyituanchina.xueyituan.R;
 import com.xueyituanchina.xueyituan.mpbe.XYTServer;
 import com.xueyituanchina.xueyituan.mpbe.bean.MyInviteBean;
+import com.xueyituanchina.xueyituan.mpbe.event.ShareAllEvent;
+import com.xueyituanchina.xueyituan.mpbe.event.ShareOneEvent;
 import com.xueyituanchina.xueyituan.mpbe.model.MeModel;
+import com.xueyituanchina.xueyituan.ui.dialog.ShareDialog;
 import com.xueyituanchina.xueyituan.wxapi.WXShare;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.Permission;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +36,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.Observable;
+import top.jplayer.baseprolibrary.net.retrofit.IoMainSchedule;
 import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
 import top.jplayer.baseprolibrary.ui.adapter.BaseViewPagerViewAdapter;
@@ -56,6 +63,8 @@ public class MyShareActivity extends CommonToolBarActivity {
     private String mInvImg;
     private String mName;
     private String mInvUrl;
+    private Bitmap mBitmap;
+    private String mSaveBitmap;
 
     @Override
     public int initAddLayout() {
@@ -67,6 +76,7 @@ public class MyShareActivity extends CommonToolBarActivity {
         super.initAddView(rootView);
         mUnbinder = ButterKnife.bind(this);
         toolRightVisible(mTvToolRight, "分享");
+        EventBus.getDefault().register(this);
         if (mBundle != null) {
             mName = mBundle.getString("name");
             mInvImg = mBundle.getString("invImg");
@@ -152,18 +162,34 @@ public class MyShareActivity extends CommonToolBarActivity {
     public void toolRightBtn(View v) {
         super.toolRightBtn(v);
         View view = mViewPager.getChildAt(mViewPager.getCurrentItem()).findViewById(R.id.clSharePic);
-        Bitmap bitmap = BitmapUtil.screenShotView(view);
-        String saveBitmap = BitmapUtil.saveBitmap(bitmap);
-        LogUtil.str(saveBitmap);
-        Observable.timer(1, TimeUnit.SECONDS).subscribe(aLong -> {
-            new WXShare(this).shareImage(saveBitmap, bitmap, SendMessageToWX.Req.WXSceneSession);
+        mBitmap = BitmapUtil.screenShotView(view);
+        mSaveBitmap = BitmapUtil.saveBitmap(mBitmap);
+        LogUtil.str(mSaveBitmap);
+
+        Observable.timer(1, TimeUnit.SECONDS).compose(new IoMainSchedule<>()).subscribe(aLong -> {
+            new ShareDialog(mActivity).show();
         });
+    }
+
+    @Subscribe
+    public void shareEvent(ShareOneEvent event) {
+        if (mSaveBitmap != null && mBitmap != null) {
+            new WXShare(this).shareImage(mSaveBitmap, mBitmap, SendMessageToWX.Req.WXSceneSession);
+        }
+    }
+
+    @Subscribe
+    public void shareEvent(ShareAllEvent event) {
+        if (mSaveBitmap != null && mBitmap != null) {
+            new WXShare(this).shareImage(mSaveBitmap, mBitmap, SendMessageToWX.Req.WXSceneTimeline);
+        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         mUnbinder.unbind();
+        EventBus.getDefault().unregister(this);
     }
 }
 

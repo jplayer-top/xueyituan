@@ -65,6 +65,7 @@ public class HomeModel extends BaseModel<XYTServer> {
     public Observable<OrderInfoBean> orderInfo(String orderId) {
         return mServer.orderInfo(orderId).compose(new IoMainSchedule<>());
     }
+
     public Observable<BaseBean> vipPay(String orderId) {
         return mServer.vipPay(orderId).compose(new IoMainSchedule<>());
     }
@@ -91,6 +92,10 @@ public class HomeModel extends BaseModel<XYTServer> {
 
     public Observable<AliPayInfoBean> aliShop(String money) {
         return mServer.wallAliShop(money, "1").compose(new IoMainSchedule<>());
+    }
+
+    public Observable<BaseBean> payVip(String money) {
+        return mServer.payVipR(money, "3").compose(new IoMainSchedule<>());
     }
 
     public Observable<HomeTopBean> homeTop() {
@@ -128,6 +133,10 @@ public class HomeModel extends BaseModel<XYTServer> {
 
     public Observable<WxPayInfoBean> payWx(String id) {
         return mServer.payWxOrder(id, "2").compose(new IoMainSchedule<>());
+    }
+
+    public Observable<BaseBean> payUserOrder(String id) {
+        return mServer.payUserOrder(id).compose(new IoMainSchedule<>());
     }
 
     public Observable<ShopItemBean> shopInfo(String id, String lnglat) {

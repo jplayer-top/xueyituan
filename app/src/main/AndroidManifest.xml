@@ -154,6 +154,10 @@
             android:name=".ui.activity.UserOrderListActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.PayTaskActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".ui.activity.StoreOrderListActivity"

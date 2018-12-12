@@ -45,6 +45,8 @@ public class TaskFragmentPresenter extends BasePresenter<TaskSubmitFragment> {
         });
     }
 
+
+
     public void tasksDestory() {
         mModel.tasksDestory().subscribe(new NetCallBackObserver<PushTaskDestoryBean>() {
             @Override
