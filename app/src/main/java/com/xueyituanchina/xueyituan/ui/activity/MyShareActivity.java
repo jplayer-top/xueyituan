@@ -38,6 +38,7 @@ import butterknife.Unbinder;
 import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.net.retrofit.IoMainSchedule;
 import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
+import top.jplayer.baseprolibrary.net.tip.DialogLoading;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
 import top.jplayer.baseprolibrary.ui.adapter.BaseViewPagerViewAdapter;
 import top.jplayer.baseprolibrary.utils.BitmapUtil;
@@ -65,6 +66,7 @@ public class MyShareActivity extends CommonToolBarActivity {
     private String mInvUrl;
     private Bitmap mBitmap;
     private String mSaveBitmap;
+    private DialogLoading mLoading;
 
     @Override
     public int initAddLayout() {
@@ -165,9 +167,13 @@ public class MyShareActivity extends CommonToolBarActivity {
         mBitmap = BitmapUtil.screenShotView(view);
         mSaveBitmap = BitmapUtil.saveBitmap(mBitmap);
         LogUtil.str(mSaveBitmap);
-
+        mLoading = new DialogLoading(this);
+        mLoading.show();
         Observable.timer(1, TimeUnit.SECONDS).compose(new IoMainSchedule<>()).subscribe(aLong -> {
-            new ShareDialog(mActivity).show();
+            if (mLoading != null) {
+                mLoading.dismiss();
+                new ShareDialog(mActivity).show();
+            }
         });
     }
 

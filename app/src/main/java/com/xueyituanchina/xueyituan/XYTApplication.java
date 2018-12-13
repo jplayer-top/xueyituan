@@ -7,6 +7,9 @@ import android.support.multidex.MultiDexApplication;
 
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
+import com.umeng.commonsdk.UMConfigure;
+import com.umeng.message.IUmengRegisterCallback;
+import com.umeng.message.PushAgent;
 import com.xueyituanchina.xueyituan.ui.activity.LoginActivity;
 
 import java.lang.ref.WeakReference;
@@ -57,6 +60,19 @@ public class XYTApplication extends MultiDexApplication {
                 .skin()
                 .fixFileProvide();
         Bugly.init(this, "236a5634ef", false);
+        UMConfigure.init(this, "5c11e9d4b465f58c190001ab", "push0", 1,
+                "8f87fd0783f4f8dcba0e693ea851ad80");
+        PushAgent.getInstance(this).register(new IUmengRegisterCallback() {
+            @Override
+            public void onSuccess(String s) {
+
+            }
+
+            @Override
+            public void onFailure(String s, String s1) {
+
+            }
+        });
     }
 
     public static boolean assert2Login(Activity activity) {

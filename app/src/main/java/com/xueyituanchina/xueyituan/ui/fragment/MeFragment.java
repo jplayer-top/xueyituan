@@ -271,7 +271,7 @@ public class MeFragment extends SuperBaseFragment {
                 ActivityUtils.init().start(mActivity, ShopCreateActivity.class, "商家入驻");
             }
         });
-        mTvNick.setText(String.format(Locale.CHINA, "会员昵称：%s", StringUtils.init().fixNullStr(bean.nick)));
+        mTvNick.setText(String.format(Locale.CHINA, "%s", StringUtils.init().fixNullStr(bean.nick)));
         XYTApplication.login_name = StringUtils.init().fixNullStr(bean.nick);
         boolean isVip = bean.vip != 0;
         XYTApplication.isVip = isVip;

@@ -425,29 +425,38 @@ public class HomeFragment extends SuperBaseFragment {
 
     private void initNews(HomeTopBean homeTopBean) {
         mTvWeekTitle.setText(homeTopBean.acfamily.title);
-        mTvShopT0.setText(homeTopBean.shop.get(0).recommend_title);
-        mTvShopT1.setText(homeTopBean.shop.get(0).sp_name);
-        mTvShop1T0.setText(homeTopBean.shop.get(1).recommend_title);
-        mTvShop1T1.setText(homeTopBean.shop.get(1).sp_name);
-
         Glide.with(mActivity)
                 .load(homeTopBean.acfamily.avator)
                 .apply(GlideUtils.init().options(R.mipmap.ic_launcher))
                 .into(mMirrorView);
-        Glide.with(mActivity)
-                .load(homeTopBean.shop.get(0).sp_img)
-                .apply(GlideUtils.init().options(R.mipmap.ic_launcher))
-                .into(mIvShop0);
-        Glide.with(mActivity)
-                .load(homeTopBean.shop.get(1).sp_img)
-                .apply(GlideUtils.init().options(R.mipmap.ic_launcher))
-                .into(mIvShop1);
-        mLlShow0.setOnClickListener(v -> {
-            clickToStore(homeTopBean.shop.get(0).sp_name, homeTopBean.shop.get(0).user_id + "");
-        });
-        mLlShop1.setOnClickListener(v -> {
-            clickToStore(homeTopBean.shop.get(1).sp_name, homeTopBean.shop.get(1).user_id + "");
-        });
+
+        if (homeTopBean.shop != null) {
+            if (homeTopBean.shop.size() > 0) {
+
+                mTvShopT0.setText(homeTopBean.shop.get(0).recommend_title);
+                mTvShopT1.setText(homeTopBean.shop.get(0).sp_name);
+
+                Glide.with(mActivity)
+                        .load(homeTopBean.shop.get(0).sp_img)
+                        .apply(GlideUtils.init().options(R.mipmap.ic_launcher))
+                        .into(mIvShop0);
+                mLlShow0.setOnClickListener(v -> {
+                    clickToStore(homeTopBean.shop.get(0).sp_name, homeTopBean.shop.get(0).user_id + "");
+                });
+                if (homeTopBean.shop.size() > 1) {
+
+                    mTvShop1T0.setText(homeTopBean.shop.get(1).recommend_title);
+                    mTvShop1T1.setText(homeTopBean.shop.get(1).sp_name);
+                    Glide.with(mActivity)
+                            .load(homeTopBean.shop.get(1).sp_img)
+                            .apply(GlideUtils.init().options(R.mipmap.ic_launcher))
+                            .into(mIvShop1);
+                    mLlShop1.setOnClickListener(v -> {
+                        clickToStore(homeTopBean.shop.get(1).sp_name, homeTopBean.shop.get(1).user_id + "");
+                    });
+                }
+            }
+        }
     }
 
     private void initViewFlipper(HomeTopBean homeTopBean) {
