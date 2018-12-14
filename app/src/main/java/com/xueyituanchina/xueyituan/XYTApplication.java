@@ -31,6 +31,7 @@ import static io.rong.imkit.utils.SystemUtils.getCurProcessName;
 
 public class XYTApplication extends MultiDexApplication {
     public static String uid = "";
+    public static int merchant = -1;
     public static String cuid = "1";
     public static String token = "";
     public static boolean isVip = false;

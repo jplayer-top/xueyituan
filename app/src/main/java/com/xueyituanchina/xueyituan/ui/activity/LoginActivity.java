@@ -32,6 +32,8 @@ import io.reactivex.disposables.Disposable;
 import top.jplayer.baseprolibrary.mvp.contract.IContract;
 import top.jplayer.baseprolibrary.net.retrofit.IoMainSchedule;
 import top.jplayer.baseprolibrary.ui.activity.SuperBaseActivity;
+import top.jplayer.baseprolibrary.ui.activity.WebViewActivity;
+import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.ScreenUtils;
 import top.jplayer.baseprolibrary.utils.SharePreUtil;
 import top.jplayer.baseprolibrary.utils.SizeUtils;
@@ -132,6 +134,11 @@ public class LoginActivity extends SuperBaseActivity implements TextWatcher, ICo
         mMap = new HashMap<>();
         mLlWxBindIssue.setVisibility(View.INVISIBLE);
         isCheckKeyboard = false;
+        mTvBackBefore1.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("url", "https://www.xueyituanchina.cn/info/useagreement.html");
+            ActivityUtils.init().start(mActivity, WebViewActivity.class, "", bundle);
+        });
     }
 
     @Override

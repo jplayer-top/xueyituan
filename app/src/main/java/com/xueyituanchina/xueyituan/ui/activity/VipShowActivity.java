@@ -13,6 +13,7 @@ import com.xueyituanchina.xueyituan.mpbe.event.AliPayOkEvent;
 import com.xueyituanchina.xueyituan.mpbe.event.NoPayBackEvent;
 import com.xueyituanchina.xueyituan.mpbe.event.PayVipROkEvent;
 import com.xueyituanchina.xueyituan.mpbe.model.MeModel;
+import com.xueyituanchina.xueyituan.ui.dialog.DialogVip;
 import com.xueyituanchina.xueyituan.wxapi.WXPayEntryActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -109,6 +110,7 @@ public class VipShowActivity extends CommonToolBarActivity {
     }
 
     private void isOkVip() {
+        new DialogVip(this).show();
         mIsVip = true;
         mTvVipSol.setText("尊享会员");
         mBtnAdd.setText("邀请好友得现金");

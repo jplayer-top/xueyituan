@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dimen_10dp"
             android:layout_marginStart="@dimen/dimen_10dp"
-            android:layout_marginTop="@dimen/dimen_20dp"
+            android:layout_marginTop="@dimen/dimen_10dp"
             android:background="@drawable/task_push_save"
             android:text="确认并提交"
             android:textColor="@color/white"
@@ -112,16 +112,16 @@
 3.上传图片必须是朋友圈全屏截图
 4.朋友圈需要转发至少2小时后方可审核"
             app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="@dimen/dimen_14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTipE"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_15dp"
+            android:layout_marginTop="@dimen/dimen_30dp"
             android:text="----------------- 截图示例 -----------------"
             android:textSize="@dimen/dimen_16sp"
-            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvRules"/>
@@ -130,7 +130,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dimen_15dp"
-            android:layout_marginTop="@dimen/dimen_50dp"
+            android:layout_marginTop="@dimen/dimen_60dp"
             android:src="@drawable/temple"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

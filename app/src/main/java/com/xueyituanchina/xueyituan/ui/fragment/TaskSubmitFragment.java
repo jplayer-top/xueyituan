@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.xueyituanchina.xueyituan.R;
+import com.xueyituanchina.xueyituan.XYTApplication;
 import com.xueyituanchina.xueyituan.mpbe.bean.PushTaskBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.PushTaskDestoryBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.TaskGoodsListBean;
@@ -104,12 +105,17 @@ public class TaskSubmitFragment extends SuperBaseFragment {
             mPresenter.taskGoodsList();
         });
         mBtnPush.setOnClickListener(v -> {
+
             if (mMap.size() < 1) {
                 ToastUtils.init().showInfoToast(mActivity, "请选择活动课程");
                 return;
             }
             if (StringUtils.init().isEmpty(mTvTitle)) {
                 ToastUtils.init().showInfoToast(mActivity, "请输入活动标题");
+                return;
+            }
+            if (mTvTitle.getText().toString().length() > 15) {
+                ToastUtils.init().showInfoToast(mActivity, "活动标题限制为15个字符");
                 return;
             }
             if (StringUtils.init().isEmpty(mLlNums)) {
@@ -120,15 +126,26 @@ public class TaskSubmitFragment extends SuperBaseFragment {
                 ToastUtils.init().showInfoToast(mActivity, "请输入活动单个价格");
                 return;
             }
+            if (XYTApplication.merchant != 3) {
+                ToastUtils.init().showErrorToast(mActivity, "当前只有商家可以发布任务");
+                return;
+            }
             mMap.put("goods_subtitle", mTvTitle.getText().toString());
             mMap.put("amount", mLlNums.getText().toString());
             mMap.put("money", mLlPrice.getText().toString());
             mPresenter.taskPush(mMap);
         });
         mSmartRefreshLayout.setOnRefreshListener(refreshLayout -> {
-            mPresenter.tasksDestory();
+            if (XYTApplication.merchant == 3) {
+                mPresenter.tasksDestory();
+            } else {
+                ToastUtils.init().showErrorToast(mActivity, "当前只有商家可以发布任务");
+            }
         });
         mPresenter.tasksDestory();
+        if (XYTApplication.merchant != 3) {
+            ToastUtils.init().showErrorToast(mActivity, "当前只有商家可以发布任务");
+        }
     }
 
     @Override

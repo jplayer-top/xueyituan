@@ -11,7 +11,7 @@
         xmlns:bga="http://schemas.android.com/apk/res-auto"
         android:id="@+id/bgaBanner"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="210dp"
         bga:banner_indicatorGravity="bottom"
         bga:banner_pointAutoPlayAble="true"
         bga:banner_pointContainerBackground="@color/trans"
@@ -153,6 +153,7 @@
         android:layout_marginTop="@dimen/dimen_10dp"
         android:scaleType="centerCrop"
         android:src="@drawable/logo_news"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ll0"/>
 
@@ -165,6 +166,7 @@
         android:flipInterval="3000"
         android:inAnimation="@anim/slide_in_bottom"
         android:outAnimation="@anim/slide_out_top"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/ivLogoNews"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ivLogoNews"
@@ -173,11 +175,11 @@
 
     <LinearLayout
         android:id="@+id/llWeek"
-        android:layout_width="@dimen/dimen_100dp"
-        android:layout_height="@dimen/dimen_150dp"
+        android:layout_width="@dimen/dimen_130dp"
+        android:layout_height="@dimen/dimen_130dp"
         android:layout_marginStart="@dimen/dimen_15dp"
-        android:layout_marginTop="@dimen/dimen_10dp"
-        android:background="@color/whitesmoke"
+        android:layout_marginTop="@dimen/dimen_23dp"
+        android:background="@drawable/store_week"
         android:orientation="vertical"
         app:layout_constraintEnd_toStartOf="@+id/llShop0"
         app:layout_constraintStart_toStartOf="parent"
@@ -188,7 +190,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_10dp"
             android:gravity="center_horizontal"
-            android:text="周末亲子游"/>
+            android:text="周末亲子游"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/tvWeekTitle"
@@ -200,7 +203,8 @@
             android:lines="1"
             android:text="周末亲子游玩"
             android:textColor="@color/coral"
-            android:textSize="@dimen/dimen_12sp"/>
+            android:textSize="@dimen/dimen_12sp"
+            android:visibility="gone"/>
 
         <com.kingja.magicmirror.MagicMirrorView
             android:id="@+id/mirrorView"
@@ -210,17 +214,18 @@
             android:layout_marginTop="@dimen/dimen_10dp"
             android:scaleType="centerCrop"
             android:src="@mipmap/ic_launcher"
+            android:visibility="gone"
             app:mirrorShape="circle"/>
     </LinearLayout>
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/llShop0"
         android:layout_width="0dp"
-        android:layout_height="@dimen/dimen_70dp"
+        android:layout_height="@dimen/dimen_60dp"
         android:layout_marginEnd="@dimen/dimen_15dp"
         android:layout_marginStart="@dimen/dimen_10dp"
-        android:layout_marginTop="@dimen/dimen_10dp"
-        android:background="@color/whitesmoke"
+        android:layout_marginTop="@dimen/dimen_23dp"
+        android:background="@drawable/store_shop_01"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.3"
@@ -237,6 +242,7 @@
             android:paddingEnd="@dimen/dimen_40dp"
             android:paddingStart="@dimen/dimen_10dp"
             android:text=""
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/tvShopT1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -252,6 +258,7 @@
             android:paddingStart="@dimen/dimen_10dp"
             android:text=""
             android:textColor="@color/coral"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvShopT0"/>
@@ -264,6 +271,7 @@
             android:background="@color/whitesmoke"
             android:scaleType="centerCrop"
             android:src="@mipmap/ic_launcher"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -273,11 +281,11 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/llShop1"
         android:layout_width="0dp"
-        android:layout_height="@dimen/dimen_70dp"
+        android:layout_height="@dimen/dimen_60dp"
         android:layout_marginEnd="@dimen/dimen_15dp"
         android:layout_marginStart="@dimen/dimen_10dp"
         android:layout_marginTop="@dimen/dimen_10dp"
-        android:background="@color/whitesmoke"
+        android:background="@drawable/store_shop_02"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.3"
@@ -294,6 +302,7 @@
             android:paddingEnd="@dimen/dimen_40dp"
             android:paddingStart="@dimen/dimen_10dp"
             android:text=""
+            android:visibility="gone"
             app:layout_constraintBottom_toTopOf="@+id/tvShop1T1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -309,6 +318,7 @@
             android:paddingStart="@dimen/dimen_10dp"
             android:text=""
             android:textColor="@color/coral"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvShop1T0"/>
@@ -321,6 +331,7 @@
             android:background="@color/whitesmoke"
             android:scaleType="centerCrop"
             android:src="@mipmap/ic_launcher"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

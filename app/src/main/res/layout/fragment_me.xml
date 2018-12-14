@@ -11,7 +11,7 @@
         android:id="@+id/smartRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/whiteF8"
+        android:background="@color/whiteF2F5F9"
         app:srlEnablePreviewInEditMode="true"
         app:srlPrimaryColor="@color/whiteF8">
 
@@ -49,7 +49,9 @@
                         android:layout_height="@dimen/dimen_160dp"
                         android:layout_marginEnd="@dimen/dp_10"
                         android:layout_marginStart="@dimen/dp_10"
-                        android:layout_marginTop="@dimen/dimen_40dp"
+                        android:layout_marginTop="@dimen/dimen_62dp"
+                        app:cardCornerRadius="@dimen/dimen_7dp"
+                        app:cardElevation="0dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
@@ -60,8 +62,8 @@
 
                             <top.jplayer.baseprolibrary.widgets.polygon.PolygonImageView
                                 android:id="@+id/ivAvatar"
-                                android:layout_width="@dimen/dimen_50dp"
-                                android:layout_height="@dimen/dimen_50dp"
+                                android:layout_width="@dimen/dimen_47dp"
+                                android:layout_height="@dimen/dimen_47dp"
                                 android:layout_marginStart="@dimen/dimen_15dp"
                                 android:layout_marginTop="@dimen/dimen_15dp"
                                 android:src="@mipmap/ic_launcher"
@@ -85,7 +87,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginBottom="@dimen/dimen_5dp"
-                                    android:text="会员名称"/>
+                                    android:text="会员名称"
+                                    android:textSize="@dimen/dimen_15sp"/>
 
                                 <ImageView
                                     android:id="@+id/ivVipSet"
@@ -141,7 +144,8 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="收藏"/>
+                                    android:text="收藏"
+                                    android:textSize="@dimen/dimen_14sp"/>
                             </LinearLayout>
 
                             <LinearLayout
@@ -165,7 +169,8 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="评价"/>
+                                    android:text="评价"
+                                    android:textSize="@dimen/dimen_14sp"/>
                             </LinearLayout>
 
                             <LinearLayout
@@ -189,7 +194,8 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="订单"/>
+                                    android:text="订单"
+                                    android:textSize="@dimen/dimen_14sp"/>
                             </LinearLayout>
 
                             <LinearLayout
@@ -214,7 +220,8 @@
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="邀请"/>
+                                    android:text="邀请"
+                                    android:textSize="@dimen/dimen_14sp"/>
                             </LinearLayout>
                         </android.support.constraint.ConstraintLayout>
                     </android.support.v7.widget.CardView>
@@ -230,7 +237,7 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="@dimen/dimen_50dp"
                             android:layout_marginEnd="@dimen/dimen_15dp"
                             android:layout_marginStart="@dimen/dimen_15dp"
                             android:layout_marginTop="@dimen/dimen_15dp"
@@ -249,7 +256,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginStart="@dimen/dimen_15dp"
                                 android:text="尊享会员卡"
-                                android:textSize="@dimen/dimen_16sp"
+                                android:textSize="@dimen/dimen_14sp"
                                 android:textStyle="bold"/>
 
                             <TextView
@@ -260,8 +267,7 @@
                                 android:layout_weight="1"
                                 android:gravity="end"
                                 android:text="查看我的会员权益"
-                                android:textSize="@dimen/dimen_12sp"
-                                android:textStyle="bold"/>
+                                android:textSize="@dimen/dimen_12sp"/>
 
                             <ImageView
                                 android:layout_width="@dimen/dimen_7dp"
@@ -292,8 +298,7 @@
                                 android:gravity="center_vertical"
                                 android:paddingEnd="@dimen/dimen_15dp"
                                 android:paddingStart="@dimen/dimen_15dp"
-                                android:text="我的资产"
-                                android:textStyle="bold"/>
+                                android:text="我的资产"/>
 
                             <TextView
                                 android:id="@+id/llShop"
@@ -305,8 +310,7 @@
                                 android:gravity="center_vertical"
                                 android:paddingEnd="@dimen/dimen_15dp"
                                 android:paddingStart="@dimen/dimen_15dp"
-                                android:text="商家端"
-                                android:textStyle="bold"/>
+                                android:text="商家端"/>
 
                             <TextView
                                 android:id="@+id/llWork"
@@ -318,8 +322,7 @@
                                 android:gravity="center_vertical"
                                 android:paddingEnd="@dimen/dimen_15dp"
                                 android:paddingStart="@dimen/dimen_15dp"
-                                android:text="我要合作"
-                                android:textStyle="bold"/>
+                                android:text="我要合作"/>
                         </LinearLayout>
 
                         <LinearLayout
@@ -342,8 +345,7 @@
                                 android:gravity="center_vertical"
                                 android:paddingEnd="@dimen/dimen_15dp"
                                 android:paddingStart="@dimen/dimen_15dp"
-                                android:text="客服中心"
-                                android:textStyle="bold"/>
+                                android:text="客服中心"/>
 
                             <TextView
                                 android:id="@+id/llSetting"
@@ -355,8 +357,7 @@
                                 android:gravity="center_vertical"
                                 android:paddingEnd="@dimen/dimen_15dp"
                                 android:paddingStart="@dimen/dimen_15dp"
-                                android:text="设置"
-                                android:textStyle="bold"/>
+                                android:text="设置"/>
                         </LinearLayout>
 
                     </LinearLayout>

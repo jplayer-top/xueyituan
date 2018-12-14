@@ -73,7 +73,7 @@ public class SplashActivity extends SuperBaseActivity {
                             if (loginBean.shield != 1) {
                                 requestMyInfo();
                             } else {
-                                ToastUtils.init().showErrorToast(mActivity, "当前账号为 黑名单账号");
+                                ToastUtils.init().showErrorToast(mActivity, "您的账户存在违规操作\n请致电客服0635 8091618");
                             }
                         }
 
@@ -126,6 +126,7 @@ public class SplashActivity extends SuperBaseActivity {
 
     private void responseMyInfo(MyInfoBean bean) {
         XYTApplication.cuid = bean.customerId;
+        XYTApplication.merchant = bean.merchant;
         XYTApplication.login_name = StringUtils.init().fixNullStr(bean.nick);
         XYTApplication.isVip = bean.vip != 0;
         if (bean.avator != null) {

@@ -141,39 +141,57 @@ public class MeFragment extends SuperBaseFragment {
 //            }
 //        });
         tvSetting.setOnClickListener(v -> {
-            toSettingActivity();
+            if (XYTApplication.assert2Login(mActivity)) {
+                toSettingActivity();
+            }
         });
         tvProperty.setOnClickListener(v -> {
-            ActivityUtils.init().start(mActivity, ProPertyActivity.class, "我的资产");
+            if (XYTApplication.assert2Login(mActivity))
+                ActivityUtils.init().start(mActivity, ProPertyActivity.class, "我的资产");
         });
         ivSubmitTask.setOnClickListener(v -> {
-            ActivityUtils.init().start(mActivity, UserTaskListActivity.class, "提交任务");
+            if (XYTApplication.assert2Login(mActivity))
+                ActivityUtils.init().start(mActivity, UserTaskListActivity.class, "提交任务");
         });
         mLlCollection.setOnClickListener(v -> {
-            ActivityUtils.init().start(mActivity, CollectionActivity.class, "收藏");
+            if (XYTApplication.assert2Login(mActivity)) {
+                ActivityUtils.init().start(mActivity, CollectionActivity.class, "收藏");
+            }
         });
         llInvit.setOnClickListener(v -> {
-            ActivityUtils.init().start(mActivity, MeInvActivity.class, "邀请好友");
+            if (XYTApplication.assert2Login(mActivity))
+                ActivityUtils.init().start(mActivity, MeInvActivity.class, "邀请好友");
         });
         mLlShop.setOnClickListener(v -> {
-            ActivityUtils.init().start(mActivity, StoreInfoActivity.class, "");
+            if (XYTApplication.assert2Login(mActivity)) {
+                if (3 == bean.merchant) {
+                    ActivityUtils.init().start(mActivity, StoreInfoActivity.class, "");
+                } else {
+                    ToastUtils.init().showInfoToast(mActivity, "请先进行商家入驻");
+                }
+            }
         });
         mLlIssue.setOnClickListener(v -> {
-            ActivityUtils.init().start(mActivity, IssueActivity.class, "我的评价");
+            if (XYTApplication.assert2Login(mActivity))
+                ActivityUtils.init().start(mActivity, IssueActivity.class, "我的评价");
         });
 
         mLlChat.setOnClickListener(v -> {
-            if (assert2Login(mActivity)) {
-                RongIM.getInstance().startConversation(mActivity, Conversation.ConversationType.PRIVATE,
-                        "u_" + XYTApplication.cuid, "客服");
+            if (XYTApplication.assert2Login(mActivity)) {
+                if (assert2Login(mActivity)) {
+                    RongIM.getInstance().startConversation(mActivity, Conversation.ConversationType.PRIVATE,
+                            "u_" + XYTApplication.cuid, "客服");
+                }
             }
         });
         tvLoadMoreOrder.setOnClickListener(v -> {
-            Bundle bundle = new Bundle();
-            if (bean != null && bean.orderList != null) {
-                List<MyInfoBean.OrderListBean> orderList = bean.orderList;
-                bundle.putParcelableArrayList("order_list", (ArrayList<MyInfoBean.OrderListBean>) orderList);
-                ActivityUtils.init().start(mActivity, OrderListActivity.class, "订单列表", bundle);
+            if (XYTApplication.assert2Login(mActivity)) {
+                Bundle bundle = new Bundle();
+                if (bean != null && bean.orderList != null) {
+                    List<MyInfoBean.OrderListBean> orderList = bean.orderList;
+                    bundle.putParcelableArrayList("order_list", (ArrayList<MyInfoBean.OrderListBean>) orderList);
+                    ActivityUtils.init().start(mActivity, OrderListActivity.class, "订单列表", bundle);
+                }
             }
         });
     }
@@ -244,9 +262,9 @@ public class MeFragment extends SuperBaseFragment {
         smartRefreshLayout.finishRefresh();
         mTvToLogin.setVisibility(View.INVISIBLE);
         mLlWork.setOnClickListener(v -> {
-            if ("0".equals(bean.merchant)) {
+            if (0 == (bean.merchant)) {
                 ActivityUtils.init().start(mActivity, ShopCreateActivity.class, "商家入驻");
-            } else if ("1".equals(bean.merchant)) {
+            } else if (1 == (bean.merchant)) {
                 DialogLogout dialogLogout = new DialogLogout(mActivity);
                 dialogLogout
                         .setTitle("温馨提示")
@@ -257,7 +275,7 @@ public class MeFragment extends SuperBaseFragment {
                             ActivityUtils.init().start(this.getActivity(), RechargeActivity.class, "商铺审核金", bundle);
                             dialogLogout.dismiss();
                         });
-            } else if ("2".equals(bean.merchant)) {
+            } else if (2 == (bean.merchant)) {
                 DialogLogout dialogLogout = new DialogLogout(mActivity);
                 dialogLogout
                         .setTitle("温馨提示")
@@ -265,9 +283,9 @@ public class MeFragment extends SuperBaseFragment {
                         .show(R.id.btnSure, view -> {
                             dialogLogout.dismiss();
                         });
-            } else if ("3".equals(bean.merchant)) {
+            } else if (3 == (bean.merchant)) {
                 ToastUtils.init().showSuccessToast(mActivity, "当前已是商家，请直接查看商家端");
-            } else if ("4".equals(bean.merchant)) {
+            } else if (4 == (bean.merchant)) {
                 ActivityUtils.init().start(mActivity, ShopCreateActivity.class, "商家入驻");
             }
         });
@@ -297,8 +315,18 @@ public class MeFragment extends SuperBaseFragment {
             bundle.putString("phone", login_phone);
             ActivityUtils.init().start(this.mActivity, VipShowActivity.class, "会员中心", bundle);
         });
+        ivVipSet.setOnClickListener(v -> {
+            Bundle bundle = new Bundle();
+            bundle.putBoolean("isVip", XYTApplication.isVip);
+            bundle.putString("avator", bean.avator);
+            bundle.putString("name", bean.nick);
+            bundle.putString("recharge", bean.recharge);
+            String login_phone = (String) SharePreUtil.getData(getContext(), "login_phone", "");
+            bundle.putString("phone", login_phone);
+            ActivityUtils.init().start(this.mActivity, VipShowActivity.class, "会员中心", bundle);
+        });
         initRecomend(bean.avator, mIvAvatar);
-
+        XYTApplication.merchant = bean.merchant;
     }
 
     private void initRecomend(String img, ImageView iv) {

@@ -112,7 +112,7 @@ public class LoginPresenter extends BasePresenter<LoginActivity> {
                 if (loginBean.shield != 1) {
                     EventBus.getDefault().post(new LoginSuccessEvent(uid));
                 } else {
-                    ToastUtils.init().showErrorToast(mIView, "当前账号为 黑名单账号");
+                    ToastUtils.init().showErrorToast(mIView, "您的账户存在违规操作\n请致电客服0635 8091618 ");
                 }
             }
 

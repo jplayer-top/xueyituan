@@ -1,6 +1,7 @@
 package com.xueyituanchina.xueyituan.ui.fragment;
 
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -99,6 +100,7 @@ public class HomeFragment extends SuperBaseFragment {
     private View mFooter;
     private int pageNumber = 1;
     private View mBtnTop;
+    private ConstraintLayout mConstraint;
 
     @Override
     public int initLayout() {
@@ -109,6 +111,7 @@ public class HomeFragment extends SuperBaseFragment {
     protected void initData(View rootView) {
         initImmersionBar();
         initRefreshStatusView(rootView);
+        mConstraint = rootView.findViewById(R.id.constraint);
         mFooter = View.inflate(mActivity, R.layout.layout_empty_view_card, null);
         TextView emptyText = mFooter.findViewById(R.id.empty_retry_view);
         emptyText.setText("暂无相关商家及课程");
@@ -169,6 +172,12 @@ public class HomeFragment extends SuperBaseFragment {
                     mBtnTop.setVisibility(View.VISIBLE);
                 } else {
                     mBtnTop.setVisibility(View.INVISIBLE);
+                }
+                int firPos = layoutManager.findFirstVisibleItemPosition();
+                if (firPos <= 1) {
+                    mConstraint.setVisibility(View.VISIBLE);
+                } else {
+                    mConstraint.setVisibility(View.INVISIBLE);
                 }
 
             }

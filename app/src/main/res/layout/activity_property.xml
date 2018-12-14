@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/ivBg"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="311dp"
         android:scaleType="centerCrop"
         android:src="@drawable/property_bg"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -34,15 +34,14 @@
             android:gravity="center"
             android:text="我的资产"
             android:textColor="@color/white"
-            android:textSize="@dimen/dimen_15sp"
-            android:textStyle="bold"/>
+            android:textSize="@dimen/dimen_15sp"/>
     </FrameLayout>
 
     <top.jplayer.baseprolibrary.widgets.polygon.PolygonImageView
         android:id="@+id/ivAvatar"
         android:layout_width="@dimen/dimen_60dp"
         android:layout_height="@dimen/dimen_60dp"
-        android:layout_marginTop="@dimen/dimen_15dp"
+        android:layout_marginTop="@dimen/dimen_21dp"
         android:src="@mipmap/ic_launcher"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,6 +49,7 @@
         app:poly_vertices="0"/>
 
     <TextView
+        android:id="@+id/tvTip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_15dp"
@@ -63,14 +63,12 @@
         android:id="@+id/tvUserMoney"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_40dp"
-        android:text="￥0.0"
+        android:text="￥0.00"
         android:textColor="@color/white"
-        android:textSize="@dimen/dimen_25sp"
-        android:textStyle="bold"
+        android:textSize="@dimen/dimen_35sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivAvatar"/>
+        app:layout_constraintTop_toBottomOf="@+id/tvTip"/>
 
     <View
         android:layout_width="1dp"
@@ -100,7 +98,6 @@
         android:text="0.0"
         android:textColor="@color/white"
         android:textSize="@dimen/dimen_25sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/ivBg"
         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -123,7 +120,6 @@
         android:text="0.0"
         android:textColor="@color/white"
         android:textSize="@dimen/dimen_25sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/ivBg"
         app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -151,7 +147,7 @@
                 android:drawablePadding="@dimen/dimen_10dp"
                 android:drawableStart="@drawable/chongzhi"
                 android:text="充值"
-                android:textStyle="bold"/>
+                android:textColor="#333"/>
         </LinearLayout>
 
         <LinearLayout
@@ -167,7 +163,7 @@
                 android:drawablePadding="@dimen/dimen_10dp"
                 android:drawableStart="@drawable/tixian"
                 android:text="提现"
-                android:textStyle="bold"/>
+                android:textColor="#333"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -193,7 +189,7 @@
             android:paddingEnd="@dimen/dimen_15dp"
             android:paddingStart="@dimen/dimen_15dp"
             android:text="账单明细"
-            android:textStyle="bold"/>
+            android:textColor="#333"/>
 
         <TextView
             android:id="@+id/llUserInput"
@@ -206,6 +202,6 @@
             android:paddingEnd="@dimen/dimen_15dp"
             android:paddingStart="@dimen/dimen_15dp"
             android:text="账户认证"
-            android:textStyle="bold"/>
+            android:textColor="#333"/>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

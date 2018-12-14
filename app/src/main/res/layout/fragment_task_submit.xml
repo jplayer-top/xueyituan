@@ -72,8 +72,10 @@
                 android:background="@drawable/shape_5_white"
                 android:gravity="center_vertical"
                 android:hint="点击选择要推广的课程"
+                android:paddingEnd="@dimen/dimen_1dp"
                 android:paddingStart="@dimen/dimen_35dp"
-                android:textColorHint="@color/color999"/>
+                android:textColor="#666"
+                android:textColorHint="#666"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -98,7 +100,8 @@
                     android:hint="请输入活动推广标题（最多15个字符）"
                     android:paddingEnd="@dimen/dimen_15dp"
                     android:paddingStart="@dimen/dimen_15dp"
-                    android:textColorHint="@color/color666"
+                    android:textColor="#666"
+                    android:textColorHint="#999"
                     android:textSize="@dimen/dimen_14sp"/>
 
                 <EditText
@@ -113,7 +116,8 @@
                     android:inputType="number"
                     android:paddingEnd="@dimen/dimen_15dp"
                     android:paddingStart="@dimen/dimen_15dp"
-                    android:textColorHint="@color/color666"
+                    android:textColor="#666"
+                    android:textColorHint="#999"
                     android:textSize="@dimen/dimen_14sp"/>
 
                 <EditText
@@ -129,7 +133,8 @@
                     android:inputType="text"
                     android:paddingEnd="@dimen/dimen_15dp"
                     android:paddingStart="@dimen/dimen_15dp"
-                    android:textColorHint="@color/color666"
+                    android:textColor="#666"
+                    android:textColorHint="#999"
                     android:textSize="@dimen/dimen_14sp"/>
             </LinearLayout>
 

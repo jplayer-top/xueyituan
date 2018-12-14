@@ -31,7 +31,7 @@ public class MyInfoBean extends BaseBean {
     public int points;
     public String recharge;
     public String avator;
-    public String merchant;
+    public int merchant;
     public String customerId;
     public List<OrderListBean> orderList;
     public List<RmdListBean> rmdList;

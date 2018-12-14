@@ -17,6 +17,10 @@ import com.xueyituanchina.xueyituan.ui.adapter.UserTaskListAdapter;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observable;
+import top.jplayer.baseprolibrary.net.retrofit.IoMainSchedule;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
@@ -47,9 +51,12 @@ public class UserTaskListActivity extends CommonToolBarActivity {
         EventBus.getDefault().register(this);
         mRecyclerView.setAdapter(mAdapter);
         rootView.findViewById(R.id.tvCopyTo).setOnClickListener(v -> {
+            ToastUtils.init().showSuccessToast(this, "已成功复制客服微信");
             ClipboardManager tvCopy = (ClipboardManager) this.getSystemService(Context.CLIPBOARD_SERVICE);
             tvCopy.setText("xueyika01");
-            getWechatApi();
+            Observable.timer(500, TimeUnit.MILLISECONDS).compose(new IoMainSchedule<>()).subscribe(aLong -> {
+                getWechatApi();
+            });
         });
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             UserTaskListBean.ListBean listBean = mAdapter.getData().get(position);

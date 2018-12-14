@@ -186,7 +186,7 @@
         android:layout_height="0dp"
         android:layout_marginEnd="@dimen/dimen_50dp"
         android:background="@color/pickerview_wheelview_textcolor_divider"
-        app:layout_constraintBottom_toTopOf="@+id/tvStoreLocalLen"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvStoreName"/>
 
@@ -195,9 +195,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/dimen_10dp"
-        android:src="@drawable/shop_call"
+        android:src="@drawable/shop_call_fix"
         android:tint="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="@+id/tvStoreLocalLen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tvStoreName"/>
 

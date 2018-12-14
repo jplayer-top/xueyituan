@@ -30,20 +30,19 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.Observable;
-import top.jplayer.baseprolibrary.net.retrofit.IoMainSchedule;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
 import top.jplayer.baseprolibrary.net.tip.DialogLoading;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
 import top.jplayer.baseprolibrary.ui.adapter.BaseViewPagerViewAdapter;
 import top.jplayer.baseprolibrary.utils.BitmapUtil;
 import top.jplayer.baseprolibrary.utils.CameraUtil;
-import top.jplayer.baseprolibrary.utils.LogUtil;
 import top.jplayer.baseprolibrary.utils.ScreenUtils;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
 import top.jplayer.baseprolibrary.widgets.CardTransformer;
@@ -67,6 +66,7 @@ public class MyShareActivity extends CommonToolBarActivity {
     private Bitmap mBitmap;
     private String mSaveBitmap;
     private DialogLoading mLoading;
+    private View mView;
 
     @Override
     public int initAddLayout() {
@@ -163,18 +163,23 @@ public class MyShareActivity extends CommonToolBarActivity {
     @Override
     public void toolRightBtn(View v) {
         super.toolRightBtn(v);
-        View view = mViewPager.getChildAt(mViewPager.getCurrentItem()).findViewById(R.id.clSharePic);
-        mBitmap = BitmapUtil.screenShotView(view);
-        mSaveBitmap = BitmapUtil.saveBitmap(mBitmap);
-        LogUtil.str(mSaveBitmap);
         mLoading = new DialogLoading(this);
         mLoading.show();
-        Observable.timer(1, TimeUnit.SECONDS).compose(new IoMainSchedule<>()).subscribe(aLong -> {
-            if (mLoading != null) {
-                mLoading.dismiss();
-                new ShareDialog(mActivity).show();
-            }
-        });
+        mView = mViewPager.getChildAt(mViewPager.getCurrentItem()).findViewById(R.id.clSharePic);
+        Observable.just(1).subscribeOn(Schedulers.io())
+                .map(aLong -> {
+                    mBitmap = BitmapUtil.screenShotView(mView);
+                    mSaveBitmap = BitmapUtil.saveBitmap(mBitmap);
+                    return aLong;
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(aLong
+                        -> {
+                    if (mLoading != null) {
+                        mLoading.dismiss();
+                        new ShareDialog(mActivity).show();
+                    }
+                });
     }
 
     @Subscribe

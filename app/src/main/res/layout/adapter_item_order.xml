@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dimen_15dp"
         android:text="支出"
-        android:textStyle="bold"
+        android:textSize="@dimen/dimen_16sp"
         app:layout_constraintStart_toEndOf="@+id/ivAvatar"
         app:layout_constraintTop_toTopOf="@+id/ivAvatar"/>
 

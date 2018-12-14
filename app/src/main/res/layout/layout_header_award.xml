@@ -42,8 +42,8 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="@dimen/dimen_60dp"
-            android:layout_marginEnd="@dimen/dimen_15dp"
-            android:layout_marginStart="@dimen/dimen_15dp"
+            android:layout_marginEnd="@dimen/dimen_16dp"
+            android:layout_marginStart="@dimen/dimen_16dp"
             android:background="@drawable/shape_45_white"
             android:divider="@drawable/shape_divider"
             android:dividerPadding="@dimen/dimen_10dp"
@@ -79,7 +79,7 @@
                     android:lines="1"
                     android:text="0"
                     android:textColor="@color/colorBlackGold"
-                    android:textSize="@dimen/dimen_17sp"
+                    android:textSize="@dimen/dimen_20sp"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -90,7 +90,7 @@
                     android:layout_toEndOf="@+id/ivCounts"
                     android:text="已分享"
                     android:textColor="@color/color999"
-                    android:textSize="@dimen/dimen_11sp"/>
+                    android:textSize="@dimen/dimen_12sp"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -116,7 +116,7 @@
                     android:lines="1"
                     android:text="0"
                     android:textColor="@color/colorBlackGold"
-                    android:textSize="@dimen/dimen_17sp"
+                    android:textSize="@dimen/dimen_20sp"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -127,7 +127,7 @@
                     android:layout_toEndOf="@+id/ivNums"
                     android:text="任务数量"
                     android:textColor="@color/color999"
-                    android:textSize="@dimen/dimen_11sp"/>
+                    android:textSize="@dimen/dimen_12sp"/>
             </RelativeLayout>
 
         </LinearLayout>
@@ -136,7 +136,7 @@
     <LinearLayout
         android:id="@+id/llNotice"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dimen_40dp"
         android:layout_marginTop="@dimen/dimen_15dp"
         android:background="@color/white"
         android:paddingEnd="@dimen/dimen_20dp"
@@ -169,7 +169,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_40dp"
+        android:layout_height="@dimen/dimen_42dp"
         android:layout_marginTop="@dimen/dimen_15dp"
         android:background="@color/white"
         android:gravity="center_vertical"
@@ -193,6 +193,15 @@
             android:layout_height="match_parent"
             android:drawableEnd="@drawable/right_arrow"
             android:text="查看全部"
-            android:textColor="@color/color999"/>
+            android:textColor="@color/color999"
+            android:textSize="@dimen/dimen_14sp"/>
     </LinearLayout>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#eaeaea"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 </android.support.constraint.ConstraintLayout>
