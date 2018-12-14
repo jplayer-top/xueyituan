@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide;
 import com.xueyituanchina.xueyituan.R;
 import com.xueyituanchina.xueyituan.mpbe.bean.ProPertyBean;
 import com.xueyituanchina.xueyituan.mpbe.event.ApplyEvent;
+import com.xueyituanchina.xueyituan.mpbe.event.BankInfoOkEvent;
 import com.xueyituanchina.xueyituan.mpbe.presenter.PropertyPresenter;
 
 import org.greenrobot.eventbus.EventBus;
@@ -110,6 +111,11 @@ public class ProPertyActivity extends SuperBaseActivity {
 
     @Subscribe
     public void onEvnet(ApplyEvent event) {
+        mPresenter.property();
+    }
+
+    @Subscribe
+    public void onEvnet(BankInfoOkEvent event) {
         mPresenter.property();
     }
 

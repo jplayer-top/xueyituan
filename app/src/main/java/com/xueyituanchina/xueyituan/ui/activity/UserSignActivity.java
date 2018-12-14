@@ -8,7 +8,10 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 
 import com.xueyituanchina.xueyituan.R;
+import com.xueyituanchina.xueyituan.mpbe.event.BankInfoOkEvent;
 import com.xueyituanchina.xueyituan.mpbe.presenter.UserSignPresenter;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -118,7 +121,7 @@ public class UserSignActivity extends CommonToolBarActivity {
     }
 
     public void bankinfo(BaseBean bean) {
-
+        EventBus.getDefault().post(new BankInfoOkEvent());
     }
 
     @Override
