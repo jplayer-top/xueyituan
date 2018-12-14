@@ -81,7 +81,7 @@ public class TXActivity extends CommonToolBarActivity {
             ToastUtils.init().showInfoToast(this, "成为会员，可以提现");
             return;
         }
-        new DialogApply(this).show();
+        new DialogApply(this).setMoney(string).show();
 //        mPresenter.applySign("");
     }
 

@@ -54,6 +54,7 @@ public class AwardBean extends BaseBean {
         public String goods_title;
         public String goods_subtitle;
         public int amount;
+        public int goods_id;
         public String share_img;
         public String cat_name;
         public String goods_thumb_img;

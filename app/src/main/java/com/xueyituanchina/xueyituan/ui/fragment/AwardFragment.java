@@ -16,6 +16,7 @@ import com.xueyituanchina.xueyituan.mpbe.event.ShareAwardOneEvent;
 import com.xueyituanchina.xueyituan.mpbe.presenter.AwardPresenter;
 import com.xueyituanchina.xueyituan.ui.activity.AwardActivity;
 import com.xueyituanchina.xueyituan.ui.activity.MyShareActivity;
+import com.xueyituanchina.xueyituan.ui.activity.ShopItemActivity;
 import com.xueyituanchina.xueyituan.ui.adapter.AwardAdapter;
 import com.xueyituanchina.xueyituan.ui.dialog.ShareAwardDialog;
 import com.xueyituanchina.xueyituan.wxapi.WXShare;
@@ -80,6 +81,12 @@ public class AwardFragment extends SuperBaseFragment {
             mAwardDialog.show();
             cPos = position;
             return false;
+        });
+        mAdapter.setOnItemClickListener((adapter, view, position) -> {
+            AwardBean.TaskListBean taskListBean = mAdapter.getData().get(position);
+            Bundle bundle = new Bundle();
+            bundle.putString("id", taskListBean.goods_id + "");
+            ActivityUtils.init().start(mActivity, ShopItemActivity.class, taskListBean.goods_title, bundle);
         });
         mRecyclerView.setAdapter(mAdapter);
         mPresenter = new AwardPresenter(this);
