@@ -127,7 +127,7 @@ public class TaskSubmitFragment extends SuperBaseFragment {
                 return;
             }
             if (XYTApplication.merchant != 3) {
-                ToastUtils.init().showErrorToast(mActivity, "当前只有商家可以发布任务");
+                ToastUtils.init().showErrorToast(mActivity, "发布功能仅限商家使用，请您先入驻成为商家。");
                 return;
             }
             mMap.put("goods_subtitle", mTvTitle.getText().toString());
@@ -139,12 +139,12 @@ public class TaskSubmitFragment extends SuperBaseFragment {
             if (XYTApplication.merchant == 3) {
                 mPresenter.tasksDestory();
             } else {
-                ToastUtils.init().showErrorToast(mActivity, "当前只有商家可以发布任务");
+                ToastUtils.init().showErrorToast(mActivity, "发布功能仅限商家使用，请您先入驻成为商家。");
             }
         });
         mPresenter.tasksDestory();
         if (XYTApplication.merchant != 3) {
-            ToastUtils.init().showErrorToast(mActivity, "当前只有商家可以发布任务");
+            ToastUtils.init().showErrorToast(mActivity, "发布功能仅限商家使用，请您先入驻成为商家。");
         }
     }
 

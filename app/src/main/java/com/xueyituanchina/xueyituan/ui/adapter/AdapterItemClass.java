@@ -29,8 +29,8 @@ class AdapterItemClass extends BaseQuickAdapter<HomeGoodsList.ListBean.Goodslist
         tvLocalGoodsPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         helper.setText(R.id.tvGoodsName, item.goods_title)
                 .setText(R.id.tvGift, item.goods_subtitle)
-                .setText(R.id.tvGoodsPrice, String.format(Locale.CHINA, "团购价：￥%s", item.goodsBestPriceStr))
-                .setText(R.id.tvLocalGoodsPrice, String.format(Locale.CHINA, "门市价：￥%s", item.goodsOrgPriceStr));
+                .setText(R.id.tvGoodsPrice, String.format(Locale.CHINA, "￥%s", item.goodsBestPriceStr))
+                .setText(R.id.tvLocalGoodsPrice, String.format(Locale.CHINA, "%s元", item.goodsOrgPriceStr));
 
     }
 }
