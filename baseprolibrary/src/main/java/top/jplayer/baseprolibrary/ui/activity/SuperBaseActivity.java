@@ -176,12 +176,13 @@ public abstract class SuperBaseActivity extends AppCompatActivity implements ICo
             return;
         } else {
             if (isOpenDoubleBack) {
-                if (doubleBack > 1) {
+                if (doubleBack >= 1) {
                     super.onBackPressed();
                 } else {
                     ToastUtils.init().showQuickToast("再按一次退出应用");
                 }
-                Observable.timer(500, TimeUnit.MICROSECONDS).subscribe(aLong -> ++doubleBack);
+                ++doubleBack;
+                Observable.timer(1, TimeUnit.SECONDS).subscribe(aLong -> doubleBack = 0);
             } else {
                 super.onBackPressed();
             }

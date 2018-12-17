@@ -78,7 +78,7 @@ public class TXActivity extends CommonToolBarActivity {
             return;
         }
         if (!XYTApplication.isVip) {
-            ToastUtils.init().showInfoToast(this, "成为会员，可以提现");
+            ToastUtils.init().showInfoToast(this, "成为会员即可提现");
             return;
         }
         new DialogApply(this).setMoney(string).show();

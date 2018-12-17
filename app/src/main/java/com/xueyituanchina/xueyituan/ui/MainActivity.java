@@ -55,6 +55,7 @@ public class MainActivity extends SuperBaseActivity {
     public void initRootData(View view) {
         super.initRootData(view);
         mMainActivity = this;
+        isOpenDoubleBack = true;
         NavigationTabBar navigationBar = view.findViewById(R.id.navigationBar);
         new QuickNavigationBar(this)
                 .idRes(R.id.flRoot)

@@ -32,8 +32,8 @@
 
         <ImageView
             android:id="@+id/ivSrc0"
-            android:layout_width="@dimen/dimen_40dp"
-            android:layout_height="@dimen/dimen_40dp"
+            android:layout_width="@dimen/dimen_45dp"
+            android:layout_height="@dimen/dimen_45dp"
             android:src="@mipmap/ic_launcher"/>
 
         <TextView
@@ -57,8 +57,8 @@
 
         <ImageView
             android:id="@+id/ivSrc1"
-            android:layout_width="@dimen/dimen_40dp"
-            android:layout_height="@dimen/dimen_40dp"
+            android:layout_width="@dimen/dimen_45dp"
+            android:layout_height="@dimen/dimen_45dp"
             android:src="@mipmap/ic_launcher"/>
 
         <TextView
@@ -82,8 +82,8 @@
 
         <ImageView
             android:id="@+id/ivSrc2"
-            android:layout_width="@dimen/dimen_40dp"
-            android:layout_height="@dimen/dimen_40dp"
+            android:layout_width="@dimen/dimen_45dp"
+            android:layout_height="@dimen/dimen_45dp"
             android:src="@mipmap/ic_launcher"/>
 
         <TextView
@@ -107,8 +107,8 @@
 
         <ImageView
             android:id="@+id/ivSrc3"
-            android:layout_width="@dimen/dimen_40dp"
-            android:layout_height="@dimen/dimen_40dp"
+            android:layout_width="@dimen/dimen_45dp"
+            android:layout_height="@dimen/dimen_45dp"
             android:src="@mipmap/ic_launcher"/>
 
         <TextView
@@ -133,8 +133,8 @@
 
         <ImageView
             android:id="@+id/ivSrc4"
-            android:layout_width="@dimen/dimen_40dp"
-            android:layout_height="@dimen/dimen_40dp"
+            android:layout_width="@dimen/dimen_45dp"
+            android:layout_height="@dimen/dimen_45dp"
             android:src="@mipmap/ic_launcher"/>
 
         <TextView
