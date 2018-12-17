@@ -7,33 +7,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
-    <FrameLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/constraint">
-
-        <include layout="@layout/layout_refresh_white_hasfoot"/>
-
-        <Button
-            android:id="@+id/btnTop"
-            android:layout_width="@dimen/dimen_40dp"
-            android:layout_height="@dimen/dimen_40dp"
-            android:layout_gravity="bottom|end"
-            android:layout_marginBottom="@dimen/dimen_80dp"
-            android:layout_marginEnd="@dimen/dimen_15dp"
-            android:background="@drawable/top"
-            android:visibility="invisible"/>
-    </FrameLayout>
-
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraint"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
+        android:background="@color/white"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
@@ -65,10 +43,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dimen_10dp"
-            android:drawableEnd="@drawable/home_bottom_arrow"
+            android:drawableEnd="@drawable/bottom_arrow"
             android:drawablePadding="@dimen/dimen_2dp"
             android:text="聊城市"
-            android:textColor="@color/white"
+            android:textColor="@color/color666"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvWeather"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -80,12 +58,12 @@
             android:layout_height="@dimen/dimen_30dp"
             android:layout_margin="@dimen/dimen_10dp"
             android:background="@drawable/shape_trans_grey"
-            android:drawableStart="@drawable/home_bar_search"
+            android:drawableStart="@drawable/bar_search"
             android:gravity="center_vertical"
             android:paddingEnd="@dimen/dimen_5dp"
             android:paddingStart="@dimen/dimen_5dp"
             android:text="请输入商户名 、课程名"
-            android:textColor="@color/white"
+            android:textColor="@color/color666"
             android:textSize="@dimen/dimen_12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -93,6 +71,29 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
     </android.support.constraint.ConstraintLayout>
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraint">
+
+        <include layout="@layout/layout_refresh_white_hasfoot"/>
+
+        <Button
+            android:id="@+id/btnTop"
+            android:layout_width="@dimen/dimen_40dp"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="@dimen/dimen_80dp"
+            android:layout_marginEnd="@dimen/dimen_15dp"
+            android:background="@drawable/top"
+            android:visibility="invisible"/>
+    </FrameLayout>
+
 
     <FrameLayout
         android:id="@+id/flTouchView"

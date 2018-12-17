@@ -173,12 +173,12 @@ public class HomeFragment extends SuperBaseFragment {
                 } else {
                     mBtnTop.setVisibility(View.INVISIBLE);
                 }
-                int firPos = layoutManager.findFirstVisibleItemPosition();
-                if (firPos <= 1) {
-                    mConstraint.setVisibility(View.VISIBLE);
-                } else {
-                    mConstraint.setVisibility(View.INVISIBLE);
-                }
+//                int firPos = layoutManager.findFirstVisibleItemPosition();
+//                if (firPos <= 1) {
+//                    mConstraint.setVisibility(View.VISIBLE);
+//                } else {
+//                    mConstraint.setVisibility(View.INVISIBLE);
+//                }
 
             }
         });
