@@ -70,7 +70,7 @@ public class HomeAdapter extends BaseQuickAdapter<HomeGoodsList.ListBean, BaseVi
                 adapter.setNewData(goodslist);
                 adapter.removeAllFooterView();
             });
-            tvOtherGoods.setText(String.format(Locale.CHINA, "查看其他%d个团购", other));
+            tvOtherGoods.setText(String.format(Locale.CHINA, "查看其他%d个课程", other));
             adapter.setFooterView(footerView);
         }
     }

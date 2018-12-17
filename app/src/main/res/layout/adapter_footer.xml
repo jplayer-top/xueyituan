@@ -8,20 +8,22 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_50dp"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingEnd="@dimen/dimen_15dp"
+        android:paddingStart="@dimen/dimen_106dp">
 
         <TextView
             android:id="@+id/tvOtherGoods"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="查看其它团购"
-            android:textColor="@color/colorPrimary"/>
+            android:text="查看其他课程"
+            android:textColor="@color/color666"/>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/home_local_sel"
-            android:tint="@color/colorPrimary"/>
+            android:tint="@color/color666"/>
     </LinearLayout>
 
 </FrameLayout>
