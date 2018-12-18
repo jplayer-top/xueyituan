@@ -11,6 +11,7 @@ import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.xueyituanchina.xueyituan.R;
 import com.xueyituanchina.xueyituan.XYTApplication;
 import com.xueyituanchina.xueyituan.mpbe.bean.AwardBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.ShareImgBean;
 import com.xueyituanchina.xueyituan.mpbe.event.ShareAwardAllEvent;
 import com.xueyituanchina.xueyituan.mpbe.event.ShareAwardOneEvent;
 import com.xueyituanchina.xueyituan.mpbe.presenter.AwardPresenter;
@@ -73,13 +74,16 @@ public class AwardFragment extends SuperBaseFragment {
         EventBus.getDefault().register(this);
         mAdapter = new AwardAdapter(null);
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
-            if (mAdapter.getData().get(position).shared) {
-                ToastUtils.init().showInfoToast(mActivity, "该任务已经分享过");
-                return false;
+            if (XYTApplication.assertNoLogin(mActivity)) {
+                if (mAdapter.getData().get(position).shared) {
+                    ToastUtils.init().showInfoToast(mActivity, "该任务已经分享过");
+                    return false;
+                }
+                mPresenter.shareImg(mAdapter.getData().get(position).task_id);
+                cPos = position;
+            } else {
+                ToastUtils.init().showInfoToast(mActivity, "请先登录");
             }
-            mAwardDialog = new ShareAwardDialog(mActivity);
-            mAwardDialog.show();
-            cPos = position;
             return false;
         });
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
@@ -110,14 +114,15 @@ public class AwardFragment extends SuperBaseFragment {
 
     @Subscribe
     public void onEvent(ShareAwardAllEvent event) {
-        Observable.just(0).subscribeOn(Schedulers.io()).map(integer -> {
-            File file = Glide.with(mActivity).asFile().load(mAdapter.getData().get(cPos)
-                    .share_img).submit().get();
-            return FileUtil.copyFile(file, mActivity.getExternalCacheDir(), "award.png");
-        }).observeOn(AndroidSchedulers.mainThread()).subscribe(file ->
-                new WXShare(mActivity).shareImage(file.getAbsolutePath(),
-                        BitmapUtil.adjustBitmap(file.getAbsolutePath()),
-                        SendMessageToWX.Req.WXSceneTimeline));
+        if (shareBean != null && shareBean.shareImg != null) {
+            Observable.just(0).subscribeOn(Schedulers.io()).map(integer -> {
+                File file = Glide.with(mActivity).asFile().load(shareBean.shareImg).submit().get();
+                return FileUtil.copyFile(file, mActivity.getExternalCacheDir(), "award.png");
+            }).observeOn(AndroidSchedulers.mainThread()).subscribe(file ->
+                    new WXShare(mActivity).shareImage(file.getAbsolutePath(),
+                            BitmapUtil.adjustBitmap(file.getAbsolutePath()),
+                            SendMessageToWX.Req.WXSceneTimeline));
+        }
     }
 
     @Subscribe
@@ -217,5 +222,13 @@ public class AwardFragment extends SuperBaseFragment {
 
     public void shareOk(BaseBean bean) {
         mPresenter.awardList();
+    }
+
+    ShareImgBean shareBean;
+
+    public void shareImg(ShareImgBean bean) {
+        shareBean = bean;
+        mAwardDialog = new ShareAwardDialog(mActivity);
+        mAwardDialog.show();
     }
 }

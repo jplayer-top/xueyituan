@@ -3,7 +3,9 @@ package com.xueyituanchina.xueyituan.ui.activity;
 import android.widget.FrameLayout;
 
 import com.xueyituanchina.xueyituan.R;
+import com.xueyituanchina.xueyituan.XYTApplication;
 import com.xueyituanchina.xueyituan.mpbe.bean.AwardBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.ShareImgBean;
 import com.xueyituanchina.xueyituan.mpbe.presenter.AwardActivityPresenter;
 import com.xueyituanchina.xueyituan.ui.adapter.AwardAdapter;
 import com.xueyituanchina.xueyituan.ui.dialog.ShareAwardDialog;
@@ -46,13 +48,16 @@ public class AwardActivity extends CommonToolBarActivity {
         mAdapter = new AwardAdapter(beans);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
-            if (mAdapter.getData().get(position).shared) {
-                ToastUtils.init().showInfoToast(mActivity, "该任务已经分享过");
-                return false;
+            if (XYTApplication.assertNoLogin(mActivity)) {
+                if (mAdapter.getData().get(position).shared) {
+                    ToastUtils.init().showInfoToast(mActivity, "该任务已经分享过");
+                    return false;
+                }
+                mPresenter.shareImg(mAdapter.getData().get(position).task_id);
+                cPos = position;
+            } else {
+                ToastUtils.init().showInfoToast(mActivity, "请先登录");
             }
-            mAwardDialog = new ShareAwardDialog(mActivity);
-            mAwardDialog.show();
-            cPos = position;
             return false;
         });
     }
@@ -84,5 +89,13 @@ public class AwardActivity extends CommonToolBarActivity {
 
     public void shareOk(BaseBean bean) {
         mPresenter.awardList();
+    }
+
+    ShareImgBean shareBean;
+
+    public void shareImg(ShareImgBean bean) {
+        shareBean = bean;
+        mAwardDialog = new ShareAwardDialog(mActivity);
+        mAwardDialog.show();
     }
 }

@@ -5,6 +5,7 @@ import com.xueyituanchina.xueyituan.mpbe.XYTServer;
 import com.xueyituanchina.xueyituan.mpbe.bean.AwardBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.PushTaskBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.PushTaskDestoryBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.ShareImgBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.TaskGoodsListBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.UpdateUrlBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.UserTaskListBean;
@@ -43,6 +44,10 @@ public class AwardModel extends BaseModel<XYTServer> {
 
     public Observable<BaseBean> shareOk(String taskId) {
         return mServer.shareOk(taskId).compose(new IoMainSchedule<>());
+    }
+
+    public Observable<ShareImgBean> shareImg(String taskId) {
+        return mServer.shareImg(taskId).compose(new IoMainSchedule<>());
     }
 
     public Observable<BaseBean> pushShare(String taskId, String url) {

@@ -24,6 +24,7 @@ import com.xueyituanchina.xueyituan.mpbe.bean.ProPertyBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.PushTaskBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.PushTaskDestoryBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.ShareBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.ShareImgBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.ShopItemBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.StoreBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.StoreInfoBean;
@@ -106,6 +107,9 @@ public interface XYTServer {
 
     @POST("task/share")
     Observable<BaseBean> shareOk(@Query("taskId") String taskId);
+
+    @POST("task/shareimg")
+    Observable<ShareImgBean> shareImg(@Query("taskId") String taskId);
 
     @POST("home/vippay")
     Observable<BaseBean> vipPay(@Query("orderId") String orderId);

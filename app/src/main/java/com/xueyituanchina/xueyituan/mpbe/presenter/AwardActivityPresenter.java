@@ -2,12 +2,14 @@ package com.xueyituanchina.xueyituan.mpbe.presenter;
 
 import com.xueyituanchina.xueyituan.mpbe.XYTServer;
 import com.xueyituanchina.xueyituan.mpbe.bean.AwardBean;
+import com.xueyituanchina.xueyituan.mpbe.bean.ShareImgBean;
 import com.xueyituanchina.xueyituan.mpbe.model.AwardModel;
 import com.xueyituanchina.xueyituan.ui.activity.AwardActivity;
 
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
+import top.jplayer.baseprolibrary.net.tip.GetImplTip;
 
 /**
  * Created by Obl on 2018/8/20.
@@ -34,6 +36,20 @@ public class AwardActivityPresenter extends BasePresenter<AwardActivity> {
 
             @Override
             public void responseFail(AwardBean bean) {
+
+            }
+        });
+    }
+
+    public void shareImg(String taskId) {
+        mModel.shareImg(taskId).subscribe(new NetCallBackObserver<ShareImgBean>(new GetImplTip(mIView)) {
+            @Override
+            public void responseSuccess(ShareImgBean bean) {
+                mIView.shareImg(bean);
+            }
+
+            @Override
+            public void responseFail(ShareImgBean bean) {
 
             }
         });
