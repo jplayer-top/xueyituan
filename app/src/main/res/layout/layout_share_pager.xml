@@ -4,8 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingEnd="@dimen/dimen_15dp"
-    android:paddingStart="@dimen/dimen_15dp">
+    android:paddingEnd="@dimen/dimen_30dp"
+    android:paddingStart="@dimen/dimen_30dp">
 
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/clSharePic"
@@ -66,17 +66,50 @@
 
             <TextView
 
-                android:id="@+id/tvName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_70dp"
-                android:text="我是董先生 我已在学艺团"
+                android:text="我是董先生 我在学艺团"
                 android:textColor="@color/colorBlackGold"
-                android:textSize="@dimen/dimen_15sp"
+                android:textSize="@dimen/dimen_14sp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ivShareSrc"/>
 
+            <LinearLayout
+                android:id="@+id/llName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_70dp"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivShareSrc">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="我是 "
+                    android:textColor="@color/colorBlackGold"
+                    android:textSize="@dimen/dimen_14sp"/>
+
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="董先生"
+                    android:textColor="@color/colorBlackGold"
+                    android:textSize="@dimen/dimen_14sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 我在学艺团"
+                    android:textColor="@color/colorBlackGold"
+                    android:textSize="@dimen/dimen_14sp"/>
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/llTip0"
@@ -84,60 +117,61 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_8dp"
                 android:gravity="center"
-                app:layout_constraintTop_toBottomOf="@+id/tvName">
+                app:layout_constraintTop_toBottomOf="@+id/llName">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="end"
-                    android:text="领取"
+                    android:text="已领取"
                     android:textColor="@color/colorBlackGold"
-                    android:textSize="@dimen/dimen_20sp"/>
+                    android:textSize="@dimen/dimen_14sp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="start"
                     android:text=" 200元奖学金"
-                    android:textColor="#298686"
-                    android:textSize="@dimen/dimen_20sp"
+                    android:textColor="#ee0832"
+                    android:textSize="@dimen/dimen_14sp"
                     android:textStyle="bold"/>
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/tvTip2"
+            <LinearLayout
+                android:id="@+id/llTip2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_3dp"
-                android:text="下载学艺团APP"
-                android:textColor="@color/color666"
-                android:textSize="@dimen/dimen_13sp"
-                android:visibility="gone"
+                android:layout_marginTop="@dimen/dimen_18dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/llTip0"/>
+                app:layout_constraintTop_toBottomOf="@id/llTip0">
 
-            <TextView
-                android:id="@+id/tvTip3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_10dp"
-                android:text="下载学艺团APP，即可学习海量免费课程"
-                android:textColor="@color/color666"
-                android:textSize="@dimen/dimen_11sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvTip2"/>
+                <TextView
+                    android:id="@+id/tvTip2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="下载学艺团APP，即可 "
+                    android:textColor="@color/color666"
+                    android:textSize="@dimen/dimen_11sp"/>
+
+                <TextView
+                    android:id="@+id/tvTip3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="学习海量免费课程"
+                    android:textColor="@color/color666"
+                    android:textSize="@dimen/dimen_11sp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/viewBottom"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvTip3">
+                app:layout_constraintTop_toBottomOf="@+id/llTip2">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -179,6 +213,13 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <View
+                android:id="@+id/viewBottom"
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
 
         </android.support.constraint.ConstraintLayout>
     </android.support.v4.widget.NestedScrollView>

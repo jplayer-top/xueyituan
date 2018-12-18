@@ -100,13 +100,13 @@ public class MyShareActivity extends CommonToolBarActivity {
         strings.add(mName);
         strings.add(mName);
         mViewPager.setOffscreenPageLimit(strings.size());
-        mViewPager.setPageTransformer(true, new CardTransformer(20));
+        mViewPager.setPageTransformer(true, new CardTransformer(35));
         mViewPager.setAdapter(new BaseViewPagerViewAdapter<String>(strings, R.layout.layout_share_pager) {
             @Override
             public void bindView(View view, String s, int position) {
                 mIvShareSrc = view.findViewById(R.id.ivShareSrc);
                 TextView tvName = view.findViewById(R.id.tvName);
-                tvName.setText(String.format(Locale.CHINA, "我是%s 我已加入学艺团", s));
+                tvName.setText(String.format(Locale.CHINA, " %s ", s));
                 ImageView ivQCode = view.findViewById(R.id.ivQCode);
                 String textContent = mInvUrl;
                 if (TextUtils.isEmpty(textContent)) {
