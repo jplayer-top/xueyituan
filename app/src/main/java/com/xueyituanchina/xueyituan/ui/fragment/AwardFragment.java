@@ -34,6 +34,7 @@ import cn.bingoogolapple.bgabanner.BGABanner;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.ResponseBody;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.ui.activity.WebViewActivity;
@@ -103,26 +104,24 @@ public class AwardFragment extends SuperBaseFragment {
     @Subscribe
     public void onEvent(ShareAwardOneEvent event) {
         Observable.just(0).subscribeOn(Schedulers.io()).map(integer -> {
-            File file = Glide.with(mActivity).asFile().load(mAdapter.getData().get(cPos)
-                    .share_img).submit().get();
+            File file = Glide.with(mActivity).asFile().load(event.url).submit().get();
             return FileUtil.copyFile(file, mActivity.getExternalCacheDir(), "award.png");
         }).observeOn(AndroidSchedulers.mainThread()).subscribe(file ->
                 new WXShare(mActivity).shareImage(file.getAbsolutePath(),
                         BitmapUtil.adjustBitmap(file.getAbsolutePath()),
                         SendMessageToWX.Req.WXSceneSession));
+
     }
 
     @Subscribe
     public void onEvent(ShareAwardAllEvent event) {
-        if (shareBean != null && shareBean.shareImg != null) {
-            Observable.just(0).subscribeOn(Schedulers.io()).map(integer -> {
-                File file = Glide.with(mActivity).asFile().load(shareBean.shareImg).submit().get();
-                return FileUtil.copyFile(file, mActivity.getExternalCacheDir(), "award.png");
-            }).observeOn(AndroidSchedulers.mainThread()).subscribe(file ->
-                    new WXShare(mActivity).shareImage(file.getAbsolutePath(),
-                            BitmapUtil.adjustBitmap(file.getAbsolutePath()),
-                            SendMessageToWX.Req.WXSceneTimeline));
-        }
+        Observable.just(0).subscribeOn(Schedulers.io()).map(integer -> {
+            File file = Glide.with(mActivity).asFile().load(event.url).submit().get();
+            return FileUtil.copyFile(file, mActivity.getExternalCacheDir(), "award.png");
+        }).observeOn(AndroidSchedulers.mainThread()).subscribe(file ->
+                new WXShare(mActivity).shareImage(file.getAbsolutePath(),
+                        BitmapUtil.adjustBitmap(file.getAbsolutePath()),
+                        SendMessageToWX.Req.WXSceneTimeline));
     }
 
     @Subscribe
@@ -229,6 +228,10 @@ public class AwardFragment extends SuperBaseFragment {
     public void shareImg(ShareImgBean bean) {
         shareBean = bean;
         mAwardDialog = new ShareAwardDialog(mActivity);
+        mAwardDialog.setUrl(bean.shareImg);
         mAwardDialog.show();
+    }
+
+    public void reponseFileImg(ResponseBody responseBody) {
     }
 }

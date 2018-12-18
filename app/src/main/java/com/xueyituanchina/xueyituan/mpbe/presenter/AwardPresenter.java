@@ -10,6 +10,7 @@ import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
 import top.jplayer.baseprolibrary.net.tip.GetImplTip;
+import top.jplayer.baseprolibrary.utils.LogUtil;
 
 /**
  * Created by Obl on 2018/8/20.
@@ -67,5 +68,11 @@ public class AwardPresenter extends BasePresenter<AwardFragment> {
 
             }
         });
+    }
+
+    public void requestFileDown(String shareImg) {
+        mModel.requestApk(shareImg).subscribe(responseBody -> {
+          mIView.reponseFileImg(responseBody);
+        }, throwable -> LogUtil.net(throwable.getMessage()));
     }
 }

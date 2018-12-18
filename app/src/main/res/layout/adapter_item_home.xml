@@ -31,7 +31,7 @@
             android:layout_marginStart="@dimen/dimen_15dp"
             android:text="￥0.01"
             android:textColor="@color/money_color"
-            android:textSize="@dimen/dimen_15sp"
+            android:textSize="@dimen/dimen_17sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/tvLocalGoodsPrice"
             app:layout_constraintEnd_toStartOf="@+id/tvLocalGoodsPrice"
@@ -59,7 +59,7 @@
             android:lines="1"
 
             android:text="学艺团官方课程"
-            android:textSize="@dimen/dimen_13sp"
+            android:textSize="@dimen/dimen_14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/tvGoodsPrice"
             app:layout_constraintStart_toStartOf="parent"

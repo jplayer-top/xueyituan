@@ -96,6 +96,7 @@ public class AwardActivity extends CommonToolBarActivity {
     public void shareImg(ShareImgBean bean) {
         shareBean = bean;
         mAwardDialog = new ShareAwardDialog(mActivity);
+        mAwardDialog.setUrl(bean.shareImg);
         mAwardDialog.show();
     }
 }

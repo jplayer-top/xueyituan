@@ -8,4 +8,9 @@ package com.xueyituanchina.xueyituan.mpbe.event;
  */
 
 public class ShareAwardAllEvent {
+    public String url;
+
+    public ShareAwardAllEvent(String url) {
+        this.url = url;
+    }
 }

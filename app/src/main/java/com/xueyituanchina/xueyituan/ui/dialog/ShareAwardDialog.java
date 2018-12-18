@@ -20,19 +20,25 @@ import top.jplayer.baseprolibrary.widgets.dialog.BaseCustomDialog;
 
 public class ShareAwardDialog extends BaseCustomDialog {
 
+    public String url;
 
     public ShareAwardDialog(Context context) {
         super(context);
     }
 
+    public ShareAwardDialog setUrl(String url) {
+        this.url = url;
+        return this;
+    }
+
     @Override
     protected void initView(View view) {
         view.findViewById(R.id.tvOneShare).setOnClickListener(v -> {
-            EventBus.getDefault().post(new ShareAwardOneEvent());
+            EventBus.getDefault().post(new ShareAwardOneEvent(url));
             this.dismiss();
         });
         view.findViewById(R.id.tvAllShare).setOnClickListener(v -> {
-            EventBus.getDefault().post(new ShareAwardAllEvent());
+            EventBus.getDefault().post(new ShareAwardAllEvent(url));
             this.dismiss();
         });
         view.findViewById(R.id.tvClose).setOnClickListener(v -> this.dismiss());

@@ -18,6 +18,7 @@ import io.reactivex.Observable;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import top.jplayer.baseprolibrary.mvp.model.BaseModel;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.net.retrofit.IoMainSchedule;
@@ -80,6 +81,11 @@ public class AwardModel extends BaseModel<XYTServer> {
         MultipartBody.Part body =
                 MultipartBody.Part.createFormData("img", file.getName(), requestFile);
         return mServer.updateScreen(body)
+                .compose(new IoMainSchedule<>());
+    }
+
+    public Observable<ResponseBody> requestApk(String url) {
+        return mServer.imgLoad(url)
                 .compose(new IoMainSchedule<>());
     }
 }

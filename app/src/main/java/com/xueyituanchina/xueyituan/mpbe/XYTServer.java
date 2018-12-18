@@ -39,13 +39,16 @@ import java.util.Map;
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
+import retrofit2.http.Streaming;
 import retrofit2.http.Url;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 
@@ -290,4 +293,9 @@ public interface XYTServer {
 
     @POST("my/mctentry")
     Observable<BaseBean> shopCreate(@Body RequestBody Body);
+
+    @Headers("download:download")
+    @Streaming //IO 大文件下载处理
+    @GET
+    Observable<ResponseBody> imgLoad(@Url String url);
 }
