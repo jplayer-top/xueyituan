@@ -106,7 +106,7 @@ public class MyShareActivity extends CommonToolBarActivity {
             public void bindView(View view, String s, int position) {
                 mIvShareSrc = view.findViewById(R.id.ivShareSrc);
                 TextView tvName = view.findViewById(R.id.tvName);
-                tvName.setText(String.format(Locale.CHINA, " %s ", s));
+                tvName.setText(String.format(Locale.CHINA, "%s", s));
                 ImageView ivQCode = view.findViewById(R.id.ivQCode);
                 String textContent = mInvUrl;
                 if (TextUtils.isEmpty(textContent)) {

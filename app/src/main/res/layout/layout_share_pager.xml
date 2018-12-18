@@ -100,7 +100,7 @@
                     android:layout_height="wrap_content"
                     android:text="董先生"
                     android:textColor="@color/colorBlackGold"
-                    android:textSize="@dimen/dimen_14sp"
+                    android:textSize="@dimen/dimen_16sp"
                     android:textStyle="bold"/>
 
                 <TextView
@@ -133,7 +133,7 @@
                     android:gravity="start"
                     android:text=" 200元奖学金"
                     android:textColor="#ee0832"
-                    android:textSize="@dimen/dimen_14sp"
+                    android:textSize="@dimen/dimen_16sp"
                     android:textStyle="bold"/>
             </LinearLayout>
 
