@@ -37,6 +37,7 @@
 
 
                     <ImageView
+                        android:scaleType="centerCrop"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/dimen_160dp"
                         android:src="@drawable/me_header"

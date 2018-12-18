@@ -26,9 +26,11 @@ class AdapterItemClass extends BaseQuickAdapter<HomeGoodsList.ListBean.Goodslist
     @Override
     protected void convert(BaseViewHolder helper, HomeGoodsList.ListBean.GoodslistBean item) {
         TextView tvLocalGoodsPrice = helper.itemView.findViewById(R.id.tvLocalGoodsPrice);
+        helper.itemView.findViewById(R.id.ivIsVip);
         tvLocalGoodsPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         helper.setText(R.id.tvGoodsName, item.goods_title)
                 .setText(R.id.tvGift, item.goods_subtitle)
+                .setVisible(R.id.ivIsVip, item.is_vip == 1)
                 .setText(R.id.tvGoodsPrice, String.format(Locale.CHINA, "￥%s", item.goodsBestPriceStr))
                 .setText(R.id.tvLocalGoodsPrice, String.format(Locale.CHINA, "%s元", item.goodsOrgPriceStr));
 

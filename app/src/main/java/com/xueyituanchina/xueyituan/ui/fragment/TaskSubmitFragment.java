@@ -15,9 +15,18 @@ import com.xueyituanchina.xueyituan.XYTApplication;
 import com.xueyituanchina.xueyituan.mpbe.bean.PushTaskBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.PushTaskDestoryBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.TaskGoodsListBean;
+import com.xueyituanchina.xueyituan.mpbe.event.AliPayOkEvent;
+import com.xueyituanchina.xueyituan.mpbe.event.NoPayBackEvent;
 import com.xueyituanchina.xueyituan.mpbe.presenter.TaskFragmentPresenter;
 import com.xueyituanchina.xueyituan.ui.activity.PayTaskActivity;
+import com.xueyituanchina.xueyituan.ui.activity.RechargeActivity;
+import com.xueyituanchina.xueyituan.ui.activity.ShopCreateActivity;
 import com.xueyituanchina.xueyituan.ui.adapter.TaskPushAdapter;
+import com.xueyituanchina.xueyituan.ui.dialog.DialogTaskPush;
+import com.xueyituanchina.xueyituan.wxapi.WXPayEntryActivity;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,6 +36,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import top.jplayer.baseprolibrary.ui.dialog.DialogLogout;
 import top.jplayer.baseprolibrary.ui.fragment.SuperBaseFragment;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.PickerUtils;
@@ -68,6 +78,7 @@ public class TaskSubmitFragment extends SuperBaseFragment {
     private TaskFragmentPresenter mPresenter;
     private Map<String, String> mMap;
     private TaskPushAdapter mAdapter;
+    private DialogTaskPush mDialogTaskPush;
 
     @Override
     public int initLayout() {
@@ -79,6 +90,7 @@ public class TaskSubmitFragment extends SuperBaseFragment {
         initImmersionBar();
         mBind = ButterKnife.bind(this, rootView);
         mPresenter = new TaskFragmentPresenter(this);
+        EventBus.getDefault().register(this);
         mMap = new HashMap<>();
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -127,7 +139,7 @@ public class TaskSubmitFragment extends SuperBaseFragment {
                 return;
             }
             if (XYTApplication.merchant != 3) {
-                ToastUtils.init().showErrorToast(mActivity, "发布功能仅限商家使用，请您先入驻成为商家。");
+                toCreateStore();
                 return;
             }
             mMap.put("goods_subtitle", mTvTitle.getText().toString());
@@ -139,13 +151,60 @@ public class TaskSubmitFragment extends SuperBaseFragment {
             if (XYTApplication.merchant == 3) {
                 mPresenter.tasksDestory();
             } else {
-                ToastUtils.init().showErrorToast(mActivity, "发布功能仅限商家使用，请您先入驻成为商家。");
+                toCreateStore();
             }
         });
         mPresenter.tasksDestory();
         if (XYTApplication.merchant != 3) {
-            ToastUtils.init().showErrorToast(mActivity, "发布功能仅限商家使用，请您先入驻成为商家。");
+            toCreateStore();
         }
+    }
+
+    private void toCreateStore() {
+        mDialogTaskPush = new DialogTaskPush(mActivity);
+        mDialogTaskPush.show(R.id.btnSure, view -> {
+            if (0 == (XYTApplication.merchant)) {
+                ActivityUtils.init().start(mActivity, ShopCreateActivity.class, "商家入驻");
+            } else if (1 == (XYTApplication.merchant)) {
+                DialogLogout dialogLogout = new DialogLogout(mActivity);
+                dialogLogout
+                        .setTitle("温馨提示")
+                        .setSubTitle("当前已提交入驻信息\n请提交一百元审核金")
+                        .show(R.id.btnSure, view1 -> {
+                            Bundle bundle = new Bundle();
+                            bundle.putString("recharge", "100.00");
+                            ActivityUtils.init().start(this.getActivity(), RechargeActivity.class, "商铺审核金", bundle);
+                            dialogLogout.dismiss();
+                        });
+            } else if (2 == (XYTApplication.merchant)) {
+                DialogLogout dialogLogout = new DialogLogout(mActivity);
+                dialogLogout
+                        .setTitle("温馨提示")
+                        .setSubTitle("当前已认缴一百元审核金\n请耐心等待审核")
+                        .show(R.id.btnSure, view1 -> {
+                            dialogLogout.dismiss();
+                        });
+            } else if (4 == (XYTApplication.merchant)) {
+                ActivityUtils.init().start(mActivity, ShopCreateActivity.class, "商家入驻");
+            }
+            mDialogTaskPush.dismiss();
+        });
+    }
+
+
+    @Subscribe
+    public void onEvent(WXPayEntryActivity.WxPayEvent event) {
+        XYTApplication.merchant = 2;
+    }
+
+    @Subscribe
+    public void onEvent(NoPayBackEvent event) {
+        XYTApplication.merchant = 1;
+    }
+
+    @Subscribe
+    public void onEvent(AliPayOkEvent event) {
+        XYTApplication.merchant = 2;
     }
 
     @Override
@@ -158,6 +217,7 @@ public class TaskSubmitFragment extends SuperBaseFragment {
     public void onDestroy() {
         super.onDestroy();
         mBind.unbind();
+        EventBus.getDefault().unregister(this);
     }
 
     public void goodsList(TaskGoodsListBean bean) {

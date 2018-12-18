@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dp_4"
+    app:cardCornerRadius="@dimen/dimen_10dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_10">
+
+        <ImageView
+            android:id="@+id/ivBg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_28dp"
+            android:src="@drawable/task_tip"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tvTip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_15dp"
+            android:text="发布功能仅限商家使用"
+            android:textSize="@dimen/dimen_17sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivBg"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1px"
+            android:background="#eeeeee"
+            app:layout_constraintBottom_toTopOf="@+id/btnSure"/>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="0dp"
+            android:background="#eeeeee"
+            app:layout_constraintBottom_toBottomOf="@+id/btnSure"
+            app:layout_constraintEnd_toEndOf="@+id/btnCancel"
+            app:layout_constraintTop_toTopOf="@+id/btnSure"/>
+
+        <Button
+            android:id="@+id/btnSure"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="商家入驻"
+            android:textColor="#17CBC7"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/btnCancel"
+            app:layout_constraintTop_toBottomOf="@+id/tvTip"/>
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="取消"
+            android:textColor="@color/color999"
+            android:textSize="@dimen/dimen_17sp"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintRight_toLeftOf="@+id/btnSure"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTip"/>
+    </android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>

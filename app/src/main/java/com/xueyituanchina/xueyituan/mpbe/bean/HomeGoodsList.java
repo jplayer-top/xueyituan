@@ -55,6 +55,7 @@ public class HomeGoodsList extends BaseBean {
              */
 
             public int goods_id;
+            public int is_vip;
             public String goods_title;
             public String goods_subtitle;
             public int goods_org_price;

@@ -245,10 +245,15 @@ public class RechargeActivity extends CommonToolBarActivity {
     private static final int SDK_PAY_FLAG = 1;
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        EventBus.getDefault().post(new NoPayBackEvent());
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         mUnbinder.unbind();
-        EventBus.getDefault().post(new NoPayBackEvent());
         EventBus.getDefault().unregister(this);
     }
 
