@@ -7,10 +7,11 @@
         android:name=".XYTApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="@string/app_name_res"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/OblAppTheme">
+        android:theme="@style/OblAppTheme"
+        tools:replace="android:label">
         <activity
             android:name=".ui.MainActivity"
             android:launchMode="singleTop"

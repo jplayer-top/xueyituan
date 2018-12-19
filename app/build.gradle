@@ -54,6 +54,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             manifestPlaceholders = [RONG_KEY: key_rong["release"], CHANNEL_NAME: "dev"]
             signingConfig signingConfigs.config
+            resValue("string", "app_name_res", "学艺团")
         }
         debug {
             buildConfigField "String", "HOST", "\"${url["debug"]}\""
@@ -61,6 +62,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             manifestPlaceholders = [RONG_KEY: key_rong["debug"], CHANNEL_NAME: "dev"]
             signingConfig signingConfigs.config
+            applicationIdSuffix ".debug"
+            resValue("string", "app_name_res", "学艺团-debug")
         }
     }
     compileOptions {
