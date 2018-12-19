@@ -99,16 +99,16 @@ public class LoginPresenter extends BasePresenter<LoginActivity> {
             @Override
             public void responseSuccess(LoginBean loginBean) {
                 mIView.login(loginBean);
-                connectIm(loginBean);
-                String imtoken = loginBean.imtoken;
+//                connectIm(loginBean);
+//                String imtoken = loginBean.imtoken;
                 String uid = loginBean.uid + "";
                 SharePreUtil.saveData(mIView, "login_phone", phone);
                 SharePreUtil.saveData(mIView, "login_password", password);
                 SharePreUtil.saveData(mIView, "login_uid", uid);
-                SharePreUtil.saveData(mIView, "login_token", imtoken);
+//                SharePreUtil.saveData(mIView, "login_token", imtoken);
                 SharePreUtil.saveData(mIView, "mark_login", "1");
                 XYTApplication.uid = uid;
-                XYTApplication.token = imtoken;
+//                XYTApplication.token = imtoken;
                 if (loginBean.shield != 1) {
                     EventBus.getDefault().post(new LoginSuccessEvent(uid));
                 } else {

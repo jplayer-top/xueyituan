@@ -1,5 +1,6 @@
 package com.xueyituanchina.xueyituan.ui.activity;
 
+import android.view.View;
 import android.widget.FrameLayout;
 
 import com.xueyituanchina.xueyituan.R;
@@ -46,6 +47,7 @@ public class AwardActivity extends CommonToolBarActivity {
         EventBus.getDefault().register(this);
         mPresenter = new AwardActivityPresenter(this);
         mAdapter = new AwardAdapter(beans);
+        mAdapter.setEmptyView(View.inflate(this, R.layout.layout_empty_view_award_2, null));
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
             if (XYTApplication.assertNoLogin(mActivity)) {

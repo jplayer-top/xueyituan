@@ -21,12 +21,22 @@
                 android:id="@+id/ivShareSrc"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:background="#d9d9d9"
                 android:scaleType="fitXY"
-                android:src="@color/color999"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
+
+            <ImageView
+                android:id="@+id/ivXuanZhe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/xuanzhe"
+                app:layout_constraintBottom_toBottomOf="@+id/ivShareSrc"
+                app:layout_constraintEnd_toEndOf="@+id/ivShareSrc"
+                app:layout_constraintStart_toStartOf="@+id/ivShareSrc"
+                app:layout_constraintTop_toTopOf="@+id/ivShareSrc"/>
 
             <View
                 android:layout_width="0dp"

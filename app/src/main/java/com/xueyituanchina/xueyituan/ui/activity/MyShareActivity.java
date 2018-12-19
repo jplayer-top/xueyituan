@@ -67,6 +67,7 @@ public class MyShareActivity extends CommonToolBarActivity {
     private String mSaveBitmap;
     private DialogLoading mLoading;
     private View mView;
+    private ImageView mIvXuanZhe;
 
     @Override
     public int initAddLayout() {
@@ -105,6 +106,7 @@ public class MyShareActivity extends CommonToolBarActivity {
             @Override
             public void bindView(View view, String s, int position) {
                 mIvShareSrc = view.findViewById(R.id.ivShareSrc);
+                mIvXuanZhe = view.findViewById(R.id.ivXuanZhe);
                 TextView tvName = view.findViewById(R.id.tvName);
                 tvName.setText(String.format(Locale.CHINA, "%s", s));
                 ImageView ivQCode = view.findViewById(R.id.ivQCode);
@@ -118,8 +120,10 @@ public class MyShareActivity extends CommonToolBarActivity {
                 ivQCode.setImageBitmap(bitmap);
 
                 if (position == 0) {
+                    mIvXuanZhe.setVisibility(View.GONE);
                     Glide.with(mActivity).load(mInvImg).into(mIvShareSrc);
                 } else {
+                    mIvXuanZhe.setVisibility(View.VISIBLE);
                     mIvShareSrc.setOnClickListener(v -> {
                         AndPermission.with(mActivity)
                                 .permission(Permission.CAMERA, Permission.WRITE_EXTERNAL_STORAGE, Permission.READ_EXTERNAL_STORAGE)

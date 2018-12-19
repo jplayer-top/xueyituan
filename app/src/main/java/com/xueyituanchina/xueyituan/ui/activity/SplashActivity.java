@@ -60,16 +60,16 @@ public class SplashActivity extends SuperBaseActivity {
                     mModel.requestLogin(phone, password).subscribe(new NetCallBackObserver<LoginBean>() {
                         @Override
                         public void responseSuccess(LoginBean loginBean) {
-                            String imtoken = loginBean.imtoken;
+//                            String imtoken = loginBean.imtoken;
                             String uid = loginBean.uid + "";
                             connectIm(loginBean);
                             SharePreUtil.saveData(mActivity, "login_phone", phone);
                             SharePreUtil.saveData(mActivity, "login_password", password);
                             SharePreUtil.saveData(mActivity, "login_uid", uid);
-                            SharePreUtil.saveData(mActivity, "login_token", imtoken);
+//                            SharePreUtil.saveData(mActivity, "login_token", imtoken);
                             SharePreUtil.saveData(mActivity, "mark_login", "1");
                             XYTApplication.uid = uid;
-                            XYTApplication.token = imtoken;
+//                            XYTApplication.token = imtoken;
                             if (loginBean.shield != 1) {
                                 requestMyInfo();
                             } else {
