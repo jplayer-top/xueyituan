@@ -211,12 +211,11 @@ public class AwardFragment extends SuperBaseFragment {
         mAwardBean = bean;
         List<AwardBean.TaskListBean> taskList = bean.taskList;
         initBanner(bean);
+        mAdapter.removeAllFooterView();
         if (taskList != null) {
-            if (taskList.size() > 0) {
-                mAdapter.removeAllFooterView();
-                mAdapter.setNewData(taskList.subList(0, taskList.size() > 5 ? 5 : taskList.size()));
-            }else {
-                mAdapter.addFooterView(View.inflate(mActivity,R.layout.layout_empty_view_award,null));
+            mAdapter.setNewData(taskList.subList(0, taskList.size() > 5 ? 5 : taskList.size()));
+            if (taskList.size() < 1) {
+                mAdapter.addFooterView(View.inflate(mActivity, R.layout.layout_empty_view_award, null));
             }
         }
         initViewFlipper(bean.broadMsgList);
