@@ -1,5 +1,6 @@
 package com.xueyituanchina.xueyituan.ui.activity;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
+import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
 
 /**
@@ -32,7 +34,7 @@ public class AwardActivity extends CommonToolBarActivity {
 
     private AwardAdapter mAdapter;
     private ShareAwardDialog mAwardDialog;
-    public int cPos = 0;
+    public int cPos = -1;
     private AwardActivityPresenter mPresenter;
 
     @Override
@@ -62,12 +64,20 @@ public class AwardActivity extends CommonToolBarActivity {
             }
             return false;
         });
+        mAdapter.setOnItemClickListener((adapter, view, position) -> {
+            AwardBean.TaskListBean taskListBean = mAdapter.getData().get(position);
+            Bundle bundle = new Bundle();
+            bundle.putString("id", taskListBean.goods_id + "");
+            ActivityUtils.init().start(mActivity, ShopItemActivity.class, taskListBean.goods_title, bundle);
+        });
     }
 
 
     @Subscribe
     public void onEvent(WXShareBean event) {
-        mPresenter.shareOk(mAdapter.getData().get(cPos).task_id);
+        if (cPos != -1) {
+            mPresenter.shareOk(mAdapter.getData().get(cPos).task_id);
+        }
     }
 
     @Override
@@ -90,6 +100,7 @@ public class AwardActivity extends CommonToolBarActivity {
 
 
     public void shareOk(BaseBean bean) {
+        cPos = -1;
         mPresenter.awardList();
     }
 
