@@ -161,6 +161,7 @@ public class MyShareActivity extends CommonToolBarActivity {
             List<String> pathList = data.getStringArrayListExtra(ImageSelectorActivity.EXTRA_RESULT);
             ImageView view = mViewPager.getChildAt(mViewPager.getCurrentItem()).findViewById(R.id.ivShareSrc);
             Glide.with(mActivity).load(pathList.get(0)).into(view);
+            mIvXuanZhe.setVisibility(View.GONE);
         }
     }
 

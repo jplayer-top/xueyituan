@@ -99,7 +99,7 @@ public class AwardFragment extends SuperBaseFragment {
         initHeader();
     }
 
-    public int cPos = 0;
+    public int cPos = -1;
 
     @Subscribe
     public void onEvent(ShareAwardOneEvent event) {
@@ -126,7 +126,9 @@ public class AwardFragment extends SuperBaseFragment {
 
     @Subscribe
     public void onEvent(WXShareBean event) {
-        mPresenter.shareOk(mAdapter.getData().get(cPos).task_id);
+        if (cPos != -1) {
+            mPresenter.shareOk(mAdapter.getData().get(cPos).task_id);
+        }
     }
 
     @Override
@@ -224,6 +226,7 @@ public class AwardFragment extends SuperBaseFragment {
     }
 
     public void shareOk(BaseBean bean) {
+        cPos = -1;
         mPresenter.awardList();
     }
 
