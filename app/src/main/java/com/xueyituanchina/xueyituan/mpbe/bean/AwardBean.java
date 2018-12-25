@@ -67,6 +67,7 @@ public class AwardBean extends BaseBean {
             goods_title = in.readString();
             goods_subtitle = in.readString();
             amount = in.readInt();
+            goods_id = in.readInt();
             share_img = in.readString();
             cat_name = in.readString();
             goods_thumb_img = in.readString();
@@ -98,6 +99,7 @@ public class AwardBean extends BaseBean {
             dest.writeString(goods_title);
             dest.writeString(goods_subtitle);
             dest.writeInt(amount);
+            dest.writeInt(goods_id);
             dest.writeString(share_img);
             dest.writeString(cat_name);
             dest.writeString(goods_thumb_img);

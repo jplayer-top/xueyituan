@@ -43,6 +43,7 @@ import top.jplayer.baseprolibrary.ui.fragment.SuperBaseFragment;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.BitmapUtil;
 import top.jplayer.baseprolibrary.utils.FileUtil;
+import top.jplayer.baseprolibrary.utils.LogUtil;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
 
 /**
@@ -82,8 +83,7 @@ public class AwardFragment extends SuperBaseFragment {
                     ToastUtils.init().showInfoToast(mActivity, "该任务已经分享过");
                     return false;
                 }
-                mPresenter.shareImg(mAdapter.getData().get(position).task_id);
-                cPos = position;
+                mPresenter.shareCan(mAdapter.getData().get(position).task_id, position);
             } else {
                 ToastUtils.init().showInfoToast(mActivity, "请先登录");
             }
@@ -240,13 +240,22 @@ public class AwardFragment extends SuperBaseFragment {
 
     ShareImgBean shareBean;
 
-    public void shareImg(ShareImgBean bean) {
+    public void shareImg(ShareImgBean bean, int position) {
         shareBean = bean;
+        cPos = position;
         mAwardDialog = new ShareAwardDialog(mActivity);
         mAwardDialog.setUrl(bean.shareImg);
         mAwardDialog.show();
+        mAwardDialog.setOnDismissListener(dialog -> {
+            LogUtil.str("-----");
+            cPos = -1;
+        });
     }
 
     public void reponseFileImg(ResponseBody responseBody) {
+    }
+
+    public void shareCan(String taskId, int position) {
+        mPresenter.shareImg(taskId, position);
     }
 }

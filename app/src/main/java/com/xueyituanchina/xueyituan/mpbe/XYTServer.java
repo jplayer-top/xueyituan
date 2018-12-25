@@ -111,6 +111,9 @@ public interface XYTServer {
     @POST("task/share")
     Observable<BaseBean> shareOk(@Query("taskId") String taskId);
 
+    @POST("task/beforeshare")
+    Observable<BaseBean> shareCan(@Query("taskId") String taskId);
+
     @POST("task/shareimg")
     Observable<ShareImgBean> shareImg(@Query("taskId") String taskId);
 

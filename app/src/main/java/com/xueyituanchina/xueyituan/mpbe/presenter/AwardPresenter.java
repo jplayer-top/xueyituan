@@ -56,11 +56,11 @@ public class AwardPresenter extends BasePresenter<AwardFragment> {
         });
     }
 
-    public void shareImg(String taskId) {
+    public void shareImg(String taskId, int position) {
         mModel.shareImg(taskId).subscribe(new NetCallBackObserver<ShareImgBean>(new GetImplTip(mIView.mActivity)) {
             @Override
             public void responseSuccess(ShareImgBean bean) {
-                mIView.shareImg(bean);
+                mIView.shareImg(bean,position);
             }
 
             @Override
@@ -70,9 +70,23 @@ public class AwardPresenter extends BasePresenter<AwardFragment> {
         });
     }
 
+    public void shareCan(String taskId, int position) {
+        mModel.shareCan(taskId).subscribe(new NetCallBackObserver<BaseBean>(new GetImplTip(mIView.mActivity)) {
+            @Override
+            public void responseSuccess(BaseBean bean) {
+                mIView.shareCan(taskId,position);
+            }
+
+            @Override
+            public void responseFail(BaseBean bean) {
+
+            }
+        });
+    }
+
     public void requestFileDown(String shareImg) {
         mModel.requestApk(shareImg).subscribe(responseBody -> {
-          mIView.reponseFileImg(responseBody);
+            mIView.reponseFileImg(responseBody);
         }, throwable -> LogUtil.net(throwable.getMessage()));
     }
 }

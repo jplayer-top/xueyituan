@@ -51,6 +51,10 @@ public class AwardModel extends BaseModel<XYTServer> {
         return mServer.shareImg(taskId).compose(new IoMainSchedule<>());
     }
 
+    public Observable<BaseBean> shareCan(String taskId) {
+        return mServer.shareCan(taskId).compose(new IoMainSchedule<>());
+    }
+
     public Observable<BaseBean> pushShare(String taskId, String url) {
         return mServer.pushShare(taskId, url).compose(new IoMainSchedule<>());
     }

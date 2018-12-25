@@ -41,15 +41,29 @@ public class AwardActivityPresenter extends BasePresenter<AwardActivity> {
         });
     }
 
-    public void shareImg(String taskId) {
+    public void shareImg(String taskId, int position) {
         mModel.shareImg(taskId).subscribe(new NetCallBackObserver<ShareImgBean>(new GetImplTip(mIView)) {
             @Override
             public void responseSuccess(ShareImgBean bean) {
-                mIView.shareImg(bean);
+                mIView.shareImg(bean,position);
             }
 
             @Override
             public void responseFail(ShareImgBean bean) {
+
+            }
+        });
+    }
+
+    public void shareCan(String taskId, int position) {
+        mModel.shareCan(taskId).subscribe(new NetCallBackObserver<BaseBean>(new GetImplTip(mIView.mActivity)) {
+            @Override
+            public void responseSuccess(BaseBean bean) {
+                mIView.shareCan(taskId,position);
+            }
+
+            @Override
+            public void responseFail(BaseBean bean) {
 
             }
         });

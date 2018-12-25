@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
+import top.jplayer.baseprolibrary.utils.LogUtil;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
 
 /**
@@ -57,8 +58,7 @@ public class AwardActivity extends CommonToolBarActivity {
                     ToastUtils.init().showInfoToast(mActivity, "该任务已经分享过");
                     return false;
                 }
-                mPresenter.shareImg(mAdapter.getData().get(position).task_id);
-                cPos = position;
+                mPresenter.shareCan(mAdapter.getData().get(position).task_id, position);
             } else {
                 ToastUtils.init().showInfoToast(mActivity, "请先登录");
             }
@@ -106,10 +106,19 @@ public class AwardActivity extends CommonToolBarActivity {
 
     ShareImgBean shareBean;
 
-    public void shareImg(ShareImgBean bean) {
+    public void shareImg(ShareImgBean bean, int position) {
         shareBean = bean;
+        cPos = position;
         mAwardDialog = new ShareAwardDialog(mActivity);
         mAwardDialog.setUrl(bean.shareImg);
         mAwardDialog.show();
+        mAwardDialog.setOnDismissListener(dialog -> {
+            LogUtil.str("-----");
+            cPos = -1;
+        });
+    }
+
+    public void shareCan(String taskId, int position) {
+        mPresenter.shareImg(taskId, position);
     }
 }
