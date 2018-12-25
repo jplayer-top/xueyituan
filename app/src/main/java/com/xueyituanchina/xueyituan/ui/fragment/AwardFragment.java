@@ -18,6 +18,7 @@ import com.xueyituanchina.xueyituan.mpbe.presenter.AwardPresenter;
 import com.xueyituanchina.xueyituan.ui.activity.AwardActivity;
 import com.xueyituanchina.xueyituan.ui.activity.MyShareActivity;
 import com.xueyituanchina.xueyituan.ui.activity.ShopItemActivity;
+import com.xueyituanchina.xueyituan.ui.activity.UserTaskListActivity;
 import com.xueyituanchina.xueyituan.ui.adapter.AwardAdapter;
 import com.xueyituanchina.xueyituan.ui.dialog.ShareAwardDialog;
 import com.xueyituanchina.xueyituan.wxapi.WXShare;
@@ -62,6 +63,7 @@ public class AwardFragment extends SuperBaseFragment {
     private TextView mTvNums;
     private TextView mTvAwardAll;
     private ShareAwardDialog mAwardDialog;
+    private View mRlNums;
 
     @Override
     public int initLayout() {
@@ -145,6 +147,7 @@ public class AwardFragment extends SuperBaseFragment {
 
     private void initHeader() {
         mHeader = View.inflate(getContext(), R.layout.layout_header_award, null);
+        mRlNums = mHeader.findViewById(R.id.rlNums);
         mAdapter.addHeaderView(mHeader);
         mViewFlipper = mHeader.findViewById(R.id.viewFlipper);
         mBgaBanner = mHeader.findViewById(R.id.bgaBanner);
@@ -160,6 +163,10 @@ public class AwardFragment extends SuperBaseFragment {
             Bundle bundle = new Bundle();
             bundle.putParcelableArrayList("beans", mAwardBean.taskList);
             ActivityUtils.init().start(mActivity, AwardActivity.class, "全部任务", bundle);
+        });
+        mRlNums.setOnClickListener(v -> {
+            if (XYTApplication.assertNoLogin(mActivity))
+                ActivityUtils.init().start(mActivity, UserTaskListActivity.class, "提交任务");
         });
     }
 
@@ -223,6 +230,7 @@ public class AwardFragment extends SuperBaseFragment {
         initViewFlipper(bean.broadMsgList);
         mTvNums.setText(String.format(Locale.CHINA, "%d", bean.taskNum));
         mTvCounts.setText(String.format(Locale.CHINA, "%d", bean.totalShared));
+
     }
 
     public void shareOk(BaseBean bean) {
