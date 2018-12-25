@@ -14,6 +14,7 @@ import com.xueyituanchina.xueyituan.mpbe.bean.AwardBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.ShareImgBean;
 import com.xueyituanchina.xueyituan.mpbe.event.ShareAwardAllEvent;
 import com.xueyituanchina.xueyituan.mpbe.event.ShareAwardOneEvent;
+import com.xueyituanchina.xueyituan.mpbe.event.ShareOtherEvent;
 import com.xueyituanchina.xueyituan.mpbe.presenter.AwardPresenter;
 import com.xueyituanchina.xueyituan.ui.activity.AwardActivity;
 import com.xueyituanchina.xueyituan.ui.activity.MyShareActivity;
@@ -43,7 +44,6 @@ import top.jplayer.baseprolibrary.ui.fragment.SuperBaseFragment;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.BitmapUtil;
 import top.jplayer.baseprolibrary.utils.FileUtil;
-import top.jplayer.baseprolibrary.utils.LogUtil;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
 
 /**
@@ -102,6 +102,11 @@ public class AwardFragment extends SuperBaseFragment {
     }
 
     public int cPos = -1;
+
+    @Subscribe
+    public void onEvent(ShareOtherEvent event) {
+        cPos = -1;
+    }
 
     @Subscribe
     public void onEvent(ShareAwardOneEvent event) {
@@ -246,10 +251,6 @@ public class AwardFragment extends SuperBaseFragment {
         mAwardDialog = new ShareAwardDialog(mActivity);
         mAwardDialog.setUrl(bean.shareImg);
         mAwardDialog.show();
-        mAwardDialog.setOnDismissListener(dialog -> {
-            LogUtil.str("-----");
-            cPos = -1;
-        });
     }
 
     public void reponseFileImg(ResponseBody responseBody) {

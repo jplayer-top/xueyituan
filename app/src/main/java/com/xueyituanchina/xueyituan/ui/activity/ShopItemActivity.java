@@ -24,6 +24,7 @@ import com.xueyituanchina.xueyituan.mpbe.bean.OrderBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.ShopItemBean;
 import com.xueyituanchina.xueyituan.mpbe.event.ShareAllEvent;
 import com.xueyituanchina.xueyituan.mpbe.event.ShareOneEvent;
+import com.xueyituanchina.xueyituan.mpbe.event.ShareOtherEvent;
 import com.xueyituanchina.xueyituan.mpbe.model.LoookWhatDaoModel;
 import com.xueyituanchina.xueyituan.mpbe.presenter.ShopPresenter;
 import com.xueyituanchina.xueyituan.ui.adapter.ShopAdapter;
@@ -125,7 +126,10 @@ public class ShopItemActivity extends CommonToolBarActivity {
 
     @Override
     public void toolRightLeft(int isVisible, View.OnClickListener listener) {
-        super.toolRightLeft(View.VISIBLE, v -> new ShareDialog(mActivity).show());
+        super.toolRightLeft(View.VISIBLE, v -> {
+            EventBus.getDefault().post(new ShareOtherEvent());
+            new ShareDialog(mActivity).show();
+        });
     }
 
     @Override

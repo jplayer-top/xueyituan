@@ -8,6 +8,7 @@ import com.xueyituanchina.xueyituan.R;
 import com.xueyituanchina.xueyituan.XYTApplication;
 import com.xueyituanchina.xueyituan.mpbe.bean.AwardBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.ShareImgBean;
+import com.xueyituanchina.xueyituan.mpbe.event.ShareOtherEvent;
 import com.xueyituanchina.xueyituan.mpbe.presenter.AwardActivityPresenter;
 import com.xueyituanchina.xueyituan.ui.adapter.AwardAdapter;
 import com.xueyituanchina.xueyituan.ui.dialog.ShareAwardDialog;
@@ -72,6 +73,10 @@ public class AwardActivity extends CommonToolBarActivity {
         });
     }
 
+    @Subscribe
+    public void onEvent(ShareOtherEvent event) {
+        cPos = -1;
+    }
 
     @Subscribe
     public void onEvent(WXShareBean event) {
