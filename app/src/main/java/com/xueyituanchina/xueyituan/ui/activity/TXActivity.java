@@ -66,19 +66,19 @@ public class TXActivity extends CommonToolBarActivity {
     private void toTx() {
         String string = mTvTxMoney.getText().toString();
         if ("".equals(string)) {
-            ToastUtils.init().showInfoToast(this, "请输入提现金额");
+            ToastUtils.init().showInfoToast(this, "请输入兑换金额");
             return;
         }
         if (Float.valueOf(string) > Float.valueOf(mCantx)) {
-            ToastUtils.init().showInfoToast(this, "超出可提现金额");
+            ToastUtils.init().showInfoToast(this, "超出可兑换金额");
             return;
         }
-        if (Float.valueOf(string) < 200) {
-            ToastUtils.init().showInfoToast(this, "提现金额需大于200元");
+        if (Float.valueOf(string) < 2000) {
+            ToastUtils.init().showInfoToast(this, "奖学金兑换需大于2000");
             return;
         }
         if (!XYTApplication.isVip) {
-            ToastUtils.init().showInfoToast(this, "成为会员即可提现");
+            ToastUtils.init().showInfoToast(this, "成为会员即可兑换");
             return;
         }
         new DialogApply(this).setMoney(string).show();
