@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
-import top.jplayer.baseprolibrary.utils.LogUtil;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
 
 /**
@@ -117,10 +116,6 @@ public class AwardActivity extends CommonToolBarActivity {
         mAwardDialog = new ShareAwardDialog(mActivity);
         mAwardDialog.setUrl(bean.shareImg);
         mAwardDialog.show();
-        mAwardDialog.setOnDismissListener(dialog -> {
-            LogUtil.str("-----");
-            cPos = -1;
-        });
     }
 
     public void shareCan(String taskId, int position) {

@@ -85,7 +85,8 @@ public class RechargeActivity extends CommonToolBarActivity {
             llToWall.setVisibility(View.VISIBLE);
             mTvRecharge.setVisibility(View.GONE);
         }
-        llPayShare.setVisibility(mIsVip ? View.VISIBLE : View.INVISIBLE);
+//        llPayShare.setVisibility(mIsVip ? View.VISIBLE : View.INVISIBLE);
+        llPayShare.setVisibility(View.INVISIBLE);
         mTvRecharge.setText(mRecharge);
 
 
