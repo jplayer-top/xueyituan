@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.mvp.contract.BasePresenter;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
+import top.jplayer.baseprolibrary.net.retrofit.IoMainSchedule;
 import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
 import top.jplayer.baseprolibrary.net.tip.PostImplTip;
 
@@ -37,7 +38,7 @@ public class ApplySignPresenter extends BasePresenter<TXActivity> {
             @Override
             public void responseSuccess(BaseBean bean) {
                 EventBus.getDefault().post(new ApplyEvent());
-                Observable.timer(1, TimeUnit.SECONDS).subscribe(a -> mIView.finish());
+                Observable.timer(1, TimeUnit.SECONDS).compose(new IoMainSchedule<>()).subscribe(a -> mIView.finish());
             }
 
             @Override
