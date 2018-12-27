@@ -38,7 +38,7 @@ public class ApplySignPresenter extends BasePresenter<TXActivity> {
             @Override
             public void responseSuccess(BaseBean bean) {
                 EventBus.getDefault().post(new ApplyEvent());
-                Observable.timer(1, TimeUnit.SECONDS).compose(new IoMainSchedule<>()).subscribe(a -> mIView.finish());
+                Observable.timer(2, TimeUnit.SECONDS).compose(new IoMainSchedule<>()).subscribe(a -> mIView.finish());
             }
 
             @Override
