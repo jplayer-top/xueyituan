@@ -314,7 +314,7 @@ public class ShopCreateActivity extends CommonToolBarActivity {
 
     public void createSuccess() {
         Bundle bundle = new Bundle();
-        bundle.putString("recharge", "100.00");
+        bundle.putString("recharge", "500.00");
         ActivityUtils.init().start(this, RechargeActivity.class, "商铺审核金", bundle);
         finish();
     }

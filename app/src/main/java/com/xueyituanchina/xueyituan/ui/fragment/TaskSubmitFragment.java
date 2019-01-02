@@ -172,7 +172,7 @@ public class TaskSubmitFragment extends SuperBaseFragment {
                         .setSubTitle("当前已提交入驻信息\n请提交一百元审核金")
                         .show(R.id.btnSure, view1 -> {
                             Bundle bundle = new Bundle();
-                            bundle.putString("recharge", "100.00");
+                            bundle.putString("recharge", "500.00");
                             ActivityUtils.init().start(this.getActivity(), RechargeActivity.class, "商铺审核金", bundle);
                             dialogLogout.dismiss();
                         });
