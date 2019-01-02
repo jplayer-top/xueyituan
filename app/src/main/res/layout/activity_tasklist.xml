@@ -29,7 +29,7 @@
             android:drawableStart="@drawable/task_notice"
             android:ellipsize="end"
             android:lines="1"
-            android:text="点击下方极速审核按钮，复制并添加客服微信xueyika01,可极速审核"
+            android:text="点击下方添加客服按钮，复制并添加客服微信xueyika01,可极速审核"
             android:textColor="@color/white"
             android:textSize="@dimen/dimen_10sp"/>
 
@@ -80,6 +80,6 @@
         android:layout_marginStart="@dimen/dimen_30dp"
         android:layout_marginTop="@dimen/dimen_15dp"
         android:background="@drawable/shape_45_theme"
-        android:text="极速审核"
+        android:text="添加客服"
         android:textColor="@color/white"/>
 </LinearLayout>

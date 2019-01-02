@@ -209,7 +209,7 @@ public class ShopItemActivity extends CommonToolBarActivity {
         });
         mTvWasPay.setText(String.format(Locale.CHINA, "已售 %d", goodsBean.sales));
         mHeader.findViewById(R.id.ivToCall).setOnClickListener(v -> dialPhoneNumber(shopBean.phone));
-        mBtnPay.setText(String.format(Locale.CHINA, "%s元试课", goodsBean.goodsBestPriceStr));
+        mBtnPay.setText(String.format(Locale.CHINA, "%s元换购", goodsBean.goodsBestPriceStr));
 
         if (XYTApplication.isVip && goodsBean.vip == 1) {
             mBtnPay.setText("会员0元专享");
