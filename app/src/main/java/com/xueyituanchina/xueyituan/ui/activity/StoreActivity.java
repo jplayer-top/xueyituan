@@ -18,7 +18,6 @@ import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.xueyituanchina.xueyituan.R;
-import com.xueyituanchina.xueyituan.XYTApplication;
 import com.xueyituanchina.xueyituan.mpbe.bean.HasIssueBean;
 import com.xueyituanchina.xueyituan.mpbe.bean.StoreBean;
 import com.xueyituanchina.xueyituan.mpbe.presenter.StorePresenter;
@@ -31,8 +30,6 @@ import java.util.List;
 import java.util.Locale;
 
 import cn.bingoogolapple.bgabanner.BGABanner;
-import io.rong.imkit.RongIM;
-import io.rong.imlib.model.Conversation;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
@@ -93,8 +90,9 @@ public class StoreActivity extends CommonToolBarActivity {
         });
         findViewById(R.id.tvChat).setOnClickListener(v -> {
             if (assert2Login(mActivity)) {
-                RongIM.getInstance().startConversation(mActivity, Conversation.ConversationType.PRIVATE,
-                        "u_" + XYTApplication.cuid, "客服");
+                ToastUtils.init().showQuickToast("请联系客服电话:0635-8091618");
+//                RongIM.getInstance().startConversation(mActivity, Conversation.ConversationType.PRIVATE,
+//                        "u_" + XYTApplication.cuid, "客服");
             }
         });
         findViewById(R.id.tvXYTCall).setOnClickListener(v -> {

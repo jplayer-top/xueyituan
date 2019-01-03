@@ -39,8 +39,6 @@ import java.util.List;
 import java.util.Locale;
 
 import cn.bingoogolapple.bgabanner.BGABanner;
-import io.rong.imkit.RongIM;
-import io.rong.imlib.model.Conversation;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
@@ -105,8 +103,9 @@ public class ShopItemActivity extends CommonToolBarActivity {
         mWxShare = new WXShare(this);
         findViewById(R.id.tvChat).setOnClickListener(v -> {
             if (assert2Login(mActivity)) {
-                RongIM.getInstance().startConversation(mActivity, Conversation.ConversationType.PRIVATE,
-                        "u_" + XYTApplication.cuid, "客服");
+                ToastUtils.init().showQuickToast("请联系客服电话:0635-8091618");
+//                RongIM.getInstance().startConversation(mActivity, Conversation.ConversationType.PRIVATE,
+//                        "u_" + XYTApplication.cuid, "客服");
             }
         });
         findViewById(R.id.tvXYTCall).setOnClickListener(v -> {

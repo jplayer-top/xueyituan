@@ -257,6 +257,12 @@ public class AwardFragment extends SuperBaseFragment {
     }
 
     public void shareCan(String taskId, int position) {
-        mPresenter.shareImg(taskId, position);
+        //带二维码图片
+//        mPresenter.shareImg(taskId, position);
+        //非二维码图片
+        cPos = position;
+        mAwardDialog = new ShareAwardDialog(mActivity);
+        mAwardDialog.setUrl(mAdapter.getData().get(position).share_img);
+        mAwardDialog.show();
     }
 }

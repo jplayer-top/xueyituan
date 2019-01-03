@@ -43,8 +43,6 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import io.rong.imkit.RongIM;
-import io.rong.imlib.model.Conversation;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.ui.dialog.DialogLogout;
 import top.jplayer.baseprolibrary.ui.fragment.SuperBaseFragment;
@@ -179,8 +177,9 @@ public class MeFragment extends SuperBaseFragment {
         mLlChat.setOnClickListener(v -> {
             if (XYTApplication.assert2Login(mActivity)) {
                 if (assert2Login(mActivity)) {
-                    RongIM.getInstance().startConversation(mActivity, Conversation.ConversationType.PRIVATE,
-                            "u_" + XYTApplication.cuid, "客服");
+                    ToastUtils.init().showQuickToast("请联系客服电话:0635-8091618");
+//                    RongIM.getInstance().startConversation(mActivity, Conversation.ConversationType.PRIVATE,
+//                            "u_" + XYTApplication.cuid, "客服");
                 }
             }
         });
@@ -268,7 +267,7 @@ public class MeFragment extends SuperBaseFragment {
                 DialogLogout dialogLogout = new DialogLogout(mActivity);
                 dialogLogout
                         .setTitle("温馨提示")
-                        .setSubTitle("当前已提交入驻信息\n请提交一百元审核金")
+                        .setSubTitle("当前已提交入驻信息\n请提交五百元审核金")
                         .show(R.id.btnSure, view -> {
                             Bundle bundle = new Bundle();
                             bundle.putString("recharge", "500.00");
@@ -279,7 +278,7 @@ public class MeFragment extends SuperBaseFragment {
                 DialogLogout dialogLogout = new DialogLogout(mActivity);
                 dialogLogout
                         .setTitle("温馨提示")
-                        .setSubTitle("当前已认缴一百元审核金\n请耐心等待审核")
+                        .setSubTitle("当前已认缴五百元审核金\n请耐心等待审核")
                         .show(R.id.btnSure, view -> {
                             dialogLogout.dismiss();
                         });

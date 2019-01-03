@@ -119,6 +119,10 @@ public class AwardActivity extends CommonToolBarActivity {
     }
 
     public void shareCan(String taskId, int position) {
-        mPresenter.shareImg(taskId, position);
+//        mPresenter.shareImg(taskId, position);
+        cPos = position;
+        mAwardDialog = new ShareAwardDialog(mActivity);
+        mAwardDialog.setUrl(mAdapter.getData().get(position).share_img);
+        mAwardDialog.show();
     }
 }

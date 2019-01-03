@@ -169,7 +169,7 @@ public class TaskSubmitFragment extends SuperBaseFragment {
                 DialogLogout dialogLogout = new DialogLogout(mActivity);
                 dialogLogout
                         .setTitle("温馨提示")
-                        .setSubTitle("当前已提交入驻信息\n请提交一百元审核金")
+                        .setSubTitle("当前已提交入驻信息\n请提交五百元审核金")
                         .show(R.id.btnSure, view1 -> {
                             Bundle bundle = new Bundle();
                             bundle.putString("recharge", "500.00");
@@ -180,7 +180,7 @@ public class TaskSubmitFragment extends SuperBaseFragment {
                 DialogLogout dialogLogout = new DialogLogout(mActivity);
                 dialogLogout
                         .setTitle("温馨提示")
-                        .setSubTitle("当前已认缴一百元审核金\n请耐心等待审核")
+                        .setSubTitle("当前已认缴五百元审核金\n请耐心等待审核")
                         .show(R.id.btnSure, view1 -> {
                             dialogLogout.dismiss();
                         });
