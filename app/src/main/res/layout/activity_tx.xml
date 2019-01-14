@@ -137,8 +137,10 @@
         app:layout_constraintTop_toBottomOf="@+id/btnToTx"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dimen_20dp"
+
         android:layout_marginStart="@dimen/dimen_25dp"
         android:layout_marginTop="@dimen/dimen_5dp"
         android:gravity="center_vertical"
@@ -146,6 +148,7 @@
         android:text="@string/tx_tip"
         android:textColor="@color/color999"
         android:textSize="@dimen/dimen_12sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTip3"/>
 </android.support.constraint.ConstraintLayout>

@@ -31,6 +31,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import top.jplayer.baseprolibrary.mvp.model.bean.BaseBean;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
+import top.jplayer.baseprolibrary.ui.dialog.DialogLogout;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
 
 /**
@@ -102,7 +103,14 @@ public class PayActivity extends CommonToolBarActivity {
             } else if (checked2) {
                 mPresenter.payAliOrder(orderId);
             } else if (checked3) {
-                mPresenter.payUserOrder(orderId);
+                DialogLogout dialogLogout = new DialogLogout(mActivity);
+                dialogLogout
+                        .setTitle("提示")
+                        .setSubTitle("是否确认购买")
+                        .show(R.id.btnSure, view1 -> {
+                            mPresenter.payUserOrder(orderId);
+                            dialogLogout.dismiss();
+                        });
             }
         });
     }

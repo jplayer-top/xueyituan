@@ -41,6 +41,7 @@ import java.util.Locale;
 import cn.bingoogolapple.bgabanner.BGABanner;
 import top.jplayer.baseprolibrary.glide.GlideUtils;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
+import top.jplayer.baseprolibrary.ui.dialog.DialogLogout;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 import top.jplayer.baseprolibrary.utils.SharePreUtil;
 import top.jplayer.baseprolibrary.utils.ToastUtils;
@@ -213,8 +214,15 @@ public class ShopItemActivity extends CommonToolBarActivity {
         if (XYTApplication.isVip && goodsBean.vip == 1) {
             mBtnPay.setText("会员0元专享");
             mBtnPay.setOnClickListener(v -> {
-                String login_phone = (String) SharePreUtil.getData(this, "login_phone", "");
-                mPresenter.createOrder(mId, "1", login_phone, true);
+                DialogLogout dialogLogout = new DialogLogout(mActivity);
+                dialogLogout
+                        .setTitle("提示")
+                        .setSubTitle("是否确定购买会员0元专享课程")
+                        .show(R.id.btnSure, view1 -> {
+                            String login_phone = (String) SharePreUtil.getData(this, "login_phone", "");
+                            mPresenter.createOrder(mId, "1", login_phone, true);
+                            dialogLogout.dismiss();
+                        });
             });
         } else {
             mBtnPay.setOnClickListener(v -> {

@@ -101,7 +101,7 @@
                 android:drawableEnd="@drawable/rightstar"
                 android:drawablePadding="@dimen/dimen_5dp"
                 android:drawableStart="@drawable/inv_left"
-                android:text="我的收益"
+                android:text="我的邀请"
                 android:textColor="#FFEA67"
                 android:textSize="@dimen/dimen_20sp"
                 android:textStyle="bold"

@@ -78,14 +78,14 @@ android {
         //generateTests：设置自动生成单元测试用例
     }
 
-    afterEvaluate {
-        tasks.matching {
-            it.name.contains("preBuild")
-        }.each { task ->
-            task.dependsOn(rootProject.tasks.delTask)  // 任务依赖：执行task之前需要执行dependsOn指定的任务
-        }
-
-    }
+//    afterEvaluate {
+//        tasks.matching {
+//            it.name.contains("preBuild")
+//        }.each { task ->
+//            task.dependsOn(rootProject.tasks.delTask)  // 任务依赖：执行task之前需要执行dependsOn指定的任务
+//        }
+//
+//    }
 }
 
 dependencies {

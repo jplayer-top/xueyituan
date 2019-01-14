@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.widget.FrameLayout;
 
 import com.xueyituanchina.xueyituan.R;
+import com.xueyituanchina.xueyituan.mpbe.XYTServer;
 import com.xueyituanchina.xueyituan.mpbe.bean.MyInfoBean;
+import com.xueyituanchina.xueyituan.mpbe.model.MeModel;
 import com.xueyituanchina.xueyituan.ui.adapter.MeOrderAdapter;
 
 import java.util.ArrayList;
@@ -12,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import top.jplayer.baseprolibrary.net.retrofit.IoMainSchedule;
+import top.jplayer.baseprolibrary.net.retrofit.NetCallBackObserver;
 import top.jplayer.baseprolibrary.ui.activity.CommonToolBarActivity;
 import top.jplayer.baseprolibrary.utils.ActivityUtils;
 
@@ -45,11 +48,32 @@ public class OrderListActivity extends CommonToolBarActivity {
         });
     }
 
+    public void requestMyInfo() {
+        new MeModel(XYTServer.class).requestMyInfo().subscribe(new NetCallBackObserver<MyInfoBean>() {
+            @Override
+            public void responseSuccess(MyInfoBean myInfoBean) {
+                mSmartRefreshLayout.finishRefresh();
+                responseMyInfo(myInfoBean);
+            }
+
+            @Override
+            public void responseFail(MyInfoBean myInfoBean) {
+
+            }
+        });
+    }
+
+    private void responseMyInfo(MyInfoBean myInfoBean) {
+        if (myInfoBean.orderList != null) {
+            mOrderAdapter.setNewData(myInfoBean.orderList);
+        }
+    }
+
     @Override
     public void refreshStart() {
         super.refreshStart();
         Observable.timer(1, TimeUnit.SECONDS).compose(new IoMainSchedule<>()).subscribe(aLong -> {
-            OrderListActivity.this.responseSuccess();
+            requestMyInfo();
         });
     }
 }
