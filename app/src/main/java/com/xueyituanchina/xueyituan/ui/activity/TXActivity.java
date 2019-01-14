@@ -73,8 +73,8 @@ public class TXActivity extends CommonToolBarActivity {
             ToastUtils.init().showInfoToast(this, "超出可兑换金额");
             return;
         }
-        if (Float.valueOf(string) < 2000) {
-            ToastUtils.init().showInfoToast(this, "奖学金兑换需大于2000");
+        if (Float.valueOf(string) < 100 || Float.valueOf(string) % 100 != 0) {
+            ToastUtils.init().showInfoToast(this, "奖学金兑换金额需要≥100，且为100的整数倍");
             return;
         }
         if (!XYTApplication.isVip) {

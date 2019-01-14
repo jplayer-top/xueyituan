@@ -14,10 +14,12 @@ import top.jplayer.baseprolibrary.utils.DateUtils;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() throws Exception {
-        int l = (int) ((new Date().getTime() - DateUtils.getDateByPattern("2018-12-04 17:23:47", "yyyy-MM-dd " + "HH:mm:ss").getTime()))/1000;
-        int dayAll = 3600 * 24 ;
+        int l = (int) ((new Date().getTime() - DateUtils.getDateByPattern("2018-12-04 17:23:47", "yyyy-MM-dd " + "HH:mm:ss").getTime())) / 1000;
+        int dayAll = 3600 * 24;
         int h = (dayAll - l) / 3600;
         int m = (dayAll - l) % 3600 / 60;
-        System.out.println(h+"......."+m);
+        System.out.println(h + "......." + m);
+        String string = "1000.00";
+        System.out.println(Float.valueOf(string) % 100==0);
     }
 }
